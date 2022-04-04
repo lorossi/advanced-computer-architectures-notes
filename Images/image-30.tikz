@@ -1,0 +1,121 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (43) at (20, 0) {};
+		\node [style=none] (44) at (22, 0) {};
+		\node [style=none] (45) at (18, -4) {};
+		\node [style=none] (46) at (24, -4) {};
+		\node [style=none] (55) at (14, 0) {};
+		\node [style=none] (56) at (16, 0) {};
+		\node [style=none] (57) at (12, -4) {};
+		\node [style=none] (58) at (18, -4) {};
+		\node [style=none] (51) at (8, 0) {};
+		\node [style=none] (52) at (10, 0) {};
+		\node [style=none] (53) at (6, -4) {};
+		\node [style=none] (54) at (12, -4) {};
+		\node [style=none] (47) at (2, 0) {};
+		\node [style=none] (48) at (4, 0) {};
+		\node [style=none] (49) at (0, -4) {};
+		\node [style=none] (50) at (6, -4) {};
+		\node [style=none] (1) at (0, -4) {};
+		\node [style=none] (2) at (2, 0) {};
+		\node [style=none] (3) at (4, 0) {};
+		\node [style=none] (4) at (6, -4) {};
+		\node [style=none] (5) at (2, -4) {};
+		\node [style=none] (6) at (4, -4) {};
+		\node [style=none] (7) at (6, -4) {};
+		\node [style=none] (8) at (8, 0) {};
+		\node [style=none] (9) at (10, 0) {};
+		\node [style=none] (10) at (12, -4) {};
+		\node [style=none] (11) at (8, -4) {};
+		\node [style=none] (12) at (10, -4) {};
+		\node [style=none] (13) at (12, -4) {};
+		\node [style=none] (14) at (14, 0) {};
+		\node [style=none] (15) at (16, 0) {};
+		\node [style=none] (16) at (18, -4) {};
+		\node [style=none] (17) at (14, -4) {};
+		\node [style=none] (18) at (16, -4) {};
+		\node [style=none] (19) at (0, 1) {};
+		\node [style=none] (20) at (0, 1) {};
+		\node [style=none] (21) at (25, -4) {};
+		\node [style=none] (22) at (0, -4.75) {};
+		\node [style=none] (23) at (6, -4.75) {};
+		\node [style=none] (24) at (3, -5.5) {loop iteration};
+		\node [style=none] (25) at (6, 2.5) {startup overhead};
+		\node [style=none] (26) at (6, -1) {};
+		\node [style=none] (27) at (18, 2.5) {wind down overhead};
+		\node [style=left align] (29) at (25, -4) {\textit{time}};
+		\node [style=right align, rotate=90] (30) at (-0.75, 0.75) {\textit{performance}};
+		\node [style=none] (31) at (6, 2) {};
+		\node [style=none] (33) at (7, -1) {};
+		\node [style=none] (34) at (17, -1) {};
+		\node [style=none] (35) at (18, -1) {};
+		\node [style=none] (36) at (18, 2) {};
+		\node [style=none] (37) at (18, -4) {};
+		\node [style=none] (38) at (20, 0) {};
+		\node [style=none] (39) at (22, 0) {};
+		\node [style=none] (40) at (24, -4) {};
+		\node [style=none] (41) at (20, -4) {};
+		\node [style=none] (42) at (22, -4) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (43.center)
+			 to (45.center)
+			 to (46.center)
+			 to (44.center)
+			 to cycle;
+		\draw [style=light fill] (55.center)
+			 to (57.center)
+			 to [in=180, out=0] (58.center)
+			 to (56.center)
+			 to cycle;
+		\draw [style=light fill] (51.center)
+			 to (53.center)
+			 to (54.center)
+			 to (52.center)
+			 to cycle;
+		\draw [style=light fill] (47.center)
+			 to (49.center)
+			 to (50.center)
+			 to (48.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=red fill] (1.center)
+			 to (5.center)
+			 to (2.center)
+			 to cycle;
+		\draw [style=red fill] (6.center)
+			 to (4.center)
+			 to (3.center)
+			 to cycle;
+		\draw [style=green fill] (7.center)
+			 to (11.center)
+			 to (8.center)
+			 to cycle;
+		\draw [style=green fill] (12.center)
+			 to (10.center)
+			 to (9.center)
+			 to cycle;
+		\draw [style=orange fill] (13.center)
+			 to (17.center)
+			 to (14.center)
+			 to cycle;
+		\draw [style=orange fill] (16.center)
+			 to (15.center)
+			 to (18.center)
+			 to cycle;
+		\draw [style=big arrow] (1.center) to (20.center);
+		\draw [style=double arrow] (22.center) to (23.center);
+		\draw [style=green line] (31.center) to (26.center);
+		\draw [style=green arrow] (26.center) to (33.center);
+		\draw [style=orange arrow] (35.center) to (34.center);
+		\draw [style=orange line] (35.center) to (36.center);
+		\draw [style=yellow fill] (37.center)
+			 to (41.center)
+			 to (38.center)
+			 to cycle;
+		\draw [style=yellow fill] (40.center)
+			 to (39.center)
+			 to (42.center)
+			 to cycle;
+		\draw [style=big arrow] (1.center) to (21.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

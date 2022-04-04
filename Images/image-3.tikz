@@ -1,0 +1,198 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (10, -1) {};
+		\node [style=none] (1) at (10, -12) {};
+		\node [style=none] (3) at (1, -6) {};
+		\node [style=none] (4) at (19, -6) {};
+		\node [style=none] (107) at (2, -7) {};
+		\node [style=none] (108) at (5, -7) {};
+		\node [style=none] (109) at (5, -10) {};
+		\node [style=none] (110) at (2, -10) {};
+		\node [style=none] (116) at (6, -7) {};
+		\node [style=none] (117) at (9, -7) {};
+		\node [style=none] (118) at (9, -10) {};
+		\node [style=none] (119) at (6, -10) {};
+		\node [style=none] (125) at (4, -2) {};
+		\node [style=none] (126) at (7, -2) {};
+		\node [style=none] (127) at (7, -5) {};
+		\node [style=none] (128) at (4, -5) {};
+		\node [style=left align] (218) at (20.25, -1) {threads};
+		\node [style=none] (222) at (13, -2) {};
+		\node [style=none] (223) at (16, -2) {};
+		\node [style=none] (224) at (16, -5) {};
+		\node [style=none] (225) at (13, -5) {};
+		\node [style=none] (226) at (11, -7) {};
+		\node [style=none] (227) at (14, -7) {};
+		\node [style=none] (228) at (14, -10) {};
+		\node [style=none] (229) at (11, -10) {};
+		\node [style=none] (230) at (15, -7) {};
+		\node [style=none] (231) at (18, -7) {};
+		\node [style=none] (232) at (18, -10) {};
+		\node [style=none] (233) at (15, -10) {};
+		\node [style=none] (234) at (5.25, -2.5) {};
+		\node [style=none] (235) at (5.75, -2.5) {};
+		\node [style=none] (236) at (5.75, -4.5) {};
+		\node [style=none] (237) at (5.25, -4.5) {};
+		\node [style=none] (238) at (13.5, -2.5) {};
+		\node [style=none] (239) at (14, -2.5) {};
+		\node [style=none] (240) at (14, -4.5) {};
+		\node [style=none] (241) at (13.5, -4.5) {};
+		\node [style=none] (242) at (14.25, -2.5) {};
+		\node [style=none] (243) at (14.75, -2.5) {};
+		\node [style=none] (244) at (14.75, -4.5) {};
+		\node [style=none] (245) at (14.25, -4.5) {};
+		\node [style=none] (246) at (15, -2.5) {};
+		\node [style=none] (247) at (15.5, -2.5) {};
+		\node [style=none] (248) at (15.5, -4.5) {};
+		\node [style=none] (249) at (15, -4.5) {};
+		\node [style=none] (250) at (11.5, -7.5) {};
+		\node [style=none] (251) at (12, -7.5) {};
+		\node [style=none] (252) at (12, -9.5) {};
+		\node [style=none] (253) at (11.5, -9.5) {};
+		\node [style=none] (254) at (12.25, -7.5) {};
+		\node [style=none] (255) at (12.75, -7.5) {};
+		\node [style=none] (256) at (12.75, -9.5) {};
+		\node [style=none] (257) at (12.25, -9.5) {};
+		\node [style=none] (258) at (13, -7.5) {};
+		\node [style=none] (259) at (13.5, -7.5) {};
+		\node [style=none] (260) at (13.5, -9.5) {};
+		\node [style=none] (261) at (13, -9.5) {};
+		\node [style=none] (263) at (15.5, -7.5) {};
+		\node [style=none] (264) at (16, -7.5) {};
+		\node [style=none] (265) at (16, -9.5) {};
+		\node [style=none] (266) at (15.5, -9.5) {};
+		\node [style=none] (267) at (16.25, -7.5) {};
+		\node [style=none] (268) at (16.75, -7.5) {};
+		\node [style=none] (269) at (16.75, -9.5) {};
+		\node [style=none] (270) at (16.25, -9.5) {};
+		\node [style=none] (271) at (17, -7.5) {};
+		\node [style=none] (272) at (17.5, -7.5) {};
+		\node [style=none] (273) at (17.5, -9.5) {};
+		\node [style=none] (274) at (17, -9.5) {};
+		\node [style=none] (275) at (3.25, -7.5) {};
+		\node [style=none] (276) at (3.75, -7.5) {};
+		\node [style=none] (277) at (3.75, -9.5) {};
+		\node [style=none] (278) at (3.25, -9.5) {};
+		\node [style=none] (279) at (7.25, -7.5) {};
+		\node [style=none] (280) at (7.75, -7.5) {};
+		\node [style=none] (281) at (7.75, -9.5) {};
+		\node [style=none] (282) at (7.25, -9.5) {};
+		\node [style=none] (283) at (1, -12) {};
+		\node [style=none] (284) at (1, 0) {};
+		\node [style=none] (285) at (20, -1) {};
+		\node [style=none] (286) at (0, -1) {};
+		\node [style=right align, anchor=west, rotate=-90] (287) at (1, -12.25) {processes};
+		\node [style=none] (288) at (5.5, -0.5) {};
+		\node [style=none] (289) at (14.5, -0.5) {};
+		\node [style=none] (290) at (14.5, -1) {};
+		\node [style=none] (291) at (5.5, -1) {};
+		\node [style=none] (292) at (5.5, 0) {\(1\)};
+		\node [style=none] (293) at (14.5, 0) {\(n\)};
+		\node [style=none] (294) at (1, -3.5) {};
+		\node [style=none] (295) at (0.5, -3.5) {};
+		\node [style=none] (296) at (1, -8.5) {};
+		\node [style=none] (297) at (0.5, -8.5) {};
+		\node [style=none, rotate=-90] (298) at (0, -3.5) {\(1\)};
+		\node [style=none, rotate=-90] (299) at (0, -8.5) {\(n\)};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=dashed] (110.center)
+			 to (107.center)
+			 to (108.center)
+			 to (109.center)
+			 to cycle;
+		\draw [style=dashed] (119.center)
+			 to (116.center)
+			 to (117.center)
+			 to (118.center)
+			 to cycle;
+		\draw [style=dashed] (128.center)
+			 to (125.center)
+			 to (126.center)
+			 to (127.center)
+			 to cycle;
+		\draw [style=dashed] (225.center)
+			 to (222.center)
+			 to (223.center)
+			 to (224.center)
+			 to cycle;
+		\draw [style=dashed] (229.center)
+			 to (226.center)
+			 to (227.center)
+			 to (228.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=dashed] (233.center)
+			 to (230.center)
+			 to (231.center)
+			 to (232.center)
+			 to cycle;
+		\draw [style=green fill] (236.center)
+			 to (237.center)
+			 to [in=-90, out=90] (234.center)
+			 to (235.center)
+			 to [in=90, out=270] cycle;
+		\draw [style=green fill] (240.center)
+			 to (241.center)
+			 to [in=-90, out=90] (238.center)
+			 to (239.center)
+			 to [in=90, out=270] cycle;
+		\draw [style=green fill] (244.center)
+			 to (245.center)
+			 to [in=-90, out=90] (242.center)
+			 to (243.center)
+			 to [in=90, out=270] cycle;
+		\draw [style=green fill] (248.center)
+			 to (249.center)
+			 to [in=-90, out=90] (246.center)
+			 to (247.center)
+			 to [in=90, out=270] cycle;
+		\draw [style=green fill] (253.center)
+			 to [in=-90, out=90] (250.center)
+			 to (251.center)
+			 to [in=90, out=270] (252.center)
+			 to cycle;
+		\draw [style=green fill] (257.center)
+			 to [in=-90, out=90] (254.center)
+			 to (255.center)
+			 to [in=90, out=270] (256.center)
+			 to cycle;
+		\draw [style=green fill] (261.center)
+			 to [in=-90, out=90] (258.center)
+			 to (259.center)
+			 to [in=90, out=270] (260.center)
+			 to cycle;
+		\draw [style=green fill] (266.center)
+			 to [in=-90, out=90] (263.center)
+			 to (264.center)
+			 to [in=90, out=270] (265.center)
+			 to cycle;
+		\draw [style=green fill] (270.center)
+			 to [in=-90, out=90] (267.center)
+			 to (268.center)
+			 to [in=90, out=270] (269.center)
+			 to cycle;
+		\draw [style=green fill] (274.center)
+			 to [in=-90, out=90] (271.center)
+			 to (272.center)
+			 to [in=90, out=270] (273.center)
+			 to cycle;
+		\draw [style=green fill] (277.center)
+			 to (278.center)
+			 to [in=-90, out=90] (275.center)
+			 to (276.center)
+			 to [in=90, out=270] cycle;
+		\draw [style=green fill] (281.center)
+			 to (282.center)
+			 to [in=-90, out=90] (279.center)
+			 to (280.center)
+			 to [in=90, out=270] cycle;
+		\draw [style=big arrow] (286.center) to (285.center);
+		\draw [style=big arrow] (284.center) to (283.center);
+		\draw [style=big, in=270, out=90] (290.center) to (289.center);
+		\draw [style=big] (291.center) to (288.center);
+		\draw [style=big] (295.center) to (294.center);
+		\draw [style=big] (297.center) to (296.center);
+		\draw [style=thin] (3.center) to (4.center);
+		\draw [style=thin] (1.center) to (0.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

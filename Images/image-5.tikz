@@ -1,0 +1,69 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (2) at (15, 0) {};
+		\node [style=none] (4) at (0, 4) {};
+		\node [style=none] (6) at (0, 8) {};
+		\node [style=none] (7) at (0, 12) {};
+		\node [style=none] (8) at (0, 2) {};
+		\node [style=none] (9) at (0, 6) {};
+		\node [style=none] (10) at (0, 10) {};
+		\node [style=none] (11) at (0, 14) {};
+		\node [style=none] (12) at (0, 15) {};
+		\node [style=bottom align] (13) at (0, -0.75) {\(1\)};
+		\node [style=bottom align] (14) at (2, -0.75) {\(2\)};
+		\node [style=bottom align] (15) at (4, -0.75) {\(3\)};
+		\node [style=bottom align] (16) at (6, -0.75) {\(4\)};
+		\node [style=bottom align] (17) at (8, -0.75) {\(5\)};
+		\node [style=bottom align] (18) at (10, -0.75) {\(6\)};
+		\node [style=bottom align] (19) at (12, -0.75) {\(7\)};
+		\node [style=right align] (21) at (-0.75, 2) {\(1\)};
+		\node [style=right align] (22) at (-0.75, 4) {\(2\)};
+		\node [style=right align] (23) at (-0.75, 6) {\(3\)};
+		\node [style=right align] (24) at (-0.75, 8) {\(4\)};
+		\node [style=right align] (25) at (-0.75, 10) {\(5\)};
+		\node [style=right align] (26) at (-0.75, 12) {\(6\)};
+		\node [style=right align] (27) at (-0.75, 14) {\(7\)};
+		\node [style=none] (28) at (0, 3) {};
+		\node [style=bottom align] (30) at (14, -0.75) {\(8\)};
+		\node [style=none] (32) at (2, 0) {};
+		\node [style=none] (33) at (4, 0) {};
+		\node [style=none] (34) at (6, 0) {};
+		\node [style=none] (35) at (8, 0) {};
+		\node [style=none] (36) at (10, 0) {};
+		\node [style=none] (37) at (12, 0) {};
+		\node [style=none] (38) at (14, 0) {};
+		\node [style=none] (39) at (0, 0) {};
+		\node [style=right align] (40) at (-0.5, 0) {0};
+		\node [style=none] (52) at (14, 14) {};
+		\node [style=none] (53) at (14, 6) {};
+		\node [style=none] (54) at (14, 3) {};
+		\node [style=left align] (55) at (14.25, 3) {superscalar};
+		\node [style=left align] (56) at (14, 6) {MT fine};
+		\node [style=left align] (57) at (14, 14) {simultaneous MT};
+		\node [style=right align] (58) at (14.75, -2) {\textit{number of threads}};
+		\node [style=left align, rotate=90, anchor=east] (59) at (-2, 15.25) {\textit{throughtput}};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=big] (30) to (38.center);
+		\draw [style=big] (19) to (37.center);
+		\draw [style=big] (18) to (36.center);
+		\draw [style=big] (17) to (35.center);
+		\draw [style=big] (16) to (34.center);
+		\draw [style=big] (15) to (33.center);
+		\draw [style=big] (14) to (32.center);
+		\draw [style=big] (11.center) to (27);
+		\draw [style=big] (26) to (7.center);
+		\draw [style=big] (10.center) to (25);
+		\draw [style=big] (24) to (6.center);
+		\draw [style=big] (23) to (9.center);
+		\draw [style=big] (22) to (4.center);
+		\draw [style=big] (21) to (8.center);
+		\draw [style=big] (40) to (39.center);
+		\draw [style=big arrow, in=180, out=360] (39.center) to (2.center);
+		\draw [style=big arrow] (39.center) to (12.center);
+		\draw [style=big] (13) to (39.center);
+		\draw [style=green line] (28.center) to (54.center);
+		\draw [style=red line, in=45, out=180, looseness=0.75] (53.center) to (28.center);
+		\draw [style=blue line, in=-165, out=60] (28.center) to (52.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

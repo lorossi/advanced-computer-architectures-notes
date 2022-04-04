@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=left align] (0) at (0.25, -2) {\texttt{sub\ \$4,\ \$5,\ \$6}};
+		\node [style=left align] (1) at (0.25, -5) {\texttt{if\ \$1 ==\ 0\ then }};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (2) at (0.25, -6) {\texttt{branch\ delay\ shot}};
+		\node [style=none] (3) at (0, 0) {};
+		\node [style=none] (4) at (0, -7) {};
+		\node [style=none] (5) at (8, -7) {};
+		\node [style=none] (6) at (8, 0) {};
+		\node [style=none] (7) at (7.5, -2) {};
+		\node [style=none] (8) at (7.5, -5) {};
+		\node [style=none] (9) at (6, -2) {};
+		\node [style=none] (10) at (6.5, -5) {};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (11) at (0.5, -3) {\(\ldots\)};
+		\node [style=none] (12) at (8.5, -3.5) {};
+		\node [style=none] (13) at (12.5, -3.5) {};
+		\node [style=left align] (26) at (0.25, -4) {\texttt{add\ \$1,\ \$2,\ \$3}};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (27) at (0.5, -1) {\(\ldots\)};
+		\node [style=left align] (28) at (13.25, -6) {\texttt{sub\ \$4,\ \$5,\ \$6}};
+		\node [style=left align] (29) at (13.25, -5) {\texttt{if\ \$1 ==\ 0\ then }};
+		\node [style=none] (31) at (13, 0) {};
+		\node [style=none] (32) at (13, -7) {};
+		\node [style=none] (33) at (21, -7) {};
+		\node [style=none] (34) at (21, 0) {};
+		\node [style=none] (35) at (20.5, -2) {};
+		\node [style=none] (36) at (20.5, -5) {};
+		\node [style=none] (37) at (17, -2) {};
+		\node [style=none] (38) at (19.5, -5) {};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (39) at (13.5, -3) {\(\ldots\)};
+		\node [style=left align] (40) at (13.25, -4) {\texttt{add\ \$1,\ \$2,\ \$3}};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (41) at (13.5, -2) {\(\ldots\)};
+		\node [style=left align] (42) at (13.25, -1) {\texttt{sub\ \$4,\ \$5,\ \$6}};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red arrow] (7.center) to (9.center);
+		\draw [style=solid] (4.center) to (5.center);
+		\draw [style=solid] (5.center) to (6.center);
+		\draw [style=solid] (6.center) to (3.center);
+		\draw [style=solid] (3.center) to (4.center);
+		\draw [style=red line] (8.center) to (7.center);
+		\draw [style=big arrow] (12.center) to (13.center);
+		\draw [style=red line] (10.center) to (8.center);
+		\draw [style=red arrow] (35.center) to (37.center);
+		\draw [style=solid] (32.center) to (33.center);
+		\draw [style=solid] (33.center) to (34.center);
+		\draw [style=solid] (34.center) to (31.center);
+		\draw [style=solid] (31.center) to (32.center);
+		\draw [style=red line] (36.center) to (35.center);
+		\draw [style=red line] (38.center) to (36.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

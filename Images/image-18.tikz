@@ -1,0 +1,207 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (-2, 5) {};
+		\node [style=none] (1) at (0, 5) {};
+		\node [style=none] (2) at (-2, 4) {};
+		\node [style=none] (3) at (0, 4) {};
+		\node [style=none] (4) at (-2, 4) {};
+		\node [style=none] (5) at (0, 4) {};
+		\node [style=none] (6) at (-2, 3) {};
+		\node [style=none] (7) at (0, 3) {};
+		\node [style=none] (8) at (-2, 3) {};
+		\node [style=none] (9) at (0, 3) {};
+		\node [style=none] (10) at (-2, 2) {};
+		\node [style=none] (11) at (0, 2) {};
+		\node [style=none] (12) at (-2, 2) {};
+		\node [style=none] (13) at (0, 2) {};
+		\node [style=none] (14) at (-2, 1) {};
+		\node [style=none] (15) at (0, 1) {};
+		\node [style=none] (16) at (-2, 1) {};
+		\node [style=none] (17) at (0, 1) {};
+		\node [style=none] (18) at (-2, 0) {};
+		\node [style=none] (19) at (0, 0) {};
+		\node [style=none] (20) at (-2, 0) {};
+		\node [style=none] (21) at (0, 0) {};
+		\node [style=none] (22) at (-2, -1) {};
+		\node [style=none] (23) at (0, -1) {};
+		\node [style=none] (24) at (2, 5) {};
+		\node [style=none] (25) at (4, 5) {};
+		\node [style=none] (26) at (2, 4) {};
+		\node [style=none] (27) at (4, 4) {};
+		\node [style=none] (38) at (2, 1) {};
+		\node [style=none] (39) at (4, 1) {};
+		\node [style=none] (40) at (2, 1) {};
+		\node [style=none] (41) at (4, 1) {};
+		\node [style=none] (42) at (2, 0) {};
+		\node [style=none] (43) at (4, 0) {};
+		\node [style=none] (44) at (2, 0) {};
+		\node [style=none] (45) at (4, 0) {};
+		\node [style=none] (46) at (2, -1) {};
+		\node [style=none] (47) at (4, -1) {};
+		\node [style=none] (48) at (2, 1) {};
+		\node [style=none] (49) at (4, 1) {};
+		\node [style=none] (50) at (2, 2) {};
+		\node [style=none] (51) at (4, 2) {};
+		\node [style=none] (52) at (2, 3) {};
+		\node [style=none] (53) at (2, 2) {};
+		\node [style=none] (54) at (4, 2) {};
+		\node [style=none] (55) at (4, 3) {};
+		\node [style=none] (56) at (2, 4) {};
+		\node [style=none] (57) at (2, 3) {};
+		\node [style=none] (58) at (4, 3) {};
+		\node [style=none] (59) at (4, 4) {};
+		\node [style=none] (60) at (-1, 5.5) {\texttt{T0}};
+		\node [style=none] (61) at (3, 5.5) {\texttt{T1}};
+		\node [style=none] (62) at (-2.5, 8) {};
+		\node [style=none] (63) at (4.5, 8) {};
+		\node [style=none] (64) at (4.5, 9) {};
+		\node [style=none] (65) at (-2.5, 9) {};
+		\node [style=none] (66) at (1, 8.5) {\(k\)-bits branch address};
+		\node [style=none] (67) at (1, 8) {};
+		\node [style=none] (69) at (-2.25, 1.5) {};
+		\node [style=none] (70) at (1, 9) {};
+		\node [style=none] (71) at (5, 1.5) {};
+		\node [style=none] (74) at (4.25, 1.5) {};
+		\node [style=none] (75) at (-1, -1) {};
+		\node [style=none] (76) at (-1, -2.75) {};
+		\node [style=none] (77) at (3, -1) {};
+		\node [style=none] (78) at (3, -2.75) {};
+		\node [style=none] (79) at (-2, -3) {};
+		\node [style=none] (80) at (4, -3) {};
+		\node [style=none] (81) at (-0.5, -5) {};
+		\node [style=none] (82) at (2.5, -5) {};
+		\node [style=none] (83) at (1, -5) {};
+		\node [style=none] (84) at (1, -6.75) {};
+		\node [style=none] (89) at (1, -7.25) {\texttt{T/NT} branch prediction};
+		\node [style=none] (90) at (-1.75, -4) {};
+		\node [style=right align] (92) at (-7.25, -4) {last branch result};
+		\node [style=none] (93) at (-3, 1.5) {};
+		\node [style=none] (94) at (1, 7.5) {};
+		\node [style=none] (95) at (1, 6.5) {};
+		\node [style=none] (96) at (-3, 6.5) {};
+		\node [style=none] (97) at (5, 6.5) {};
+		\node [style=right align] (98) at (-5.25, 5) {\textit{if last branch not taken}};
+		\node [style=right align] (99) at (-5.25, 5.75) {Branch History Table};
+		\node [style=none] (100) at (-5, 6.5) {};
+		\node [style=none] (101) at (-5, 4.25) {};
+		\node [style=none] (102) at (-13.5, 4.25) {};
+		\node [style=none] (103) at (-13.5, 6.5) {};
+		\node [style=none] (104) at (-5, 5.5) {};
+		\node [style=none] (105) at (-1.75, 5.5) {};
+		\node [style=left align] (106) at (7.25, 5) {\textit{if last branch taken}};
+		\node [style=left align] (107) at (7.25, 5.75) {Branch History Table};
+		\node [style=none] (108) at (14.5, 6.5) {};
+		\node [style=none] (109) at (14.5, 4.25) {};
+		\node [style=none] (110) at (7, 4.25) {};
+		\node [style=none] (111) at (7, 6.5) {};
+		\node [style=none] (112) at (3.75, 5.5) {};
+		\node [style=none] (113) at (7, 5.5) {};
+		\node [style=none] (114) at (-4, -3.5) {};
+		\node [style=none] (115) at (-7, -3.5) {};
+		\node [style=none] (116) at (-7, -4.5) {};
+		\node [style=none] (117) at (-4, -4.5) {};
+		\node [style=none] (118) at (-4, -4) {};
+		\node [style=none] (119) at (-5.5, -4) {\texttt{NT/T}};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (3.center)
+			 to (2.center)
+			 to (0.center)
+			 to (1.center)
+			 to cycle;
+		\draw [style=light fill] (7.center)
+			 to (6.center)
+			 to (4.center)
+			 to (5.center)
+			 to cycle;
+		\draw [style=light fill] (11.center)
+			 to (10.center)
+			 to (8.center)
+			 to (9.center)
+			 to cycle;
+		\draw [style=light fill] (15.center)
+			 to (14.center)
+			 to (12.center)
+			 to (13.center)
+			 to cycle;
+		\draw [style=light fill] (16.center)
+			 to [in=180, out=0] (17.center)
+			 to (19.center)
+			 to (18.center)
+			 to cycle;
+		\draw [style=light fill] (23.center)
+			 to (22.center)
+			 to (20.center)
+			 to [in=180, out=0] (21.center)
+			 to cycle;
+		\draw [style=light fill] (27.center)
+			 to (26.center)
+			 to (24.center)
+			 to (25.center)
+			 to cycle;
+		\draw [style=light fill] (39.center) to (38.center);
+		\draw [style=light fill] (40.center)
+			 to [in=180, out=0] (41.center)
+			 to (43.center)
+			 to (42.center)
+			 to cycle;
+		\draw [style=light fill] (47.center)
+			 to (46.center)
+			 to (44.center)
+			 to [in=180, out=0] (45.center)
+			 to cycle;
+		\draw [style=light fill] (48.center)
+			 to (49.center)
+			 to (51.center)
+			 to (50.center)
+			 to cycle;
+		\draw [style=light fill] (53.center)
+			 to (52.center)
+			 to (55.center)
+			 to (54.center)
+			 to cycle;
+		\draw [style=light fill] (57.center)
+			 to (56.center)
+			 to (59.center)
+			 to (58.center)
+			 to cycle;
+		\draw [style=light fill] (65.center)
+			 to (62.center)
+			 to (63.center)
+			 to (64.center)
+			 to cycle;
+		\draw [style=big arrow] (71.center) to (74.center);
+		\draw [style=big arrow] (75.center) to (76.center);
+		\draw [style=big arrow] (77.center) to (78.center);
+		\draw [style=light fill] (81.center)
+			 to [in=180, out=0] (82.center)
+			 to (80.center)
+			 to [in=360, out=180] (79.center)
+			 to cycle;
+		\draw [style=green arrow] (83.center) to (84.center);
+		\draw [style=big arrow] (93.center) to (69.center);
+		\draw [style=big] (96.center) to (93.center);
+		\draw [style=big] (95.center) to (96.center);
+		\draw [style=big] (95.center) to (97.center);
+		\draw [style=big] (97.center) to (71.center);
+		\draw [style=big] (95.center) to (94.center);
+		\draw [style=big] (101.center)
+			 to (100.center)
+			 to (103.center)
+			 to (102.center)
+			 to cycle;
+		\draw [style=dashed arrow] (104.center) to (105.center);
+		\draw [style=big] (110.center)
+			 to (109.center)
+			 to (108.center)
+			 to (111.center)
+			 to cycle;
+		\draw [style=dashed arrow] (113.center) to (112.center);
+		\draw [style=light fill] (117.center)
+			 to (116.center)
+			 to (115.center)
+			 to (114.center)
+			 to cycle;
+		\draw [style=big arrow] (118.center) to (90.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

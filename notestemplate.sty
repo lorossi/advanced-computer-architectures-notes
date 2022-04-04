@@ -1,0 +1,207 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{notestemplate}[2022/02/28 LaTeX template for my notes]
+
+% I don't really know how those packages interact or why they do so
+%   but if I change the import order, something always stops working
+%   So don't change the order!
+\RequirePackage[a4paper]{geometry} % page settings
+\RequirePackage[utf8]{inputenc} % utf encoding
+\RequirePackage[dvipsnames]{xcolor} % text colours
+\RequirePackage[style=english]{csquotes} % for better quotes
+\RequirePackage{babel} % language specific stuff
+\usepackage[T1]{fontenc} % UTF encoding
+\RequirePackage{lmodern} % allows text at arbitrarily size
+\RequirePackage{tikz} % for drawings
+\RequirePackage{amsmath} % math environments
+\RequirePackage{amsfonts} % math fonts
+\RequirePackage{amssymb} % math symbols
+\RequirePackage{mathtools} % math operators for asmmath
+\RequirePackage{hyperref} % links colouring
+\RequirePackage{ccicons} % creative common icons
+\RequirePackage{verbatim} % monospaced text blocks
+\RequirePackage{listings} % syntax highlighting
+\RequirePackage{enumitem} % custom enum
+\RequirePackage{graphicx} % images
+\RequirePackage{fontawesome} % dings
+\RequirePackage{titlesec} % for sections customization
+\RequirePackage{amsmath} % for better math typesetting
+\RequirePackage{xspace} % for spacing after commands
+\RequirePackage{xfrac} % for diagonal fractions
+\RequirePackage{tocloft} % for spacing in TOC
+\RequirePackage{nameref} % for named references
+\RequirePackage[style=iso]{datetime2} % datetime command
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%% TIKZ and TIKZIT CONFIGURATIONS %%%%%%%%%%%%%%%%
+% image path is relative to wherever the package is called from
+\IfFileExists{tikzstyle.tikzstyles}{
+  \input{tikzstyle.tikzstyles}
+  % tiks libraries for automata and drawing
+  \usetikzlibrary{automata, positioning, backgrounds, arrows, arrows.meta, shapes, shapes.geometric, shapes.misc}
+  % standard layers used in .tikz files
+  \pgfdeclarelayer{edgelayer}
+  \pgfdeclarelayer{nodelayer}
+  \pgfsetlayers{background,edgelayer,nodelayer,main}
+  % style is applied by default to any tikzpicture included via \tikzfig
+  \tikzstyle{tikzfig}=[baseline=-0.25em,scale=0.5]
+  % style for blank nodes
+  \tikzstyle{none}=[inner sep=0mm]
+  % eternalize tikz so that it does not renders all the images each time
+  \usetikzlibrary{external}
+  \tikzexternalize[prefix=tikztemp/]
+}
+
+% command to add tikzit image
+\newcommand{\tikzfig}[2][1] {
+  \IfFileExists{Images/#2} {
+    \scalebox{#1}{
+    \tikzstyle{every picture}=[tikzfig]
+    \tikzsetnextfilename{#2}
+    \input{Images/#2}
+    }
+  }{
+    % image not found, just write it down
+    \textcolor{BrickRed}{
+      \colorbox{white}{Image Images/#2 not found!}
+    }
+  }
+}
+%%%%%%%%%%%%%%%% end of TIKZ and TIKZIT CONFIGURATIONS %%%%%%%%%%%%%%%%
+
+% images folder
+\graphicspath{{Images/}}
+
+% taller lines
+\renewcommand{\baselinestretch}{1.05}
+
+% number subparagraphs as well
+\setcounter{secnumdepth}{5}
+% include sub paragraphs in toc
+\setcounter{tocdepth}{5}
+
+% changed bullet for lists
+\newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{\(\bullet\)}}}}}
+\newcommand\striangle[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{\(\blacktriangleright\)}}}}}
+
+\renewcommand{\labelitemi}{\(\sbullet[.9]\)}
+\renewcommand{\labelitemii}{\(\sbullet[.65]\)}
+\renewcommand{\labelitemiii}{\(\striangle[.5]\)}
+\renewcommand{\labelitemiv}{\(\rightarrrow\)}
+
+% new line after paragraph
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{0.5em}{}
+
+% add commands for checkmark
+\newcommand{\cmark}{\faCheck\xspace} % check
+\newcommand{\xmark}{\faTimes\xspace}  % cross
+\newcommand{\colorcmark}{\textcolor{ForestGreen}{\cmark}\xspace} % green check
+\newcommand{\colorxmark}{\textcolor{BrickRed}{\xmark}\xspace} % red cross
+
+% cusom macro creation
+\newcommand{\shortfor}[1]{\textit{#1}\xspace}
+
+% tighter lists
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
+
+% resets equation numbering when starting a new section.
+\numberwithin{equation}{section}
+
+% page margins
+\geometry{left = 2 cm, right = 2 cm, bottom = 2.5 cm, top = 2.5 cm}
+\setlength{\parindent}{0em}
+
+% hyperlinks colours
+\hypersetup{
+	colorlinks=true,
+	urlcolor={black},
+  linkcolor={black},
+  citecolor={black}
+}
+
+% table spacing
+\setlength{\tabcolsep}{1em} % for the horizontal padding
+\renewcommand{\arraystretch}{1.4} % for the vertical padding
+
+% TOC spacing
+\advance\cftsecnumwidth 0.5em\relax
+\advance\cftsubsecindent 0.5em\relax
+\advance\cftsubsecnumwidth 0.5em\relax
+
+% command for indented quote block
+\newcommand{\indentquote}[1]{
+  \vspace*{1em}
+  \hspace*{2.5em}%
+  \begin{minipage}{.9\textwidth}
+    \textit{\textquote{#1}}
+  \end{minipage}
+  \vspace*{1em}
+}
+
+% command for inline quote block
+\newcommand{\inlinequote}[1]{
+  \hspace*{-0.75em}
+  \textit{\textquote{#1}}
+  \hspace*{-0.75em}
+}
+
+% white on gray text
+\newcommand{\whiteongray}[1]{
+  \textcolor{white}{\colorbox{gray}{\strut #1}}
+}
+
+% command for when I can't be bothered
+\newcommand{\TODO}{
+  \bigskip
+  \begin{center}
+  \Huge
+    \texttt{\textcolor{BrickRed}{TODO}}
+  \end{center}
+  \bigskip
+}
+
+% command for when I am slightly bothered
+\newcommand{\WIP}{
+  \bigskip
+  \begin{center}
+  \Huge
+    \texttt{\textcolor{ForestGreen}{WIP}}
+  \end{center}
+  \bigskip
+}
+
+% command for cover
+\newcommand{\makecover}[2] {
+  \pagenumbering{gobble}
+
+  \title{\Huge{#1}}
+  \author{\Large Lorenzo Rossi and everyone who kindly helped!}
+  \date{#2}
+
+  \maketitle
+
+  \vspace{7.5cm}
+
+  \begin{center}
+    \large{\textbf{Last update: \today}} \\
+    \bigskip
+    \large{These notes are distributed under Creative Commons 4.0 license \\ CC BY-NC \ccbynceu} \\
+  \end{center}
+
+  \begin{figure}[b]
+    \centering
+    \includegraphics[width=5cm]{logo.png} \\
+    \footnotesize no alpaca has been harmed while writing these notes
+  \end{figure}
+
+  \newpage
+
+  \pagenumbering{roman}
+  \tableofcontents
+  \clearpage
+  \pagenumbering{arabic}
+  \newpage
+}
+
+\endinput

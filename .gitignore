@@ -1,0 +1,8 @@
+tikztemp/*
+!tikztemp/.placeholder
+
+*.aux*
+*.log
+*.out
+*.toc
+*.synctex*

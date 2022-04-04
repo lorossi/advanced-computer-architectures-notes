@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -2) {};
+		\node [style=none] (4) at (4.5, -1) {exact address of a branch};
+		\node [style=none] (5) at (9, 0) {};
+		\node [style=none] (6) at (9, -2) {};
+		\node [style=none] (7) at (18, -2) {};
+		\node [style=none] (8) at (18, 0) {};
+		\node [style=none] (9) at (13.5, -1) {predicted target address};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (1.center)
+			 to (6.center)
+			 to (5.center)
+			 to (0.center)
+			 to cycle;
+		\draw [style=light fill] (5.center)
+			 to (6.center)
+			 to (7.center)
+			 to (8.center)
+			 to cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

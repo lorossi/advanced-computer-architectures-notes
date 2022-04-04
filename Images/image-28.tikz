@@ -1,0 +1,175 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (1) at (0, -2) {};
+		\node [style=none] (2) at (4, 0) {};
+		\node [style=none] (3) at (4, -2) {};
+		\node [style=none] (4) at (0, 0) {};
+		\node [style=none] (5) at (2, -1) {\texttt{Memory}};
+		\node [style=none] (11) at (2.5, 0.25) {};
+		\node [style=none] (12) at (2, -2.25) {};
+		\node [style=none] (13) at (2, -4.75) {};
+		\node [style=none] (14) at (0, -5) {};
+		\node [style=none] (15) at (0, -7) {};
+		\node [style=none] (16) at (4, -7) {};
+		\node [style=none] (17) at (4, -5) {};
+		\node [style=none] (18) at (2, -6) {\texttt{IF\ unit}};
+		\node [style=none] (19) at (4, -6) {};
+		\node [style=none] (20) at (6.75, -6) {};
+		\node [style=none] (21) at (7, -5) {};
+		\node [style=none] (22) at (11, -5) {};
+		\node [style=none] (23) at (11, -7) {};
+		\node [style=none] (24) at (7, -7) {};
+		\node [style=none] (25) at (9, -6) {\texttt{ID\ unit}};
+		\node [style=none] (26) at (11, -5.5) {};
+		\node [style=none] (27) at (11, -5.75) {};
+		\node [style=none] (28) at (11, -6) {};
+		\node [style=none] (29) at (11, -6.25) {};
+		\node [style=none] (30) at (11, -6.5) {};
+		\node [style=none] (31) at (13, -5.5) {};
+		\node [style=none] (32) at (13, -1) {};
+		\node [style=none] (33) at (15.75, -1) {};
+		\node [style=none] (34) at (16, -0.25) {};
+		\node [style=none] (35) at (16, -1.75) {};
+		\node [style=none] (36) at (19, -1.75) {};
+		\node [style=none] (37) at (19, -0.25) {};
+		\node [style=none] (38) at (17.5, -1) {\texttt{FU\ 1}};
+		\node [style=none] (39) at (15.75, -3.5) {};
+		\node [style=none] (40) at (16, -2.75) {};
+		\node [style=none] (41) at (16, -4.25) {};
+		\node [style=none] (42) at (19, -4.25) {};
+		\node [style=none] (43) at (19, -2.75) {};
+		\node [style=none] (44) at (17.5, -3.5) {\texttt{FU\ 2}};
+		\node [style=none] (45) at (15.75, -6) {};
+		\node [style=none] (46) at (16, -5.25) {};
+		\node [style=none] (47) at (16, -6.75) {};
+		\node [style=none] (48) at (19, -6.75) {};
+		\node [style=none] (49) at (19, -5.25) {};
+		\node [style=none] (50) at (17.5, -6) {\texttt{FU\ 3}};
+		\node [style=none] (51) at (15.75, -8.25) {};
+		\node [style=none] (52) at (16, -7.5) {};
+		\node [style=none] (53) at (16, -9) {};
+		\node [style=none] (54) at (19, -9) {};
+		\node [style=none] (55) at (19, -7.5) {};
+		\node [style=none] (56) at (17.5, -8.25) {\texttt{FU\ 4}};
+		\node [style=none] (57) at (15.75, -11.75) {};
+		\node [style=none] (58) at (16, -11) {};
+		\node [style=none] (59) at (16, -12.5) {};
+		\node [style=none] (60) at (19, -12.5) {};
+		\node [style=none] (61) at (19, -11) {};
+		\node [style=none] (62) at (17.5, -11.75) {\texttt{FU\ n}};
+		\node [style=none] (63) at (13.5, -5.75) {};
+		\node [style=none] (64) at (13.5, -3.5) {};
+		\node [style=none] (65) at (13.5, -8.25) {};
+		\node [style=none] (66) at (13.5, -6.25) {};
+		\node [style=none] (67) at (17.5, -9.5) {};
+		\node [style=none] (68) at (17.5, -10.5) {};
+		\node [style=none] (69) at (13, -6.5) {};
+		\node [style=none] (70) at (13, -11.75) {};
+		\node [style=none] (71) at (15, -13.25) {};
+		\node [style=none] (72) at (20, -13.25) {};
+		\node [style=none] (73) at (15, 1.5) {};
+		\node [style=none] (74) at (20, 1.5) {};
+		\node [style=none] (75) at (17.5, 0.75) {\texttt{EX\ unit}};
+		\node [style=none] (76) at (21, -0.25) {};
+		\node [style=none] (77) at (21, -12.5) {};
+		\node [style=none] (78) at (24, -12.5) {};
+		\node [style=none] (79) at (24, -0.25) {};
+		\node [style=none, rotate=90] (80) at (22.5, -6.5) {\texttt{Register\ files}};
+		\node [style=none] (82) at (19.25, -11.75) {};
+		\node [style=none] (83) at (20.75, -11.75) {};
+		\node [style=none] (84) at (19.25, -8.25) {};
+		\node [style=none] (85) at (20.75, -8.25) {};
+		\node [style=none] (86) at (19.25, -6) {};
+		\node [style=none] (87) at (20.75, -6) {};
+		\node [style=none] (88) at (19.25, -3.5) {};
+		\node [style=none] (89) at (20.75, -3.5) {};
+		\node [style=none] (90) at (19.25, -1) {};
+		\node [style=none] (91) at (20.75, -1) {};
+		\node [style=none] (92) at (17.5, 1.75) {};
+		\node [style=none] (93) at (2.5, 3) {};
+		\node [style=none] (94) at (17.5, 3) {};
+		\node [style=none] (96) at (22.5, 0) {};
+		\node [style=none] (97) at (22.5, 4) {};
+		\node [style=none] (98) at (1.5, 4) {};
+		\node [style=none] (99) at (1.5, 0.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (2.center)
+			 to (4.center)
+			 to (1.center)
+			 to (3.center)
+			 to cycle;
+		\draw [style=light fill] (14.center)
+			 to (15.center)
+			 to (16.center)
+			 to (17.center)
+			 to cycle;
+		\draw [style=double arrow] (13.center) to (12.center);
+		\draw [style=big arrow] (19.center) to (20.center);
+		\draw [style=light fill] (21.center)
+			 to [in=90, out=-90] (24.center)
+			 to (23.center)
+			 to (22.center)
+			 to cycle;
+		\draw [style=big] (26.center) to (31.center);
+		\draw [style=big] (31.center) to (32.center);
+		\draw [style=big arrow] (32.center) to (33.center);
+		\draw [style=light fill] (35.center)
+			 to (36.center)
+			 to (37.center)
+			 to (34.center)
+			 to cycle;
+		\draw [style=light fill] (41.center)
+			 to (42.center)
+			 to (43.center)
+			 to (40.center)
+			 to cycle;
+		\draw [style=light fill] (47.center)
+			 to (48.center)
+			 to (49.center)
+			 to (46.center)
+			 to cycle;
+		\draw [style=light fill] (53.center)
+			 to (54.center)
+			 to (55.center)
+			 to (52.center)
+			 to cycle;
+		\draw [style=light fill] (59.center)
+			 to (60.center)
+			 to (61.center)
+			 to (58.center)
+			 to cycle;
+		\draw [style=big] (63.center) to (27.center);
+		\draw [style=big] (63.center) to (64.center);
+		\draw [style=big arrow] (64.center) to (39.center);
+		\draw [style=big arrow] (28.center) to (45.center);
+		\draw [style=big] (29.center) to (66.center);
+		\draw [style=big] (66.center) to (65.center);
+		\draw [style=big arrow] (65.center) to (51.center);
+		\draw [style=big dashed] (68.center) to (67.center);
+		\draw [style=big] (69.center) to (30.center);
+		\draw [style=big] (69.center) to (70.center);
+		\draw [style=big arrow] (70.center) to (57.center);
+		\draw [style=red line] (73.center)
+			 to (74.center)
+			 to (72.center)
+			 to (71.center)
+			 to cycle;
+		\draw [style=light fill] (76.center)
+			 to (79.center)
+			 to (78.center)
+			 to (77.center)
+			 to cycle;
+		\draw [style=double arrow] (82.center) to (83.center);
+		\draw [style=double arrow] (84.center) to (85.center);
+		\draw [style=double arrow] (86.center) to (87.center);
+		\draw [style=double arrow] (88.center) to (89.center);
+		\draw [style=double arrow] (90.center) to (91.center);
+		\draw [style=big arrow] (93.center) to (11.center);
+		\draw [style=big arrow] (94.center) to (92.center);
+		\draw [style=big] (94.center) to (93.center);
+		\draw [style=big] (98.center) to (97.center);
+		\draw [style=big arrow] (97.center) to (96.center);
+		\draw [style=big arrow] (98.center) to (99.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

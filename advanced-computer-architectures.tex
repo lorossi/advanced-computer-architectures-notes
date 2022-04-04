@@ -1,0 +1,2202 @@
+\documentclass[english]{article}
+\usepackage{notestemplate}
+
+% TODO - when everything is done, re-number all images
+
+\begin{document}
+
+\makecover{Advanced Computer Architectures}{2021/2022}
+
+\section*{Introduction}
+
+This document contains the notes for the \textit{Advanced Computer Architectures} course, relative to the \textit{2021/2022} class of \textit{Computer Science and Engineering} held at \textit{Politecnico di Milano}.
+
+Teacher: \textit{Donatella Sciuto}
+
+Support teacher: \textit{Davide Conficconi}
+
+Textbook: \textit{Hennessey and Patterson, Computer Architecture: A Quantitative Approach}
+
+\bigskip
+
+If you find any errors and you are willing to contribute and fix them, feel free to send me a pull request on the GitHub repository found at \href{https://github.com/lorossi/advanced-computer-architectures-notes}{github.com/lorossi/advanced-computer-architectures-notes}.
+
+\bigskip
+
+A big thank you to everyone who helped me!
+
+\newpage
+
+\section{Introduction to the Computer Architectures}
+
+\subsection{Flynn Taxonomy}
+\label{sec:flynn-taxonomy}
+
+Created in 1996 and upgraded in 1972, it provides the first description of a computer.
+
+\begin{itemize}
+  \item \textit{SISD} - single instruction, single data
+        \begin{itemize}
+          \item \textbf{Sequential} programs
+          \item \textbf{Serial} (non parallel) computer
+          \item \textbf{Deterministic} execution
+          \item Only one instruction stream is being executed at a time
+        \end{itemize}
+  \item \textit{MISD} - multiple instructions, single data
+        \begin{itemize}
+          \item Multiple processors working in \textbf{parallel} on the same data
+          \item \textbf{Fail safe} due to high redundancy
+          \item Same algorithm programmed and implemented in different ways, so if one fails the other are still able to compute the result
+          \item No practical market configuration
+        \end{itemize}
+  \item \textit{SIMD} - single instruction, multiple data
+        \begin{itemize}
+          \item Each processor receives \textbf{different data} and performs the \textbf{same operations} on it
+          \item Used in image processing or in fields where a single operation must be performed in many different pieces of informations
+          \item Each instructions is executed in \textbf{synchronous} way on the same data
+          \item Best suited for specialized problems characterized by a high degree of regularity, such as graphics or images processing
+          \item Data level parallelism (DLP)
+        \end{itemize}
+  \item \textit{MIMD} - multiple instructions, multiple data
+        \begin{itemize}
+          \item \textbf{Array of processors} in parallel, each of them executing its instructions
+          \item Execution can be \textbf{asynchronous} or \textbf{synchronous}, \textbf{deterministic} or \textbf{non-deterministic}
+          \item The most common type of parallel computer
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+An illustration of the different architectures is displayed in Figure~\ref{fig:flynn-taxonomy}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-1.tikz}
+  \caption{Flynn Taxonomy}
+  \label{fig:flynn-taxonomy}
+  \bigskip
+\end{figure}
+
+\subsection{Hardware parallelism}
+
+There are different types of hardware parallelisms:
+
+\begin{itemize}
+  \item \textbf{Instruction Level parallelism} - \textit{(ILP)}
+        \begin{itemize}
+          \item Exploits data level parallelism at modest level through \textbf{compiler techniques} such as pipelining and at medium levels using speculation
+        \end{itemize}
+  \item \textbf{Vector Architectures} and \textbf{Graphic Processor Units}
+        \begin{itemize}
+          \item Exploit data level parallelism by applying a single instruction to a \textbf{collection of data} in parallel
+        \end{itemize}
+  \item \textbf{Thread level parallelism} - \textit{(TLP)}
+        \begin{itemize}
+          \item Exploits either data level parallelism or task level parallelism in a coupled hardware model that allows \textbf{interaction among threads}
+        \end{itemize}
+  \item \textbf{Request level parallelism}
+        \begin{itemize}
+          \item Exploits parallelism among largely decoupled tasks specified by the programmer or the OS
+        \end{itemize}
+\end{itemize}
+
+Nowadays, heterogeneous systems \textit{(systems that utilize more than one type of parallelism)} are commonly used among all commercial devices.
+
+\newpage
+
+\section{Performance and cost}
+
+There are multiple types \textit{(classes)} of computers, each with different needs.
+The performance measurement is not the same for each of them.
+\textit{Price, computing speed, power consumption} can be metrics to measure the performance of a computer.
+
+Programming has become so complicated that it's not possible to balance all the constraints manually.
+While the computational power has grown bigger than ever before, energy consumption is now a sensible constraint.
+
+The computer engineering methodology is therefore as such:
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \begin{minipage}[h]{0.45\textwidth}
+    \centering
+    \tikzfig{image-2.tikz}
+  \end{minipage}
+  \begin{minipage}[h]{0.45\textwidth}
+    \begin{enumerate}
+      \item \label{enum:methodology-start} \textit{evaluate} system by bottlenecks
+      \item \textit{simulate} new designs and organizations
+      \item \textit{implement} next generation systems
+      \item \textit{go} to Step~\ref{enum:methodology-start}
+    \end{enumerate}
+  \end{minipage}
+  \caption{Computer engineering methodology}
+  \label{fig:computer-engineering-methodology}
+  \bigskip
+\end{figure}
+
+There are more constraints not contained in this models, such as technology trends.
+
+\bigskip
+When one computer is faster than another, what quality is being addressed?
+\textbf{It depends on what it's important.}
+The picked qualities may change according to the use case or the user itself.
+
+2 metrics are normally used:
+
+\begin{enumerate}
+  \item Computer system user
+        \begin{itemize}
+          \item minimize elapsed time for program execution
+          \item \(\texttt{execution\ time} = \texttt{time\_end} - \texttt{time\_start}\)
+        \end{itemize}
+  \item Computer center manager
+        \begin{itemize}
+          \item maximize completion rate
+          \item \(\texttt{completion\ rate} = \texttt{number\ of\ jobs } \div \texttt{ elapsed\ time}\)
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Response time vs throughput}
+
+Is it true that
+\(\texttt{throughput} = {1} \div { \texttt{average\ response\ time}}\)?
+The answer can be given only if it's clear if there's overlapping between core operations.
+
+If there is, then \[ \texttt{throughput} > {1} \div {\texttt{average\ response\ time}} \]
+With pipelining, \textbf{execution time} of a single instruction is \textbf{increased} while the \textbf{average throughput} is \textbf{decreased}.
+
+\subsection{Factors affecting performance}
+
+A few of the factors affecting the performance are:
+
+\begin{itemize}
+  \item Algorithm complexity and data set
+  \item Compiler
+  \item Instructions set
+  \item Available operations
+  \item Operating systems
+  \item Clock rate
+  \item Memory system performance
+  \item I/O system performance and overhead
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item it's the least optimizable factor
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+The locution \textbf{\(X\) is \(n\) times faster than \(Y\)} means:
+
+\begin{gather*}
+  \dfrac{ExTime\ (Y)}{ExTime\ (X)}  = \dfrac{Performance\ (X)}{Performance\ (Y)} = Speedup\ (X, Y) \\
+  Performance(X) = \dfrac{1}{ExTime\ (x)}
+\end{gather*}
+
+So, in order to optimize a system, one must focus on the common sense.
+\textit{Sadly}, it is a valuable quality.
+
+While making a design trade off one must favour the frequent case over the infrequent one.
+
+\textit{For example}:
+\begin{itemize}
+  \item Instructions fetch and decode unit is used more frequently than multiplier, so it makes sense to optimize it first
+  \item If database server has 50 disks processor, storage dependability is more important than system dependability so it has to be optimized first
+\end{itemize}
+
+\subsubsection{Amdahl's law}
+
+As seen before, the speedup due to the enhancement \(E\) is:
+\[ Speedup\ (E)  = \dfrac{ExTime\ w/o\ E}{ExTime\ w/\ E} = \dfrac{Performance\ w/\ E}{Performance\ w/o\ E} \]
+
+Suppose that enhancement \(E\) accelerates a fraction \(F\) of the task by a factor \(S\) and the remainder of the task is unaffected.
+The Amdahl's law states that:
+\begin{gather*}
+  ExTime_{new} = ExTime_{old} \times \left[\left(1 - F\right) + \dfrac{F}{S}\right] \\
+  Speedup = \dfrac{ExTime_{old}}{ExTime_{new}} = \dfrac{1}{(1 - F) + \sfrac{F}{S}} = \dfrac{S}{S - SF + F}
+\end{gather*}
+
+\paragraph{Corollary}
+
+The best possible outcome of the \textit{Amdahl's law} is:
+\[ Speedup = \dfrac{1}{1 - F} \]
+
+\indentquote{If an enhancement is only usable for a fraction of task, we can't speed up the task by more than the reciprocal of \(1\) minus the fraction}
+
+The \textit{Amdahl's law} expresses the law of diminishing returns.
+It serves as a guide to how much an enhancement will improve performance and how to distribute resources to improve the cost over performance ratio.
+
+\subsubsection{\textit{CPU} time}
+
+\textbf{CPU time} is determined by:
+
+\begin{itemize}
+  \item Instruction Count, \textit{IC}:
+        \begin{itemize}
+          \item The number of executed instructions, not the size of static code
+          \item Determined by multiple \textit{factors, including algorithm, compiler, ISA}
+        \end{itemize}
+  \item Cycles per instructions, \textit{CPI}:
+        \begin{itemize}
+          \item Determined by \textit{ISA} and \textit{CPU} organization
+          \item Overlap among instructions reduces this term
+          \item The \textit{CPI} relative to a process \texttt{P} is calculated as:
+                \[ CPI(P) = \dfrac{\texttt{\#\ of\ clock\ cycles\ to\ execute\ P}}{\texttt{number\ of\ instructions}} \]
+        \end{itemize}
+  \item Time per cycle, \textit{TC}:
+        \begin{itemize}
+          \item It's determined by technology, organization and circuit design
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+Then, \textit{CPU} time can be calculated as:
+\[ CPU_{time} = T_{clock} \cdot CPI \cdot N_{inst} = \dfrac{CPI \cdot N_{inst}}{f} \]
+Note that the \textit{CPI} can vary among instructions, because each step of pipeline might take different amounts of time.
+The factors that can influence the \textit{CPU} time is shown in Table~\ref{tab:relation-factor-CPU-time}.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{r|c|c|c}
+                             & \textit{IC} & \textit{CPI} & \textit{TC} \\ \hline
+    \textit{Program}         & \xmark      &              &             \\
+    \textit{Compiler}        & \xmark      & (\xmark)     &             \\
+    \textit{Instruction set} & \xmark      & \xmark       &             \\
+    \textit{Organization}    &             & \xmark       & \xmark      \\
+    \textit{Technology}      &             &              & \xmark      \\
+  \end{tabular}
+  \caption{Relation between factors and \textit{CPU} time}
+  \label{tab:relation-factor-CPU-time}
+\end{table}
+
+\paragraph{\textit{CPU} time and cache}
+
+In order to improve the \textit{CPU} time, an \textbf{instruction cache} can be used.
+Using a more realistic model, while calculating \textit{CPU} time, one must must also account for:
+
+\begin{itemize}
+  \item The execution \textit{CPI} - \(\text{CPI}_\text{EXE}\)
+  \item The miss penalty - \(\text{MISS}_P\)
+  \item The miss rate - \(\text{MISS}_R\)
+  \item The memory references - \(\text{MEM}\)
+\end{itemize}
+
+Then the \(\text{CPI}_{\text{CACHE}}\) can be calculated as:
+\[ \text{CPI}_{\text{CACHE}} = \text{CPI}_\text{EXE} + \text{MISS}_P \cdot  \text{MISS}_R \cdot \text{MEM} \]
+
+\subsubsection{Other metrics}
+
+There are other metrics to measure the performance of a CPU:
+
+\begin{itemize}
+  \item \textit{MIPS} - million of instructions per second
+        \[ \dfrac{\texttt{number\ of\ instructions}}{\texttt{execution\ time} \cdot 10^6} = \dfrac{\texttt{clock\ frequency}}{\texttt{CPI} \cdot 10^6} \]
+        \begin{itemize}
+          \item the higher the \textit{MIPS}, he faster the machine
+        \end{itemize}
+  \item \textit{Execution time}
+        \[ \dfrac{\texttt{instruction\ count}}{\texttt{MIPS} \cdot 10^6} \]
+  \item \textit{MFLOPS} - floating point operations in program
+        \begin{itemize}
+          \item assumes that floating points operations are independent of compiler and and ISA
+          \item it's not always safe, because of:
+                \begin{itemize}
+                  \item missing instructions \textit{(e.g. FP divide, square root, sin, cos, \dots)}
+                  \item optimizing compilers
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+Furthermore, the execution time is compared against test programs that:
+
+\begin{itemize}
+  \item Are chosen to measure performance defined by some groups
+  \item Are available to the community
+  \item Run on machines whose performance is well known and documented
+  \item Can compare to reports on other machines
+  \item Are representative
+\end{itemize}
+
+\subsection{Averaging metrics}
+
+The simplest approach to summarizing relative performance is to use the total execution time of the \(n\) programs.
+However, this does account for the different durations of the benchmarking programs.
+
+\(3\) different approaches using means can be described as shown in Table~\ref{tab:mean-approaches}.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{c|c}
+    \textit{metric} & \textit{type of mean} \\ \hline
+    times           & arithmetic            \\
+    rates           & harmonic              \\
+    execution time  & geometric             \\
+  \end{tabular}
+  \caption{Mean approaches}
+  \label{tab:mean-approaches}
+\end{table}
+
+\newpage
+\section{Multithreading and Multiprocessors}
+
+\subsection{Why multithreading?}
+
+Why is multithreading needed?
+
+\begin{itemize}
+  \item 80's: expansions of superscalar processors
+        \begin{itemize}
+          \item In the 80's, people were writing languages in high level programming languages
+          \item Since compiler optimization was not good enough, it was needed to improve the software translations by making \textit{CPU} instructions that were more similar to high level instructions
+          \item But all of these improvements weren't enough!
+          \item As a solution, the pipelining was introduced
+                \begin{itemize}
+                  \item it sends more than one instructions at a time
+                  \item more instructions completed in the same clock cycle
+                  \item it's kind of a hardware level implicit parallelism
+                \end{itemize}
+        \end{itemize}
+  \item 90's: decreasing returns on investments
+        \begin{itemize}
+          \item Since all the parallelism was implemented by the hardware (or, at most, the compiler), there was no effective way to manually handle the performance
+          \item There were many different issues:
+                \begin{itemize}
+                  \item issue from 2 to 6 ways, issue out of order, branch prediction, all lowering from 1 CPI to 0.5 CPI
+                  \item performance below expectations
+                  \item this led to delayed and cancelled projects
+                \end{itemize}
+          \item All the previous improvements were due to the shrinking size of the transistors, which was slowly speeding down
+                \begin{itemize}
+                  \item[\cmark] the number of transistors followed Moore's law, doubling each 18 to 24 months
+                  \item[\xmark] the frequency and the performance per core were not, due to interferences and energy problems
+                \end{itemize}
+        \end{itemize}
+  \item 2000: beginning of the multi core era
+        \begin{itemize}
+          \item Since increasing the \textit{CPU} frequency could not be achieved any more, the only solution left was to increase the number of threads in every processor
+          \item This implied that there was a need of introducing a software way to handle the parallelism, in harmony with an enhanced hardware
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+Motivations for the paradigm change:
+
+\begin{itemize}
+  \item Moderns processors fail to utilize execution resources well enough
+        \begin{itemize}
+          \item There's no single culprit:
+                \begin{itemize}
+                  \item Memory conflicts
+                  \item Control hazards
+                  \item Branch misprediction
+                  \item Cache miss
+                  \item \ldots
+                \end{itemize}
+          \item All those problems are correlated and there's no way of solving one of them without affecting all the others
+          \item There's the need for a general latency-tolerance solution which can hide all sources of latency: \textbf{parallel programming}
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Parallel Programming}
+
+Explicit parallelism implies structuring the applications into concurrent and communicating tasks.
+Operating systems offer systems to implement such features: \textbf{threads} and \textbf{processes}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-3.tikz}
+  \caption{Multiplicity of processes and threads}
+  \label{fig:multiplicity-of-processes-and-threads}
+  \bigskip
+\end{figure}
+
+The multitasking is implemented differently basing on the characteristics of the CPU:
+
+\begin{itemize}
+  \item Single core
+  \item Single core with multithreading support
+  \item Multi core
+\end{itemize}
+
+In multithreading, multiple threads share the functions units of one processor via overlapping.
+The processor must duplicate the independent state of each thread:
+
+\begin{itemize}
+  \item Separate copy of the register files
+  \item Separate \texttt{PC}
+  \item Separate page table
+\end{itemize}
+
+The memory is shared via the virtual memory mechanisms, which already support multi processes.
+Finally, the hardware must be ready for fast thread switch: it must be faster than full process switch (which is in the order of hundreds to thousands of clocks).
+
+There are 2 apparent solutions:
+
+\begin{enumerate}
+  \item \textbf{Fine grained} multi threading
+        \begin{itemize}
+          \item Switches from one thread to another at each instructions by taking turns, skipping when one thread is stalled
+          \item The executions of more threads is interleaved
+          \item The \textit{CPU} must be able to change thread at every clock cycle.
+          \item For \(n\) processes, each gets \(\sfrac{1}{n}\) of \textit{CPU} time and \(n\) times the original resources are needed
+        \end{itemize}
+  \item \textbf{Coarse grained} multithreading
+        \begin{itemize}
+          \item Switching from one thread to another occurs only when there are long stalls in the active process
+          \item Two threads share many resources
+          \item The switching from one thread to the other requires different clock cycles to save the context
+        \end{itemize}
+\end{enumerate}
+
+\textbf{Disadvantages} of multithreading:
+\begin{itemize}
+  \item for short stalls it does not reduce the throughput loss
+  \item the \textit{CPU} starts the execution of instructions that belongs to a single thread
+  \item when there is one stall it is necessary to empty the pipeline before starting the new thread
+\end{itemize}
+
+\textbf{Advantages} of multithreading:
+\begin{itemize}
+  \item in normal conditions the single thread is not slowed down
+\end{itemize}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \tikzfig[1]{image-4.tikz}
+    \caption{Comparison between fine and coarse multithreading}
+    \label{fig:multithreading-comparion}
+  \end{minipage}
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \tikzfig[0.6]{image-5.tikz}
+    \caption{Performance comparison}
+    \label{fig:performance-comparison}
+  \end{minipage}
+  \bigskip
+\end{figure}
+
+\bigskip
+Could a processors oriented ad \textit{ILP} exploit \textit{TLP}?
+
+\begin{itemize}
+  \item Thread level parallelism, simultaneous multithreading
+        \begin{itemize}
+          \item Uses the resources of \textbf{one superscalar processor} to exploit simultaneously \textit{ILP} and \textit{TLP}
+          \item A \textit{CPU} today has \textbf{more functional resources} than what one thread can if fact use
+          \item Simultaneously \textbf{schedule instructions} for execution from all threads
+        \end{itemize}
+  \item A \textit{CPU} that can handle these needs must be built
+        \begin{itemize}
+          \item A \textbf{large set of registers} is needed, allowing multiple process to operate on different data on the same registers
+          \item \textbf{Mapping table for registers} is needed in order to tell each process where to write data
+          \item Each processor can manage a \textbf{set amount of threads}
+        \end{itemize}
+  \item This is the most flexible way to manage multithreading but it requires more complex hardware
+\end{itemize}
+\bigskip
+
+Comparison between many multithreading paradigms is shown in Figure~\ref{fig:multithreading-comparison}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.55]{image-6.tikz}
+  \caption{\centering Multithreading comparison - each column shows the evolution of \(5\) different processes spread on \(4\) different threads over a set amount of time.
+    A filled square illustrates a thread occupied by a process, while the empty ones represent an empty (\texttt{idle}) thread.}
+  \label{fig:multithreading-comparison}
+  \bigskip
+\end{figure}
+
+\subsubsection{Further improvements}
+
+It's difficult to increase the performance and clock frequency of the single core.
+The longest pipeline stage can be split in multiple smaller stages, allowing an higher throughput.
+
+This concept is called \textbf{deep pipeline} and has a few drawbacks:
+
+\begin{itemize}
+  \item \textbf{Heat dissipation} problems due to the increased number of components
+  \item More stages imply \textbf{more faults} since sequential instructions are likely related
+  \item \textbf{Transmissions delay} in wires start to get relevant
+  \item \textbf{Harder design} and verifications by the hardware developers
+\end{itemize}
+
+\subsection{Parallel Architectures}
+
+A \textbf{parallel computer} is a collection of processing elements that cooperate and communicate to solve large problems in a rapid way.
+
+The aim is to replicate processors to add performance and not design a single faster processor.
+Parallel architecture extends traditional computer architecture with a communication architecture.
+
+This concept needs:
+
+\begin{itemize}
+  \item \textbf{Abstractions} for HW/SW interface
+  \item \textbf{Different structures} to realize abstractions easily
+\end{itemize}
+
+Refer to Flynn Taxonomy (Section~\ref{sec:flynn-taxonomy}) for more details about these architectures.
+
+\subsection{\textit{SIMD} architecture}
+
+The characteristics of the \textit{SIMD} architectures \textit{(Single Instruction Multiple Data)} are:
+
+\begin{itemize}
+  \item \textbf{Same instruction} executed by \textbf{multiple processors} using different data streams
+  \item Each processor has its own data memory
+  \item \textbf{Single instruction memory} and \textbf{single control processor} to fetch and dispatch instructions
+  \item Processors are typically \textbf{special purpose}
+  \item A \textbf{simple} programming model
+\end{itemize}
+
+The programming model features:
+
+\begin{itemize}
+  \item Synchronized units
+        \begin{itemize}
+          \item a single program counter
+        \end{itemize}
+  \item Each unit has its own addressing registers
+        \begin{itemize}
+          \item each unit can use different data address
+        \end{itemize}
+\end{itemize}
+
+Motivations for \textit{SIMD}:
+
+\begin{itemize}
+  \item The cost of the control unit is shared between all execution units
+  \item Only one copy of the code in execution is necessary
+\end{itemize}
+
+In real life:
+
+\begin{itemize}
+  \item \textit{SIMD} architectures are a mix of \textit{SISD} and \textit{SIMD}
+  \item A host computer executes sequential operations
+  \item \textit{SIMD} instructions sent to all the execution units, which has its own memory and registers and exploit an interconnection network to exchange data
+\end{itemize}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-7.tikz}
+  \caption{\textit{SIMD} architecture}
+  \label{fig:simd-architecture}
+  \bigskip
+\end{figure}
+
+\subsubsection{Vector processing}
+
+\textbf{Vector processors} have high level operations that work on linear arrays of number \textit(vectors).
+A language that can handle vectors (and not scalar values) is needed as well.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-8.tikz}
+  \caption{Vector processing}
+  \label{fig:vector-processing}
+  \bigskip
+\end{figure}
+
+A vector processor consists of a pipelined scalar unit and a vector units.
+There are 2 styles of vector architectures:
+
+\begin{itemize}
+  \item \textbf{memory-memory} vector processors: all vector operations are memory to memory
+  \item \textbf{vector-register} processors: all vector operations are between vector registers (except load and store)
+\end{itemize}
+
+The execution is done by using a deep pipeline, allowing very fast clock frequency and higher speeds.
+Since elements in the vectors are independent, there are no hazards and the pipelines are always full.
+
+Vectors applications are not limited to scientific computing, as they are used in:
+
+\begin{itemize}
+  \item Multimedia Processing
+  \item Standard benchmarks kernels
+  \item Lossy and Lossless Compression
+  \item Cryptography and Hashing
+  \item Speech and handwriting recognition
+  \item Operating systems and networking
+  \item Databases
+  \item Language run time support
+  \item \ldots
+\end{itemize}
+
+\bigskip
+\textit{Example of vector code:}
+
+\begin{minipage}{0.99\textwidth}
+  \bigskip
+  \begin{minipage}[t]{0.35\textwidth}
+    \begin{verbatim}
+      # C code
+      for (i = 0; i < 64; i++)
+        C[i] = A[i] + B[i];
+    \end{verbatim}
+  \end{minipage}
+  \begin{minipage}[t]{0.3\textwidth}
+    \begin{verbatim}
+      # Scalar Code
+      LI R4, #64
+    loop:
+      L.D F0, 0(R1)
+      L.D F2, 0(R2)
+      ADD.D F4, F2, F0
+      S.D F4, 0(R3)
+      DADDIU R1, 8
+      DADDIU R2, 8
+      DADDIU R3, 8
+      DSUBIU R4, 1
+      BNEZ R4, loop
+\end{verbatim}
+  \end{minipage}
+  \begin{minipage}[t]{0.3\textwidth}
+    \begin{verbatim}
+    # Vector Code
+    LI VLR, #64
+    LV V1, R1
+    LV V2, R2
+    ADDV.D V3,V1,V2
+    SV V3, R3
+  \end{verbatim}
+  \end{minipage}
+  \bigskip
+\end{minipage}
+
+The structure of the vector unit is represented in Figure~\ref{fig:vector-unit-structure}.
+
+\begin{figure}
+  \bigskip
+  \centering
+  \tikzfig[0.4]{image-26.tikz}
+  \caption{\textit{Vector Unit} structure}
+  \label{fig:vector-unit-structure}
+  \bigskip
+\end{figure}
+
+\subsection{\textit{MIMD} architecture}
+
+\textit{MIMD} architectures are flexible as they can function as:
+
+\begin{itemize}
+  \item \textbf{Single user} machines for high performance on one application
+  \item Multiprogrammed multiprocessors running many tasks \textbf{simultaneously}
+  \item Some combinations of the two aforementioned functions
+  \item Can be build starting from standard CPUs
+\end{itemize}
+
+Each processor fetches its own instructions and operates on its own data.
+Processors are often off the shelf microprocessors, with the upside of being able to build a scalable architecture and having an high cost performance ratio.
+
+To fully exploit a \textit{MIMD} with \(n\) processors, there must be:
+
+\begin{itemize}
+  \item At least \(n\) threads or processes to execute
+        \begin{itemize}
+          \item those independent threads are typically identified by the programmer or created by the compiler
+        \end{itemize}
+  \item Thread level parallelism
+        \begin{itemize}
+          \item parallelism is identified by the software (and not by hardware like in superscalar CPUs)
+        \end{itemize}
+\end{itemize}
+
+\textit{MIMD} machines can be characterized in 2 classes, depending on the number of processors involved:
+
+\begin{itemize}
+  \item Centralized shared-memory architectures
+        \begin{itemize}
+          \item At most a few dozen processors chips (less than 100 cores)
+          \item Large caches, single memory multiple banks
+          \item This kind of structures is often \textbf{symmetric multiprocessors (SMP)} and the style of architecture is called \textbf{Uniform Memory Access (UMA)}
+        \end{itemize}
+  \item Distributed memory architectures
+        \begin{itemize}
+          \item Supports \textbf{large processor count}
+          \item Requires \textbf{high bandwidth} interconnection
+          \item It has the disadvantage of the high volume of data communication between processors
+        \end{itemize}
+\end{itemize}
+
+\newpage
+
+\section{Pipeline recap}
+
+The pipeline \textit{CPI} (clocks per instruction) can be calculated as the sum of:
+
+\begin{itemize}
+  \item \textbf{Ideal} pipeline \textit{CPI}
+        \begin{itemize}
+          \item measure of the maximum performance attainable by the implementation
+        \end{itemize}
+  \item \textbf{Structural stalls}
+        \begin{itemize}
+          \item due to the inability of the \textit{HW} to support this combination of instructions
+          \item can be solved with more \textit{HW} resources
+        \end{itemize}
+  \item \textbf{Data hazards}
+        \begin{itemize}
+          \item the current instruction depends on the result of a prior instruction still in the pipeline
+          \item can be solved with \textit{forwarding} or \textit{compiler scheduling}
+        \end{itemize}
+  \item \textbf{Control hazards}
+        \begin{itemize}
+          \item caused by delay between the \texttt{IF} and the decisions about changes in control flow \textit{(branches, jumps, executions)}
+          \item can be solved with \textit{early evaluation, delayed branch, predictors}
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+The main features of pipelining are:
+\begin{itemize}
+  \item \textbf{Higher throughput} for the entire workload
+  \item Pipeline rate is limited by the \textbf{slowest} pipeline stage
+  \item Multiple tasks operate \textbf{simultaneously}
+  \item It \textbf{exploits parallelism} among instructions
+  \item Time needed to \textit{"fill"} and \textit{"empty"} the pipeline reduces speedup
+\end{itemize}
+
+\subsection{Stages in \textit{MIPS} pipeline}
+
+The 5 stages in the \textit{MIPS} pipeline are:
+
+\begin{enumerate}
+  \item \textit{Fetch} - \texttt{FE}
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item Instruction fetch from memory
+        \end{itemize}
+  \item \textit{Decode} - \texttt{ID}
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item Instruction decode and register read
+        \end{itemize}
+  \item \textit{Execute} - \texttt{EX}
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item Execute operation or calculate address
+        \end{itemize}
+  \item \textit{Memory access} - \texttt{ME}
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item Access memory operand
+        \end{itemize}
+  \item \textit{Write back} - \texttt{W}
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item Write result back to register
+        \end{itemize}
+\end{enumerate}
+
+Each instructions is executed after the previous one has completed its first stage, and so on.
+When the pipeline is filled, five different activities are running at once.
+Instructions are passed from one unit to the next through a storage buffer.
+As an instruction progresses through the pipeline, all the information needed by the stages downstream must be passed along.
+
+The stages are usually represented like in Figure~\ref{fig:mips-pipeline-stages}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1.5]{image-25.tikz}
+  \caption{Stages in \textit{MIPS} pipelines}
+  \label{fig:mips-pipeline-stages}
+  \bigskip
+\end{figure}
+
+\subsection{Complex in-order pipeline}
+
+What happens, architecture wise, when mixing integer and floating point operations?
+How are different registers handled?
+
+For example, how can \textit{GPRs (general purpose registers)} and \textit{FPRs (floating point registers)} be matched?
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-23.tikz}
+  \caption{Complex pipelining}
+  \label{fig:complex-pipelining}
+  \bigskip
+\end{figure}
+
+The \textit{issue} stage detects those conflicts and it's able to stop the execution of an instructions in case of errors.
+
+\bigskip
+Pipelining becomes complex when we want high performance in the presence of:
+
+\begin{itemize}
+  \item \textbf{Long latency} or partially pipelined floating point units
+  \item \textbf{Multiple functions} and memory units
+  \item Memory systems with \textbf{variable access time}
+  \item Precise \textbf{exception}
+\end{itemize}
+
+Formally, all the different executions must be balanced.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.7]{image-24.tikz}
+  \caption{Complex pipelining}
+  \label{fig:complex-pipelining-2}
+  \bigskip
+\end{figure}
+
+\bigskip
+The main issues are:
+\begin{itemize}
+  \item \textbf{Structural conflicts at the execution stage} if some \textit{FPU} or memory unit is not pipelined and takes more than one cycle
+  \item \textbf{Structural conflicts at the write back stage} due to variable latencies of different functional units (or \textit{FUs})
+  \item Out of order write hazards due to variable latencies of different \textit{FUs}
+  \item Hard to handle exceptions
+\end{itemize}
+
+Is it possible to solve write hazards without equalizing all pipeline depths and without bypassing?
+
+One solution is found by delaying all writebacks so all operations have the same latency into the \texttt{WB} stage.
+While applying this idea:
+
+\begin{itemize}
+  \item Write ports are \textbf{never oversubscribed}
+        \begin{itemize}
+          \item one instruction \textit{in} and one instruction \textit{out} for every cycle
+        \end{itemize}
+  \item Instruction commit happens \textbf{in order}
+        \begin{itemize}
+          \item it simplifies the precise exception implementation
+        \end{itemize}
+\end{itemize}
+
+How is it possible to prevent increased write back latency from slowing down single cycle integer operations?
+Is it possible to solve all write hazards without equalizing all pipeline depths and without bypassing?
+
+\subsection{Instructions issuing}
+\label{sec:instructions-issuing}
+
+To reach higher performance, more parallelism must be extracted from the program.
+In other words, dependencies must be detected and solved, while instructions must be scheduled as to achieve highest parallelism of execution compatible with available resources.
+
+A data structure keeping track of all the instructions in all the functional units is needed.
+In order to work properly, it must make the following checks before the \texttt{issue} stage in order to dispatch an instruction:
+
+\begin{enumerate}
+  \item Check if the \textbf{function unit} is available
+  \item Check if the \textbf{input data} is available
+        \begin{itemize}
+          \item \textit{Failure in this step would cause a RAW}
+        \end{itemize}
+  \item Check if it's safe to write to the \textbf{destination}
+        \begin{itemize}
+          \item \textit{Failure in this step would cause a WAR or a WAW}
+        \end{itemize}
+  \item Check if there's a \textbf{structural conflict} at the \texttt{WB} stage
+\end{enumerate}
+
+Such a suitable data structure would look like in Table~\ref{tab:data-structure-keep-track-functional-units}.
+
+\begin{table}
+  \centering
+  \begin{tabular}{r|c|cccc}
+    \hline
+    \textit{name}   & \textit{busy} & \textit{op} & \textit{destination} & \textit{source 1} & \textit{source 2} \\ \hline
+    \texttt{int}    &               &             &                      &                   &                   \\
+    \texttt{mem}    &               &             &                      &                   &                   \\ \hline
+    \texttt{add 1}  &               &             &                      &                   &                   \\
+    \texttt{add 2}  &               &             &                      &                   &                   \\
+    \texttt{add 3}  &               &             &                      &                   &                   \\ \hline
+    \texttt{mult 1} &               &             &                      &                   &                   \\
+    \texttt{mult 2} &               &             &                      &                   &                   \\ \hline
+    \texttt{div}    &               &             &                      &                   &                   \\
+  \end{tabular}
+  \caption{Data structure to keep track of \textit{FUs}}
+  \label{tab:data-structure-keep-track-functional-units}
+\end{table}
+
+An instruction at the \texttt{issue} stage consults this table to check if:
+
+\begin{itemize}
+  \item The \textit{FU} is available by looking at the \textit{busy} column
+  \item A \textit{RAW} can arise by looking at the \textit{destination} column for its sources
+  \item A \textit{WAR} can arise by looking at the \textit{source} columns for its destinations
+  \item A \textit{WAW} can arise by looking at the \textit{destination} columns for its destinations
+\end{itemize}
+
+When the checks are all completed:
+
+\begin{itemize}
+  \item An entry is \textbf{added} to the table if no hazard is detected
+  \item An entry is \textbf{removed} from the table after \texttt{WB} stage
+\end{itemize}
+
+\bigskip
+Later in the course \textit{(Section~\ref{par:CDC6600-scoreboard})}, this approach will be discussed more in depth.
+
+\subsection{Dependences}
+
+Determining \textbf{dependences} among instructions is critical to defining the amount of parallelism existing in a program.
+If two instructions are dependent, they cannot execute in parallel: they must be executed in order or only partially overlapped.
+
+There exist 3 different types of dependences:
+
+\begin{itemize}
+  \item \textbf{Name} Dependences
+  \item \textbf{Data} Dependences
+  \item \textbf{Control} Dependences
+\end{itemize}
+
+While hazards are a property of the pipeline, dependences are a property of the program.
+
+\subsubsection{Name Dependences}
+
+\textbf{Name dependences} occurs when 2 instructions use the same register or memory location \textit{(called name)}, but there is no flow of data between the instructions associated with that \textit{name}.
+Two type of name dependences could exist between an instruction \texttt{i} that precedes an instruction \texttt{j}:
+
+\begin{itemize}
+  \item \textbf{Antidependence}: when \texttt{j} writes a register or memory location that instruction \texttt{i} reads. The original instruction ordering must be preserved to ensure that \texttt{i} reads the correct value
+  \item \textbf{Output Dependence}: when \texttt{i} and \texttt{j} write the same register or memory location. The original instructions ordering must be preserved to ensure that the value finally written corresponds to \texttt{j}
+\end{itemize}
+
+Name dependences are not true data dependences, since there is no value \textit{(no data flow)} being transmitted between instructions.
+If the name \textit{(either register or memory location)} used in the instructions could be changed, the instructions do not conflict.
+
+Dependences through memory locations are more difficult to detect (this is called the \inlinequote{memory disambiguation} problem), since two apparently different addresses may refer to the same memory location.
+As a consequence, it's easier to rename a \textbf{register} than renaming a \textbf{memory location}.
+It can be done either \textbf{statically} by the compiler or \textbf{dynamically} by the hardware.
+
+\subsubsection{Data Dependences}
+
+A data or name dependence can potentially generate a data hazard (\textit{RAW} for the former or \textit{WAR} and \textit{WAW} for the latter), but the actual hazard and the number of stalls to eliminate them are properties of the pipeline.
+
+\subsubsection{Control Dependeces}
+
+\textbf{Control dependences} determine the ordering of instructions.
+They are preserved by two properties:
+
+\begin{enumerate}
+  \item \textbf{Instructions execution in program order} to ensure that an instruction that occurs before a branch is executed at the right time \textit{(before the branch)}
+  \item \textbf{Detection of control hazards} to ensure that an instruction (that is control dependent on a branch) is not executed until the branch direction is known
+\end{enumerate}
+
+Although preserving control dependence is a simple way to preserve program order, control dependence is not the critical property that must be preserved.
+
+\newpage
+
+\section{Branch Prediction}
+
+The main goal of the \textbf{branch prediction} it to evaluate as early as possible the outcome of a branch instruction.
+Its performance depends on:
+
+\begin{itemize}
+  \item The \textbf{accuracy}, measured in terms or percentage of incorrect predictions given
+  \item The \textbf{cost of an incorrect prediction} measured in terms of time lost to execute useless instructions (misprediction penalty) given by the processor architecture
+        \begin{itemize}
+          \item the cost increases for deeply pipelined processors
+        \end{itemize}
+  \item \textbf{Branch frequency} given by the application
+        \begin{itemize}
+          \item the importance of accurate branch prediction is higher in programs with higher branch frequency
+        \end{itemize}
+\end{itemize}
+
+There are many methods to deal with the performance loss due to branch hazards:
+
+\begin{itemize}
+  \item Static branch prediction techniques: the actions for a branch are fixed for each branch during the entire execution
+        \begin{itemize}
+          \item used in processors where the expectation is that the branch behaviour is highly predictable at compile time
+          \item can be used to assist dynamic predictors
+        \end{itemize}
+  \item Dynamic branch prediction techniques: the actions for a branch can change during the program execution
+\end{itemize}
+
+In both cases, care must be taken not to change the processor state until the branch is definitely known.
+
+\subsection{Static techniques}
+
+There are 5 commonly used branch prediction techniques:
+
+\begin{itemize}
+  \item \textit{Branch always not taken}
+  \item \textit{Branch always taken}
+  \item \textit{Backward taken forward not taken}
+  \item \textit{Profile driven prediction}
+  \item \textit{Delayed branch}
+\end{itemize}
+
+Each one of these techniques will be discussed in the following Sections (from \ref{sec:branch-always-not-taken} to \ref{sec:delayed-branch}).
+
+\subsubsection{Branch Always Not Taken}
+\label{sec:branch-always-not-taken}
+
+We assume the \textbf{branch will not be taken}, thus the sequential instruction flow we have fetched can continue as if the branch condition was not satisfied.
+If the condition in state \texttt{ID} will result not satisfied (and the prediction is correct) we can preserve performance.
+
+If the condition in stage \texttt{ID} will result satisfied (and the prediction is incorrect) the branch is taken: we need to flush the next instruction already fetched (so that it's turned into a \texttt{nop}) and restart the execution by fetching the instruction at the branch target address.
+There is a one cycle penalty.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-9.tikz}
+  \caption{Branch always not taken: success}
+  \label{fig:branch-always-not-taken}
+  \bigskip
+\end{figure}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-10.tikz}
+  \caption{Branch always not taken: fail}
+  \label{fig:branch-always-not-taken-fail}
+  \bigskip
+\end{figure}
+
+\subsubsection{Branch Always Taken}
+\label{sec:branch-always-taken}
+
+An alternative scheme is to consider \textbf{every branch as taken}: as soon as the branch is decoded and the branch target address is computed, we assume the branch to be taken and we begin fetching and executing at the target.
+The predicted-taken scheme makes sense for pipelines where the branch target is known before the actual outcome.
+
+In \textit{MIPS} pipeline, the branch target address is not known before the branch outcome, so \textbf{there is no advantage in this approach}.
+
+\subsubsection{Backward Taken Forward Not Taken}
+\label{sec:backward-taken-forward-not-taken}
+
+The prediction is based on the branch direction:
+
+\begin{itemize}
+  \item \textbf{Backward} going branches are predicted as \textbf{taken}
+        \begin{itemize}
+          \item the branches at the end of the loops are likely to be executed most of the time
+        \end{itemize}
+  \item \textbf{Forward} going branches are predicted as \textbf{not taken}
+        \begin{itemize}
+          \item the if branches are likely not executed most of the time
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Profile Driven Prediction}
+\label{sec:profile-driven-prediction}
+
+The branch prediction is based on profiling information collected from earlier runs.
+
+This method can use compiler hints, and it's potentially more effective than the other ones.
+However, it's also the most complicated.
+
+\subsubsection{Delayed Branch}
+\label{sec:delayed-branch}
+
+The compiler statically schedules and independent instruction in the branch delay slot, which is then executed whether or not the branch is taken.
+
+If the branch delay consists of one cycle (as in \textit{MIPS}), there's only a one delay shot.
+Almost all processors with delayed branch have a single delay shot, as it's difficult for the compiler to fill more than one slot.
+
+If the branch:
+
+\begin{itemize}
+  \item \textbf{Is taken}: the execution continues with the instruction after the branch
+  \item \textbf{Is untaken}: the execution continues at the branch target
+\end{itemize}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-11.tikz}
+  \caption{Delayed branch}
+  \label{fig:delayed-branch}
+  \bigskip
+\end{figure}
+
+The compiler job is to make the instruction placed in the branch delay slot valid and useful.
+There are three ways in which the branch delay slot can be scheduled:
+
+\begin{enumerate}
+  \item From \textbf{before}
+  \item From \textbf{target}
+  \item From \textbf{fall through}
+\end{enumerate}
+
+These methods will better analyzed in the following paragraph.
+
+\bigskip
+In general, the compilers are able to fill about \textbf{half} of the delayed branch slots with valid and useful instructions, while the remaining slots are filled with \texttt{nop}.
+In deeply pipelined processors, the delayed branch is longer than one cycle: many slots must be filled for every branch, thus it's more difficult to fill each of the with \textit{useful} instructions.
+
+The main limitations on delayed branch scheduling arise from:
+
+\begin{itemize}
+  \item \textbf{The restriction on the instruction} that can be scheduled in the delay slot
+  \item \textbf{The ability of the compiler} to statically predict the outcome of the branch
+\end{itemize}
+
+To improve the ability of the compiler to fill the branch delay slot, most processor have introduced a \textbf{cancelling or nullifying branch}.
+The instruction includes the direction of the predicted branch:
+
+\begin{itemize}
+  \item When the branch \textbf{behaves as predicted}, the instruction in the branch delay slot is \textbf{executed normally}
+  \item When the branch \textbf{is incorrectly predicted}, the instruction in the branch delay slot is \textbf{flushed} (turned into a \texttt{nop})
+\end{itemize}
+
+With this approach, the compiler does not need to be as conservative when filling the delay slot.
+
+\paragraph{From before}
+
+The branch delay slot is scheduled with an independent instruction \textbf{from before the branch}.
+
+The instruction in the branch delay slot is always executed, whether the branch is taken or not.
+An illustration of this strategy is represented in Figure~\ref{fig:from-before}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-12.tikz}
+  \caption{From before}
+  \label{fig:from-before}
+  \bigskip
+\end{figure}
+
+\paragraph{From target}
+
+The use of a register in the branch condition prevents any instructions with that register as a destination from being moved after the branch itself.
+The branch delay slot is scheduled from \textbf{the target of the branch} (usually the target instruction will need to be copied because it can be reached by another path).
+
+This strategy is preferred when the branch is taken with high probability, such as loop branches \textbf{(backward branches)}.
+An illustration of this strategy is represented in Figure~\ref{fig:from-target}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-13.tikz}
+  \caption{From target}
+  \label{fig:from-target}
+  \bigskip
+\end{figure}
+
+\paragraph{From fall throught}
+
+The use of a register in the branch condition prevents any instructions with that register as a destination from being moved after the branch itself \textit{(like what happens in the from target technique)}.
+The branch delay slot is scheduled from \textbf{the not taken fall through path}.
+
+This strategy is preferred when the branch is not taken with high probability, such as \textbf{forward branches}.
+An illustration of this strategy is represented in Figure~\ref{fig:from-fall-through}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-14.tikz}
+  \caption{From fall through}
+  \label{fig:from-fall-through}
+  \bigskip
+\end{figure}
+
+In order to make the optimization legal for the target, it must be ok to execute the moved instruction when the branch goes in the expected direction.
+The instruction in the branch delay slot is executed but its result is wasted (if the program will still execute correctly).
+
+For example, if the destination register is an unused temporary register when the branch goes in the unexpected direction.
+
+\subsection{Dynamic Branch Prediction}
+
+\textit{Basic idea: use the past branch behaviour to predict the future.}
+
+Hardware is used to dynamically predict the outcome of a branch: the prediction wil depend on the behaviour of the branch at run time and will change if the branch changes its behaviour during execution.
+We start with a simple branch prediction scheme and then examine approaches that increase the branch prediction accuracy.
+
+Dynamic Branch Prediction is based on two interacting mechanisms:
+
+\begin{enumerate}
+  \item Branch Outcome Predictor (\textit{BOP})
+        \begin{itemize}
+          \item used to predict the direction of a branch (taken or not taken)
+        \end{itemize}
+  \item Branch Target Predictor (\textit{BTP})
+        \begin{itemize}
+          \item used to predict the branch target address in case of taken branch
+        \end{itemize}
+\end{enumerate}
+
+These modules are used by the Instruction Fetch Unit to predict the next instruction to read in the I-cache:
+\begin{itemize}
+  \item Branch is not taken: \texttt{PC} is incremented
+  \item Branch is taken: \textit{BTP} gives the target address
+\end{itemize}
+
+\subsubsection{Branch Target Buffer}
+
+The \textbf{Branch Target Buffer} is a cache storing the predicated branch target address for the next instruction after a branch.
+The \textit{BTB} is accessed in the \texttt{IF} stage using the instruction address of the fetched instruction (a possible branch) to index the cache.
+
+The typical entry of the \textit{BTB} is shown in Figure~\ref{fig:typical-entry-BTB}.
+The predicted target address is expressed as \texttt{PC}-relative.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-15.tikz}
+  \caption{Typical entry of the \textit{BTB}}
+  \label{fig:typical-entry-BTB}
+  \bigskip
+\end{figure}
+
+The structure and operation of the \textit{BTB} is shown in Figure~\ref{fig:structure-of-BTB}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.8]{image-16.tikz}
+  \caption{Structure of the \textit{BTB}}
+  \label{fig:structure-of-BTB}
+  \bigskip
+\end{figure}
+
+\subsubsection{Branch History Table}
+
+The \textbf{Branch History Table} contains 1 bit for each entry that says whether the branch was recently taken or not.
+It is indexed by the lower portion of the address of the branch instruction.
+The structure of the \textit{BTB} is shown in Figure~\ref{fig:structure-of-BHT}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-17.tikz}
+  \caption{Structure of the \textit{BHT}}
+  \label{fig:structure-of-BHT}
+  \bigskip
+\end{figure}
+
+The predictions is a hint that it is assumed to be correct, fetching begins in the predicted direction.
+If the hint turns out to be wrong, the prediction bit is inverted and stored back.
+The pipeline is flushed and the correct sequence is executed.
+
+The table has no tags (every access is a hit) and the prediction bit
+could have been put there by another branch with the same LSBs.
+The 1-bit branch history table only considers the last status of the branch (taken or not taken).
+It is a simple \textit{FSA} where a misprediction will change the current value.
+Its structure is shown in Figure~\ref{fig:BHT-as-FSA}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+
+  \begin{tikzpicture}[auto, node distance=3cm, >=Triangle]
+    \node [state, minimum size=1.5cm](0) {\texttt{NT}};
+    \node [state, right= of 0, minimum size=1.5cm](1) {\texttt{T}};
+
+    \path[->, thick]
+    (0) edge [loop left] node {\texttt{NT}} ()
+    (1) edge [loop right] node {\texttt{T}} ()
+    (0) edge [bend left] node {\texttt{T}} (1)
+    (1) edge [bend left] node {\texttt{NT}} (0);
+
+  \end{tikzpicture}
+
+  \caption{\(1\)-bit \textit{BHT} as \textit{FSA}}
+  \label{fig:BHT-as-FSA}
+  \bigskip
+\end{figure}
+
+A misprediction occurs when:
+
+\begin{itemize}
+  \item The prediction is incorrect for that branch
+  \item The same index has been referenced by two different branches, and the previous history refers to the other branch
+        \begin{itemize}
+          \item to solve this problem it's enough to increase the number or rows in the \textit{BHT} or to use a hashing function (such as in \textit{GShare}).
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+In a loop branch, even if a branch is almost always taken and then not taken one, che \(1\)-bit \textit{BHT} will mispredict twice (rather than once) when it is not taken.
+That situation causes two wrong predictions:
+\begin{itemize}
+  \item At the last loop iteration
+        \begin{itemize}
+          \item the loop must be exited
+          \item the prediction bit will say \texttt{TAKE}
+        \end{itemize}
+  \item While re-entering the loop
+        \begin{itemize}
+          \item at the end of the first iteration the branch must be taken to stay in the loop
+          \item the prediction bit will say \texttt{NOT\ TAKE} because the bit was flipped on previous execution of the last iteration of the loop
+        \end{itemize}
+\end{itemize}
+
+In order to fix this kind of behaviour, the \(2\)-bit \textit{BHT} was introduced.
+
+\subsubsection{\textit{2}-bit Branch History Table}
+
+By adding one bit to the \textit{BHT}, the prediction must miss twice before it is changed.
+In a loop branch, there's no need to change the prediction for the last iteration,
+
+For each index in the table, the \(2\) bits are used to encode the four states of a \textit{FSA}.
+Its structures is represented in Figure~\ref{fig:2-bit-BHT-as-FSA}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+
+  \begin{tikzpicture}[auto, node distance=3cm, >=Triangle]
+    \node [state, minimum size=2cm](nt_strong) {\texttt{NT\ strong}};
+    \node [state, below= of nt_strong, minimum size=2cm](t_weak) {\texttt{T\ weak}};
+    \node [state, right= of nt_strong, minimum size=2cm](nt_weak) {\texttt{NT\ weak}};
+    \node [state, below= of nt_weak, minimum size=2cm](t_strong) {\texttt{T\ strong}};
+
+    \path[->, thick]
+    (nt_strong) edge [loop left] node {\texttt{NT}} ()
+    (t_strong) edge [loop right] node {\texttt{T}} ()
+    (nt_strong) edge [bend left] node {\texttt{T}} (nt_weak)
+    (nt_weak) edge [bend left] node {\texttt{NT}} (nt_strong)
+    (t_weak) edge [bend left] node {\texttt{T}} (t_strong)
+    (t_strong) edge [bend left] node {\texttt{NT}} (t_weak)
+    (t_weak) edge [bend left] node {\texttt{NT}} (nt_strong)
+    (nt_weak) edge [bend left] node {\texttt{T}} (t_strong);
+  \end{tikzpicture}
+
+  \caption{\(2\)-bit \textit{BHT} as \textit{FSA}}
+  \label{fig:2-bit-BHT-as-FSA}
+  \bigskip
+\end{figure}
+
+\subsubsection{\textit{k}-bit Branch History Table}
+
+It's a generalization: \(n\)-bit saturating counter for each entry in the prediction buffer.
+
+The counter can take on values between \(0\) and \(2^{n-1}\).
+When the counter is greater than or equal to one half of its maximum value, the branch is predicted as taken.
+Otherwise, it's predicted as untaken.
+
+As in the \(2\)-bit scheme, the counter is incremented on a taken branch and decremented on an untaken branch.
+Studies on \(n\)-bit predictors have shown that \(2\) bits behave almost as well \textit{(so using more than \(2\) bits its almost useless)}.
+
+\subsection{Correlating Branch Predictors}
+
+\textit{Basic idea}: the behaviour of recent branches are correlated, that is the recent behaviour of other branches rather than just the current branch that we are trying to predict can influence the prediction of the current branch.
+
+The \textbf{Correlating Branch Predictors} are predictors that use the behaviour of other branches to make a prediction.
+They are also called \textit{\(2\)-level Predictors}.
+Their scheme is represented in Figure~\ref{fig:structure-of-CBP}.
+
+A \((1, 1)\) Correlating Predictor denotes a \(1\)-bit predictor with \(1\)-bit of correlation: the behaviour of the last branch is used to choose among a pair of \(1\)-bit branch predictors.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.8]{image-18.tikz}
+  \caption{Structure of the \textit{Correlating Branch Predictors}}
+  \label{fig:structure-of-CBP}
+  \bigskip
+\end{figure}
+
+\subsubsection{\textit{(m, n)} Correlating Branch Predictors}
+
+In general, \((m, n)\) correlating predictors records last \(m\) branches to choose from \(2^m\) \textit{BHTs}, each of which is a \(n\)-bit predictor.
+
+The branch prediction buffer can be indexed by using a concatenation of low order bits from the branch address with \(m\)-bit global history \textit{(i.e. global history of the most recent \(m\) branches, implemented with a shift register)}.
+
+The general structure of a \((m, n)\) \textit{CBP} is represented in Figure~\ref{fig:m-n-CBP}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.8]{image-19.tikz}
+  \caption{Structure of the \textit{(m, n) Correlating Branch Predictors}}
+  \label{fig:m-n-CBP}
+  \bigskip
+\end{figure}
+
+\paragraph{A \textit{(2, 2) Correlating Branch Predictor}}
+
+A \((2, 2)\) correlating predictor has \(4\) \(2\)-bit Branch History Tables.
+It uses the \(2\)-bit global history to choose among the \(4\) \textit{BHTs}.
+
+\begin{itemize}
+  \item Each \textit{BHT} is composed of 16 entries of \(2\)-bit each
+  \item The \(4\)-bit branch address is used to choose four entries (a row)
+  \item \(2\)-bit global history is used to choose one of four entries in a row (one of the four \textit{BHTs})
+\end{itemize}
+
+\paragraph{Accuracy of Correlating Predictors}
+
+A \(2\)-bit predictor with no global history is simply a \((0, 2)\) predictor.
+
+By comparing the performance of a \(2\)-bit simple predictor with 4K entries and a \(2, 2\) correlating predictor with 1K entries, we find out that the latter not only outperforms the \(2\)-bit predictor with the same number of total bits but also often outperforms a \(2\)-bit predictor with an unlimited number of entries.
+
+\subsection{Two Level Adaptive Branch Predictors}
+
+The first level history is recorded in one (or more) \(k\)-bit shift register called Branch History Register (\textit{BHR}) which records the outcomes of the \(k\) most recent branches.
+The second level history is recorded in ore (or more) tables called Pattern History Table (\textit{PHT}) of two bit saturating counters.
+
+The BHR is used to index the PHT to select which \(2\)-bit counter to use.
+Once the two bit counter is selected, the prediction is made using the same method as in the two bit counter scheme.
+
+\subsubsection{GA Predictor}
+
+The \textbf{GA Predictor} is composed of a \textit{BHT} (local predictor) and by one (or more) \textit{GAs} (local and global predictor):
+
+\begin{itemize}
+  \item The \textit{BHT} is indexed by the low order bits of the \texttt{PC} (branch address)
+  \item The GAs are a \(2\)-level predictor: \textit{PHT} is indexed by the content of \textit{BHR} (global history)
+\end{itemize}
+
+The structure of a \textit{GA} predictor is represented in Figure~\ref{fig:GA-predictor}.
+
+\subsubsection{GShare Predictor}
+
+The \textbf{GShare Predictor} is a local \texttt{XOR} global information, indexed by the exclusive \texttt{OR} of the low order bits of \textit{PC} (branch address) and the content of \textit{BHR} (global history).
+
+The structure of a \textit{GShare} predictor is represented in Figure~\ref{fig:GShare-predictor}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \begin{minipage}[b]{0.6\textwidth}
+    \centering
+    \tikzfig[0.6]{image-20.tikz}
+    \caption{GA Predictor}
+    \label{fig:GA-predictor}
+  \end{minipage}
+  \begin{minipage}[b]{0.39\textwidth}
+    \centering
+    \tikzfig[0.5]{image-21.tikz} % 6pt too wide with 0.6 zoom
+    \caption{GShare Predictor}
+    \label{fig:GShare-predictor}
+  \end{minipage}
+  \bigskip
+\end{figure}
+
+\newpage
+
+\section{Instruction Level Parallelism - \textit{ILP}}
+
+The objective of the \textit{ILP} is to improve the \textit{CPI}, with the ideal goal of \(1\) \textit{cycle per instruction}.
+The \textit{ILP} implies a potential overlap of execution among unrelated instructions.
+They may happen if there are no faults, called \textbf{hazards}.
+
+An hazard is created whenever there is a dependence between instructions that are close enough such that the overlap introduced by pipelining would change the order of access the operands involved in said dependance.
+They prevent the next instruction in the pipeline from executing during its designated clock cycle, reduce the performance from the ideal speedup.
+
+There are three classes of hazards:
+\begin{enumerate}
+  \item \textbf{Structural} hazards, due to attempt to use the same resource from different instructions at the same time
+  \item \textbf{Data} hazards \textit{stalls}, due to attempt to use a result before it is ready
+        \begin{itemize}
+          \item \textit{Read after write} - \textit{RAW}, the instruction tries to read the operand before it is even written
+          \item \textit{Write after read} - \textit{WAR}, the instruction tries to write the operand before it is even read
+          \item \textit{Write after write} - \textit{WAW}, the instruction tries to write the operand before it is even written
+        \end{itemize}
+  \item \textbf{Control} hazards \textit{stalls}, due to attempt to make a decision on the next instruction to execute before the condition itself is evaluated
+\end{enumerate}
+
+\bigskip
+\textit{Data stalls may occur with instructions such as}:
+\begin{itemize}
+  \item \textit{RAW} stall:
+        \begin{verbatim}
+    r3 := (r1) op (r2)
+    r5 := (r3) op (r4)  // r3 has not been written yet\end{verbatim}
+
+  \item \textit{WAR} stall:
+        \begin{verbatim}
+    r3 := (r1) op (r2)
+    r1 := (r4) op (r5)  // r1 has not been read yet \end{verbatim}
+  \item \textit{WAW}  \textit{stall}:
+        \begin{verbatim}
+    r3 := (r1) op (r2)
+    r3 := (r6) op (r7) // r3 has not been written yet \end{verbatim}
+\end{itemize}
+
+\subsection{Solutions to data hazards}
+
+There are many ways in which data hazards can be solved, such as:
+
+\begin{itemize}
+  \item \textbf{Compilation} techniques
+        \begin{itemize}
+          \item \textbf{Insertion of \texttt{nop}} instructions
+          \item \textbf{Instructions scheduling}
+                \begin{itemize}
+                  \item the compiler tries to avoid that correlating instructions are too close
+                  \item it tries to insert independent instructions among correlated ones
+                  \item when it can't, it inserts \texttt{nop} operations
+                \end{itemize}
+        \end{itemize}
+  \item \textbf{Hardware} techniques
+        \begin{itemize}
+          \item \textbf{Insertion} on \textit{bubbles} or \textit{stalls} in the pipeline
+          \item Data \textbf{forwarding} or bypassing
+        \end{itemize}
+\end{itemize}
+
+Both the compilation and the hardware techniques will be analyzed in depth in Section~\ref{sec:strategies-to-support-ilp}.
+
+\newpage
+
+\subsubsection{Program Properties}
+
+Two properties are critical to program correctness (and normally preserved by maintaining both data and control dependences):
+
+\begin{enumerate}
+  \item \textbf{Exception behaviour}: preserving exception behaviour means that any changes in the ordering of instructions execution must not change how exceptions are raised in the program
+  \item \textbf{Data flow}: actual flow of data values among instructions that produces the correct results and consumes them
+\end{enumerate}
+
+\subsection{Strategies to support \textit{ILP}}
+\label{sec:strategies-to-support-ilp}
+
+There are main two software strategies to support \textit{ILP}:
+
+\begin{enumerate}
+  \item \textbf{Dynamic} Scheduling: depends on the hardware to locate parallelism
+  \item \textbf{Static} Scheduling: relies on the software to identify potential parallelism
+\end{enumerate}
+
+Usually, hardware intensive approaches dominate desktop and server markets.
+
+\subsubsection{Dynamic scheduling}
+
+The hardware reorders the instruction execution to reduce pipeline stall while maintaining data flow and exception behaviour.
+
+\bigskip
+\textit{Description}:
+\begin{enumerate}
+  \item Instructions are fetched and \textbf{issued in program order}
+  \item Execution begins \textbf{as soon as operands are available}, possibly out of order execution
+  \item Out of order execution introduces possibility or \textit{WAR} and \textit{WAW} data hazards
+  \item Out of order execution implies \textbf{out of order completion}
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item a \textit{reorder buffer} is needed to reorder the output
+        \end{itemize}
+\end{enumerate}
+
+\bigskip
+The two main techniques used by hardware to minimize stalls are:
+
+\begin{itemize}
+  \item \textbf{Forwarding}
+        \begin{enumerate}
+          \item The result from the \texttt{EX/MEM} and the \texttt{EX/WB} pipeline registers is fed back to the \texttt{ALU} inputs
+          \item If the forwarding hardware detects that the previous \texttt{ALU} operation has written the register corresponding to a source for the current \texttt{ALU} operation, control logic selects the forwarded result as the \texttt{ALU} input rather than the value read from the register file
+        \end{enumerate}
+        \begin{itemize}
+          \item The \texttt{ALU} needs multiplexers that allow it to select the correct inputs from the pipeline
+          \item Forwarding can be generalized to include passing a result directly to the functional unit that requires it
+                \begin{itemize}
+                  \item in that case, a result is forwarded from the pipeline register corresponding to the output of one unit to the input of another, rather than just from the result of a unit to the input of the same unit
+                \end{itemize}
+        \end{itemize}
+  \item \textbf{Stalling}
+        \begin{itemize}
+          \item Since not all potential data hazards can be solved by bypassing, so a piece of hardware called \textit{pipeline interlock} is added
+          \item When it detects a hazard, it stalls the pipeline until that hazard it solved
+          \item The stalls are often referred to as \inlinequote{bubbles}
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+\textbf{Advantages} of dynamic scheduling:
+\begin{itemize}
+  \item It enables handling some cases where dependences are unknown at compile time
+  \item It simplifies the compiler complexity
+  \item It allows compiled code to run efficiently on a different pipeline
+\end{itemize}
+
+\textbf{Disadvantages}:
+\begin{itemize}
+  \item A significant increase in hardware complexity
+  \item Increased power consumption
+  \item Could generate imprecise exception
+\end{itemize}
+
+\subsubsection{CDC6600 Scoreboard}
+\label{par:CDC6600-scoreboard}
+
+As discussed earlier \textit{(Section~\ref{sec:instructions-issuing})}, a specific data structure is needed to solve data dependencies without specialized compilers.
+The first implementation of such an an hardware is found in the \textbf{CDC6600 Scoreboard}, created in \textit{1963}.
+
+Its key idea is to allow instruction behind stalls to proceed, with the result of a \(250\%\) speedup with regards to no dynamic scheduling and a \(170\%\) speedup with regards to instructions reordering by compiler.
+It has the downside of having a slow memory (due to the absence of cache) and no forwarding hardware.
+Furthermore, it has a low number of \textit{FUs} and it does not issue on structural hazards.
+
+Is solves the issue of data dependencies that cannot be hidden with bypassing or forwarding due to the hardware stalls of the pipeline by allowing out of order execution and commit of instructions.
+
+\bigskip
+The scoreboard centralizes the hazard management.
+It can avoid them by:
+
+\begin{itemize}
+  \item Dispatching \textbf{instructions} in order to functional units provided there's no structural hazard or \textit{WAW}
+        \begin{itemize}
+          \item a \textbf{stall} is added on structural hazards \textit{(when no functional unit is available)}
+          \item there can be only one pending write to each register
+        \end{itemize}
+  \item Instructions \textbf{wait} for input operands to avoid \textit{RAW} hazards
+        \begin{itemize}
+          \item as a result, it can execute out of order instructions
+        \end{itemize}
+  \item Instructions \textbf{wait} for output register to be read by preceding instructions to avoid \textit{WAR} hazards
+        \begin{itemize}
+          \item results are held in functional units until the register is freed
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+The scoreboard is operated by:
+
+\begin{enumerate}
+  \item \textbf{Sending} each instruction through it
+  \item \textbf{Determining} when the instruction can read its operands and subsequently start its execution
+  \item \textbf{Monitoring} changes in hardware and deciding when a stalled instruction can execute
+  \item \textbf{Controlling} when instruction can write results
+\end{enumerate}
+
+As a result, a new pipeline is introduced, where the \texttt{ID} stage  is divided in two parts:
+\begin{enumerate}
+  \item \textit{issue}, where the instruction is decoded and \textbf{structural hazards} are checked
+  \item \textit{read operands}, where the operation waits until there are no \textbf{data hazards}
+\end{enumerate}
+
+Finally, the scoreboard is structured in three different parts:
+\begin{enumerate}
+  \item \textbf{Instruction} status
+  \item \textbf{Functional Units} status
+        \begin{itemize}
+          \item fields indicating the state of the \textit{FUs}:
+                \begin{itemize}
+                  \item \texttt{Busy} - indicates whether the unit is busy or not
+                  \item \texttt{Op} - the operation to perform in the unit
+                  \item \texttt{Fi} - the destination register
+                  \item \texttt{Fj}, \texttt{Fk} - source register numbers
+                  \item \texttt{Qj}, \texttt{Qk} - functional units producing source registers
+                  \item \texttt{Rj}, \texttt{Rk} - flags indicating when \texttt{Fj}, \texttt{Fk} are ready
+                \end{itemize}
+        \end{itemize}
+  \item \textbf{Register} result status
+        \begin{itemize}
+          \item indicates which functional unit will write each register
+          \item it's \texttt{blank} if no pending instructions will write that register
+        \end{itemize}
+\end{enumerate}
+
+\bigskip
+An illustration of the new pipeline is represented in Figure~\ref{fig:pipeline-of-scoreboard}, while the structure of the scoreboard is represented in Figure~\ref{fig:structure-of-scoreboard}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-35.tikz}
+  \caption{Pipeline introduced by the \textit{Scoreboard}}
+  \label{fig:pipeline-of-scoreboard}
+  \bigskip
+\end{figure}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-34.tikz}
+  \caption{Structure of the \textit{Scoreboard}}
+  \label{fig:structure-of-scoreboard}
+  \bigskip
+\end{figure}
+
+\paragraph{Four stages of Scoreboard Control}
+
+The four stages of the scoreboard control are:
+
+\begin{itemize}
+  \item \textbf{Issue}: instructions are decoded and structural hazards are checked for
+        \begin{itemize}
+          \item instructions are issued in program order for hazard checking
+          \item if the \textit{FU} for the instruction is free and no other active instruction has the same destination register, the scoreboard issues the instruction and updates its internal data structure
+          \item if a structural or \textit{WAW} hazard exists, then the instruction issue stalls and no further instructions is issued until they are solved
+        \end{itemize}
+  \item \textbf{Read operands}: expiration of data hazards is awaited, then operands are read
+        \begin{itemize}
+          \item a source operand if available if no earlier issued active instruction will write it or a functional unit is writing its value into a register
+          \item when the source operands are available, the scoreboard tells the \textit{FU} to proceed to read the operands from the registers begin execution
+          \item \textit{RAW} hazards are resolved dynamically, instructions could be sent out of order
+          \item there's no data forwarding in this model
+        \end{itemize}
+  \item \textbf{Execution}: the \textit{FUs} operate on the data
+        \begin{itemize}
+          \item when the result is ready, the scoreboard it's notified
+          \item the delays are characterized by \textbf{latency} and \textbf{initiation interval}
+        \end{itemize}
+  \item \textbf{Write result}: the execution is finished
+        \begin{itemize}
+          \item once the scoreboard is aware that the \textit{FU} has completed the execution, it checks for \textit{WAR} hazards
+                \begin{itemize}
+                  \item if no \textit{WAR} hazard is found, the result is written
+                  \item otherwise, the execution is stalled
+                \end{itemize}
+          \item \textbf{issue} and \textbf{write} stages can overlap
+        \end{itemize}
+\end{itemize}
+
+This structure adds a few implications:
+
+\begin{itemize}
+  \item \textit{WAW} are detected (and the pipeline is stalled) until the other instruction is completed
+  \item There's no register renaming
+  \item Multiple instructions must be dispatched in the execution phase, creating the need for multiple or pipelined execution units
+  \item Scoreboard keeps track of dependences and the state of the operations
+\end{itemize}
+
+\subsubsection{Tomasulo algorithm}
+
+The Tomasulo algorithm is a \textbf{dynamic} algorithm that allows execution to proceed in presence of dependences.
+It was invented at IBM \(3\) years after \textit{CDC 6600} scoreboard with the same goal.
+
+The key idea behind this algorithm is to \textbf{distribute} the control login and the buffers within \textit{FUs}, as opposed to the scoreboard (in which the control logic is centralized).
+
+The operand buffers are called \textbf{Reservation Stations}.
+Each instruction is also an entry to a Reservation Station and its operands are replaced by values or pointers (a technique known as \textbf{Implicit Register Renaming}) in order to avoid \textit{WAR} and \textit{RAW} hazards.
+
+Results are then dispatched to other \textit{FUs} through a \textit{Common Data Bus}, communicating both the data and the source.
+Finally, \texttt{LOAD} and \texttt{STORE} operations are treated as \textit{FUs}, as Reservation Stations are more complex than registers to allow more compiler-level optimizations.
+
+\paragraph{Structure of the Reservation Stations}
+The Reservation Station is composed by \(5\) fields:
+
+\begin{itemize}
+  \item \texttt{TAG} - indicating the \textit{RS} itself
+  \item \texttt{OP} - the operation to perform in the unit
+  \item \texttt{Vj}, \texttt{Vk} - the value of the source operands
+  \item \texttt{Qj}, \texttt{Qk} - pointers to the \textit{RS} that produces \texttt{Vj}, \texttt{Vk}
+        \begin{itemize}
+          \item its value is zero if the source operator is already available in \texttt{Vj} or \texttt{Vk}
+        \end{itemize}
+  \item \texttt{BUSY} - indicates the \textit{RS} ib busy
+\end{itemize}
+
+In this description, only one of the \texttt{V}-field or \texttt{Q}-field is valid for each operand.
+
+\bigskip
+Furthermore, a few more components exist:
+
+\begin{itemize}
+  \item \textit{Register File} and the \textit{Store} buffers have a \textit{Value} (\texttt{V}) and a \textit{Pointer} (\texttt{Q}) field
+        \begin{itemize}
+          \item  \texttt{Q} corresponds to the number of the \textit{RS} producing the result (\texttt{V}) to be stored in \textit{Register File} or \textit{Store} buffers
+          \item if \texttt{Q\ =\ 0}, no active instructions is producing a result and the \textit{Register File} (or \textit{Store}) buffer contains the wrong value
+        \end{itemize}
+  \item Load and Store buffers have an \textit{Address} (\texttt{A}) field, with the former having also a \textit{Busy} field (\texttt{BUSY})
+        \begin{itemize}
+          \item the \texttt{A} field holds information for memory address calculation: initially contains the instruction offset, while after the calculation it stores the effective address
+        \end{itemize}
+\end{itemize}
+
+\paragraph{Stages of the Tomasulo Algorithm}
+
+The Tomasulo algorithm is structured in \(3\) different stages: \textbf{Issue}, \textbf{Execute} and \textbf{Write}.
+
+\bigskip
+In more detail:
+
+\begin{enumerate}
+  \item \textit{Issue} stage:
+        \begin{itemize}
+          \item Get an instruction \texttt{I} from the queue
+                \begin{itemize}
+                  \item if it is an \textit{FP} operation, check if any \textit{RS} in empty (i.e. check for any structural hazard)
+                \end{itemize}
+          \item Rename the registers
+          \item Resolve \textit{WAR} hazards
+                \begin{itemize}
+                  \item if \texttt{I} writes \textit{R}, read by an already issued instruction \texttt{K}, \texttt{K} will already know the value of \textit{R} or knows that instruction will write into it
+                  \item the \textit{Register File} can be linked to \texttt{I}
+                \end{itemize}
+          \item Resolve \textit{WAW} hazards
+                \begin{itemize}
+                  \item since the in-order issue is used, the \textit{Register File} can be linked to \texttt{I}
+                \end{itemize}
+        \end{itemize}
+  \item \textit{Execute} stage:
+        \begin{itemize}
+          \item When both the operands are ready, then the operation is executed. Otherwise, watch the \textit{Common Data Bus} for results.
+                \begin{itemize}
+                  \item by delaying the execution until both operands are available, \textit{RAW} hazards are avoided
+                  \item several instructions could become ready in the same clock cycle for the same \textit{FU}
+                \end{itemize}
+          \item \texttt{LOAD} and \texttt{STORE} are two step processes:
+                \begin{itemize}
+                  \item effective address is computed and placed in \texttt{LOAD/STORE} buffer
+                  \item \texttt{LOAD} operations are executed as soon as the memory unit is available
+                  \item \texttt{STORE} operations wait for the value to be stored before sending it into the memory unit
+                \end{itemize}
+        \end{itemize}
+  \item \textit{Write} stage:
+        \begin{itemize}
+          \item When the result is available, it is written on the \textit{Common Data Bus}
+                \begin{itemize}
+                  \item it is then propagated into the \textit{Register File} and all the registers \textit{(including store buffers)} waiting for this result
+                  \item \texttt{STORE} operations write data to memory
+                  \item \textit{RSs} are marked as available
+                \end{itemize}
+        \end{itemize}
+\end{enumerate}
+
+\paragraph{Focus on \texttt{LOAD} and \texttt{STORE} in Tomasulo Algorithm}
+
+\texttt{LOAD} and \texttt{STORE} instructions go through a functional unit for effective computation before proceeding to the effective load and store buffers.
+\texttt{LOAD} take a second execution step to access memory, then go to \textit{Write} stage to send the value from memory to \textit{Register File} and/or \textit{RS}, while \texttt{STORE} complete their execution in their \textit{Write} stage.
+
+All write operations occur in the write stage, simplifying the algorithm.
+
+\bigskip
+A \texttt{LOAD} and a \texttt{STORE} instruction can be done in different order, provided they access different memory locations.
+Otherwise, a \textit{WAR} \textit{(interchange in load-store sequence)} or a \textit{RAW} \textit{(interchange in store-load sequence)} may result (generating a \textit{WAW} if two stores are interchanged).
+
+\texttt{LOAD} instructions can be reordered freely.
+
+In order to detect such hazards, data memory addresses associated with any earlier memory operation must have been computed by the \textit{CPU}.
+
+\bigskip
+\texttt{LOAD} instructions executed out of order with previous \texttt{STORE} assume that the address is computed in program order.
+When teh \texttt{LOAD} address has been computed, it can be compared with \texttt{A} fields in active \texttt{STORE} Buffers: in case of a match, load is not sent to its buffer until conflicting \texttt{STORE} completes.
+
+Store instructions must check for matching addresses in both \texttt{LOAD} and \texttt{STORE} buffers.
+This is a \textbf{dynamic disambiguation} and, opposing to the static disambiguation, is not performed by the compiler.
+
+As a drawback, more hardware is required to perform these operations: each \textit{RS} must contain a fast associative buffer, because single \textit{CDB} may limit performance.
+
+\paragraph{Tomasulo and Loops}
+
+Tomasulo algorithm can overlap iterations of loops due to:
+
+\begin{itemize}
+  \item \textbf{Register Renaming}
+        \begin{itemize}
+          \item multiple iterations use different physical destinations for registers
+          \item static register names are replaced from code with dynamic registers \textit{"pointers"}, effectively increasing the size of the register file
+          \item instruction issue is advanced past integer control flow operations
+        \end{itemize}
+  \item \textbf{Fast branch resolution}
+        \begin{itemize}
+          \item Integer unit must \textit{"get ahead"} of floating point unit so that multiple iterations can be issued
+        \end{itemize}
+\end{itemize}
+
+\paragraph{Comparison between Tomasulo Algorithm and Scoreboard}
+
+The main advantages of the Tomasulo algorithm over the scoreboard are:
+\begin{itemize}
+  \item Control and buffers are distributed with \textit{FUs}
+        \begin{itemize}
+          \item \textit{FUs} buffers are called \textbf{reservation stations} and have pending operands
+        \end{itemize}
+  \item Registers in instructions are replaced by values or pointers to \textit{RS}
+        \begin{itemize}
+          \item avoids \textit{WAR} and \textit{WAW} hazards
+          \item since there are more \textit{RS} than registers, there's an higher optimization than compilers alone can do
+        \end{itemize}
+  \item The result are propagated from \textit{RS} to \textit{FU} via \textit{Common Data Bus}
+        \begin{itemize}
+          \item the value is propagated \textbf{to all \textit{FUs}}
+        \end{itemize}
+  \item \texttt{LOAD} and \texttt{STORE} instructions are treated as \textit{FUs} with \textit{RSs}
+  \item Integer instructions can go past branches, allowing \textit{FP} ops beyond basic block in \textit{FP} queue
+\end{itemize}
+
+\subsubsection{Static Scheduling}
+
+Compilers can use sophisticated algorithms for code scheduling to exploit \textit{ILP}.
+The amount of parallelism available within a basic block (a straight line code sequence with no branches in except to the entry and no branches out except at the exit) is quite small.
+Data dependence can further limit the amount of \textit{ILP} that can be exploited within a basic block to much less than the average basic block size.
+To obtain substantial performance enhancements, \textit{ILP} must be exploited across multiple basic blocks \textit{(i.e. across branches)}.
+
+The static detection and resolution of dependences is accomplished by the compiler, so they are avoided by code reordering.
+The compiler outputs dependency-free code.
+
+\bigskip
+\textbf{Limits of static scheduling}:
+\begin{itemize}
+  \item Unpredictable branches
+  \item Variable memory latency (due to unpredictable cache misses)
+  \item Huge increase in code size
+  \item High compiler complexity
+\end{itemize}
+
+\subsubsection{More improvements}
+
+Is it possible to have a \textit{CPI} bigger than \(1\)?
+\textit{I.e.} is it possible to have more than one instruction per cycle?
+
+Two approaches can be found:
+
+\begin{itemize}
+  \item \textbf{Superscalar} architecture
+  \item \textbf{VLIW} architecture
+\end{itemize}
+
+In this section, the focus is on the latter solution.
+
+\subsection{VLIW architectures}
+
+The \textbf{Very Long Instruction Words} \textit{(VLIW)} is a particular architecture made specifically to fetch more instructions at a time.
+The \textit{CPU} issues multiple sets of operations (single unit of computations, such as \texttt{add}, \texttt{load}, \texttt{branch}, \ldots) called \textbf{instructions}.
+Those are meant to be intended to be issued at the same time and the compiler has to specify them completely.
+
+\bigskip
+Its features includes:
+
+\begin{itemize}
+  \item Fixed number of instructions \textit{(between 4 and 16)}
+  \item The instructions are scheduled by the \textbf{compiler}
+        \begin{itemize}
+          \item the hardware has very limited control on what is going on
+          \item the instructions are going to have a very low dependency
+        \end{itemize}
+  \item The operations are put into wide \textbf{templates}
+  \item \textbf{Explicit} parallelism
+        \begin{itemize}
+          \item parallelism is found at compile time, not run time
+          \item the compiler is responsible for parallelizing the code, not the designer
+        \end{itemize}
+  \item Single control flow
+        \begin{itemize}
+          \item there's only one \texttt{PC}
+          \item only one instruction is issued each clock cycle
+        \end{itemize}
+  \item Low hardware complexity
+        \begin{itemize}
+          \item there's no need to to perform \textit{scheduling} or \textit{reordering} on hardware level
+          \item all operations that are supposed to begin at the same time are packaged into a single instruction
+          \item each operations slot is meant for a fixed functions
+          \item constant operation latencies are specified
+        \end{itemize}
+\end{itemize}
+
+There are multiple \textbf{functional units} \textit{(FUs)} that are going to execute instructions in parallel.
+An illustration of the inner working instruction-level is represented in Figure~\ref{fig:vliw-instruction-level}, while at pipeline level is represented in Figure~\ref{fig:vliw-hardware-level}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-27.tikz}
+  \caption{\textit{VLIW} - instructions level}
+  \label{fig:vliw-instruction-level}
+  \bigskip
+\end{figure}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-28.tikz}
+  \caption{\textit{VLIW} - pipeline level}
+  \label{fig:vliw-hardware-level}
+  \bigskip
+\end{figure}
+
+\subsubsection{Compiler responsibilities}
+
+The compiler has to schedule the instructions to maximize the parallel execution
+\begin{itemize}
+  \item It can exploit \textit{ILP} and \textit{LLP} (\textit{Loop level parallelism})
+  \item It is necessary to map the instructions over the machine functional units
+  \item This mapping must account for time constraints and dependencies among the tasks themselves
+  \item it performs \textbf{static scheduling}
+\end{itemize}
+
+The idea behind the static scheduling in \textit{VLIW} is to utilize all functional units (\textit{FUs}) in each cycle as much as possible to reach a better \textit{ILP} and therefore higher parallel speedups.
+
+\subsubsection{Basic Blocks and Trace Scheduling}
+\label{sec:trace-scheduling}
+
+Compilers use sophisticated algorithms to schedule code and exploit \textit{ILP}.
+However, the amount of parallelism available in a single \textbf{basic block} is quite small.
+Furthermore, data dependence can limit the amount of \textit{ILP} that can be exploited to less than the average block size.
+
+A \textbf{basic block} \textit{(BB)} is defined as a sequence of straight non branch instructions.
+
+In order to obtain substantial performance enhancements, the \textit{ILP} must be exploited across multiple blocks (\textit{i.e.} among branches).
+An illustration of the structure of \textit{BB} can be found in Figure~\ref{fig:basic-blocks}.
+
+\bigskip
+
+A \textbf{trace} is a sequence of basic blocks embedded in the control flow graph.
+It must not contain loops but it may include branches.
+
+It's an execution path which can be taken for a certain set of inputs.
+The chances that a trace is actually executed depends on the input set that allows its execution.
+As a result, some traces are executed much more frequently than others.
+
+The tracing scheduling algorithm works as follows:
+
+\begin{enumerate}
+  \item Pick a \textbf{sequence of basic blocks} that represents the most frequent branch path
+  \item Use \textbf{profiling feedback} or compiler heuristics to find the common branch paths
+  \item \textbf{Schedule} the whole trace at once
+  \item Add \textbf{code to handle branches} jumping out of trace
+\end{enumerate}
+
+Scheduling in a trace relies on basic code motion but it could also use globally scoped code by appropriately \textit{renaming} some blocks.
+Compensation codes are then needed for \textbf{side entry points} \textit{(i.e. points except beginning)} and \textbf{slide exit points} \textit{(i.e. points except ending)}.
+
+Blocks on non common paths may now have added overhead, so there must be an high probability of taking common paths according the profile.
+However, this choice might not be clear for some programs.
+
+In general, compensation codes are not easy to generate for entry points.
+
+\bigskip
+An illustration of scheduled code can be found in Figure~\ref{fig:trace-scheduled-code}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \tikzfig[0.7]{image-29.tikz}
+    \caption{Basic blocks}
+    \label{fig:basic-blocks}
+  \end{minipage}
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \tikzfig[0.7]{image-32.tikz}
+    \caption{Trace scheduled code}
+    \label{fig:trace-scheduled-code}
+  \end{minipage}
+
+  \bigskip
+\end{figure}
+
+\paragraph{Code motion and Rotating Register Files in Trace Scheduling}
+
+In addition to the need of compensation codes, there are a few more restrictions on the movement of a code trace:
+
+\begin{enumerate}[label=\Alph*)]
+  \item \label{enum:data-flow-trace-scheduling} The \textbf{data flow} of the program must not change
+  \item \label{enum:exception-behaviour-trace-scheduling} The \textbf{exception behaviour} must be preserved
+\end{enumerate}
+
+\bigskip
+
+In order to ensure \ref{enum:data-flow-trace-scheduling}, the \textbf{Data} and \textbf{Control} dependency must be maintained.
+Furthermore, control dependency can be eliminated using \textbf{predicate instructions} (via \textit{Hyperblock scheduling}) and branch removal or by using \textbf{speculative instructions} (via \textit{Speculative Scheduling}) and speculatively moving instructions before branches.
+
+Finally, Trace Scheduling within loops require lots of registers, due to the duplicated code.
+In order to solve this issue, a new set of register must be allocated for each iteration.
+
+This solution is achieved via the use of \textbf{Rotating Register Files} \textit{(RRB)}.
+The address of the \textit{RRB} register points to the base of the current register set.
+The value added onto a local register specifier gives physical register number.
+
+\bigskip
+An illustration of the \textit{RRB} is shown in Figure~\ref{fig:rotating-register-file}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-33.tikz}
+  \caption{Rotating Register File}
+  \label{fig:rotating-register-file}
+  \bigskip
+\end{figure}
+
+\subsubsection{Pros and cons of \textit{VLIW}}
+
+\textit{Pros}:
+\begin{itemize}
+  \item Simple \textit{HW}
+  \item It's easy to increate the number of FU
+  \item Good compilers can efficiently detect parallelism
+\end{itemize}
+
+\bigskip
+\textit{Cons}:
+\begin{itemize}
+  \item Huge number of registers to keep active each FU, each needed to store operands and results
+  \item Large data transport capabilities between:
+        \begin{itemize}
+          \item FUs and register files
+          \item Register files and memory
+        \end{itemize}
+  \item High bandwidth between instruction cache and fetch unit
+  \item Large code size
+\end{itemize}
+
+\subsubsection{Static Scheduling methods}
+
+The static scheduling methods used in the \textit{VLIW} are:
+
+\begin{itemize}
+  \item Simple code \textbf{motion}
+  \item \textbf{Loop unrolling} and loop peeling - \textit{Paragraph~\ref{par:loop-unrolling}}
+  \item Software \textbf{pipelining} - \textit{Paragraph~\ref{par:software-pipelining}}
+  \item Global code \textbf{scheduling} (across basic blocks)
+        \begin{itemize}
+          \item Trace scheduling - \textit{Paragraph~\ref{par:trace-scheduling}}
+          \item Superblock scheduling
+          \item Hyperblock scheduling
+          \item Speculative Trace scheduling
+        \end{itemize}
+\end{itemize}
+
+\paragraph{Loop unrolling}
+\label{par:loop-unrolling}
+
+Examine this snippet of code:
+
+\begin{verbatim}
+  for (int i = 0; i < N; i++)
+    B[i] = A[i] + C;
+\end{verbatim}
+
+the inner loop gets \textit{unrolled} in order to execute \(4\) iterations at once:
+
+\begin{verbatim}
+  for (int i = 0; i < N; i += 4) {
+    B[i] = A[i] + C;
+    B[i + 1] = A[i + 1] + C;
+    B[i + 2] = A[i + 2] + C;
+    B[i + 3] = A[i + 3] + C;
+  }
+\end{verbatim}
+
+A final clean up is needed to take care of those values of \texttt{N} that are not multiples of the unrolling factor (\(4\) in this example).
+
+This technique has the drawbacks of creating \textbf{longer code} and \textbf{losing performance} due to the costs of starting and closing each iteration.
+
+Furthermore, trace scheduling cannot proceed beyond a loop.
+
+\bigskip
+An illustration of the performance improvements can be found in Figure~\ref{fig:performance-improvement-loop-unrolling}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-30.tikz}
+  \caption{Performance improvement of loop unrolling}
+  \label{fig:performance-improvement-loop-unrolling}
+  \bigskip
+\end{figure}
+
+\paragraph{Software pipelining}
+\label{par:software-pipelining}
+
+The programs can be pipelined in order to increase performance and reduce the overall cost of the startup and wind down phases from once per iteration to once per loop.
+
+\bigskip
+An illustration of the performance improvements can be found in Figure~\ref{fig:performance-improvement-software-pipelining}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-31.tikz}
+  \caption{Performance improvement of software pipelining}
+  \label{fig:performance-improvement-software-pipelining}
+  \bigskip
+\end{figure}
+
+\paragraph{Trace scheduling}
+\label{par:trace-scheduling}
+
+As discussed in Section~\ref{sec:trace-scheduling}, Trace Scheduling does not support loops.
+
+In order to increase the performance in these situations, techniques based on loop unrolling are needed.
+Traces scheduling schedules traces in order of decreasing probability of being executed.
+As such, most frequently executed traces get better schedules.
+
+\end{document}

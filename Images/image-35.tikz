@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (4) at (11, 0) {};
+		\node [style=none] (5) at (11, -1) {};
+		\node [style=none] (6) at (17, -1) {};
+		\node [style=none] (8) at (23, 0) {};
+		\node [style=none] (9) at (23, -1) {};
+		\node [style=none] (13) at (11, -1) {};
+		\node [style=none] (14) at (17, -1) {};
+		\node [style=none] (15) at (23, -1) {};
+		\node [style=none] (18) at (5, -0.5) {\texttt{ID}};
+		\node [style=none] (19) at (14, -0.5) {\texttt{EX}};
+		\node [style=none] (21) at (20, -0.5) {\texttt{WB}};
+		\node [style=none] (22) at (-1, -2) {};
+		\node [style=none] (24) at (11, -2) {};
+		\node [style=none] (25) at (17, -2) {};
+		\node [style=none] (26) at (5, -1) {};
+		\node [style=none] (27) at (5, -2) {};
+		\node [style=none] (28) at (23, -2) {};
+		\node [style=none] (29) at (2, -1.5) {\textit{issue}};
+		\node [style=none] (30) at (8, -1.5) {\textit{read operands}};
+		\node [style=none] (31) at (-1, 0) {};
+		\node [style=none] (32) at (-1, -1) {};
+		\node [style=none] (7) at (17, 0) {};
+		\node [style=none] (33) at (14, -1.5) {\textit{execution}};
+		\node [style=none] (34) at (20, -1.5) {\textit{write back}};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=solid] (27.center) to (26.center);
+		\draw [style=solid] (24.center) to (13.center);
+		\draw [style=solid] (25.center) to (14.center);
+		\draw [style=solid] (28.center) to (15.center);
+		\draw [style=solid] (28.center) to (22.center);
+		\draw [style=solid] (32.center) to (22.center);
+		\draw [style=light fill] (8.center)
+			 to (31.center)
+			 to (32.center)
+			 to (15.center)
+			 to cycle;
+		\draw [style=solid] (4.center) to (5.center);
+		\draw [style=solid] (7.center) to (6.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

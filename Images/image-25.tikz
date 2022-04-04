@@ -1,0 +1,37 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -1) {};
+		\node [style=none] (2) at (2, -1) {};
+		\node [style=none] (3) at (2, 0) {};
+		\node [style=none] (4) at (4, 0) {};
+		\node [style=none] (5) at (4, -1) {};
+		\node [style=none] (6) at (6, -1) {};
+		\node [style=none] (7) at (6, 0) {};
+		\node [style=none] (8) at (8, 0) {};
+		\node [style=none] (9) at (8, -1) {};
+		\node [style=none] (10) at (10, -1) {};
+		\node [style=none] (11) at (10, 0) {};
+		\node [style=none] (12) at (2, -1) {};
+		\node [style=none] (13) at (4, -1) {};
+		\node [style=none] (14) at (6, -1) {};
+		\node [style=none] (15) at (8, -1) {};
+		\node [style=none] (16) at (10, -1) {};
+		\node [style=none] (17) at (1, -0.5) {\texttt{IF}};
+		\node [style=none] (18) at (3, -0.5) {\texttt{ID}};
+		\node [style=none] (19) at (5, -0.5) {\texttt{EX}};
+		\node [style=none] (20) at (7, -0.5) {\texttt{ME}};
+		\node [style=none] (21) at (9, -0.5) {\texttt{WB}};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (0.center)
+			 to (1.center)
+			 to (10.center)
+			 to (11.center)
+			 to cycle;
+		\draw [style=solid] (3.center) to (2.center);
+		\draw [style=solid] (4.center) to (5.center);
+		\draw [style=solid] (7.center) to (6.center);
+		\draw [style=solid] (8.center) to (9.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,135 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (2, 0) {};
+		\node [style=none] (2) at (0, -1) {};
+		\node [style=none] (3) at (2, -1) {};
+		\node [style=none] (4) at (0, -1) {};
+		\node [style=none] (5) at (2, -1) {};
+		\node [style=none] (6) at (0, -2) {};
+		\node [style=none] (7) at (2, -2) {};
+		\node [style=none] (8) at (0, -2) {};
+		\node [style=none] (9) at (2, -2) {};
+		\node [style=none] (10) at (0, -3) {};
+		\node [style=none] (11) at (2, -3) {};
+		\node [style=none] (12) at (0, -3) {};
+		\node [style=none] (13) at (2, -3) {};
+		\node [style=none] (14) at (0, -4) {};
+		\node [style=none] (15) at (2, -4) {};
+		\node [style=none] (16) at (0, -4) {};
+		\node [style=none] (17) at (2, -4) {};
+		\node [style=none] (18) at (0, -5) {};
+		\node [style=none] (19) at (2, -5) {};
+		\node [style=none] (20) at (0, -5) {};
+		\node [style=none] (21) at (2, -5) {};
+		\node [style=none] (22) at (0, -6) {};
+		\node [style=none] (23) at (2, -6) {};
+		\node [style=none] (24) at (0, -6) {};
+		\node [style=none] (25) at (2, -6) {};
+		\node [style=none] (26) at (0, -7) {};
+		\node [style=none] (27) at (2, -7) {};
+		\node [style=none] (28) at (0, -7) {};
+		\node [style=none] (29) at (2, -7) {};
+		\node [style=none] (30) at (0, -8) {};
+		\node [style=none] (31) at (2, -8) {};
+		\node [style=none] (32) at (1, 0.5) {\textit{PHT}};
+		\node [style=none] (33) at (-11, -3) {};
+		\node [style=none] (34) at (-11, -4) {};
+		\node [style=none] (35) at (-10, -4) {};
+		\node [style=none] (36) at (-10, -3) {};
+		\node [style=none] (37) at (-9, -3) {};
+		\node [style=none] (38) at (-9, -4) {};
+		\node [style=none] (39) at (-8, -4) {};
+		\node [style=none] (40) at (-8, -3) {};
+		\node [style=none] (41) at (-10.5, -3.5) {\texttt{NT}};
+		\node [style=none] (42) at (-9.5, -3.5) {\texttt{NT}};
+		\node [style=none] (43) at (-8.5, -3.5) {\texttt{T}};
+		\node [style=none] (44) at (-12, -3) {};
+		\node [style=none] (45) at (-12, -4) {};
+		\node [style=none] (46) at (-11.5, -3.5) {\texttt{T}};
+		\node [style=none] (47) at (-0.25, -3.5) {};
+		\node [style=none] (48) at (-3, -3.5) {};
+		\node [style=none] (49) at (-10, -2.5) {\textit{BHR}};
+		\node [style=none] (50) at (2.25, -3.5) {};
+		\node [style=none] (51) at (4.75, -3.5) {};
+		\node [style=left align] (52) at (4.75, -3.5) {\texttt{T/NT}};
+		\node [style=none] (53) at (-4, -2.5) {};
+		\node [style=none] (54) at (-4, -1) {};
+		\node [style=none] (55) at (-4, -0.5) {\(k\)-bit \texttt{PC}};
+		\node [style=none] (56) at (-8, -3.5) {};
+		\node [style=none] (57) at (-5, -3.5) {};
+		\node [style=none] (58) at (-3.25, -3.5) {};
+		\node [style=none] (59) at (-4, -2.75) {};
+		\node [style=none] (60) at (-4, -4.25) {};
+		\node [style=none] (61) at (-4.75, -3.5) {};
+		\node [style=none] (62) at (-4, -3.5) {\texttt{XOR}};
+		\node [style=none] (63) at (-6, -1) {};
+		\node [style=none] (64) at (-2, -1) {};
+		\node [style=none] (65) at (-2, 0) {};
+		\node [style=none] (66) at (-6, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (2.center)
+			 to (3.center)
+			 to (1.center)
+			 to (0.center)
+			 to cycle;
+		\draw [style=light fill] (6.center)
+			 to (7.center)
+			 to (5.center)
+			 to (4.center)
+			 to cycle;
+		\draw [style=light fill] (10.center)
+			 to (11.center)
+			 to (9.center)
+			 to (8.center)
+			 to cycle;
+		\draw [style=light fill] (14.center)
+			 to (15.center)
+			 to (13.center)
+			 to (12.center)
+			 to cycle;
+		\draw [style=light fill] (18.center)
+			 to (19.center)
+			 to (17.center)
+			 to (16.center)
+			 to cycle;
+		\draw [style=light fill] (22.center)
+			 to (23.center)
+			 to (21.center)
+			 to (20.center)
+			 to cycle;
+		\draw [style=light fill] (26.center)
+			 to (27.center)
+			 to (25.center)
+			 to (24.center)
+			 to cycle;
+		\draw [style=light fill] (30.center)
+			 to (31.center)
+			 to (29.center)
+			 to (28.center)
+			 to cycle;
+		\draw [style=light fill] (45.center)
+			 to (44.center)
+			 to (40.center)
+			 to (39.center)
+			 to cycle;
+		\draw [style=light fill] (34.center) to (33.center);
+		\draw [style=light fill] (36.center) to (35.center);
+		\draw [style=light fill] (37.center) to (38.center);
+		\draw [style=big arrow] (48.center) to (47.center);
+		\draw [style=green arrow, in=180, out=0] (50.center) to (51.center);
+		\draw [style=big arrow] (54.center) to (53.center);
+		\draw [style=big arrow] (56.center) to (57.center);
+		\draw [style=light fill] (61.center)
+			 to [bend left=45] (59.center)
+			 to [bend left=45] (58.center)
+			 to [bend left=45] (60.center)
+			 to [bend left=45] cycle;
+		\draw [style=light fill] (64.center)
+			 to (65.center)
+			 to (66.center)
+			 to (63.center)
+			 to cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

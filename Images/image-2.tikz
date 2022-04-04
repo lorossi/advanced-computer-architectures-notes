@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 3) {};
+		\node [style=none] (11) at (-3, 0) {};
+		\node [style=right align, text={rgb,255: red,191; green,0; blue,64}] (12) at (-2.75, 3) {evaluate};
+		\node [style=left align, text={rgb,255: red,0; green,128; blue,128}] (13) at (3, 3) {simulate};
+		\node [style=none, text={rgb,255: red,31; green,117; blue,254}] (14) at (0, -4) {implement};
+		\node [style=none] (16) at (0, -3) {};
+		\node [style=none] (17) at (3, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red arrow, in=180, out=90] (11.center) to (0.center);
+		\draw [style=blue line, bend left=45] (17.center) to (16.center);
+		\draw [style=green arrow, in=90, out=0] (0.center) to (17.center);
+		\draw [style=blue arrow, bend left=45] (16.center) to (11.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
