@@ -1,0 +1,77 @@
+{
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "build with externalized images",
+      "tools": ["envsetup", "pdflatex", "pdflatex"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "envsetup",
+      "command": "python3",
+      "args": ["envsetup.py"],
+      "env": {}
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {}
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "build with externalized images",
+  "latex-workshop.latex.autoBuild.interval": 5000,
+  "latex-workshop.message.warning.show": false,
+  "latex-workshop.message.error.show": false,
+  "latex-workshop.view.outline.sections": [
+    "part",
+    "chapter",
+    "section",
+    "subsection",
+    "subsubsection",
+    "paragraph"
+  ],
+  "latex-workshop.latexindent.args": [
+    "-c",
+    "%DIR%/",
+    "%TMPFILE%",
+    "-y=defaultIndent: '%INDENT%'",
+    "-m"
+  ],
+  "[latex]": {
+    "editor.formatOnSave": false
+  },
+  "cSpell.words": [
+    "ADDV",
+    "analyzed",
+    "Antidependence",
+    "BNEZ",
+    "Conficconi",
+    "DADDIU",
+    "DSUBIU",
+    "Hyperblock",
+    "MFLOPS",
+    "MISD",
+    "mispredict",
+    "mult",
+    "pipelining",
+    "Sciuto",
+    "SISD",
+    "Speedup",
+    "speedups",
+    "Superblock",
+    "tikzit",
+    "tikzstyle",
+    "tikzstyles",
+    "tikztemp",
+    "Tomasulo",
+    "VLIW",
+    "writebacks"
+  ]
+}
