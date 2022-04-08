@@ -336,6 +336,7 @@ However, this does account for the different durations of the benchmarking progr
 \end{table}
 
 \newpage
+
 \section{Multithreading and Multiprocessors}
 
 \subsection{Why multithreading?}
@@ -1770,7 +1771,7 @@ The Reservation Station is composed by \(5\) fields:
   \item \texttt{BUSY} - indicates the \textit{RS} ib busy
 \end{itemize}
 
-In this description, only one of the \texttt{V}-field or \texttt{Q}-field is valid for each operand.
+In this description, only one between the \texttt{V}-field and the \texttt{Q}-field is valid for each operand.
 
 \bigskip
 Furthermore, a few more components exist:
@@ -1859,7 +1860,7 @@ When teh \texttt{LOAD} address has been computed, it can be compared with \textt
 Store instructions must check for matching addresses in both \texttt{LOAD} and \texttt{STORE} buffers.
 This is a \textbf{dynamic disambiguation} and, opposing to the static disambiguation, is not performed by the compiler.
 
-As a drawback, more hardware is required to perform these operations: each \textit{RS} must contain a fast associative buffer, because single \textit{CDB} may limit performance.
+As a drawback, more hardware is required to perform these operations: each \textit{RS} must contain a fast associative buffer, because single \textit{CDB} \textit{(Common Data Bus)}  may limit performance.
 
 \paragraph{Tomasulo and Loops}
 
@@ -2198,5 +2199,505 @@ As discussed in Section~\ref{sec:trace-scheduling}, Trace Scheduling does not su
 In order to increase the performance in these situations, techniques based on loop unrolling are needed.
 Traces scheduling schedules traces in order of decreasing probability of being executed.
 As such, most frequently executed traces get better schedules.
+
+\newpage
+
+\section{Hardware Based Speculation}
+
+The Hardware Based Speculation combines 3 ideas:
+
+\begin{itemize}
+  \item \textbf{Dynamic Branch Prediction} to choose which instruction to execute
+  \item \textbf{Dynamic Scheduling} to support out of order execution while allowing in order commit
+        \begin{itemize}
+          \item prevents irrevocable actions such as register update or exception taking until an instruction commits
+        \end{itemize}
+  \item \textbf{Speculation} to execute instructions before control dependences are resolved
+\end{itemize}
+
+The outcome of the branches is speculated, then the program is executed as if speculation was correct.
+Mechanisms are necessary to handle incorrect speculation: the hardware speculation extends dynamic scheduling beyond a branch (i.e. beyond the basic block).
+
+\bigskip
+Generally speaking, Hardware Based Speculation raises power consumption but lowers execution time by more than it increases the average power consumption.
+The total energy consumed may be less depending on the number of instructions incorrectly executed.
+
+\subsection{Reorder Buffer}
+
+The \textbf{Reorder Buffer} (or \textit{ROB}) holds instructions in \textit{FIFO} order, exactly as issued.
+When instructions are complete, their results are placed back in the \textit{ROB}.
+
+Operands are supplied to the other instructions between their completion and their commit.
+Results are tagged with \textit{ROB} buffer number instead of the reservation station.
+
+During the instruction commit the values in the head of the \textit{ROB} are placed in registers.
+
+\bigskip
+\textit{ROB} are structured as a circular buffer with \textbf{Head} and \textbf{Tail} pointers.
+Entries between those two are valid and they are allocated and freed whenever an instruction enters or leaves the \textit{ROB}.
+
+Its main entries include:
+
+\begin{itemize}
+  \item The \textbf{type} of the instruction
+  \item The \textbf{destination} register of the result
+  \item The \textbf{result} of the instruction
+  \item If any \textbf{exception} was raised
+  \item The \textbf{program counter} \texttt{PC}
+  \item If the \textbf{instruction} is \textbf{ready}
+  \item If the \textbf{branch} is \textbf{speculative}
+\end{itemize}
+
+\bigskip
+The structure of the \textit{ROB} is represented in Figure~\ref{fig:structure-of-ROB} along with its main entries.
+
+\begin{figure}[htpb]
+  \bigskip
+  \centering
+  \tikzfig[]{image-36.tikz}
+  \caption{Structure of the \textit{ROB}}
+  \label{fig:structure-of-ROB}
+  \bigskip
+\end{figure}
+
+The structure of an entry is similar to the one showed in Figure~\ref{fig:structure-entries-rob}:
+
+\begin{itemize}
+  \item The \texttt{TAG}, given by the index in the \textit{ROB}
+  \item The new instructions are dispatched to free slots while
+  \item Instruction space is reclaimed when done by setting the \texttt{P} bit
+  \item In \textbf{dispatch} stage:
+        \begin{itemize}
+          \item non busy source operands are read from register files and copied to \texttt{SRC} fields where the \texttt{P} bit is set
+          \item busy source operands copy \texttt{TAG} of producer and clear the \texttt{P} bit
+          \item the \texttt{V} bit is set valid
+        \end{itemize}
+  \item In \textbf{issue} stage:
+        \begin{itemize}
+          \item the \texttt{I} bit is set valid
+        \end{itemize}
+  \item On \textbf{completion}:
+        \begin{itemize}
+          \item source tags are searched and the \texttt{P} bit is set
+          \item result and \texttt{EXCEPTION} flags are written back to \textit{ROB}
+        \end{itemize}
+  \item On \textbf{commit}:
+        \begin{itemize}
+          \item \texttt{EXCEPTION} flags are checked
+          \item \texttt{RESULT} is copied into register files
+        \end{itemize}
+  \item On \textbf{trap}:
+        \begin{itemize}
+          \item machine and \textit{ROB} are flushed
+          \item \texttt{FREE} pointer is set as \texttt{OLDEST}
+          \item the execution resumes from \texttt{HANDLER}
+        \end{itemize}
+\end{itemize}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[]{image-38.tikz}
+  \caption{Structure of the entries of the \textit{ROB}}
+  \label{fig:structure-entries-rob}
+  \bigskip
+\end{figure}
+
+\bigskip
+In order to separate the completion stage from the commit stage, the \textit{ROB} must hold register results from the former until the latter.
+
+Each entry, allocated in program order during decode, holds:
+
+\begin{itemize}
+  \item The \textbf{type} of the instruction
+  \item The \textbf{destination} register specifier and value \textit{(if any)}
+  \item The \textbf{program counter}, \texttt{PC}
+  \item The \textbf{exception} status (often compressed to save memory)
+\end{itemize}
+
+They buffer completed values and exception states until the in-order commit point.
+Completed values can be used by dependencies before reaching that point.
+
+\subsection{Interrupts and Exceptions with hardware speculation}
+
+Hardware Speculation greatly increases the complexity of control dependencies.
+In fact, branch prediction may not be enough to keep an high level of \textit{ILP}.
+
+Special care must be ensued while handling \textbf{interrupts} and \textbf{exceptions}, because:
+
+\begin{itemize}
+  \item All the instruction \textbf{before} the event must be completed
+  \item All the instructions \textbf{after} the even must behave as they have never started
+\end{itemize}
+
+Since branch prediction might be wrong, the issue is now to update the processor state accordingly.
+Finally, out of order completion, post interrupt and mispredict writebacks change the state of the program.
+
+To solve this problems executed instructions are held in \textit{ROB} until they are no longer speculative.
+The instruction commit is then \textit{in order}: exceptions and interrupt are handled by not being addressed until the instruction that caused them is recorded in the \textit{ROB}.
+
+Temporary storage \textit{(shadow registers and store buffers)} is then needed to hold all results before commit
+Operands are supplied as well between execution complete and commit.
+
+Once the instruction is committed, its result is placed in the destination register.
+Therefore, it's easy to undo speculated instructions on exceptions and interrupts.
+
+A scheme of this structure is represented in Figure~\ref{fig:exceptions-in-order-commit}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[]{image-37.tikz}
+  \caption{Scheme of the in order commit for precise exceptions}
+  \label{fig:exceptions-in-order-commit}
+  \bigskip
+\end{figure}
+
+\subsection{Steps in the Speculative Tomasulo Algorithm}
+
+The 4 steps of the Speculative Tomasulo Algorithm are:
+
+\begin{enumerate}
+  \item \textbf{Issue} or \textbf{dispatch} - instruction is loaded from \textit{FP} operation queue. If the reservation station and the reorder buffer slot are free, then:
+        \begin{itemize}
+          \item the instruction is issued
+          \item the operands are sent
+          \item the destination buffer is reordered
+        \end{itemize}
+  \item \textbf{Execution} - operands are operated upon
+        \begin{itemize}
+          \item when both operands are ready, the instruction is executed
+          \item if they aren't, the \textit{Common Data Bus} is watched for the results
+          \item when both operands are in reservation station, the instructions is executed
+          \item \textit{RAW} are checked
+        \end{itemize}
+  \item \textbf{Write result}
+        \begin{itemize}
+          \item result is written on the \textit{Common Data Bus} to all awaiting \textit{FUs} and \textit{ROBs}
+          \item all the \textit{RS} are set to available
+        \end{itemize}
+  \item \textbf{Commit} or \textbf{graduation} - when the instruction at the head of the \textit{ROB} and the results are present, then:
+        \begin{itemize}
+          \item the register (or memory page) is updated with the result
+          \item the instruction is removed from the \textit{ROB}
+          \item mispredicted branches are flushed from the \textit{ROB}
+        \end{itemize}
+\end{enumerate}
+
+Furthermore, 3 possible \textbf{commit} sequences are possible:
+
+\begin{itemize}
+  \item \textbf{Normal commit}:
+        \begin{itemize}
+          \item the instruction reaches the head of the \textit{ROB}
+          \item the result is found in the register
+          \item the instruction in removed from the \textit{ROB}
+        \end{itemize}
+  \item \textbf{Store commit}:
+        \begin{itemize}
+          \item same as \textbf{Store commit} but memory (and not a register) is updated
+        \end{itemize}
+  \item \textbf{Instruction is a branch with incorrect prediction}:
+        \begin{itemize}
+          \item the speculation was wrong
+          \item \textit{ROB} is flushed \textit{(the operation is called \inlinequote{graduation})}
+          \item execution restarts at correct successor of the branch
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Tomasulo's Algorithm and \textit{ROB}}
+
+The Tomasulo's Algorithm needs a buffer for all the uncommitted results.
+It's structured as a \textit{ROB}.
+
+Each entry of the \textit{ROB} contains 4 fields:
+
+\begin{enumerate}
+  \item \textbf{Instruction Type} field, indicating if:
+        \begin{itemize}
+          \item the instruction is a \textit{branch} (and has no destination result)
+          \item the instruction is a \textit{store} (and has a memory address destination)
+          \item the instruction is a \texttt{LOAD} or \textit{ALU} operation (and has a register destination)
+        \end{itemize}
+  \item \textbf{Destination} field, supplying:
+        \begin{itemize}
+          \item the register number (for \texttt{LOAD} and \textit{ALU} instructions)
+          \item the memory address (for \texttt{STORE} instructions)
+        \end{itemize}
+  \item \textbf{Value} field, holding the value of the result until the instruction commits
+  \item \textbf{Ready} field, indicating if the instruction has completed and the value is ready
+\end{enumerate}
+
+\bigskip
+Further observations:
+
+\begin{itemize}
+  \item The \textit{ROB} replaces all store buffers, because \texttt{STORE} execute in two steps
+        \begin{itemize}
+          \item the second step happens is when the instruction commits
+        \end{itemize}
+  \item The renaming function of the reservation stations is completely replaced by the \textit{ROB}
+        \begin{itemize}
+          \item Tomasulo provides \textbf{Implicit Registers Renaming}, because user registers are renamed to reservation station tags
+        \end{itemize}
+  \item Reservation stations now only queue operations (and their relative operands) to \textit{FUs} between the time they issue and the time they begin their execution stage
+  \item Results are tagged with the \textit{ROB} entry number rather than with the \textit{RS} number
+        \begin{itemize}
+          \item each \textit{ROB} assigned to instruction must be tracked in the \textit{RS}
+        \end{itemize}
+  \item All instructions \textbf{excluding incorrectly predicted branches} and \textbf{incorrectly speculated \texttt{LOAD}} commit when reaching head of \textit{ROB}
+        \begin{itemize}
+          \item when an incorrect prediction or speculation is indicated, the \textit{ROB} is flushed and execution restarts at correct successor of branch
+          \item speculative actions are easily undone
+        \end{itemize}
+  \item Processors with \textit{ROB} can dynamically execute while maintaining a precise interrupt model
+        \begin{itemize}
+          \item if instructions \(I\) causes an interrupt, the \textit{CPU} waits until \(I\) reaches the head of the \textit{ROB} to handle it, flushing all other pending instructions
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Exception handling}
+
+The use of a \textit{ROB} with in orde instruction commit provides precise exceptions.
+Exceptions are handled by ignoring them until they are ready to commit.
+
+3 different scenarios can then be identified at commit stage:
+
+\begin{itemize}
+  \item If a speculated instruction raises an exception, then the exception itself is recorded in the \textit{ROB}
+  \item IF a branch misprediction arises and the instruction should not have been executed, then the exception is flushed along with the instruction when the \textit{ROB} is cleared
+  \item If the instruction reaches the head of the \textit{ROB}, then it's no longer speculative and it should be addressed
+\end{itemize}
+
+\subsubsection{Hardware support for Memory Disambiguation}
+
+In order to keep track of all stores to memory in program order, a buffer is needed.
+Its duties include:
+
+\begin{itemize}
+  \item Keep track of addresses and results and when they become available
+  \item Keep a \textit{FIFO} ordering, so stores are retired in program order
+\end{itemize}
+
+While issuing a \texttt{LOAD}, the head current head of store queue must be recorded in order to know which \texttt{STORE} instructions are ahead.
+When the address is actually found, the \texttt{STORE} queue is checked:
+
+\begin{itemize}
+  \item if any \texttt{STORE} prior to \texttt{LOAD} is waiting for its address, then the \texttt{LOAD} is stalled
+  \item If any \texttt{LOAD} address matches any previous \texttt{STORE} address (found by \textit{associative lookup}), then a \textbf{memory induced} \textit{RAW} hazard is created:
+        \begin{itemize}
+          \item if the \texttt{STORE} value is available, then it's returned
+          \item if the \texttt{STORE} value is not available, then the \textit{ROB} number of the source is returned
+        \end{itemize}
+\end{itemize}
+
+All the actual \texttt{STORE} instructions commit in order, so there's no need to check for \textit{WAR} or \textit{WAW} hazards throughout memory.
+
+\newpage
+
+\section{Explicit Register Renaming}
+
+\textbf{Explicit Register Renaming} is a technique that uses physical register file that is larger than the number of register specified by the \textit{ISA}.
+
+The key \textit{idea} behind this technique is to allocate a new physical destination register for every instruction that writes.
+It's very similar to a compiler transformation called \textbf{Static Single Assignment} (\textit{SSA}) but at hardware level.
+It removes all chances of \textit{WAR} or \textit{WAW} hazards while allowing complete \textbf{out of order} completion.
+
+It works by keeping a translation table that maps each \textit{ISA} register to a physical register.
+Whenever a register is written, the corresponding entry on the map is replaced with a new register from the \textbf{freelist}.
+A physical register is considered free when not used by any active instruction.
+
+A simple illustration of this technique is shown in Image~\ref{fig:explicit-register-renaming}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[]{image-39.tikz}
+  \caption{Explicit Register Renaming}
+  \label{fig:explicit-register-renaming}
+  \bigskip
+\end{figure}
+
+Explicit Renaming Support includes:
+
+\begin{itemize}
+  \item \textbf{Rapid access} to a table of translations
+  \item A physical register file that has \textbf{more registers} than specified by the \textit{ISA}
+  \item Ability to figure out which physical registers are \textbf{free}
+        \begin{itemize}
+          \item if no registers is free, the issue stage is stalled
+        \end{itemize}
+\end{itemize}
+
+The advantages of Explicit Renaming Support are:
+
+\begin{itemize}
+  \item Decouples \textbf{renaming} from \textbf{scheduling}
+        \begin{itemize}
+          \item pipeline can behave exactly like \inlinequote{standard}, Tomasulo like or scoreboard \textit{(among the others)} pipeline
+          \item physical register file holds committed and speculative values
+          \item physical registers are decoupled from rob entries
+                \begin{itemize}
+                  \item there's no data in the \textit{ROB}
+                \end{itemize}
+        \end{itemize}
+  \item Allows data to be fetched from \textbf{single} register file
+        \begin{itemize}
+          \item there's no need to bypass values from reorder buffer
+          \item this  can be important for balancing the pipeline
+        \end{itemize}
+\end{itemize}
+
+\subsection{Unified Physical Register File}
+
+In order to enable the \textit{CPU} to explicitly rename registers, a \textbf{Unified Physical Register File} is created.
+
+It works by interfacing \textit{Registers} to \textit{Functional Units}:
+
+\begin{itemize}
+  \item It renames all architectural registers into a \textbf{single physical register file} during decode, without reading their values
+  \item Functional units read and write from single Unified Physical Register File holding \textbf{committed} and \textbf{temporary registers} in execution
+  \item It commits only updates the mapping of architectural registers to the physical registers, \textbf{without actually moving data}
+\end{itemize}
+
+The \textbf{Renaming Map} is a  simple data structure that supplies the physical register number of the register that currently corresponds to the requested architectural register.
+At the \textbf{Instruction Commit} stage the renaming stable is updated permanently to indicate that the physical register holding the destination value corresponds to the actual architectural register.
+
+A schematic of the Unified Physical Register File is shown in Image~\ref{fig:unified-physical-register-file}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[]{image-40.tikz}
+  \caption{Unified Physical Register File}
+  \label{fig:unified-physical-register-file}
+  \bigskip
+\end{figure}
+
+\bigskip
+By using the Unified Physical Register File, the mapping between an architectural register and a physical one \textbf{is not speculative}.
+Any physical register being used to hold the older value of the architectural register is freed.
+
+Deallocating registers is a more complicated:
+
+\begin{itemize}
+  \item Before freeing up a physical register, checks that the it is \textbf{no longer being used} now and in the near future must be made
+  \item A physical register corresponds to an architectural register \textbf{until it is rewritten}
+  \item There may be \textbf{pending uses} of the physical register: the processor must check if any source operand corresponds to that register in the \textit{FU} queue
+        \begin{itemize}
+          \item if it does not appear, it can be allocated
+          \item otherwise, the processor can wait until another instructions that writes the same architectural register commits. This is an easy to implement solution that might cause slight delays
+        \end{itemize}
+\end{itemize}
+
+A simplified implementation of the pipeline with a Physical Register File is shown in Image~\ref{fig:pipeline-design-with-physical-register-file}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.75]{image-41.tikz}
+  \caption{Pipeline Design with Physical Register File}
+  \label{fig:pipeline-design-with-physical-register-file}
+  \bigskip
+\end{figure}
+
+\subsection{Explicit Register Renaming and Scoreboard}
+
+The scoreboard architecture can be easily adapted to be coupled with Explicit Register Renaming.
+The 4 stages now become:
+
+\begin{itemize}
+  \item \textbf{Issue} - decode instruction, check for structural hazards and allocate new physical register for result
+        \begin{itemize}
+          \item instructions are issued in program order for hazard checking
+          \item no instruction is issued if there are no physical registers
+          \item no instruction is issued if there is a structural hazard
+        \end{itemize}
+  \item \textbf{Read operands} - wait until no hazard happens and then read operands
+        \begin{itemize}
+          \item all real dependencies (\textit{RAW} hazards) are resolved in this stage, since the processor waits for instructions to write back data
+        \end{itemize}
+  \item \textbf{Execution} on operands
+        \begin{itemize}
+          \item the \textit{FU} begins execution upon receiving operanda
+          \item when the results are read, the scoreboard is notified
+        \end{itemize}
+  \item \textbf{Write result}
+        \begin{itemize}
+          \item the execution of the instruction ends here
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+Thanks to the Explicit Renaming there's no need to check for \textit{WAR} or \textit{WAW} hazards.
+
+\subsection{Multiple Issue}
+
+Often it's necessary to modify the issue logic in order to handle two or more instructions at one, including possible dependences between instructions.
+The biggest bottleneck is found in dynamically scheduled superscalar processors:
+
+\begin{itemize}
+  \item The \textbf{processor needs additional logic} to handle issue of every possible combination of dependent instructions in the same clock cycle
+  \item Since the number of possibilities increases with the square of the number of instructions that can be issued in one clock cycle, it's difficult to implement a logic supporting more than \(4\) instructions
+\end{itemize}
+
+\bigskip
+The basic approach is as follows:
+
+\begin{enumerate}
+  \item A \textbf{reservation station} and a \textit{ROB} entry is assigned to each instruction in the following issue bundle
+        \begin{itemize}
+          \item if this is not achievable. only a subset of instruction is considered in sequential order
+        \end{itemize}
+  \item All \textbf{dependences} between the instructions are \textbf{analyzed}
+  \item If an instruction in the bundle \textbf{depends on an earlier instruction of the same bundle}, the assigned \textit{ROB} number is used to update the reservation table for the current instruction
+\end{enumerate}
+
+All these operations are done in parallel in a single clock cycle.
+
+In a similar manner, the issue logic must behave as follows:
+
+\begin{enumerate}
+  \item Enough physical space for the entire issue bundle is \textbf{reserved}
+  \item The issue logic determines what \textbf{dependences exists in the bundle}:
+        \begin{itemize}
+          \item if a dependence \textbf{does not exist} within the bundle:
+                \begin{itemize}
+                  \item the register renaming structure is used to determine the physical register that holds the result on which instruction depends
+                  \item the result is from an earlier issued bundle and the register renaming table will contain the correct register number
+                \end{itemize}
+                \begin{itemize}
+                  \item if an instruction depends on an \textbf{instruction that is earlier} in the bundle:
+                        \begin{itemize}
+                          \item the reserved physical register in which the result will be placed is used to update the information for the issuing instruction
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+\end{enumerate}
+
+Once again, all these operations are done in parallel in a single clock cycle.
+
+\subsubsection{Superscalar Register Renaming}
+
+\begin{itemize}
+  \item During decode, instructions allocate a new physical destination register
+  \item Source operands are renamed to physical register with newest value
+  \item Execution unit only sees physical register numbers
+  \item RAW hazards must be checked between instruction issuing in the same cycle
+  \begin{itemize}
+    \item this operation can be done in parallel using rename lookup
+  \end{itemize}
+\end{itemize}
+
+An illustration of the architecture in the two-issue Superscalar Register Renaming is found in Image~\ref{fig:two-issue-superscalar-register-renaming}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.75]{image-42.tikz}
+  \caption{two-issue Superscalar Register Renaming}
+  \label{fig:two-issue-superscalar-register-renaming}
+  \bigskip
+\end{figure}
 
 \end{document}

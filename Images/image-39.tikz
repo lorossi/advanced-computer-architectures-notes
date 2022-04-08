@@ -1,0 +1,62 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -2) {};
+		\node [style=none] (2) at (3, 0) {};
+		\node [style=none] (3) at (3, -2) {};
+		\node [style=none] (4) at (1.5, -1) {\texttt{fetch}};
+		\node [style=none] (5) at (5, 0) {};
+		\node [style=none] (6) at (5, -2) {};
+		\node [style=none] (7) at (8, 0) {};
+		\node [style=none] (8) at (8, -2) {};
+		\node [style=none] (9) at (6.5, -0.5) {\texttt{decode}};
+		\node [style=none] (10) at (3, -1) {};
+		\node [style=none] (11) at (4.75, -1) {};
+		\node [style=none] (12) at (10, 0) {};
+		\node [style=none] (13) at (10, -2) {};
+		\node [style=none] (14) at (13, 0) {};
+		\node [style=none] (15) at (13, -2) {};
+		\node [style=none] (16) at (11.5, -1) {\texttt{execute}};
+		\node [style=none] (17) at (8, -1) {};
+		\node [style=none] (18) at (9.75, -1) {};
+		\node [style=none] (19) at (6.5, -1.5) {\texttt{rename}};
+		\node [style=none] (20) at (5, -4) {};
+		\node [style=none] (21) at (5, -6) {};
+		\node [style=none] (22) at (8, -4) {};
+		\node [style=none] (23) at (8, -6) {};
+		\node [style=none] (24) at (6.5, -4.75) {\texttt{rename}};
+		\node [style=none] (25) at (6.5, -4) {};
+		\node [style=none] (26) at (6.5, -5.25) {\texttt{table}};
+		\node [style=none] (27) at (11.5, -2) {};
+		\node [style=none] (28) at (11.5, -5) {};
+		\node [style=none] (29) at (8.25, -5) {};
+		\node [style=none] (30) at (6.5, -2.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (1.center)
+			 to (3.center)
+			 to (2.center)
+			 to (0.center)
+			 to cycle;
+		\draw [style=light fill] (6.center)
+			 to (8.center)
+			 to (7.center)
+			 to (5.center)
+			 to cycle;
+		\draw [style=big arrow] (10.center) to (11.center);
+		\draw [style=light fill] (13.center)
+			 to (15.center)
+			 to (14.center)
+			 to (12.center)
+			 to cycle;
+		\draw [style=big arrow] (17.center) to (18.center);
+		\draw [style=light fill] (21.center)
+			 to (23.center)
+			 to (22.center)
+			 to (20.center)
+			 to cycle;
+		\draw [style=green arrow] (25.center) to (30.center);
+		\draw [style=green arrow] (28.center) to (29.center);
+		\draw [style=green line] (27.center) to (28.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

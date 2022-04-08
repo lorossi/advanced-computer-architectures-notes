@@ -1,0 +1,67 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -1.75) {};
+		\node [style=none] (2) at (7, -1.75) {};
+		\node [style=none] (3) at (7, 0) {};
+		\node [style=none] (4) at (3.5, -0.5) {\texttt{decode\ stage}};
+		\node [style=none] (5) at (3.5, -1.25) {\texttt{register\ mapping}};
+		\node [style=none] (6) at (15, 0) {};
+		\node [style=none] (7) at (15, -1.75) {};
+		\node [style=none] (8) at (22, -1.75) {};
+		\node [style=none] (9) at (22, 0) {};
+		\node [style=none] (10) at (18.5, -0.5) {\texttt{commit\ stage}};
+		\node [style=none] (11) at (18.5, -1.25) {\texttt{register\ mapping}};
+		\node [style=none] (12) at (7.5, -4) {};
+		\node [style=none] (13) at (7.5, -5.75) {};
+		\node [style=none] (14) at (14.5, -5.75) {};
+		\node [style=none] (15) at (14.5, -4) {};
+		\node [style=none] (16) at (11, -4.5) {\texttt{unified\ physical}};
+		\node [style=none] (17) at (11, -5.25) {\texttt{register\ file}};
+		\node [style=none] (18) at (3.5, -1.75) {};
+		\node [style=none] (19) at (3.5, -5) {};
+		\node [style=none] (20) at (7.25, -5) {};
+		\node [style=none] (21) at (14.75, -5) {};
+		\node [style=none] (22) at (18.5, -5) {};
+		\node [style=none] (23) at (18.5, -1.75) {};
+		\node [style=none] (24) at (7.75, -9) {};
+		\node [style=none] (25) at (7.75, -10.75) {};
+		\node [style=none] (26) at (14.25, -10.75) {};
+		\node [style=none] (27) at (14.25, -9) {};
+		\node [style=none] (28) at (11, -9.875) {\texttt{functional units}};
+		\node [style=none] (30) at (9.5, -5.75) {};
+		\node [style=none] (31) at (12.5, -9) {};
+		\node [style=none] (32) at (12.5, -6) {};
+		\node [style=none] (33) at (9.5, -8.75) {};
+		\node [style=right align] (34) at (9.25, -7.5) {read operands at issue};
+		\node [style=left align] (35) at (12.75, -7.5) {write results completion};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (0.center)
+			 to (1.center)
+			 to (2.center)
+			 to (3.center)
+			 to cycle;
+		\draw [style=light fill] (6.center)
+			 to (7.center)
+			 to (8.center)
+			 to (9.center)
+			 to cycle;
+		\draw [style=light fill] (12.center)
+			 to (13.center)
+			 to (14.center)
+			 to (15.center)
+			 to cycle;
+		\draw [style=big] (18.center) to (19.center);
+		\draw [style=big arrow] (19.center) to (20.center);
+		\draw [style=big arrow] (22.center) to (21.center);
+		\draw [style=big] (23.center) to (22.center);
+		\draw [style=light fill] (24.center)
+			 to (25.center)
+			 to (26.center)
+			 to (27.center)
+			 to cycle;
+		\draw [style=green arrow] (30.center) to (33.center);
+		\draw [style=red arrow] (31.center) to (32.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

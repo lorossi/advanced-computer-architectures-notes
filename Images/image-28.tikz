@@ -150,10 +150,10 @@
 		\draw [style=big] (69.center) to (30.center);
 		\draw [style=big] (69.center) to (70.center);
 		\draw [style=big arrow] (70.center) to (57.center);
-		\draw [style=red line] (73.center)
+		\draw [style=dashed] (71.center)
+			 to (73.center)
 			 to (74.center)
 			 to (72.center)
-			 to (71.center)
 			 to cycle;
 		\draw [style=light fill] (76.center)
 			 to (79.center)

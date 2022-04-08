@@ -20,7 +20,7 @@
 		\node [style=none] (24) at (12, -7) {};
 		\node [style=none] (25) at (12, -6) {};
 		\node [style=none] (26) at (11, -7.25) {};
-		\node [style=none] (27) at (10, -6) {};
+		\node [style=none] (27) at (9.75, -6) {};
 		\node [style=none] (28) at (11, -4.75) {};
 		\node [style=none] (29) at (11, -2.25) {};
 		\node [style=none] (66) at (11, -6) {\texttt{PE}};
@@ -30,9 +30,9 @@
 		\node [style=none] (70) at (12, -13) {};
 		\node [style=none] (71) at (12, -10) {};
 		\node [style=none] (72) at (11, -11.5) {\texttt{mem}};
-		\node [style=none] (73) at (10, -11.5) {};
+		\node [style=none] (73) at (9.75, -11.5) {};
 		\node [style=none] (74) at (11, -9.75) {};
-		\node [style=none] (75) at (8, -1) {};
+		\node [style=none] (75) at (7.5, -1) {};
 		\node [style=none] (76) at (11, -4) {};
 		\node [style=none] (77) at (11, -8) {};
 		\node [style=none] (78) at (6, -1.5) {};
@@ -45,7 +45,7 @@
 		\node [style=none] (85) at (16, -7) {};
 		\node [style=none] (86) at (16, -6) {};
 		\node [style=none] (87) at (15, -7.25) {};
-		\node [style=none] (88) at (14, -6) {};
+		\node [style=none] (88) at (13.75, -6) {};
 		\node [style=none] (89) at (15, -4.75) {};
 		\node [style=none] (90) at (15, -2.25) {};
 		\node [style=none] (91) at (15, -6) {\texttt{PE}};
@@ -55,7 +55,7 @@
 		\node [style=none] (95) at (16, -13) {};
 		\node [style=none] (96) at (16, -10) {};
 		\node [style=none] (97) at (15, -11.5) {\texttt{mem}};
-		\node [style=none] (98) at (14, -11.5) {};
+		\node [style=none] (98) at (13.75, -11.5) {};
 		\node [style=none] (99) at (15, -9.75) {};
 		\node [style=none] (100) at (15, -4) {};
 		\node [style=none] (101) at (15, -8) {};
@@ -101,13 +101,13 @@
 		\node [style=none] (145) at (13, -4) {};
 		\node [style=none] (146) at (13, -6) {};
 		\node [style=none] (147) at (13, -11.5) {};
-		\node [style=none] (148) at (18, -6) {};
-		\node [style=none] (149) at (18, -11.5) {};
+		\node [style=none] (148) at (17.75, -6) {};
+		\node [style=none] (149) at (17.75, -11.5) {};
 		\node [style=none] (150) at (17, -4) {};
 		\node [style=none] (151) at (17, -6) {};
 		\node [style=none] (152) at (17, -11.5) {};
-		\node [style=none] (153) at (22, -6) {};
-		\node [style=none] (154) at (22, -11.5) {};
+		\node [style=none] (153) at (21.75, -6) {};
+		\node [style=none] (154) at (21.75, -11.5) {};
 		\node [style=none] (155) at (21, -4) {};
 		\node [style=none] (156) at (21, -6) {};
 		\node [style=none] (157) at (21, -11.5) {};
