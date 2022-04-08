@@ -12,6 +12,7 @@
 \tikzstyle{blue line}=[-, thick, draw={rgb,255: red,31; green,117; blue,254}]
 \tikzstyle{orange line}=[-, thick, draw={rgb,255: red,255; green,117; blue,56}]
 \tikzstyle{yellow line}=[-, thick, draw={rgb,255: red,254; green,223; blue,0}]
+\tikzstyle{purple line}=[-, thick, draw={rgb,255: red,120; green,81; blue,169}]
 \tikzstyle{light fill}=[-, fill={rgb,255: red,240; green,240; blue,240}, draw=black]
 \tikzstyle{dark fill}=[-, fill={rgb,255: red,128; green,128; blue,128}]
 \tikzstyle{red fill}=[-, fill={rgb,255: red,191; green,0; blue,64}]
@@ -30,4 +31,5 @@
 \tikzstyle{blue arrow}=[draw={rgb,255: red,31; green,117; blue,254}, fill=none, -{Triangle[scale=0.8]}, thick]
 \tikzstyle{orange arrow}=[draw={rgb,255: red,255; green,117; blue,56}, fill=none, -{Triangle[scale=0.8]}, thick]
 \tikzstyle{yellow arrow}=[draw={rgb,255: red,254; green,223; blue,0}, fill=none, -{Triangle[scale=0.8]}, thick]
+\tikzstyle{purple arrow}=[draw={rgb,255: red,120; green,81; blue,169}, fill=none, -{Triangle[scale=0.8]}, thick]
 \tikzstyle{double arrow}=[fill=none, thick, {Triangle[scale=0.8]}-{Triangle[scale=0.8]}]

@@ -16,7 +16,7 @@
 		\node [style=none] (126) at (7, -2) {};
 		\node [style=none] (127) at (7, -5) {};
 		\node [style=none] (128) at (4, -5) {};
-		\node [style=left align] (218) at (20.25, -1) {threads};
+		\node [style=right align] (218) at (19.75, -0.5) {threads};
 		\node [style=none] (222) at (13, -2) {};
 		\node [style=none] (223) at (16, -2) {};
 		\node [style=none] (224) at (16, -5) {};
@@ -77,11 +77,11 @@
 		\node [style=none] (280) at (7.75, -7.5) {};
 		\node [style=none] (281) at (7.75, -9.5) {};
 		\node [style=none] (282) at (7.25, -9.5) {};
-		\node [style=none] (283) at (1, -12) {};
+		\node [style=none] (283) at (1, -14) {};
 		\node [style=none] (284) at (1, 0) {};
 		\node [style=none] (285) at (20, -1) {};
 		\node [style=none] (286) at (0, -1) {};
-		\node [style=right align, anchor=west, rotate=-90] (287) at (1, -12.25) {processes};
+		\node [style=right align, anchor=east, rotate=-90] (287) at (0.5, -13.75) {processes};
 		\node [style=none] (288) at (5.5, -0.5) {};
 		\node [style=none] (289) at (14.5, -0.5) {};
 		\node [style=none] (290) at (14.5, -1) {};

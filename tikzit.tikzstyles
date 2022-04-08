@@ -20,6 +20,7 @@
 \tikzstyle{blue line}=[-, thick, draw={rgb,255: red,31; green,117; blue,254}, tikzit draw={rgb,255: red,31; green,117; blue,254}]
 \tikzstyle{orange line}=[-, thick, draw={rgb,255: red,255; green,117; blue,56}, tikzit draw={rgb,255: red,255; green,117; blue,56}]
 \tikzstyle{yellow line}=[-, thick, draw={rgb,255: red,254; green,223; blue,0}, tikzit draw={rgb,255: red,254; green,223; blue,0}]
+\tikzstyle{purple line}=[-, thick, draw={rgb,255: red,120; green,81; blue,169}, tikzit draw={rgb,255: red,120; green,81; blue,169}]
 \tikzstyle{light fill}=[-, fill={rgb,255: red,240; green,240; blue,240}, draw=black, tikzit fill={rgb,255: red,235; green,235; blue,235}, tikzit draw={rgb,255: red,127; green,127; blue,127}]
 \tikzstyle{dark fill}=[-, fill={rgb,255: red,128; green,128; blue,128}]
 \tikzstyle{red fill}=[-, fill={rgb,255: red,191; green,0; blue,64}, tikzit fill={rgb,255: red,191; green,0; blue,64}, draw={rgb,255: red,77; green,0; blue,25}, tikzit draw={rgb,255: red,77; green,0; blue,25}]
@@ -38,4 +39,5 @@
 \tikzstyle{blue arrow}=[draw={rgb,255: red,31; green,117; blue,254}, fill=none, ->, thick, tikzit draw={rgb,255: red,31; green,117; blue,254}]
 \tikzstyle{orange arrow}=[draw={rgb,255: red,255; green,117; blue,56}, fill=none, ->, thick, tikzit draw={rgb,255: red,255; green,117; blue,56}]
 \tikzstyle{yellow arrow}=[draw={rgb,255: red,254; green,223; blue,0}, fill=none, ->, thick, tikzit draw={rgb,255: red,254; green,223; blue,0}]
+\tikzstyle{purple arrow}=[draw={rgb,255: red,120; green,81; blue,169}, fill=none, ->, thick, tikzit draw={rgb,255: red,120; green,81; blue,169}]
 \tikzstyle{double arrow}=[fill=none, thick, <->, tikzit draw=black]

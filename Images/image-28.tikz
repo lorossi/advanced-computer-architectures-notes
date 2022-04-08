@@ -77,14 +77,6 @@
 		\node [style=none, rotate=90] (80) at (22.5, -6.5) {\texttt{Register\ files}};
 		\node [style=none] (82) at (19.25, -11.75) {};
 		\node [style=none] (83) at (20.75, -11.75) {};
-		\node [style=none] (84) at (19.25, -8.25) {};
-		\node [style=none] (85) at (20.75, -8.25) {};
-		\node [style=none] (86) at (19.25, -6) {};
-		\node [style=none] (87) at (20.75, -6) {};
-		\node [style=none] (88) at (19.25, -3.5) {};
-		\node [style=none] (89) at (20.75, -3.5) {};
-		\node [style=none] (90) at (19.25, -1) {};
-		\node [style=none] (91) at (20.75, -1) {};
 		\node [style=none] (92) at (17.5, 1.75) {};
 		\node [style=none] (93) at (2.5, 3) {};
 		\node [style=none] (94) at (17.5, 3) {};
@@ -92,6 +84,20 @@
 		\node [style=none] (97) at (22.5, 4) {};
 		\node [style=none] (98) at (1.5, 4) {};
 		\node [style=none] (99) at (1.5, 0.25) {};
+		\node [style=none] (100) at (20, -11.75) {};
+		\node [style=none] (101) at (19.25, -8.25) {};
+		\node [style=none] (102) at (20.75, -8.25) {};
+		\node [style=none] (103) at (20, -8.25) {};
+		\node [style=none] (104) at (19.25, -3.5) {};
+		\node [style=none] (105) at (20.75, -3.5) {};
+		\node [style=none] (106) at (20, -3.5) {};
+		\node [style=none] (107) at (19.25, -6) {};
+		\node [style=none] (108) at (20.75, -6) {};
+		\node [style=none] (109) at (20, -6) {};
+		\node [style=none] (110) at (19.25, -1) {};
+		\node [style=none] (111) at (20.75, -1) {};
+		\node [style=none] (112) at (20, -1) {};
+		\node [style=none] (113) at (2, -3.5) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (2.center)
@@ -104,16 +110,14 @@
 			 to (16.center)
 			 to (17.center)
 			 to cycle;
-		\draw [style=double arrow] (13.center) to (12.center);
-		\draw [style=big arrow] (19.center) to (20.center);
 		\draw [style=light fill] (21.center)
 			 to [in=90, out=-90] (24.center)
 			 to (23.center)
 			 to (22.center)
 			 to cycle;
-		\draw [style=big] (26.center) to (31.center);
-		\draw [style=big] (31.center) to (32.center);
-		\draw [style=big arrow] (32.center) to (33.center);
+		\draw [style=green line] (26.center) to (31.center);
+		\draw [style=green line] (31.center) to (32.center);
+		\draw [style=green arrow] (32.center) to (33.center);
 		\draw [style=light fill] (35.center)
 			 to (36.center)
 			 to (37.center)
@@ -139,17 +143,17 @@
 			 to (61.center)
 			 to (58.center)
 			 to cycle;
-		\draw [style=big] (63.center) to (27.center);
-		\draw [style=big] (63.center) to (64.center);
-		\draw [style=big arrow] (64.center) to (39.center);
-		\draw [style=big arrow] (28.center) to (45.center);
-		\draw [style=big] (29.center) to (66.center);
-		\draw [style=big] (66.center) to (65.center);
-		\draw [style=big arrow] (65.center) to (51.center);
+		\draw [style=green line] (63.center) to (27.center);
+		\draw [style=green line] (63.center) to (64.center);
+		\draw [style=green arrow] (64.center) to (39.center);
+		\draw [style=green arrow] (28.center) to (45.center);
+		\draw [style=green line] (29.center) to (66.center);
+		\draw [style=green line] (66.center) to (65.center);
+		\draw [style=green arrow] (65.center) to (51.center);
 		\draw [style=big dashed] (68.center) to (67.center);
-		\draw [style=big] (69.center) to (30.center);
-		\draw [style=big] (69.center) to (70.center);
-		\draw [style=big arrow] (70.center) to (57.center);
+		\draw [style=green line] (69.center) to (30.center);
+		\draw [style=green line] (69.center) to (70.center);
+		\draw [style=green arrow] (70.center) to (57.center);
 		\draw [style=dashed] (71.center)
 			 to (73.center)
 			 to (74.center)
@@ -160,16 +164,24 @@
 			 to (78.center)
 			 to (77.center)
 			 to cycle;
-		\draw [style=double arrow] (82.center) to (83.center);
-		\draw [style=double arrow] (84.center) to (85.center);
-		\draw [style=double arrow] (86.center) to (87.center);
-		\draw [style=double arrow] (88.center) to (89.center);
-		\draw [style=double arrow] (90.center) to (91.center);
-		\draw [style=big arrow] (93.center) to (11.center);
-		\draw [style=big arrow] (94.center) to (92.center);
-		\draw [style=big] (94.center) to (93.center);
-		\draw [style=big] (98.center) to (97.center);
-		\draw [style=big arrow] (97.center) to (96.center);
-		\draw [style=big arrow] (98.center) to (99.center);
+		\draw [style=red arrow] (93.center) to (11.center);
+		\draw [style=red arrow] (94.center) to (92.center);
+		\draw [style=red line] (94.center) to (93.center);
+		\draw [style=red line] (98.center) to (97.center);
+		\draw [style=red arrow] (97.center) to (96.center);
+		\draw [style=red arrow] (98.center) to (99.center);
+		\draw [style=red arrow] (100.center) to (82.center);
+		\draw [style=red arrow] (100.center) to (83.center);
+		\draw [style=red arrow] (103.center) to (101.center);
+		\draw [style=red arrow] (103.center) to (102.center);
+		\draw [style=red arrow] (106.center) to (104.center);
+		\draw [style=red arrow] (106.center) to (105.center);
+		\draw [style=red arrow] (109.center) to (107.center);
+		\draw [style=red arrow] (109.center) to (108.center);
+		\draw [style=red arrow] (112.center) to (110.center);
+		\draw [style=red arrow] (112.center) to (111.center);
+		\draw [style=red arrow] (113.center) to (13.center);
+		\draw [style=red arrow] (113.center) to (12.center);
+		\draw [style=red arrow] (19.center) to (20.center);
 	\end{pgfonlayer}
 \end{tikzpicture}
