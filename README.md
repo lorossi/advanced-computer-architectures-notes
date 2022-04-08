@@ -4,7 +4,7 @@ This repository contains the notes for the Advanced Computer Architectures cours
 
 Feel free to send a PR if you find any mistake that you are willing to fix!
 
-## [Latex compilation notes](#how-to-compile)
+## Latex compilation notes
 
 The compilation of this LaTeX document is slightly problematic due to the intensive use of the `tikz` library.
 
@@ -33,11 +33,11 @@ Don't panic!
 ### The document does not compile!
 
 Have you checked the README?
-Go back to the [section above](#how-to-compile) and read it again.
+Go back to the [section above](#latex-compilation-notes) and read it again.
 
 If it still does not work, open an issue.
 
-### [You made a mistake!](#you-made-a-mistake)
+### You made a mistake!
 
 If you noticed and you feel kind enough to do the work for me, clone the repo and send me a pull request.
 
@@ -53,7 +53,7 @@ If you spot one, follow the same steps as [above](#you-made-a-mistake)
 I have always liked having clean notes on the courses I take and I do enjoy this process a lot.
 I figured out that if I was doing this for myself, I could as well share my work with everyone else.
 
-I just hope that this notes will help someone!
+I just hope that these notes will help someone!
 
 ## Licensing
 
