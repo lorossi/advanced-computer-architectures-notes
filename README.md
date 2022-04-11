@@ -45,7 +45,7 @@ If you aren't feeling it, send me a message via email or open a discussion on Gi
 
 ### The thing you wrote does not make any sense! Fix it!
 
-Sometimes I forget how to write and make sentences that make no sense.
+Sometimes I forget how to write and I make sentences that make no sense.
 If you spot one, follow the same steps as [above](#you-made-a-mistake)
 
 ### Why are you doing this?
