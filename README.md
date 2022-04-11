@@ -12,7 +12,7 @@ If you are using VScode with the [LaTeX Workshop extension](https://marketplace.
 Just keep in mind that the first compilation might take a while _(up to a minute)_ due to the needed rendering of all the figures.
 
 Otherwise, keep reading.
-Due to its *awesomely user friendly features*, the user must:
+Due to its _awesomely user friendly features_, the user must:
 
 - Create an empty folder called `tikztemp` in the repository root to hold all the temporary files it generates (note that this folder is already in the repository)
 - Have a `.tikzstyles` file holding, well, all the styles used by `tikz`
@@ -20,7 +20,7 @@ Due to its *awesomely user friendly features*, the user must:
 - Compile using `latexpdf`, as I have not tried anything else
 
 Furthermore, _due to the cryptic and mysterious nature of the tikz figures format_, I have been using another program called [TikZiT](https://tikzit.github.io/) to help me draw figure without completely losing my mind.
-Sadly, this program introduced even more annoyances, like the increased incompatibility of the `tikzstyles` file it generates with the default, *vanilla*, `tikz` library.
+Sadly, this program introduced even more annoyances, like the increased incompatibility of the `tikzstyles` file it generates with the default, _vanilla_, `tikz` library.
 In order to to fix this, I have created a Python script `cleantikz.py` that will clean the aforementioned file to remove all the fields that `TikZit` adds.
 
 **Shall you ever edit the `tikzstyle.tikzsyles` file, remember to call the script, or the document won't compile!**
@@ -30,20 +30,25 @@ Don't panic!
 
 ## Questions
 
-### The document does not compile!
+### The notes are not consistent with the lectures
+
+I found the lectures quite messy, without a clear ordering or a well defined sequence of topics.
+This is wy many chapters and sections in these notes are not in the same order as the slides for the course are. 
+
+### The document does not compile
 
 Have you checked the README?
 Go back to the [section above](#latex-compilation-notes) and read it again.
 
 If it still does not work, open an issue.
 
-### You made a mistake!
+### You made a mistake
 
 If you noticed and you feel kind enough to do the work for me, clone the repo and send me a pull request.
 
 If you aren't feeling it, send me a message via email or open a discussion on GitHub.
 
-### The thing you wrote does not make any sense! Fix it!
+### The thing you wrote does not make any sense! Fix it
 
 Sometimes I forget how to write and I make sentences that make no sense.
 If you spot one, follow the same steps as [above](#you-made-a-mistake)
