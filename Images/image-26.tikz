@@ -288,7 +288,7 @@
 		\node [style=none] (302) at (-5, -29) {};
 		\node [style=none] (303) at (58, -26) {};
 		\node [style=none] (304) at (58, -29) {};
-		\node [style=left align] (305) at (-4, -27.5) {\Large \texttt{Memory\ subsystem}};
+		\node [style=left align] (305) at (-4, -27.5) {\Large \texttt{Memory subsystem}};
 		\node [style=none] (306) at (-4.5, -14) {};
 		\node [style=none] (307) at (-4.5, -25.75) {};
 		\node [style=none] (314) at (-3.5, -26) {};
@@ -305,10 +305,10 @@
 		\node [style=none] (325) at (43.5, -25.75) {};
 		\node [style=none] (326) at (44.5, -26) {};
 		\node [style=none] (327) at (44.5, -14.25) {};
-		\node [style=none] (328) at (2, -11.5) {\Large \texttt{Elements\ 0,\ 4,\ 8,\ \ldots}};
-		\node [style=none] (329) at (18, -11.5) {\Large \texttt{Elements\ 1,\ 5,\ 9,\ \ldots}};
-		\node [style=none] (330) at (34, -11.5) {\Large \texttt{Elements\ 2,\ 6,\ 10,\ \ldots}};
-		\node [style=none] (331) at (50, -11.5) {\Large \texttt{Elements\ 4,\ 8,\ 12,\ \ldots}};
+		\node [style=none] (328) at (2, -11.5) {\Large \texttt{Elements 0, 4, 8, \ldots}};
+		\node [style=none] (329) at (18, -11.5) {\Large \texttt{Elements 1, 5, 9, \ldots}};
+		\node [style=none] (330) at (34, -11.5) {\Large \texttt{Elements 2, 6, 10, \ldots}};
+		\node [style=none] (331) at (50, -11.5) {\Large \texttt{Elements 4, 8, 12, \ldots}};
 		\node [style=none] (332) at (-6, -25) {};
 		\node [style=none] (333) at (10, -25) {};
 		\node [style=none] (334) at (10, 3) {};

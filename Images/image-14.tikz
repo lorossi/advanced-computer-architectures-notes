@@ -1,8 +1,8 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=left align] (0) at (0.25, -1) {\texttt{add\ \$1,\ \$2,\ \$3}};
-		\node [style=left align] (1) at (0.25, -2) {\texttt{if\ \$1 ==\ 0\ then }};
-		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (2) at (0.25, -3) {\texttt{branch\ delay\ shot}};
+		\node [style=left align] (0) at (0.25, -1) {\texttt{add \$1, \$2, \$3}};
+		\node [style=left align] (1) at (0.25, -2) {\texttt{if \$1 == 0 then }};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (2) at (0.25, -3) {\texttt{branch delay shot}};
 		\node [style=none] (3) at (0, 0) {};
 		\node [style=none] (4) at (0, -7) {};
 		\node [style=none] (5) at (8, -7) {};
@@ -14,7 +14,7 @@
 		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (11) at (0.5, -5) {\(\ldots\)};
 		\node [style=none] (12) at (8.5, -3.5) {};
 		\node [style=none] (13) at (12.5, -3.5) {};
-		\node [style=left align] (14) at (0.25, -4) {\texttt{or\ \$7,\ \$8,\ \$9}};
+		\node [style=left align, text={rgb,255: red,255; green,117; blue,56}] (14) at (0.25, -4) {\texttt{or \$7, \$8, \$9}};
 		\node [style=none] (18) at (13, 0) {};
 		\node [style=none] (19) at (13, -7) {};
 		\node [style=none] (20) at (21, -7) {};
@@ -23,12 +23,12 @@
 		\node [style=none] (23) at (20.5, -5) {};
 		\node [style=none] (24) at (19.5, -2) {};
 		\node [style=none] (25) at (19, -5) {};
-		\node [style=left align] (30) at (0.25, -6) {\texttt{sub\ \$4,\ \$5,\ \$6}};
-		\node [style=left align] (31) at (13.25, -1) {\texttt{add\ \$1,\ \$2,\ \$3}};
-		\node [style=left align] (32) at (13.25, -2) {\texttt{if\ \$1 ==\ 0\ then }};
-		\node [style=left align] (33) at (13.25, -3) {\texttt{or\ \$7,\ \$8,\ \$9}};
+		\node [style=left align] (30) at (0.25, -6) {\texttt{sub \$4, \$5, \$6}};
+		\node [style=left align] (31) at (13.25, -1) {\texttt{add \$1, \$2, \$3}};
+		\node [style=left align] (32) at (13.25, -2) {\texttt{if \$1 == 0 then }};
+		\node [style=left align, text={rgb,255: red,255; green,117; blue,56}] (33) at (13.25, -3) {\texttt{or \$7, \$8, \$9}};
 		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (34) at (13.25, -4) {\(\ldots\)};
-		\node [style=left align] (35) at (13.25, -5) {\texttt{sub\ \$4,\ \$5,\ \$6}};
+		\node [style=left align] (35) at (13.25, -5) {\texttt{sub \$4, \$5, \$6}};
 		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (36) at (13.25, -6) {\(\ldots\)};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}

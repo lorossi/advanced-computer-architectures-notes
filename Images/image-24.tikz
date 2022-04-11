@@ -10,7 +10,7 @@
 		\node [style=none] (7) at (2, 0) {};
 		\node [style=none] (8) at (6, 0) {};
 		\node [style=none] (9) at (6, -2) {};
-		\node [style=none] (10) at (4, -1) {\texttt{INST.\ MEM}};
+		\node [style=none] (10) at (4, -1) {\texttt{INST. MEM}};
 		\node [style=none] (11) at (7, -2.5) {};
 		\node [style=none] (12) at (8, -2.5) {};
 		\node [style=none] (13) at (8, 0.5) {};
@@ -69,7 +69,7 @@
 		\node [style=none] (66) at (27, 0) {};
 		\node [style=none] (67) at (31, 0) {};
 		\node [style=none] (68) at (31, -2) {};
-		\node [style=none] (69) at (29, -1) {\texttt{DATA.\ MEM}};
+		\node [style=none] (69) at (29, -1) {\texttt{DATA. MEM}};
 		\node [style=none] (72) at (26.75, -1) {};
 		\node [style=none] (73) at (31, -1) {};
 		\node [style=none] (74) at (26, -1) {};
@@ -227,7 +227,7 @@
 		\node [style=none] (230) at (37, -7) {};
 		\node [style=none] (231) at (36.75, -7) {};
 		\node [style=none] (232) at (39, -7) {};
-		\node [style=left align] (233) at (36.25, 2.5) {\Large \texttt{commit\ point}};
+		\node [style=left align] (233) at (36.25, 2.5) {\Large \texttt{commit point}};
 		\node [style=none] (234) at (23, -14) {};
 		\node [style=none] (235) at (23, -16) {};
 		\node [style=none] (236) at (22, -14) {};

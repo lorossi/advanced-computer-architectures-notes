@@ -81,11 +81,11 @@
 		\node [style=none] (82) at (11, -3.5) {\texttt{EX}};
 		\node [style=none] (83) at (13, -3.5) {\texttt{ME}};
 		\node [style=none] (84) at (15, -3.5) {\texttt{WB}};
-		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{beq\ \$1,\ \$2,\ L1}};
-		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{add\ \$4,\ \$5,\ \$6}};
-		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{lw\ \$3,\ 300(\$0)}};
-		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{lw\ \$7,\ 400(\$0)}};
-		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{lw\ \$8,\ 300(\$0)}};
+		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{beq \$1, \$2, L1}};
+		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{add \$4, \$5, \$6}};
+		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{lw \$3, 300(\$0)}};
+		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{lw \$7, 400(\$0)}};
+		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{lw \$8, 300(\$0)}};
 		\node [style=none] (93) at (12.5, -1.5) {};
 		\node [style=left align] (94) at (15, -1.5) {branch delay};
 		\node [style=none] (95) at (2, -2) {};

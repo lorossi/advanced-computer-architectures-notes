@@ -42,7 +42,7 @@
 		\node [style=none] (38) at (14, -8) {};
 		\node [style=none] (39) at (14, -1) {};
 		\node [style=left align] (40) at (14.5, -4.5) {\(2^k\) entries};
-		\node [style=none] (41) at (13.25, -6.5) {};
+		\node [style=none] (41) at (13, -6.5) {};
 		\node [style=none] (42) at (17.5, -6.5) {};
 		\node [style=left align] (43) at (18, -6.5) {\texttt{T/NT}};
 		\node [style=none] (44) at (0, -1) {};

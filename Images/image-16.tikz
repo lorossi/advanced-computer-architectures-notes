@@ -1,9 +1,9 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=none] (94) at (20, -7.5) {};
-		\node [style=none] (95) at (20, -10.5) {};
-		\node [style=none] (96) at (36, -10.5) {};
-		\node [style=none] (97) at (36, -7.5) {};
+		\node [style=none] (94) at (20, -14.5) {};
+		\node [style=none] (95) at (20, -17.5) {};
+		\node [style=none] (96) at (36, -17.5) {};
+		\node [style=none] (97) at (36, -14.5) {};
 		\node [style=none] (65) at (12, -6) {};
 		\node [style=none] (66) at (36, -6) {};
 		\node [style=none] (67) at (36, 0) {};
@@ -13,38 +13,38 @@
 		\node [style=none] (71) at (29, 0.5) {predicted target address};
 		\node [style=none] (72) at (17, 0.5) {\texttt{LSB} of the \texttt{PC}};
 		\node [style=none] (73) at (16, -6) {};
-		\node [style=none] (74) at (16, -7.75) {};
+		\node [style=none] (74) at (16, -9.25) {};
 		\node [style=none] (79) at (5, -0.5) {\texttt{PC} of the fetched instruction};
 		\node [style=none] (80) at (10, -1) {};
 		\node [style=none] (81) at (10, 0) {};
 		\node [style=none] (82) at (0, -1) {};
 		\node [style=none] (83) at (0, 0) {};
-		\node [style=none] (84) at (7.5, -9) {};
-		\node [style=none] (85) at (14.75, -9) {};
-		\node [style=none] (86) at (16, -9) {\(=\)};
-		\node [style=none] (88) at (19.75, -9) {};
-		\node [style=none] (90) at (16, -14.25) {};
-		\node [style=none] (91) at (18, -8.5) {\texttt{NO}};
-		\node [style=left align] (93) at (20.5, -9.5) {proceed normally};
-		\node [style=left align] (98) at (20.5, -8.5) {the instruction is not predicted to be a branch, };
-		\node [style=none] (100) at (20, -12.75) {};
-		\node [style=none] (101) at (20, -15.75) {};
-		\node [style=none] (102) at (36, -15.75) {};
-		\node [style=none] (103) at (36, -12.75) {};
-		\node [style=left align] (104) at (20.5, -14.75) {the new \texttt{PC} is going to be used};
-		\node [style=left align] (105) at (20.5, -13.75) {the instruction is predicted to be a branch,};
-		\node [style=none] (106) at (19.75, -14.25) {};
-		\node [style=none] (107) at (18, -13.75) {\texttt{YES}};
-		\node [style=none] (111) at (17, -9) {};
-		\node [style=none] (112) at (16, -8) {};
-		\node [style=none] (114) at (16, -10) {};
-		\node [style=none] (115) at (15, -9) {};
+		\node [style=none] (84) at (7.5, -10.5) {};
+		\node [style=none] (85) at (14.75, -10.5) {};
+		\node [style=none] (86) at (16, -10.5) {\(=\)};
+		\node [style=none] (88) at (19.75, -10.5) {};
+		\node [style=none] (90) at (16, -15.75) {};
+		\node [style=right align] (91) at (19.25, -15.25) {\texttt{NO}};
+		\node [style=left align] (93) at (20.5, -16.5) {proceed normally};
+		\node [style=left align] (98) at (20.5, -15.5) {the instruction is not predicted to be a branch, };
+		\node [style=none] (100) at (20, -9) {};
+		\node [style=none] (101) at (20, -12) {};
+		\node [style=none] (102) at (36, -12) {};
+		\node [style=none] (103) at (36, -9) {};
+		\node [style=left align] (104) at (20.5, -11) {the new \texttt{PC} is going to be used};
+		\node [style=left align] (105) at (20.5, -10) {the instruction is predicted to be a branch,};
+		\node [style=none] (106) at (19.75, -15.75) {};
+		\node [style=right align] (107) at (19.25, -10) {\texttt{YES}};
+		\node [style=none] (111) at (17, -10.5) {};
+		\node [style=none] (112) at (16, -9.5) {};
+		\node [style=none] (114) at (16, -11.5) {};
+		\node [style=none] (115) at (15, -10.5) {};
 		\node [style=none] (116) at (7.5, -1.5) {};
 		\node [style=none] (117) at (10, -1.25) {};
 		\node [style=none] (118) at (10, -1.5) {};
 		\node [style=none] (119) at (5, -1.5) {};
 		\node [style=none] (120) at (5, -1.25) {};
-		\node [style=left align] (121) at (8, -8.5) {\(k\) \textit{LSBs}};
+		\node [style=left align] (121) at (8, -10) {\(k\) \textit{LSBs}};
 		\node [style=none] (122) at (12, -1) {};
 		\node [style=none] (123) at (12, -2) {};
 		\node [style=none] (124) at (12, -3) {};
@@ -55,6 +55,8 @@
 		\node [style=none] (129) at (36, -3) {};
 		\node [style=none] (130) at (36, -4) {};
 		\node [style=none] (131) at (36, -5) {};
+		\node [style=none] (132) at (29, -6) {};
+		\node [style=none] (133) at (29, -8.75) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (96.center)
@@ -97,5 +99,6 @@
 		\draw [style=solid] (68.center) to (67.center);
 		\draw [style=green line, in=90, out=-90] (114.center) to (90.center);
 		\draw [style=red arrow, in=180, out=0] (111.center) to (88.center);
+		\draw [style=big arrow] (132.center) to (133.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

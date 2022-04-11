@@ -77,11 +77,11 @@
 		\node [style=none] (82) at (11, -3.5) {\texttt{EX}};
 		\node [style=none] (83) at (13, -3.5) {\texttt{ME}};
 		\node [style=none] (84) at (15, -3.5) {\texttt{WB}};
-		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{taken\ branch}};
-		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{branch\ target+2}};
-		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{branch\ target+1}};
-		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{branch\ target}};
-		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{instruction\ i+1}};
+		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{taken branch}};
+		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{branch target+2}};
+		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{branch target+1}};
+		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{branch target}};
+		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{instruction i+1}};
 		\node [style=none] (93) at (4.5, -2.5) {};
 		\node [style=none] (94) at (3, -0.75) {};
 		\node [style=none] (95) at (2, -2) {};

@@ -76,7 +76,7 @@
 		\node [style=none] (90) at (-1.75, -4) {};
 		\node [style=right align] (92) at (-7.25, -4) {last branch result};
 		\node [style=none] (93) at (-3, 1.5) {};
-		\node [style=none] (94) at (1, 7.5) {};
+		\node [style=none] (94) at (1, 8) {};
 		\node [style=none] (95) at (1, 6.5) {};
 		\node [style=none] (96) at (-3, 6.5) {};
 		\node [style=none] (97) at (5, 6.5) {};

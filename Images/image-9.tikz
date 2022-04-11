@@ -85,11 +85,11 @@
 		\node [style=none] (82) at (11, -3.5) {\texttt{EX}};
 		\node [style=none] (83) at (13, -3.5) {\texttt{ME}};
 		\node [style=none] (84) at (15, -3.5) {\texttt{WB}};
-		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{untaken\ branch}};
-		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{instruction\ i+4}};
-		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{instruction\ i+3}};
-		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{instruction\ i+2}};
-		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{instruction\ i+1}};
+		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{untaken branch}};
+		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{instruction i+4}};
+		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{instruction i+3}};
+		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{instruction i+2}};
+		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{instruction i+1}};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (0.center)
