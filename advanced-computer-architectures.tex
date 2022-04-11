@@ -32,7 +32,7 @@ A big thank you to everyone who helped me!
 \subsection{Flynn Taxonomy}
 \label{sec:flynn-taxonomy}
 
-Created in 1996 and upgraded in 1972, it provides the first description of a computer.
+Created in \(1996\) and upgraded in \(1972\), it provides the first description of a computer.
 
 \begin{itemize}
   \item \textit{SISD} - single instruction, single data
@@ -200,7 +200,7 @@ While making a design trade off one must favour the frequent case over the infre
 \textit{For example}:
 \begin{itemize}
   \item Instructions fetch and decode unit is used more frequently than multiplier, so it makes sense to optimize it first
-  \item If database server has 50 disks processor, storage dependability is more important than system dependability so it has to be optimized first
+  \item If database server has \(50\) disks processor, storage dependability is more important than system dependability so it has to be optimized first
 \end{itemize}
 
 \subsubsection{Amdahl's law}
@@ -361,13 +361,13 @@ Why is multithreading needed?
           \item Since all the parallelism was implemented by the hardware (or, at most, the compiler), there was no effective way to manually handle the performance
           \item There were many different issues:
                 \begin{itemize}
-                  \item issue from 2 to 6 ways, issue out of order, branch prediction, all lowering from 1 CPI to 0.5 CPI
+                  \item issue from \(2\) to \(6\) ways, issue out of order, branch prediction, all lowering from \(1\) \textit{CPI} to \(0.5\) \textit{CPI}
                   \item performance below expectations
                   \item this led to delayed and cancelled projects
                 \end{itemize}
           \item All the previous improvements were due to the shrinking size of the transistors, which was slowly speeding down
                 \begin{itemize}
-                  \item[\cmark] the number of transistors followed Moore's law, doubling each 18 to 24 months
+                  \item[\cmark] the number of transistors followed Moore's law, doubling each \(18\) to \(24\) months
                   \item[\xmark] the frequency and the performance per core were not, due to interferences and energy problems
                 \end{itemize}
         \end{itemize}
@@ -431,7 +431,7 @@ The processor must duplicate the independent state of each thread:
 The memory is shared via the virtual memory mechanisms, which already support multi processes.
 Finally, the hardware must be ready for fast thread switch: it must be faster than full process switch (which is in the order of hundreds to thousands of clocks).
 
-There are 2 apparent solutions:
+There are \(2\) apparent solutions:
 
 \begin{enumerate}
   \item \textbf{Fine grained} multi threading
@@ -605,7 +605,7 @@ A language that can handle vectors (and not scalar values) is needed as well.
 \end{figure}
 
 A vector processor consists of a pipelined scalar unit and a vector units.
-There are 2 styles of vector architectures:
+There are \(2\) styles of vector architectures:
 
 \begin{itemize}
   \item \textbf{memory-memory} vector processors: all vector operations are memory to memory
@@ -708,12 +708,12 @@ To fully exploit a \textit{MIMD} with \(n\) processors, there must be:
         \end{itemize}
 \end{itemize}
 
-\textit{MIMD} machines can be characterized in 2 classes, depending on the number of processors involved:
+\textit{MIMD} machines can be characterized in \(2\) classes, depending on the number of processors involved:
 
 \begin{itemize}
   \item Centralized shared-memory architectures
         \begin{itemize}
-          \item At most a few dozen processors chips (less than 100 cores)
+          \item At most a few dozen processors chips (less than \(100\) cores)
           \item Large caches, single memory multiple banks
           \item This kind of structures is often \textbf{symmetric multiprocessors (SMP)} and the style of architecture is called \textbf{Uniform Memory Access (UMA)}
         \end{itemize}
@@ -765,26 +765,26 @@ The main features of pipelining are:
 
 \subsection{Stages in \textit{MIPS} pipeline}
 
-The 5 stages in the \textit{MIPS} pipeline are:
+The \(5\) stages in the \textit{MIPS} pipeline are:
 
 \begin{enumerate}
-  \item \textit{Fetch} - \texttt{FE}
+  \item \textbf{Fetch} - \texttt{FE}
         \begin{itemize}[label=\(\rightarrow\)]
           \item Instruction fetch from memory
         \end{itemize}
-  \item \textit{Decode} - \texttt{ID}
+  \item \textbf{Decode} - \texttt{ID}
         \begin{itemize}[label=\(\rightarrow\)]
           \item Instruction decode and register read
         \end{itemize}
-  \item \textit{Execute} - \texttt{EX}
+  \item \textbf{Execute} - \texttt{EX}
         \begin{itemize}[label=\(\rightarrow\)]
           \item Execute operation or calculate address
         \end{itemize}
-  \item \textit{Memory access} - \texttt{ME}
+  \item \textbf{Memory access} - \texttt{ME}
         \begin{itemize}[label=\(\rightarrow\)]
           \item Access memory operand
         \end{itemize}
-  \item \textit{Write back} - \texttt{W}
+  \item \textbf{Write back} - \texttt{W}
         \begin{itemize}[label=\(\rightarrow\)]
           \item Write result back to register
         \end{itemize}
@@ -877,13 +877,13 @@ Is it possible to solve all write hazards without equalizing all pipeline depths
 \label{sec:instructions-issuing}
 
 To reach higher performance, more parallelism must be extracted from the program.
-In other words, dependencies must be detected and solved, while instructions must be scheduled as to achieve highest parallelism of execution compatible with available resources.
+In other words,  dependences must be detected and solved, while instructions must be scheduled as to achieve highest parallelism of execution compatible with available resources.
 
 A data structure keeping track of all the instructions in all the functional units is needed.
 In order to work properly, it must make the following checks before the \texttt{issue} stage in order to dispatch an instruction:
 
 \begin{enumerate}
-  \item Check if the \textbf{function unit} is available
+  \item Check if the \textbf{functional unit} is available
   \item Check if the \textbf{input data} is available
         \begin{itemize}
           \item \textit{Failure in this step would cause a RAW}
@@ -939,7 +939,7 @@ Later in the course \textit{(Section~\ref{par:CDC6600-scoreboard})}, this approa
 Determining \textbf{dependences} among instructions is critical to defining the amount of parallelism existing in a program.
 If two instructions are dependent, they cannot execute in parallel: they must be executed in order or only partially overlapped.
 
-There exist 3 different types of dependences:
+There exist \(3\) different types of dependences:
 
 \begin{itemize}
   \item \textbf{Name} Dependences
@@ -951,7 +951,7 @@ While hazards are a property of the pipeline, dependences are a property of the 
 
 \subsubsection{Name Dependences}
 
-\textbf{Name dependences} occurs when 2 instructions use the same register or memory location \textit{(called name)}, but there is no flow of data between the instructions associated with that \textit{name}.
+\textbf{Name dependences} occurs when \(2\) instructions use the same register or memory location \textit{(called name)}, but there is no flow of data between the instructions associated with that \textit{name}.
 Two type of name dependences could exist between an instruction \texttt{i} that precedes an instruction \texttt{j}:
 
 \begin{itemize}
@@ -1016,7 +1016,7 @@ In both cases, care must be taken not to change the processor state until the br
 
 \subsection{Static techniques}
 
-There are 5 commonly used branch prediction techniques:
+There are \(5\) commonly used branch prediction techniques:
 
 \begin{itemize}
   \item \textit{Branch always not taken}
@@ -1031,10 +1031,10 @@ Each one of these techniques will be discussed in the following Sections (from \
 \subsubsection{Branch Always Not Taken}
 \label{sec:branch-always-not-taken}
 
-We assume the \textbf{branch will not be taken}, thus the sequential instruction flow we have fetched can continue as if the branch condition was not satisfied.
-If the condition in state \texttt{ID} will result not satisfied (and the prediction is correct) we can preserve performance.
+The branch is always assumed as \textbf{not taken}, thus the sequential instruction flow that has been fetched can continue as if the branch condition was not satisfied.
+If the condition in state \texttt{ID} will result not satisfied (and the prediction is correct) performance can be preserved.
 
-If the condition in stage \texttt{ID} will result satisfied (and the prediction is incorrect) the branch is taken: we need to flush the next instruction already fetched (so that it's turned into a \texttt{nop}) and restart the execution by fetching the instruction at the branch target address.
+If the condition in stage \texttt{ID} will result satisfied (and the prediction is incorrect) the branch is taken: the next instruction already fetched is flushed (turned into a \texttt{nop}) and the execution is restarted by fetching the instruction at the branch target address.
 There is a one cycle penalty.
 
 \begin{figure}[htbp]
@@ -1058,9 +1058,9 @@ There is a one cycle penalty.
 \subsubsection{Branch Always Taken}
 \label{sec:branch-always-taken}
 
-An alternative scheme is to consider \textbf{every branch as taken}: as soon as the branch is decoded and the branch target address is computed, we assume the branch to be taken and we begin fetching and executing at the target.
-The predicted-taken scheme makes sense for pipelines where the branch target is known before the actual outcome.
+An alternative scheme is to consider \textbf{every branch as taken}: as soon as the branch is decoded and the branch target address is computed, the branch is assumed to be taken and the fetching and the execution stages can begin at the target.
 
+The predicted-taken scheme makes sense for pipelines where the branch target is known before the actual outcome.
 In \textit{MIPS} pipeline, the branch target address is not known before the branch outcome, so \textbf{there is no advantage in this approach}.
 
 \subsubsection{Backward Taken Forward Not Taken}
@@ -1085,7 +1085,7 @@ The prediction is based on the branch direction:
 The branch prediction is based on profiling information collected from earlier runs.
 
 This method can use compiler hints, and it's potentially more effective than the other ones.
-However, it's also the most complicated.
+However, it's also the most complicated between the  \(5\).
 
 \subsubsection{Delayed Branch}
 \label{sec:delayed-branch}
@@ -1120,12 +1120,13 @@ There are three ways in which the branch delay slot can be scheduled:
   \item From \textbf{fall through}
 \end{enumerate}
 
-These methods will better analyzed in the following paragraph.
+These methods will better analyzed in the following paragraphs.
 
 \bigskip
 In general, the compilers are able to fill about \textbf{half} of the delayed branch slots with valid and useful instructions, while the remaining slots are filled with \texttt{nop}.
 In deeply pipelined processors, the delayed branch is longer than one cycle: many slots must be filled for every branch, thus it's more difficult to fill each of the with \textit{useful} instructions.
 
+\bigskip
 The main limitations on delayed branch scheduling arise from:
 
 \begin{itemize}
@@ -1203,8 +1204,8 @@ For example, if the destination register is an unused temporary register when th
 \textit{Basic idea: use the past branch behaviour to predict the future.}
 
 Hardware is used to dynamically predict the outcome of a branch: the prediction wil depend on the behaviour of the branch at run time and will change if the branch changes its behaviour during execution.
-We start with a simple branch prediction scheme and then examine approaches that increase the branch prediction accuracy.
 
+\bigskip
 Dynamic Branch Prediction is based on two interacting mechanisms:
 
 \begin{enumerate}
@@ -1218,7 +1219,7 @@ Dynamic Branch Prediction is based on two interacting mechanisms:
         \end{itemize}
 \end{enumerate}
 
-These modules are used by the Instruction Fetch Unit to predict the next instruction to read in the I-cache:
+These modules are used by the \textit{Instruction Fetch Unit} to predict the next instruction to read in the instruction cache \textit{I-cache}:
 \begin{itemize}
   \item Branch is not taken: \texttt{PC} is incremented
   \item Branch is taken: \textit{BTP} gives the target address
@@ -1254,7 +1255,7 @@ The structure and operation of the \textit{BTB} is shown in Figure~\ref{fig:stru
 
 \subsubsection{Branch History Table}
 
-The \textbf{Branch History Table} contains 1 bit for each entry that says whether the branch was recently taken or not.
+The \textbf{Branch History Table} contains \(1\) bit for each entry that says whether the branch was recently taken or not.
 It is indexed by the lower portion of the address of the branch instruction.
 The structure of the \textit{BTB} is shown in Figure~\ref{fig:structure-of-BHT}.
 
@@ -1273,7 +1274,7 @@ The pipeline is flushed and the correct sequence is executed.
 
 The table has no tags (every access is a hit) and the prediction bit
 could have been put there by another branch with the same LSBs.
-The 1-bit branch history table only considers the last status of the branch (taken or not taken).
+The \(1\)-bit branch history table only considers the last status of the branch (taken or not taken).
 It is a simple \textit{FSA} where a misprediction will change the current value.
 Its structure is shown in Figure~\ref{fig:BHT-as-FSA}.
 
@@ -1413,7 +1414,7 @@ A \((2, 2)\) correlating predictor has \(4\) \(2\)-bit Branch History Tables.
 It uses the \(2\)-bit global history to choose among the \(4\) \textit{BHTs}.
 
 \begin{itemize}
-  \item Each \textit{BHT} is composed of 16 entries of \(2\)-bit each
+  \item Each \textit{BHT} is composed of \(16\) entries of \(2\)-bit each
   \item The \(4\)-bit branch address is used to choose four entries (a row)
   \item \(2\)-bit global history is used to choose one of four entries in a row (one of the four \textit{BHTs})
 \end{itemize}
@@ -1422,7 +1423,7 @@ It uses the \(2\)-bit global history to choose among the \(4\) \textit{BHTs}.
 
 A \(2\)-bit predictor with no global history is simply a \((0, 2)\) predictor.
 
-By comparing the performance of a \(2\)-bit simple predictor with 4K entries and a \(2, 2\) correlating predictor with 1K entries, we find out that the latter not only outperforms the \(2\)-bit predictor with the same number of total bits but also often outperforms a \(2\)-bit predictor with an unlimited number of entries.
+By comparing the performance of a \(2\)-bit simple predictor with \(4000\) entries and a \(2, 2\) correlating predictor with \(1000\) entries, we find out that the latter not only outperforms the \(2\)-bit predictor with the same number of total bits but also often outperforms a \(2\)-bit predictor with an unlimited number of entries.
 
 \subsection{Two Level Adaptive Branch Predictors}
 
@@ -1613,14 +1614,14 @@ The two main techniques used by hardware to minimize stalls are:
 \subsubsection{CDC6600 Scoreboard}
 \label{par:CDC6600-scoreboard}
 
-As discussed earlier \textit{(Section~\ref{sec:instructions-issuing})}, a specific data structure is needed to solve data dependencies without specialized compilers.
+As discussed earlier \textit{(Section~\ref{sec:instructions-issuing})}, a specific data structure is needed to solve data  dependences without specialized compilers.
 The first implementation of such an an hardware is found in the \textbf{CDC6600 Scoreboard}, created in \textit{1963}.
 
 Its key idea is to allow instruction behind stalls to proceed, with the result of a \(250\%\) speedup with regards to no dynamic scheduling and a \(170\%\) speedup with regards to instructions reordering by compiler.
 It has the downside of having a slow memory (due to the absence of cache) and no forwarding hardware.
 Furthermore, it has a low number of \textit{FUs} and it does not issue on structural hazards.
 
-Is solves the issue of data dependencies that cannot be hidden with bypassing or forwarding due to the hardware stalls of the pipeline by allowing out of order execution and commit of instructions.
+Is solves the issue of data  dependences that cannot be hidden with bypassing or forwarding due to the hardware stalls of the pipeline by allowing out of order execution and commit of instructions.
 
 \bigskip
 The scoreboard centralizes the hazard management.
@@ -1900,6 +1901,120 @@ The main advantages of the Tomasulo algorithm over the scoreboard are:
   \item Integer instructions can go past branches, allowing \textit{FP} ops beyond basic block in \textit{FP} queue
 \end{itemize}
 
+\subsection{Limits of \textit{ILP}}
+
+In order to execute more than one instruction at the beginning of a clock cycle, two requirements must be satisfied:
+
+\begin{enumerate}
+  \item Fetching more than one \textbf{instruction per clock cycle}
+        \begin{itemize}
+          \item this task is completed by the \textit{Fetch Unit}
+          \item there is no major problem provided the instruction cache \textit{(I-cache)} can sustain the the bandwidth and can manage multiple requests at one
+        \end{itemize}
+  \item Decide on data and control \textbf{dependences}
+        \begin{itemize}
+          \item \textit{dynamic scheduling} and \textit{dynamic branch prediction} are needed
+        \end{itemize}
+\end{enumerate}
+
+Superscalar architectures paired with compiler scheduling are able to achieve such speeds.
+
+\bigskip
+A few requirements must be satisfied in order to start an ideal machine:
+
+\begin{enumerate}
+  \item \textbf{Register renaming}
+        \begin{itemize}
+          \item by using an infinite number of virtual registers, all \textit{WAW} and \textit{WAR} hazards are avoided
+        \end{itemize}
+  \item \textbf{Branch prediction}
+        \begin{itemize}
+          \item by using an a perfect predictor, no branch is ever mispredicted
+        \end{itemize}
+  \item \textbf{Jump prediction}
+        \begin{itemize}
+          \item all jumps are perfectly predicted
+          \item a machine with perfect speculation and an infinite buffer of instructions is needed
+        \end{itemize}
+  \item \textbf{Memory address alias analysis}
+        \begin{itemize}
+          \item addresses are known and a \texttt{STORE} can be moved before a \texttt{LOAD} if their addresses are different
+        \end{itemize}
+  \item \textbf{\(1\) cycle latency} for all instructions
+        \begin{itemize}
+          \item an unlimited number of instruction can be issued each clock cycle
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Initial assumptions}
+
+Furthermore, a few \textbf{initial assumptions} must be made:
+
+\begin{itemize}
+  \item \textit{CPU} can issue an unlimited number of instructions, looking arbitrarily far ahead in the computation
+  \item There's no restriction on types of instructions that can be executed in one cycle (including loads and stores)
+  \item All \textit{FUs} have unitary latency: any sequence of depending instructions can issue on successive cycles
+  \item All LOAD and STORE execute in \(1\) cycle, thanks to perfect caches
+\end{itemize}
+
+\subsubsection{Limits dynamic analysis}
+
+\textbf{Dynamic analysis} in necessary to approach perfect branch prediction, and it cannot be achieved at compile time.
+A perfect dynamic scheduled \textit{CPU} should:
+
+\begin{enumerate}
+  \item Look arbitrarily far ahead to find set of instructions to issue and predict all branches perfectly
+  \item Rename all registers in use, avoiding all \textit{WAR} and \textit{RAW} hazards
+  \item Determine whether there are data  dependences among instructions in the issue packet, renaming them if necessary
+  \item Determine and handle all memory dependences among issuing instructions
+  \item Provide enough replicated functional units to allow all ready instructions to issue
+\end{enumerate}
+
+\subsubsection{Limits on window size}
+
+Size of the window size affects the number of comparisons needed to determine \textit{RAW} dependences.
+The number of comparisons that are needed with infinite register is:
+\[ \displaystyle 2 \sum^{n-1}_{i=1} i = 2 \cdot \dfrac{(n-1)n}{2} = n^2 - n \]
+
+For a window size of \(2000\) almost \(4\) million comparisons are needed.
+A more realistic window with a size of \(50\) instructions still needs \(2450\) comparisons.
+
+Today's \textit{CPUs} have constraints deriving from the limited number of register, the search for dependent instructions and the in order instructions issue.
+
+\subsubsection{Other limits of modern \textit{CPUs}}
+
+\begin{itemize}
+  \item Number of \textit{FUs}
+  \item Number of \textit{buses}
+  \item Number of ports for teh register file
+\end{itemize}
+
+All these limitations impose that the maximum number of instructions that can be issued, executed or committed in the same clock cycle is much smaller than the window size.
+
+In real life, the maximum size of issue width is capped at \(6\).
+Increasing the issue rate above this value \textit{(i.e. at \(12\))} would require the \textit{CPU} to:
+\begin{itemize}
+  \item issue \(3\) or \(4\) data memory accesses per cycle
+  \item resolve \(2\) or \(3\) branches per cycle
+  \item rename and access more than \(20\) registers per cycle
+  \item fetch between \(12\) and \(24\) instructions per cycle
+\end{itemize}
+
+The complexities of implementing these capabilities is likely to mean sacrifices in the maximum clock rate.
+Power consumption is nowadays an issue and it would grow too much.
+
+\bigskip
+The key question to answer is whether a technique is \textbf{energy efficient} enough:
+
+\indentquote{Does it increase power consumption faster than it increases performances?}
+
+Multiple issue processors techniques are all energy \textbf{inefficient}, as:
+
+\begin{itemize}
+  \item Issuing multiple instructions incurs some overhead in logic that grows faster than the issue rate grows
+  \item A growing gap between peak issue rates and sustained performance is introduced, increasing energy per performance ratio
+\end{itemize}
+
 \subsubsection{Static Scheduling}
 
 Compilers can use sophisticated algorithms for code scheduling to exploit \textit{ILP}.
@@ -1943,7 +2058,7 @@ Those are meant to be intended to be issued at the same time and the compiler ha
 Its features includes:
 
 \begin{itemize}
-  \item Fixed number of instructions \textit{(between 4 and 16)}
+  \item Fixed number of instructions \textit{(between \(4\) and \(16\))}
   \item The instructions are scheduled by the \textbf{compiler}
         \begin{itemize}
           \item the hardware has very limited control on what is going on
@@ -1996,7 +2111,7 @@ The compiler has to schedule the instructions to maximize the parallel execution
 \begin{itemize}
   \item It can exploit \textit{ILP} and \textit{LLP} (\textit{Loop level parallelism})
   \item It is necessary to map the instructions over the machine functional units
-  \item This mapping must account for time constraints and dependencies among the tasks themselves
+  \item This mapping must account for time constraints and  dependences among the tasks themselves
   \item it performs \textbf{static scheduling}
 \end{itemize}
 
@@ -2204,7 +2319,7 @@ As such, most frequently executed traces get better schedules.
 
 \section{Hardware Based Speculation}
 
-The Hardware Based Speculation combines 3 ideas:
+The Hardware Based Speculation combines \(3\) ideas:
 
 \begin{itemize}
   \item \textbf{Dynamic Branch Prediction} to choose which instruction to execute
@@ -2316,11 +2431,11 @@ Each entry, allocated in program order during decode, holds:
 \end{itemize}
 
 They buffer completed values and exception states until the in-order commit point.
-Completed values can be used by dependencies before reaching that point.
+Completed values can be used by  dependences before reaching that point.
 
 \subsection{Interrupts and Exceptions with hardware speculation}
 
-Hardware Speculation greatly increases the complexity of control dependencies.
+Hardware Speculation greatly increases the complexity of control  dependences.
 In fact, branch prediction may not be enough to keep an high level of \textit{ILP}.
 
 Special care must be ensued while handling \textbf{interrupts} and \textbf{exceptions}, because:
@@ -2355,7 +2470,7 @@ A scheme of this structure is represented in Figure~\ref{fig:exceptions-in-order
 
 \subsection{Steps in the Speculative Tomasulo Algorithm}
 
-The 4 steps of the Speculative Tomasulo Algorithm are:
+The \(4\) steps of the Speculative Tomasulo Algorithm are:
 
 \begin{enumerate}
   \item \textbf{Issue} or \textbf{dispatch} - instruction is loaded from \textit{FP} operation queue. If the reservation station and the reorder buffer slot are free, then:
@@ -2384,7 +2499,7 @@ The 4 steps of the Speculative Tomasulo Algorithm are:
         \end{itemize}
 \end{enumerate}
 
-Furthermore, 3 possible \textbf{commit} sequences are possible:
+Furthermore, \(3\) possible \textbf{commit} sequences are possible:
 
 \begin{itemize}
   \item \textbf{Normal commit}:
@@ -2410,7 +2525,7 @@ Furthermore, 3 possible \textbf{commit} sequences are possible:
 The Tomasulo's Algorithm needs a buffer for all the uncommitted results.
 It's structured as a \textit{ROB}.
 
-Each entry of the \textit{ROB} contains 4 fields:
+Each entry of the \textit{ROB} contains \(4\) fields:
 
 \begin{enumerate}
   \item \textbf{Instruction Type} field, indicating if:
@@ -2604,7 +2719,7 @@ A simplified implementation of the pipeline with a Physical Register File is sho
 \subsection{Explicit Register Renaming and Scoreboard}
 
 The scoreboard architecture can be easily adapted to be coupled with Explicit Register Renaming.
-The 4 stages now become:
+The \(4\) stages now become:
 
 \begin{itemize}
   \item \textbf{Issue} - decode instruction, check for structural hazards and allocate new physical register for result
@@ -2615,7 +2730,7 @@ The 4 stages now become:
         \end{itemize}
   \item \textbf{Read operands} - wait until no hazard happens and then read operands
         \begin{itemize}
-          \item all real dependencies (\textit{RAW} hazards) are resolved in this stage, since the processor waits for instructions to write back data
+          \item all real  dependences (\textit{RAW} hazards) are resolved in this stage, since the processor waits for instructions to write back data
         \end{itemize}
   \item \textbf{Execution} on operands
         \begin{itemize}
