@@ -19,6 +19,12 @@ Textbook: \textit{Hennessey and Patterson, Computer Architecture: A Quantitative
 
 \bigskip
 
+By comparing these notes with the material provided during the lectures, you will find a lot of discrepancies in the topics order.
+Despite looking a bizarre choice, this has been a deliberate decision as I have found the lessons quite confusing in their ordering and how each topic was introduced.
+You will still find each of the topics explained during the lessons, including something more \textit{(sometimes)}.
+
+\bigskip
+
 If you find any errors and you are willing to contribute and fix them, feel free to send me a pull request on the GitHub repository found at \href{https://github.com/lorossi/advanced-computer-architectures-notes}{github.com/lorossi/advanced-computer-architectures-notes}.
 
 \bigskip
@@ -140,6 +146,7 @@ There are more constraints not contained in this models, such as technology tren
 \bigskip
 When one computer is faster than another, what quality is being addressed?
 \textbf{It depends on what it's important.}
+
 The picked qualities may change according to the use case or the user itself.
 
 2 metrics are normally used:
@@ -879,10 +886,9 @@ Both the compilation and the hardware techniques will be analyzed in depth in Se
 
 \subsection{Complex in-order pipeline}
 
-What happens, architecture wise, when mixing integer and floating point operations?
-How are different registers handled?
+While using floating points operations, a few questions might arise:
 
-For example, how can \textit{GPRs (general purpose registers)} and \textit{FPRs (floating point registers)} be matched?
+\indentquote{What happens, architecture wise, when mixing integer and floating point operations? How are different registers handled? How can \textit{GPRs (general purpose registers)} and \textit{FPRs (floating point registers)} be matched?}
 
 \begin{figure}[htbp]
   \bigskip
@@ -893,10 +899,20 @@ For example, how can \textit{GPRs (general purpose registers)} and \textit{FPRs 
   \bigskip
 \end{figure}
 
-There isn't a single \textit{ALU} any more but the execution of floating point operations is split between a number of \textit{Functional Units}.
-The \textit{issue} stage detects conflicts while accessing any of them and it's able to stop the execution of an instructions in case of errors.
+In the complex in order pipeline there isn't a single \textit{ALU} any more but the execution of floating point operations is split between a number of \textit{Functional Units}.
+The \textit{issue} stage detects conflicts while accessing any of them and it's able to delay the execution \textit{(by usings stalls)} of an instructions in case of errors.
 
-\bigskip
+The pipeline is now constituted by \(6\) stages, normally represented like in Figure~\ref{fig:mips-pipeline-stages-issue}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1.5]{image-43.tikz}
+  \caption{Pipeline stages with issue}
+  \label{fig:mips-pipeline-stages-issue}
+  \bigskip
+\end{figure}
+
 Pipelining becomes complex when we want high performance in the presence of:
 
 \begin{itemize}
@@ -921,15 +937,13 @@ Formally, all the different executions must be balanced.
 The main issues are:
 \begin{itemize}
   \item \textbf{Structural conflicts at the execution stage} if some \textit{FPU} or memory unit is not pipelined and takes more than one cycle
-  \item \textbf{Structural conflicts at the write back stage} due to variable latencies of different functional units (or \textit{FUs})
+  \item \textbf{Structural conflicts at the write back stage} due to variable latencies of different Functional Units (or \textit{FUs})
   \item Out of order write hazards due to variable latencies of different \textit{FUs}
   \item Hard to handle exceptions
 \end{itemize}
 
-Is it possible to solve write hazards without equalizing all pipeline depths and without bypassing?
-
-One solution is found by delaying all writebacks so all operations have the same latency into the \texttt{WB} stage.
-While applying this idea:
+A possible technique to handle write hazards without equalizing all pipeline depths and without bypassing is by delaying all writebacks so all operations have the same latency into the \texttt{WB} stage.
+In this approach, the following events will happen:
 
 \begin{itemize}
   \item Write ports are \textbf{never oversubscribed}
@@ -1412,22 +1426,24 @@ Its structures is represented in Figure~\ref{fig:2-bit-BHT-as-FSA}.
   \bigskip
   \centering
 
-  \begin{tikzpicture}[auto, node distance=3cm, >=Triangle]
-    \node [state, minimum size=2cm](nt_strong) {\texttt{NT\ strong}};
-    \node [state, below= of nt_strong, minimum size=2cm](t_weak) {\texttt{T\ weak}};
-    \node [state, right= of nt_strong, minimum size=2cm](nt_weak) {\texttt{NT\ weak}};
-    \node [state, below= of nt_weak, minimum size=2cm](t_strong) {\texttt{T\ strong}};
+  \scalebox{0.7}{
+    \begin{tikzpicture}[auto, node distance=3cm, >=Triangle]
+      \node [state, minimum size=2cm](nt_strong) {\texttt{NT\ strong}};
+      \node [state, below= of nt_strong, minimum size=2cm](t_weak) {\texttt{T\ weak}};
+      \node [state, right= of nt_strong, minimum size=2cm](nt_weak) {\texttt{NT\ weak}};
+      \node [state, below= of nt_weak, minimum size=2cm](t_strong) {\texttt{T\ strong}};
 
-    \path[->, thick]
-    (nt_strong) edge [loop left] node {\texttt{NT}} ()
-    (t_strong) edge [loop right] node {\texttt{T}} ()
-    (nt_strong) edge [bend left] node {\texttt{T}} (nt_weak)
-    (nt_weak) edge [bend left] node {\texttt{NT}} (nt_strong)
-    (t_weak) edge [bend left] node {\texttt{T}} (t_strong)
-    (t_strong) edge [bend left] node {\texttt{NT}} (t_weak)
-    (t_weak) edge [bend left] node {\texttt{NT}} (nt_strong)
-    (nt_weak) edge [bend left] node {\texttt{T}} (t_strong);
-  \end{tikzpicture}
+      \path[->, thick]
+      (nt_strong) edge [loop left] node {\texttt{NT}} ()
+      (t_strong) edge [loop right] node {\texttt{T}} ()
+      (nt_strong) edge [bend left] node {\texttt{T}} (nt_weak)
+      (nt_weak) edge [bend left] node {\texttt{NT}} (nt_strong)
+      (t_weak) edge [bend left] node {\texttt{T}} (t_strong)
+      (t_strong) edge [bend left] node {\texttt{NT}} (t_weak)
+      (t_weak) edge [bend left] node {\texttt{NT}} (nt_strong)
+      (nt_weak) edge [bend left] node {\texttt{T}} (t_strong);
+    \end{tikzpicture}
+  }
 
   \caption{\(2\)-bit \textit{BHT} as \textit{FSA}}
   \label{fig:2-bit-BHT-as-FSA}
@@ -1678,7 +1694,7 @@ Finally, the scoreboard is structured in three different parts:
   \item \textbf{Instruction} status
   \item \textbf{Functional Units} status
         \begin{itemize}
-          \item fields indicating the state of the \textit{FUs}:
+          \item fields indicating the state of each \textit{FUs}:
                 \begin{itemize}
                   \item \texttt{Busy} - indicates whether the unit is busy or not
                   \item \texttt{Op} - the operation to perform in the unit
@@ -1770,7 +1786,7 @@ The operand buffers are called \textbf{Reservation Stations}.
 Each instruction is also an entry to a Reservation Station and its operands are replaced by values or pointers (a technique known as \textbf{Implicit Register Renaming}) in order to avoid \textit{WAR} and \textit{RAW} hazards.
 
 Results are then dispatched to other \textit{FUs} through a \textit{Common Data Bus}, communicating both the data and the source.
-Finally, \texttt{LOAD} and \texttt{STORE} operations are treated as \textit{FUs}, as Reservation Stations are more complex than registers to allow more compiler-level optimizations.
+Finally, \texttt{LOAD} and \texttt{STORE} operations are treated as \textit{FUs}, as Reservation Stations are more complex than architectural registers to allow more compiler-level optimizations.
 
 \paragraph{Structure of the Reservation Stations}
 The Reservation Station is composed by \(5\) fields:
@@ -2085,7 +2101,7 @@ Its features includes:
 \end{itemize}
 
 There are multiple \textbf{functional units} \textit{(FUs)} that are going to execute instructions in parallel.
-An illustration of the inner working instruction-level is represented in Figure~\ref{fig:vliw-instruction-level}, while at pipeline level is represented in Figure~\ref{fig:vliw-hardware-level}.
+An illustration of the inner working instruction-level is represented in Figure~\ref{fig:vliw-instruction-level}, while at pipeline level is represented in Figure~\ref{fig:vliw-pipeline-level}.
 
 \begin{figure}[htbp]
   \bigskip
@@ -2101,7 +2117,7 @@ An illustration of the inner working instruction-level is represented in Figure~
   \centering
   \tikzfig{image-28.tikz}
   \caption{\textit{VLIW} - pipeline level}
-  \label{fig:vliw-hardware-level}
+  \label{fig:vliw-pipeline-level}
   \bigskip
 \end{figure}
 
@@ -2580,7 +2596,7 @@ Exceptions are handled by ignoring them until they are ready to commit.
 
 \begin{itemize}
   \item If a speculated instruction raises an exception, then the exception itself is recorded in the \textit{ROB}
-  \item IF a branch misprediction arises and the instruction should not have been executed, then the exception is flushed along with the instruction when the \textit{ROB} is cleared
+  \item If a branch misprediction arises and the instruction should not have been executed, then the exception is flushed along with the instruction when the \textit{ROB} is cleared
   \item If the instruction reaches the head of the \textit{ROB}, then it's no longer speculative and it should be addressed
 \end{itemize}
 
@@ -2598,9 +2614,13 @@ While issuing a \texttt{LOAD}, the head current head of store queue must be reco
 When the address is actually found, the \texttt{STORE} queue is checked:
 
 \begin{itemize}
-  \item if any \texttt{STORE} prior to \texttt{LOAD} is waiting for its address, then the \texttt{LOAD} is stalled
-  \item If any \texttt{LOAD} address matches any previous \texttt{STORE} address (found by \textit{associative lookup}), then a \textbf{memory induced} \textit{RAW} hazard is created:
-        \begin{itemize}
+  \item If any \texttt{STORE} prior to \texttt{LOAD} is waiting for its address:
+  \begin{itemize}[label=\(\rightarrow\)]
+    \item the \texttt{LOAD} is stalled
+  \end{itemize}
+  \item If any \texttt{LOAD} address matches any previous \texttt{STORE} address (found by \textit{associative lookup}):
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item a \textbf{memory induced} \textit{RAW} hazard is created
           \item if the \texttt{STORE} value is available, then it's returned
           \item if the \texttt{STORE} value is not available, then the \textit{ROB} number of the source is returned
         \end{itemize}
@@ -2608,9 +2628,7 @@ When the address is actually found, the \texttt{STORE} queue is checked:
 
 All the actual \texttt{STORE} instructions commit in order, so there's no need to check for \textit{WAR} or \textit{WAW} hazards throughout memory.
 
-\newpage
-
-\section{Explicit Register Renaming}
+\subsection{Explicit Register Renaming}
 
 \textbf{Explicit Register Renaming} is a technique that uses physical register file that is larger than the number of register specified by the \textit{ISA}.
 
@@ -2663,7 +2681,7 @@ The advantages of Explicit Renaming Support are:
         \end{itemize}
 \end{itemize}
 
-\subsection{Unified Physical Register File}
+\subsubsection{Unified Physical Register File}
 
 In order to enable the \textit{CPU} to explicitly rename registers, a \textbf{Unified Physical Register File} is created.
 
@@ -2746,7 +2764,7 @@ The \(4\) stages now become:
 \bigskip
 Thanks to the Explicit Renaming there's no need to check for \textit{WAR} or \textit{WAW} hazards.
 
-\subsection{Multiple Issue}
+\subsubsection{Multiple Issue}
 
 Often it's necessary to modify the issue logic in order to handle two or more instructions at one, including possible dependences between instructions.
 The biggest bottleneck is found in dynamically scheduled superscalar processors:
@@ -2810,7 +2828,7 @@ An illustration of the architecture in the two-issue Superscalar Register Renami
   \bigskip
   \centering
   \tikzfig[0.75]{image-42.tikz}
-  \caption{two-issue Superscalar Register Renaming}
+  \caption{Two issue Superscalar Register Renaming}
   \label{fig:two-issue-superscalar-register-renaming}
   \bigskip
 \end{figure}

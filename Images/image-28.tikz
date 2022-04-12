@@ -182,6 +182,6 @@
 		\draw [style=red arrow] (112.center) to (111.center);
 		\draw [style=red arrow] (113.center) to (13.center);
 		\draw [style=red arrow] (113.center) to (12.center);
-		\draw [style=red arrow] (19.center) to (20.center);
+		\draw [style=green arrow] (19.center) to (20.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

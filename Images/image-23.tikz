@@ -87,8 +87,15 @@
 		\node [style=none] (87) at (0, -4) {};
 		\node [style=none] (88) at (0, 0) {};
 		\node [style=none] (89) at (0.75, -4) {};
-		\node [style=none] (90) at (10, -5.75) {\textit{GPRs}};
-		\node [style=none] (91) at (10, -6.5) {\textit{FPRs}};
+		\node [style=none, text=white] (90) at (10, -7.5) {\textit{GPRs}};
+		\node [style=none, text=white] (91) at (10, -8.5) {\textit{FPRs}};
+		\node [style=none] (92) at (8.5, -7) {};
+		\node [style=none] (93) at (8.5, -9) {};
+		\node [style=none] (94) at (11.5, -7) {};
+		\node [style=none] (95) at (11.5, -9) {};
+		\node [style=none] (96) at (10, -5.25) {};
+		\node [style=none] (97) at (10, -6.75) {};
+		\node [style=none] (98) at (10, -6) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (2.center)
@@ -164,5 +171,12 @@
 		\draw [style=big] (88.center) to (85.center);
 		\draw [style=big] (88.center) to (87.center);
 		\draw [style=big arrow] (87.center) to (89.center);
+		\draw [style=red fill] (94.center)
+			 to (92.center)
+			 to (93.center)
+			 to (95.center)
+			 to cycle;
+		\draw [style=red arrow] (98.center) to (97.center);
+		\draw [style=red arrow] (98.center) to (96.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

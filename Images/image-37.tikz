@@ -57,9 +57,6 @@
 		\node [style=none] (56) at (20, -9) {};
 		\node [style=none] (57) at (0.5, -9) {};
 		\node [style=none] (58) at (0.5, -2.25) {};
-		\node [style=none] (59) at (14.5, -6.5) {};
-		\node [style=none] (60) at (14.5, -9.5) {};
-		\node [style=none] (61) at (14.5, -10) {\texttt{kill}};
 		\node [style=none] (62) at (-2, -3) {};
 		\node [style=none] (63) at (-2, 1) {};
 		\node [style=none] (64) at (8, 1) {};
@@ -75,6 +72,9 @@
 		\node [style=none] (75) at (14, -3) {};
 		\node [style=none] (76) at (14, 5) {};
 		\node [style=none] (77) at (11.5, 5.5) {out of order};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (79) at (10, -9.5) {\texttt{kill}};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (80) at (15, -7.5) {\texttt{kill}};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (81) at (12.5, -8.5) {\texttt{kill}};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (1.center)
@@ -124,7 +124,6 @@
 		\draw [style=red line] (57.center) to (56.center);
 		\draw [style=red line] (56.center) to (55.center);
 		\draw [style=red line] (47.center) to (49.center);
-		\draw [style=big dashed, dashed] (59.center) to (60.center);
 		\draw [style=dashed] (62.center) to (63.center);
 		\draw [style=dashed] (63.center) to (64.center);
 		\draw [style=dashed] (64.center) to (65.center);

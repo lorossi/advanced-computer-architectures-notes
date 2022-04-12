@@ -47,8 +47,8 @@
 		\node [style=none] (62) at (-4, -3.5) {\texttt{+}};
 		\node [style=none] (63) at (-8, -3) {};
 		\node [style=none] (64) at (-8, -4) {};
-		\node [style=none] (65) at (-15.75, -3) {};
-		\node [style=none] (66) at (-15.75, -4) {};
+		\node [style=none] (65) at (-16, -3) {};
+		\node [style=none] (66) at (-16, -4) {};
 		\node [style=none] (67) at (-15, -3.5) {\texttt{R0}};
 		\node [style=none] (68) at (-13, -3.5) {\texttt{R1}};
 		\node [style=none] (69) at (-9, -3.5) {\texttt{RN}};

@@ -34,7 +34,7 @@
 		\node [style=none] (32) at (12.5, -6) {};
 		\node [style=none] (33) at (9.5, -8.75) {};
 		\node [style=right align] (34) at (9.25, -7.5) {read operands at issue};
-		\node [style=left align] (35) at (12.75, -7.5) {write results completion};
+		\node [style=left align] (35) at (12.75, -7.5) {write results at completion};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (0.center)

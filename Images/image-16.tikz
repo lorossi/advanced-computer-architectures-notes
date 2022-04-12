@@ -11,10 +11,10 @@
 		\node [style=none] (69) at (22, -6) {};
 		\node [style=none] (70) at (22, 0) {};
 		\node [style=none] (71) at (29, 0.5) {predicted target address};
-		\node [style=none] (72) at (17, 0.5) {\texttt{LSB} of the \texttt{PC}};
+		\node [style=none] (72) at (16.75, 0.5) {\texttt{LSB} of the \texttt{PC}};
 		\node [style=none] (73) at (16, -6) {};
 		\node [style=none] (74) at (16, -9.25) {};
-		\node [style=none] (79) at (5, -0.5) {\texttt{PC} of the fetched instruction};
+		\node [style=none] (79) at (5, -0.5) {\texttt{PC} of the branch instruction};
 		\node [style=none] (80) at (10, -1) {};
 		\node [style=none] (81) at (10, 0) {};
 		\node [style=none] (82) at (0, -1) {};

@@ -138,16 +138,14 @@
 		\node [style=none] (149) at (34.75, -10.5) {};
 		\node [style=none] (150) at (35, -9.5) {};
 		\node [style=none] (151) at (33.25, -9.5) {};
-		\node [style=right align] (152) at (2.75, -6.5) {\texttt{kill}};
-		\node [style=left align] (153) at (6.75, -4.5) {\texttt{kill}};
-		\node [style=none] (154) at (11.25, -9.25) {\texttt{kill}};
+		\node [style=right align, text={rgb,255: red,191; green,0; blue,64}] (152) at (3, -6.5) {\texttt{kill}};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (153) at (6.5, -4.5) {\texttt{kill}};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (154) at (11.25, -7) {\texttt{kill}};
 		\node [style=none] (155) at (10, -6.5) {};
 		\node [style=none] (156) at (12.5, -6.5) {};
 		\node [style=none] (157) at (12.5, -13) {};
 		\node [style=none] (158) at (31.5, -13) {};
 		\node [style=none] (159) at (31.5, -11.25) {};
-		\node [style=none] (160) at (11.25, -4.5) {};
-		\node [style=none] (161) at (11.25, -8.5) {};
 		\node [style=none] (162) at (29, 1) {};
 		\node [style=none] (163) at (29, -3) {};
 		\node [style=none] (164) at (34, -3) {};
@@ -277,7 +275,6 @@
 		\draw [style=red line] (155.center) to (156.center);
 		\draw [style=red line] (156.center) to (157.center);
 		\draw [style=red line] (157.center) to (158.center);
-		\draw [style=big dashed] (161.center) to (160.center);
 		\draw [style=dashed] (165.center)
 			 to (164.center)
 			 to (163.center)
