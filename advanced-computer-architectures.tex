@@ -285,7 +285,7 @@ Then the \(\text{CPI}_{\text{CACHE}}\) can be calculated as:
 
 \subsubsection{Other metrics}
 
-There are other metrics to measure the performance of a CPU:
+There are other metrics to measure the performance of a \textit{CPU}:
 
 \begin{itemize}
   \item \textit{MIPS} - million of instructions per second
@@ -411,7 +411,7 @@ Operating systems offer systems to implement such features: \textbf{threads} and
   \bigskip
 \end{figure}
 
-The multitasking is implemented differently basing on the characteristics of the CPU:
+The multitasking is implemented differently basing on the characteristics of the \textit{CPU}:
 
 \begin{itemize}
   \item Single core
@@ -806,6 +806,77 @@ The stages are usually represented like in Figure~\ref{fig:mips-pipeline-stages}
   \bigskip
 \end{figure}
 
+\subsection{Pipeline hazards}
+\label{sec:pipeline-hazards}
+
+An \textbf{hazard} is a fault in a pipeline.
+They are created whenever there is a dependence between instructions that are close enough such that the overlap introduced by pipelining would change the order of access the operands involved in said dependance.
+They prevent the next instruction in the pipeline from executing during its designated clock cycle, reduce the performance from the ideal speedup.
+
+There are three classes of hazards:
+\begin{enumerate}
+  \item \textbf{Structural} hazards, due to attempt to use the same resource from different instructions at the same time
+  \item \textbf{Data} hazards \textit{stalls}, due to attempt to use a result before it is ready
+        \begin{itemize}
+          \item \textit{Read after write} - \textit{RAW}
+                \begin{itemize}[label=\(\rightarrow\)]
+                  \item the instruction tries to read a source register before it is written by a previous instruction
+                \end{itemize}
+          \item \textit{Write after read} - \textit{WAR}
+                \begin{itemize}[label=\(\rightarrow\)]
+                  \item the instruction tries to write a destination register before it is read by a previous instruction
+                \end{itemize}
+          \item \textit{Write after write} - \textit{WAW}
+                \begin{itemize}[label=\(\rightarrow\)]
+                  \item the instruction tries to write the before it is written by a previous instruction
+                  \item it's also called \textit{anti dependency} by compilers
+                \end{itemize}
+        \end{itemize}
+  \item \textbf{Control} hazards \textit{stalls}, due to attempt to make a decision on the next instruction to execute before the condition itself is evaluated
+\end{enumerate}
+
+\bigskip
+\textit{Data stalls may occur with instructions such as}:
+\begin{itemize}
+  \item \textit{RAW} stall:
+        \begin{verbatim}
+    r3 := (r1) op (r2)
+    r5 := (r3) op (r4)  // r3 has not been written yet\end{verbatim}
+
+  \item \textit{WAR} stall:
+        \begin{verbatim}
+    r3 := (r1) op (r2)
+    r1 := (r4) op (r5)  // r1 has not been read yet \end{verbatim}
+  \item \textit{WAW}  \textit{stall}:
+        \begin{verbatim}
+    r3 := (r1) op (r2)
+    r3 := (r6) op (r7) // r3 has not been written yet \end{verbatim}
+\end{itemize}
+
+\subsubsection{Solutions to data hazards}
+
+There are many ways in which data hazards can be solved, such as:
+
+\begin{itemize}
+  \item \textbf{Compilation} techniques
+        \begin{itemize}
+          \item \textbf{Insertion of \texttt{nop}} instructions
+          \item \textbf{Instructions scheduling}
+                \begin{itemize}
+                  \item the compiler tries to avoid that correlating instructions are too close
+                  \item it tries to insert independent instructions among correlated ones
+                  \item when it can't, it inserts \texttt{nop} operations
+                \end{itemize}
+        \end{itemize}
+  \item \textbf{Hardware} techniques
+        \begin{itemize}
+          \item \textbf{Insertion} on \textit{bubbles} or \textit{stalls} in the pipeline
+          \item Data \textbf{forwarding} or bypassing
+        \end{itemize}
+\end{itemize}
+
+Both the compilation and the hardware techniques will be analyzed in depth in Section~\ref{sec:strategies-to-support-ilp}.
+
 \subsection{Complex in-order pipeline}
 
 What happens, architecture wise, when mixing integer and floating point operations?
@@ -822,7 +893,8 @@ For example, how can \textit{GPRs (general purpose registers)} and \textit{FPRs 
   \bigskip
 \end{figure}
 
-The \textit{issue} stage detects those conflicts and it's able to stop the execution of an instructions in case of errors.
+There isn't a single \textit{ALU} any more but the execution of floating point operations is split between a number of \textit{Functional Units}.
+The \textit{issue} stage detects conflicts while accessing any of them and it's able to stop the execution of an instructions in case of errors.
 
 \bigskip
 Pipelining becomes complex when we want high performance in the presence of:
@@ -948,6 +1020,7 @@ There exist \(3\) different types of dependences:
 \end{itemize}
 
 While hazards are a property of the pipeline, dependences are a property of the program.
+As a consequence, the presence of dependences does not imply the existence of hazards.
 
 \subsubsection{Name Dependences}
 
@@ -1177,7 +1250,7 @@ An illustration of this strategy is represented in Figure~\ref{fig:from-target}.
   \bigskip
 \end{figure}
 
-\paragraph{From fall throught}
+\paragraph{From fall through}
 
 The use of a register in the branch condition prevents any instructions with that register as a destination from being moved after the branch itself \textit{(like what happens in the from target technique)}.
 The branch delay slot is scheduled from \textbf{the not taken fall through path}.
@@ -1473,70 +1546,11 @@ The structure of a \textit{GShare} predictor is represented in Figure~\ref{fig:G
 \section{Instruction Level Parallelism - \textit{ILP}}
 
 The objective of the \textit{ILP} is to improve the \textit{CPI}, with the ideal goal of \(1\) \textit{cycle per instruction}.
+
 The \textit{ILP} implies a potential overlap of execution among unrelated instructions.
-They may happen if there are no faults, called \textbf{hazards}.
-
-An hazard is created whenever there is a dependence between instructions that are close enough such that the overlap introduced by pipelining would change the order of access the operands involved in said dependance.
-They prevent the next instruction in the pipeline from executing during its designated clock cycle, reduce the performance from the ideal speedup.
-
-There are three classes of hazards:
-\begin{enumerate}
-  \item \textbf{Structural} hazards, due to attempt to use the same resource from different instructions at the same time
-  \item \textbf{Data} hazards \textit{stalls}, due to attempt to use a result before it is ready
-        \begin{itemize}
-          \item \textit{Read after write} - \textit{RAW}, the instruction tries to read the operand before it is even written
-          \item \textit{Write after read} - \textit{WAR}, the instruction tries to write the operand before it is even read
-          \item \textit{Write after write} - \textit{WAW}, the instruction tries to write the operand before it is even written
-        \end{itemize}
-  \item \textbf{Control} hazards \textit{stalls}, due to attempt to make a decision on the next instruction to execute before the condition itself is evaluated
-\end{enumerate}
+This goal is only achievable if there are no \textbf{hazards} \textit{(described in Section~\ref{sec:pipeline-hazards})}.
 
 \bigskip
-\textit{Data stalls may occur with instructions such as}:
-\begin{itemize}
-  \item \textit{RAW} stall:
-        \begin{verbatim}
-    r3 := (r1) op (r2)
-    r5 := (r3) op (r4)  // r3 has not been written yet\end{verbatim}
-
-  \item \textit{WAR} stall:
-        \begin{verbatim}
-    r3 := (r1) op (r2)
-    r1 := (r4) op (r5)  // r1 has not been read yet \end{verbatim}
-  \item \textit{WAW}  \textit{stall}:
-        \begin{verbatim}
-    r3 := (r1) op (r2)
-    r3 := (r6) op (r7) // r3 has not been written yet \end{verbatim}
-\end{itemize}
-
-\subsection{Solutions to data hazards}
-
-There are many ways in which data hazards can be solved, such as:
-
-\begin{itemize}
-  \item \textbf{Compilation} techniques
-        \begin{itemize}
-          \item \textbf{Insertion of \texttt{nop}} instructions
-          \item \textbf{Instructions scheduling}
-                \begin{itemize}
-                  \item the compiler tries to avoid that correlating instructions are too close
-                  \item it tries to insert independent instructions among correlated ones
-                  \item when it can't, it inserts \texttt{nop} operations
-                \end{itemize}
-        \end{itemize}
-  \item \textbf{Hardware} techniques
-        \begin{itemize}
-          \item \textbf{Insertion} on \textit{bubbles} or \textit{stalls} in the pipeline
-          \item Data \textbf{forwarding} or bypassing
-        \end{itemize}
-\end{itemize}
-
-Both the compilation and the hardware techniques will be analyzed in depth in Section~\ref{sec:strategies-to-support-ilp}.
-
-\newpage
-
-\subsubsection{Program Properties}
-
 Two properties are critical to program correctness (and normally preserved by maintaining both data and control dependences):
 
 \begin{enumerate}
@@ -2015,7 +2029,7 @@ Multiple issue processors techniques are all energy \textbf{inefficient}, as:
   \item A growing gap between peak issue rates and sustained performance is introduced, increasing energy per performance ratio
 \end{itemize}
 
-\subsubsection{Static Scheduling}
+\subsection{Static Scheduling}
 
 Compilers can use sophisticated algorithms for code scheduling to exploit \textit{ILP}.
 The amount of parallelism available within a basic block (a straight line code sequence with no branches in except to the entry and no branches out except at the exit) is quite small.
@@ -2028,25 +2042,11 @@ The compiler outputs dependency-free code.
 \bigskip
 \textbf{Limits of static scheduling}:
 \begin{itemize}
-  \item Unpredictable branches
-  \item Variable memory latency (due to unpredictable cache misses)
-  \item Huge increase in code size
-  \item High compiler complexity
+  \item \textbf{Unpredictable} branches
+  \item Variable memory \textbf{latency} (due to unpredictable cache misses)
+  \item Huge increase in code \textbf{size}
+  \item High compiler \textbf{complexity}
 \end{itemize}
-
-\subsubsection{More improvements}
-
-Is it possible to have a \textit{CPI} bigger than \(1\)?
-\textit{I.e.} is it possible to have more than one instruction per cycle?
-
-Two approaches can be found:
-
-\begin{itemize}
-  \item \textbf{Superscalar} architecture
-  \item \textbf{VLIW} architecture
-\end{itemize}
-
-In this section, the focus is on the latter solution.
 
 \subsection{VLIW architectures}
 
