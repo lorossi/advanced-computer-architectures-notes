@@ -30,25 +30,25 @@ Don't panic!
 
 ## Questions
 
-### The notes are not consistent with the lectures
+### The notes are not consistent with the lectures. Why?
 
 I found the lectures quite messy, without a clear ordering or a well defined sequence of topics.
-This is wy many chapters and sections in these notes are not in the same order as the slides for the course are. 
+This is wy many chapters and sections in these notes are not in the same order as the slides for the course are.
 
-### The document does not compile
+### The document does not compile. Can you help me?
 
 Have you checked the README?
 Go back to the [section above](#latex-compilation-notes) and read it again.
 
 If it still does not work, open an issue.
 
-### You made a mistake
+### You made a mistake! How can that be fixed?
 
 If you noticed and you feel kind enough to do the work for me, clone the repo and send me a pull request.
 
 If you aren't feeling it, send me a message via email or open a discussion on GitHub.
 
-### The thing you wrote does not make any sense! Fix it
+### The thing you wrote does not make any sense! Can you fix it?
 
 Sometimes I forget how to write and I make sentences that make no sense.
 If you spot one, follow the same steps as [above](#you-made-a-mistake)
