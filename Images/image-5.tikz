@@ -62,8 +62,8 @@
 		\draw [style=big arrow, in=180, out=360] (39.center) to (2.center);
 		\draw [style=big arrow] (39.center) to (12.center);
 		\draw [style=big] (13) to (39.center);
-		\draw [style=green line] (28.center) to (54.center);
-		\draw [style=red line, in=45, out=180, looseness=0.75] (53.center) to (28.center);
-		\draw [style=blue line, in=-165, out=60] (28.center) to (52.center);
+		\draw [style=red line] (28.center) to (54.center);
+		\draw [style=orange line, in=45, out=180, looseness=0.75] (53.center) to (28.center);
+		\draw [style=green line, in=-165, out=60] (28.center) to (52.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

@@ -75,7 +75,7 @@
 		\node [style=none] (74) at (26, -1) {};
 		\node [style=none] (75) at (26, -3) {};
 		\node [style=none] (76) at (32, -3) {};
-		\node [style=none] (77) at (32, -1) {};
+		\node [style=none] (77) at (32, -1.25) {};
 		\node [style=none] (78) at (33, -2.5) {};
 		\node [style=none] (79) at (34, -2.5) {};
 		\node [style=none] (80) at (34, 0.5) {};
@@ -227,7 +227,7 @@
 		\node [style=none] (230) at (37, -7) {};
 		\node [style=none] (231) at (36.75, -7) {};
 		\node [style=none] (232) at (39, -7) {};
-		\node [style=left align] (233) at (36.25, 2.5) {\Large \texttt{commit point}};
+		\node [style=right align, text={rgb,255: red,191; green,0; blue,64}] (233) at (35.75, 2.5) {\Large \texttt{commit point}};
 		\node [style=none] (234) at (23, -14) {};
 		\node [style=none] (235) at (23, -16) {};
 		\node [style=none] (236) at (22, -14) {};

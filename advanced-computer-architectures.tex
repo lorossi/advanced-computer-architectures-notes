@@ -31,7 +31,7 @@ If you find any errors and you are willing to contribute and fix them, feel free
 
 A big thank you to everyone who helped me!
 
-\newpage
+\clearpage
 
 \section{Introduction to the Computer Architectures}
 
@@ -83,6 +83,8 @@ An illustration of the different architectures is displayed in Figure~\ref{fig:f
   \bigskip
 \end{figure}
 
+\clearpage
+
 \subsection{Hardware parallelism}
 
 There are different types of hardware parallelisms:
@@ -108,7 +110,7 @@ There are different types of hardware parallelisms:
 
 Nowadays, heterogeneous systems \textit{(systems that utilize more than one type of parallelism)} are commonly used among all commercial devices.
 
-\newpage
+\clearpage
 
 \section{Performance and cost}
 
@@ -124,11 +126,11 @@ The computer engineering methodology is therefore as such:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \begin{minipage}[h]{0.45\textwidth}
+  \begin{minipage}[h]{0.495\textwidth}
     \centering
     \tikzfig{image-2.tikz}
   \end{minipage}
-  \begin{minipage}[h]{0.45\textwidth}
+  \begin{minipage}[h]{0.495\textwidth}
     \begin{enumerate}
       \item \label{enum:methodology-start} \textit{evaluate} system by bottlenecks
       \item \textit{simulate} new designs and organizations
@@ -342,7 +344,7 @@ However, this does account for the different durations of the benchmarking progr
   \label{tab:mean-approaches}
 \end{table}
 
-\newpage
+\clearpage
 
 \section{Multithreading and Multiprocessors}
 
@@ -351,34 +353,33 @@ However, this does account for the different durations of the benchmarking progr
 Why is multithreading needed?
 
 \begin{itemize}
-  \item 80's: expansions of superscalar processors
+  \item \textit{80's}: expansions of superscalar processors
         \begin{itemize}
           \item In the 80's, people were writing languages in high level programming languages
           \item Since compiler optimization was not good enough, it was needed to improve the software translations by making \textit{CPU} instructions that were more similar to high level instructions
-          \item But all of these improvements weren't enough!
-          \item As a solution, the pipelining was introduced
+          \item In order to improve performances, the \textbf{pipeline} was introduced
                 \begin{itemize}
-                  \item it sends more than one instructions at a time
+                  \item it sends \textbf{more than one instructions at a time}
                   \item more instructions completed in the same clock cycle
                   \item it's kind of a hardware level implicit parallelism
                 \end{itemize}
         \end{itemize}
-  \item 90's: decreasing returns on investments
+  \item \textit{90's}: decreasing returns on investments
         \begin{itemize}
-          \item Since all the parallelism was implemented by the hardware (or, at most, the compiler), there was no effective way to manually handle the performance
+          \item Since all the parallelism was implemented by the hardware \textit{(or, at most, the compiler)}, there was no effective way to manually handle the performance
           \item There were many different issues:
                 \begin{itemize}
                   \item issue from \(2\) to \(6\) ways, issue out of order, branch prediction, all lowering from \(1\) \textit{CPI} to \(0.5\) \textit{CPI}
                   \item performance below expectations
-                  \item this led to delayed and cancelled projects
+                  \item these performance issues led to delayed and cancelled projects
                 \end{itemize}
           \item All the previous improvements were due to the shrinking size of the transistors, which was slowly speeding down
                 \begin{itemize}
-                  \item[\cmark] the number of transistors followed Moore's law, doubling each \(18\) to \(24\) months
-                  \item[\xmark] the frequency and the performance per core were not, due to interferences and energy problems
+                  \item the number of transistors followed Moore's law, doubling each \(18\) to \(24\) months
+                  \item the frequency and the performance per core were not, due to interferences and energy problems
                 \end{itemize}
         \end{itemize}
-  \item 2000: beginning of the multi core era
+  \item \textit{2000}: beginning of the multi core era
         \begin{itemize}
           \item Since increasing the \textit{CPU} frequency could not be achieved any more, the only solution left was to increase the number of threads in every processor
           \item This implied that there was a need of introducing a software way to handle the parallelism, in harmony with an enhanced hardware
@@ -471,13 +472,13 @@ There are \(2\) apparent solutions:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \begin{minipage}[b]{0.45\textwidth}
+  \begin{minipage}[b]{0.495\textwidth}
     \centering
     \tikzfig[1]{image-4.tikz}
     \caption{Comparison between fine and coarse multithreading}
     \label{fig:multithreading-comparion}
   \end{minipage}
-  \begin{minipage}[b]{0.45\textwidth}
+  \begin{minipage}[b]{0.495\textwidth}
     \centering
     \tikzfig[0.6]{image-5.tikz}
     \caption{Performance comparison}
@@ -641,14 +642,14 @@ Vectors applications are not limited to scientific computing, as they are used i
 
 \begin{minipage}{0.99\textwidth}
   \bigskip
-  \begin{minipage}[t]{0.35\textwidth}
+  \begin{minipage}[t]{0.33\textwidth}
     \begin{verbatim}
       # C code
       for (i = 0; i < 64; i++)
         C[i] = A[i] + B[i];
     \end{verbatim}
   \end{minipage}
-  \begin{minipage}[t]{0.3\textwidth}
+  \begin{minipage}[t]{0.33\textwidth}
     \begin{verbatim}
       # Scalar Code
       LI R4, #64
@@ -664,7 +665,7 @@ Vectors applications are not limited to scientific computing, as they are used i
       BNEZ R4, loop
 \end{verbatim}
   \end{minipage}
-  \begin{minipage}[t]{0.3\textwidth}
+  \begin{minipage}[t]{0.33\textwidth}
     \begin{verbatim}
     # Vector Code
     LI VLR, #64
@@ -732,7 +733,7 @@ To fully exploit a \textit{MIMD} with \(n\) processors, there must be:
         \end{itemize}
 \end{itemize}
 
-\newpage
+\clearpage
 
 \section{Pipeline recap}
 
@@ -894,8 +895,8 @@ While using floating points operations, a few questions might arise:
   \bigskip
   \centering
   \tikzfig[1]{image-23.tikz}
-  \caption{Complex pipelining}
-  \label{fig:complex-pipelining}
+  \caption{Complex-in order pipeline}
+  \label{fig:complex-in-order-pipeline}
   \bigskip
 \end{figure}
 
@@ -984,6 +985,7 @@ In order to work properly, it must make the following checks before the \texttt{
 Such a suitable data structure would look like in Table~\ref{tab:data-structure-keep-track-functional-units}.
 
 \begin{table}
+  \bigskip
   \centering
   \begin{tabular}{r|c|cccc}
     \hline
@@ -999,6 +1001,7 @@ Such a suitable data structure would look like in Table~\ref{tab:data-structure-
   \end{tabular}
   \caption{Data structure to keep track of \textit{FUs}}
   \label{tab:data-structure-keep-track-functional-units}
+  \bigskip
 \end{table}
 
 An instruction at the \texttt{issue} stage consults this table to check if:
@@ -1069,7 +1072,7 @@ They are preserved by two properties:
 
 Although preserving control dependence is a simple way to preserve program order, control dependence is not the critical property that must be preserved.
 
-\newpage
+\clearpage
 
 \section{Branch Prediction}
 
@@ -1288,7 +1291,7 @@ For example, if the destination register is an unused temporary register when th
 
 \subsection{Dynamic Branch Prediction}
 
-\textit{Basic idea: use the past branch behaviour to predict the future.}
+\textit{Basic idea}: use the past branch behaviour to predict the future.
 
 Hardware is used to dynamically predict the outcome of a branch: the prediction wil depend on the behaviour of the branch at run time and will change if the branch changes its behaviour during execution.
 
@@ -1306,10 +1309,11 @@ Dynamic Branch Prediction is based on two interacting mechanisms:
         \end{itemize}
 \end{enumerate}
 
-These modules are used by the \textit{Instruction Fetch Unit} to predict the next instruction to read in the instruction cache \textit{I-cache}:
+These modules are used by the \textit{Instruction Fetch Unit} to predict the next instruction to read in the instruction cache \textit{(also called I-cache)}:
+
 \begin{itemize}
-  \item Branch is not taken: \texttt{PC} is incremented
-  \item Branch is taken: \textit{BTP} gives the target address
+  \item Branch \textbf{is not taken}: \texttt{PC} is incremented
+  \item Branch \textbf{is taken}: \textit{BTP} gives the target address
 \end{itemize}
 
 \subsubsection{Branch Target Buffer}
@@ -1355,13 +1359,12 @@ The structure of the \textit{BTB} is shown in Figure~\ref{fig:structure-of-BHT}.
   \bigskip
 \end{figure}
 
-The predictions is a hint that it is assumed to be correct, fetching begins in the predicted direction.
+The prediction is a hint that it is assumed to be correct and fetching begins in the predicted direction.
 If the hint turns out to be wrong, the prediction bit is inverted and stored back.
-The pipeline is flushed and the correct sequence is executed.
+Then the pipeline is flushed and the correct sequence is executed.
 
-The table has no tags (every access is a hit) and the prediction bit
-could have been put there by another branch with the same LSBs.
-The \(1\)-bit branch history table only considers the last status of the branch (taken or not taken).
+The table has no tags \textit{(every access is a hit)} and the prediction bit could have been put there by another branch with the same LSBs.
+The \(1\)-bit branch history table only considers the last status of the branch \textit{(either taken or not taken)}.
 It is a simple \textit{FSA} where a misprediction will change the current value.
 Its structure is shown in Figure~\ref{fig:BHT-as-FSA}.
 
@@ -1389,23 +1392,23 @@ Its structure is shown in Figure~\ref{fig:BHT-as-FSA}.
 A misprediction occurs when:
 
 \begin{itemize}
-  \item The prediction is incorrect for that branch
-  \item The same index has been referenced by two different branches, and the previous history refers to the other branch
+  \item The prediction is \textbf{incorrect} for that branch
+  \item The same index has been referenced by two different branches, and the \textbf{previous history refers to the other branch}
         \begin{itemize}
           \item to solve this problem it's enough to increase the number or rows in the \textit{BHT} or to use a hashing function (such as in \textit{GShare}).
         \end{itemize}
 \end{itemize}
 
 \bigskip
-In a loop branch, even if a branch is almost always taken and then not taken one, che \(1\)-bit \textit{BHT} will mispredict twice (rather than once) when it is not taken.
+In a loop branch, even if a branch is almost always taken and then not taken one, che \(1\)-bit \textit{BHT} will mispredict \textbf{twice} \textit{(rather than once)} when it is not taken.
 That situation causes two wrong predictions:
 \begin{itemize}
-  \item At the last loop iteration
+  \item At the \textbf{last loop iteration}
         \begin{itemize}
           \item the loop must be exited
           \item the prediction bit will say \texttt{TAKE}
         \end{itemize}
-  \item While re-entering the loop
+  \item While \textbf{re-entering the loop}
         \begin{itemize}
           \item at the end of the first iteration the branch must be taken to stay in the loop
           \item the prediction bit will say \texttt{NOT\ TAKE} because the bit was flipped on previous execution of the last iteration of the loop
@@ -1417,7 +1420,7 @@ In order to fix this kind of behaviour, the \(2\)-bit \textit{BHT} was introduce
 \subsubsection{\textit{2}-bit Branch History Table}
 
 By adding one bit to the \textit{BHT}, the prediction must miss twice before it is changed.
-In a loop branch, there's no need to change the prediction for the last iteration,
+In a loop branch, there's no need to change the prediction for the last iteration.
 
 For each index in the table, the \(2\) bits are used to encode the four states of a \textit{FSA}.
 Its structures is represented in Figure~\ref{fig:2-bit-BHT-as-FSA}.
@@ -1557,14 +1560,14 @@ The structure of a \textit{GShare} predictor is represented in Figure~\ref{fig:G
   \bigskip
 \end{figure}
 
-\newpage
+\clearpage
 
 \section{Instruction Level Parallelism - \textit{ILP}}
 
 The objective of the \textit{ILP} is to improve the \textit{CPI}, with the ideal goal of \(1\) \textit{cycle per instruction}.
 
 The \textit{ILP} implies a potential overlap of execution among unrelated instructions.
-This goal is only achievable if there are no \textbf{hazards} \textit{(described in Section~\ref{sec:pipeline-hazards})}.
+This goal is only achievable if there are no \textbf{hazards} \textit{(as described in Section~\ref{sec:pipeline-hazards})}.
 
 \bigskip
 Two properties are critical to program correctness (and normally preserved by maintaining both data and control dependences):
@@ -1591,7 +1594,8 @@ Usually, hardware intensive approaches dominate desktop and server markets.
 The hardware reorders the instruction execution to reduce pipeline stall while maintaining data flow and exception behaviour.
 
 \bigskip
-\textit{Description}:
+\textit{Properties of the Dynamic Scheduling}:
+
 \begin{enumerate}
   \item Instructions are fetched and \textbf{issued in program order}
   \item Execution begins \textbf{as soon as operands are available}, possibly out of order execution
@@ -1607,21 +1611,23 @@ The two main techniques used by hardware to minimize stalls are:
 
 \begin{itemize}
   \item \textbf{Forwarding}
-        \begin{enumerate}
-          \item The result from the \texttt{EX/MEM} and the \texttt{EX/WB} pipeline registers is fed back to the \texttt{ALU} inputs
-          \item If the forwarding hardware detects that the previous \texttt{ALU} operation has written the register corresponding to a source for the current \texttt{ALU} operation, control logic selects the forwarded result as the \texttt{ALU} input rather than the value read from the register file
-        \end{enumerate}
         \begin{itemize}
-          \item The \texttt{ALU} needs multiplexers that allow it to select the correct inputs from the pipeline
-          \item Forwarding can be generalized to include passing a result directly to the functional unit that requires it
+          \item The result from the \texttt{EX/MEM} and the \texttt{EX/WB} pipeline registers is \textbf{fed back} to the \texttt{ALU} inputs
+          \item If the forwarding hardware detects that the previous \texttt{ALU} operation has \textbf{written the register corresponding to a source for the current} \texttt{ALU} operation:
                 \begin{itemize}
+                  \item control logic selects the forwarded result as the \texttt{ALU} input
+                  \item the value read from the register file is discarded
+                \end{itemize}
+          \item The \texttt{ALU} needs \textbf{multiplexers} that allow it to select the correct inputs from the pipeline
+          \item This technique can be generalized to include \textbf{passing a result directly to the functional unit} that requires it
+                \begin{itemize}[label=\(\rightarrow\)]
                   \item in that case, a result is forwarded from the pipeline register corresponding to the output of one unit to the input of another, rather than just from the result of a unit to the input of the same unit
                 \end{itemize}
         \end{itemize}
   \item \textbf{Stalling}
         \begin{itemize}
           \item Since not all potential data hazards can be solved by bypassing, so a piece of hardware called \textit{pipeline interlock} is added
-          \item When it detects a hazard, it stalls the pipeline until that hazard it solved
+          \item When it detects a hazard, it \textbf{stalls} the pipeline until that hazard it solved
           \item The stalls are often referred to as \inlinequote{bubbles}
         \end{itemize}
 \end{itemize}
@@ -1629,16 +1635,16 @@ The two main techniques used by hardware to minimize stalls are:
 \bigskip
 \textbf{Advantages} of dynamic scheduling:
 \begin{itemize}
-  \item It enables handling some cases where dependences are unknown at compile time
-  \item It simplifies the compiler complexity
-  \item It allows compiled code to run efficiently on a different pipeline
+  \item It enables handling some cases where dependences are \textbf{unknown} at compile time
+  \item It \textbf{simplifies} the compiler complexity
+  \item It allows compiled code to run \textbf{efficiently} on a different pipeline
 \end{itemize}
 
 \textbf{Disadvantages}:
 \begin{itemize}
-  \item A significant increase in hardware complexity
-  \item Increased power consumption
-  \item Could generate imprecise exception
+  \item A significant increase in \textbf{hardware complexity}
+  \item Increased \textbf{power consumption}
+  \item Could generate \textbf{imprecise exception}
 \end{itemize}
 
 \subsubsection{CDC6600 Scoreboard}
@@ -1648,7 +1654,7 @@ As discussed earlier \textit{(Section~\ref{sec:instructions-issuing})}, a specif
 The first implementation of such an an hardware is found in the \textbf{CDC6600 Scoreboard}, created in \textit{1963}.
 
 Its key idea is to allow instruction behind stalls to proceed, with the result of a \(250\%\) speedup with regards to no dynamic scheduling and a \(170\%\) speedup with regards to instructions reordering by compiler.
-It has the downside of having a slow memory (due to the absence of cache) and no forwarding hardware.
+It has the downside of having a \textbf{slow memory} (due to the absence of cache) and \textbf{no forwarding hardware}.
 Furthermore, it has a low number of \textit{FUs} and it does not issue on structural hazards.
 
 Is solves the issue of data  dependences that cannot be hidden with bypassing or forwarding due to the hardware stalls of the pipeline by allowing out of order execution and commit of instructions.
@@ -2048,7 +2054,7 @@ Multiple issue processors techniques are all energy \textbf{inefficient}, as:
 \subsection{Static Scheduling}
 
 Compilers can use sophisticated algorithms for code scheduling to exploit \textit{ILP}.
-The amount of parallelism available within a basic block (a straight line code sequence with no branches in except to the entry and no branches out except at the exit) is quite small.
+The amount of parallelism available within a basic block \textit{(a straight line code sequence with no branches in except to the entry and no branches out except at the exit)} is quite small.
 Data dependence can further limit the amount of \textit{ILP} that can be exploited within a basic block to much less than the average basic block size.
 To obtain substantial performance enhancements, \textit{ILP} must be exploited across multiple basic blocks \textit{(i.e. across branches)}.
 
@@ -2086,12 +2092,12 @@ Its features includes:
           \item parallelism is found at compile time, not run time
           \item the compiler is responsible for parallelizing the code, not the designer
         \end{itemize}
-  \item Single control flow
+  \item Single \textbf{control flow}
         \begin{itemize}
           \item there's only one \texttt{PC}
           \item only one instruction is issued each clock cycle
         \end{itemize}
-  \item Low hardware complexity
+  \item Low hardware \textbf{complexity}
         \begin{itemize}
           \item there's no need to to perform \textit{scheduling} or \textit{reordering} on hardware level
           \item all operations that are supposed to begin at the same time are packaged into a single instruction
@@ -2137,8 +2143,8 @@ The idea behind the static scheduling in \textit{VLIW} is to utilize all functio
 \label{sec:trace-scheduling}
 
 Compilers use sophisticated algorithms to schedule code and exploit \textit{ILP}.
-However, the amount of parallelism available in a single \textbf{basic block} is quite small.
-Furthermore, data dependence can limit the amount of \textit{ILP} that can be exploited to less than the average block size.
+However, the amount of parallelism available in a single \textbf{basic block}, as previously pointed out, is quite small.
+Furthermore, \textbf{data dependence} can limit the amount of \textit{ILP} that can be exploited to less than the average block size.
 
 A \textbf{basic block} \textit{(BB)} is defined as a sequence of straight non branch instructions.
 
@@ -2146,11 +2152,10 @@ In order to obtain substantial performance enhancements, the \textit{ILP} must b
 An illustration of the structure of \textit{BB} can be found in Figure~\ref{fig:basic-blocks}.
 
 \bigskip
-
 A \textbf{trace} is a sequence of basic blocks embedded in the control flow graph.
-It must not contain loops but it may include branches.
+It must not contain loops but it can include branches.
 
-It's an execution path which can be taken for a certain set of inputs.
+It's an \textbf{execution path} which can be taken for a certain set of inputs.
 The chances that a trace is actually executed depends on the input set that allows its execution.
 As a result, some traces are executed much more frequently than others.
 
@@ -2178,13 +2183,13 @@ An illustration of scheduled code can be found in Figure~\ref{fig:trace-schedule
   \bigskip
   \centering
 
-  \begin{minipage}[b]{0.45\textwidth}
+  \begin{minipage}[b]{0.495\textwidth}
     \centering
     \tikzfig[0.7]{image-29.tikz}
     \caption{Basic blocks}
     \label{fig:basic-blocks}
   \end{minipage}
-  \begin{minipage}[b]{0.45\textwidth}
+  \begin{minipage}[b]{0.495\textwidth}
     \centering
     \tikzfig[0.7]{image-32.tikz}
     \caption{Trace scheduled code}
@@ -2198,7 +2203,7 @@ An illustration of scheduled code can be found in Figure~\ref{fig:trace-schedule
 
 In addition to the need of compensation codes, there are a few more restrictions on the movement of a code trace:
 
-\begin{enumerate}[label=\Alph*)]
+\begin{enumerate}[label=\Alph*), ref=(\Alph*)]
   \item \label{enum:data-flow-trace-scheduling} The \textbf{data flow} of the program must not change
   \item \label{enum:exception-behaviour-trace-scheduling} The \textbf{exception behaviour} must be preserved
 \end{enumerate}
@@ -2331,7 +2336,7 @@ In order to increase the performance in these situations, techniques based on lo
 Traces scheduling schedules traces in order of decreasing probability of being executed.
 As such, most frequently executed traces get better schedules.
 
-\newpage
+\clearpage
 
 \section{Hardware Based Speculation}
 
@@ -2615,9 +2620,9 @@ When the address is actually found, the \texttt{STORE} queue is checked:
 
 \begin{itemize}
   \item If any \texttt{STORE} prior to \texttt{LOAD} is waiting for its address:
-  \begin{itemize}[label=\(\rightarrow\)]
-    \item the \texttt{LOAD} is stalled
-  \end{itemize}
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item the \texttt{LOAD} is stalled
+        \end{itemize}
   \item If any \texttt{LOAD} address matches any previous \texttt{STORE} address (found by \textit{associative lookup}):
         \begin{itemize}[label=\(\rightarrow\)]
           \item a \textbf{memory induced} \textit{RAW} hazard is created
@@ -2832,5 +2837,230 @@ An illustration of the architecture in the two-issue Superscalar Register Renami
   \label{fig:two-issue-superscalar-register-renaming}
   \bigskip
 \end{figure}
+
+\clearpage
+
+\section{Exception Handling}
+
+\textbf{Interrupts} are special events that alter the normal program execution by requesting the attention of the processor.
+They can be raised either by an \textbf{internal} or an \textbf{external} system, and they are usually unexpected or rare from the program's point of view.
+
+When they are raised, a special routine called \textbf{Interrupt Handler} will take care of stopping and resuming the flow of the code, while addressing the exception.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig{image-44.tikz}
+  \caption{Interrupt event}
+  \label{fig:interrupt-event}
+  \bigskip
+\end{figure}
+
+% unbreakable list
+\begin{minipage}{0.99\textwidth}
+  \bigskip
+  The interrupts can be:
+  \begin{itemize}
+    \item \textbf{Asynchronous}: created by an \textbf{external event}, for example:
+          \begin{itemize}
+            \item input or output device service request
+            \item timer expiration
+            \item power disruption or hardware failure
+          \end{itemize}
+    \item \textbf{Synchronous}: created by an \textbf{internal event}, for example:
+          \begin{itemize}
+            \item undefined \textit{opcode}, arithmetic overflow, \textit{FPU} exception
+            \item privileged instruction, misaligned memory access
+            \item virtual memory exceptions
+                  \begin{itemize}
+                    \item page faults
+                    \item \textit{TLB} misses
+                    \item protection violations
+                  \end{itemize}
+            \item traps
+                  \begin{itemize}
+                    \item system calls
+                    \item jumps to kernel
+                  \end{itemize}
+          \end{itemize}
+  \end{itemize}
+  \bigskip
+\end{minipage}
+
+Synchronous events are also called \textbf{Exceptions}.
+
+\subsection{Precise Interrupts}
+
+An interrupt or exception is considered precise if there is a single instruction \textit{(or interrupt point)} for which all instruction before that one have committed their state and no following instructions \textit{(including the interrupting one)} have modified any state.
+
+This effectively implies that the execution can be restarted at the interrupt point and continue correctly.
+
+\bigskip
+This kind of interrupt is desirable because:
+
+\begin{itemize}
+  \item Many types of interrupts or exceptions need to be restartable
+  \item It's easier to figure out what actually happened and what caused the exception
+\end{itemize}
+
+While restartability does not require preciseness, it makes a lot easier to restart the execution by:
+
+\begin{itemize}
+  \item Reducing the \textbf{number of states} to be saved if the process has to be unloaded
+  \item Making \textbf{quicker restarts} due to the faster interrupts
+\end{itemize}
+
+\bigskip
+The operation of an interrupt is shown in Figure~\ref{fig:operation-interrupt}.
+
+\begin{figure}
+  \bigskip
+  \centering
+  \tikzfig[0.85]{image-45.tikz}
+  \caption{Operation of an interrupt}
+  \label{fig:operation-interrupt}
+  \bigskip
+\end{figure}
+
+\subsection{Classes of Exceptions}
+
+Exceptions can be divided into classes:
+
+\begin{itemize}
+  \item \textbf{Synchronous} and \textbf{Asynchronous}:
+        \begin{itemize}
+          \item Synchronous exceptions are caused by devices external to the \textit{CPU} and memory and are easier to handle as they can be addressed after the current instruction
+        \end{itemize}
+  \item \textbf{User requested} and \textbf{Coerced}:
+        \begin{itemize}
+          \item User requested are predictable, they are treated as exceptions because they use the same mechanisms that are used to save and restore the state and handled after the instruction has completed
+          \item Coerced exceptions are caused by some hardware event not under control of the program
+        \end{itemize}
+  \item \textbf{User Maskable} and \textbf{User Nonmaskable}:
+        \begin{itemize}
+          \item The mask controls whether the hardware responds to the exception or not
+        \end{itemize}
+  \item \textbf{Within} vs \textbf{Between} instructions:
+        \begin{itemize}
+          \item Exceptions that occur between instructions are usually synchronous as they are triggered by instruction. The instruction must be stopped and restarted
+          \item Asynchronous that occur between instructions arise from catastrophic situations and cause program termination
+        \end{itemize}
+  \item \textbf{Resume} and \textbf{Terminate}
+        \begin{itemize}
+          \item With terminating event, the program execution always stops
+          \item With resuming events, the program execution continues after the interrupt
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Asynchronous Interrupts}
+
+The \textbf{Asynchronous Interrupts} work by:
+
+\begin{enumerate}
+  \item Invoking the \textbf{Interrupt Handler}
+        \begin{itemize}
+          \item an \textit{I/O} device request attention by asserting one of the prioritized interrupt request lines
+        \end{itemize}
+  \item When the processor decides to \textbf{address the interrupt}, it has to:
+        \begin{enumerate}[label=\arabic*.]
+          \item stop the current program at instruction \(\texttt{I}_i\)
+          \item complete all the instructions up until \(\texttt{I}_{i-1}\) \textit{(precise interrupt)}
+          \item save the \texttt{PC} of instruction \(\texttt{I}_i\) in a special register called \textit{EPC}
+          \item disable interrupts and transfer control to a designated interrupt handler running in the kernel mode
+        \end{enumerate}
+\end{enumerate}
+
+Then the operation is handled by the \textbf{Interrupt Handler}, that will:
+
+\begin{enumerate}[resume*]
+  \item \textbf{Save} the \textit{PC} before enabling interrupts to allow nested interrupts
+        \begin{itemize}
+          \item it needs an instruction to move the \texttt{PC} into \textit{GPRs}
+          \item it needs a way to mask further interrupts at least until the \texttt{PC} can be saved
+        \end{itemize}
+  \item \textbf{Read} a \textit{status register} that indicates the cause of the interrupt
+  \item \textbf{Use} a special indirect jump instruction (\texttt{RFE}, \textit{Return From Exception}) which:
+        \begin{itemize}
+          \item enables interrupts
+          \item restores the processor to the user mode
+          \item restores hardware status and control state
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Synchronous Interrupts}
+
+A \textbf{Synchronous Interrupt} is cause by a \textbf{particular} instruction.
+Generally, the instruction \textbf{cannot be completed} and needs to be \textbf{restarted} after the exception has been handled.
+This procedure requires undoing the effect of one or more partially executed instructions.
+
+In case the interrupt was raised by a system call trap \textit{(a special jump instruction involving a change to privileged kernel mode)}, the instruction is considered to have been completed.
+
+\subsection[Precise interrupts in 5 stages pipeline]{Precise interrupts in \(5\) stages pipeline}
+
+Exceptions may occur at different stages in pipeline, due to the out of order executions.
+For instance, \textit{arithmetic exceptions} occur in \texttt{EX} stage, while \textit{TLB faults} occur in \texttt{IF} or \texttt{ME} stages.
+
+The same issue arises while handling interrupts, as the pipeline must be interrupted as little as possible.
+
+These problem can be solved by tagging instruction in pipeline as \inlinequote{cause exceptions or not}, and wait until end of \texttt{ME} stage to flax exceptions.
+Then:
+
+\begin{itemize}
+  \item Interrupts become marked \texttt{NOP} \textit{(like bubbles)} that are placed into pipeline instead of an instruction
+  \item Interrupt conditions are assumed to be persistent in case of flushed \texttt{NOP} instructions
+  \item A clever \texttt{IF} stage might start fetching instruction from the interrupt vector
+        \begin{itemize}
+          \item this step is complicated by need for supervisor mode switch, saving multiple \texttt{PC} and more similar issues
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+In detail, exceptions are handled by:
+
+\begin{itemize}
+  \item Holding exceptions flags in pipeline until the commit point \textit{(\texttt{ME} stage)}
+  \item Overriding newer exceptions for a given instructions with older exceptions
+  \item Injecting external interrupts at commit point, overriding other interrupts
+  \item If an exception happens at commit, updating \textit{CAUSE} and \textit{ECP} registers, killing all stages and injecting handler \texttt{PC} into \texttt{IF} stage
+\end{itemize}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[0.65]{image-46.tikz}
+  \caption{Interrupt handling in \(5\) stages pipeline - \textit{illustration of dubious utility}}
+  \label{fig:interrupt-handling-5-stages-pipeline}
+  \bigskip
+\end{figure}
+
+While dealing with in-order pipeline might be easy, generating precise interrupt when instructions are being executed in arbitrary order is not as easy.
+In his famous paper, \textit{Jim Smith} proposes \(3\) methods for getting precise interrupts:
+
+\begin{itemize}
+  \item In-order instruction completion
+  \item Reorder buffer
+  \item History buffer
+\end{itemize}
+
+\subsubsection{Speculating on Exceptions}
+
+There are \(3\) technique to speculate on exceptions:
+
+\begin{itemize}
+  \item Prediction mechanism
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item exceptions are so rare that predicting no exceptions is surprisingly accurate
+        \end{itemize}
+  \item Check Prediction mechanism
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item exceptions are detected at the end of instruction execution pipeline
+          \item dedicated hardware for different exception types
+        \end{itemize}
+  \item Recovery mechanism
+        \begin{itemize}[label=\(\rightarrow\)]
+          \item only write architectural state at commit point, so partially executed instruction can be thrown away after exception
+          \item exception handler is launched only after pipeline if flushed
+        \end{itemize}
+\end{itemize}
 
 \end{document}
