@@ -33,7 +33,7 @@ Don't panic!
 ### The notes are not consistent with the lectures. Why?
 
 I found the lectures quite messy, without a clear ordering or a well defined sequence of topics.
-This is wy many chapters and sections in these notes are not in the same order as the slides for the course are.
+This is why many chapters and sections in my notes are out of order with respect to the slides.
 
 ### The document does not compile. Can you help me?
 
@@ -50,7 +50,7 @@ If you aren't feeling it, send me a message via email or open a discussion on Gi
 
 ### The thing you wrote does not make any sense! Can you fix it?
 
-Sometimes I forget how to write and I make sentences that make no sense.
+Sometimes I forget how to write as English is not my primary languages and the sentences lose all meaning.
 If you spot one, follow the same steps as [above](#you-made-a-mistake)
 
 ### Why are you doing this?
