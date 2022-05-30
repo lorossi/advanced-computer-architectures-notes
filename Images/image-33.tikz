@@ -52,7 +52,7 @@
 		\node [style=none] (67) at (-15, -3.5) {\texttt{R0}};
 		\node [style=none] (68) at (-13, -3.5) {\texttt{R1}};
 		\node [style=none] (69) at (-9, -3.5) {\texttt{RN}};
-		\node [style=none] (70) at (-11, -3.5) {\tiny \texttt{\dots}};
+		\node [style=none] (70) at (-11, -3.5) {  \texttt{\dots}};
 		\node [style=none] (71) at (-16.25, -2.75) {};
 		\node [style=none] (72) at (-7.5, -2.75) {};
 		\node [style=none] (73) at (-7.5, -2.5) {};
@@ -60,7 +60,7 @@
 		\node [style=none] (75) at (1, -0.5) {\texttt{P0}};
 		\node [style=none] (76) at (1, -1.5) {\texttt{P1}};
 		\node [style=none] (77) at (1, -2.5) {\texttt{P2}};
-		\node [style=none] (79) at (1, -4.5) {\tiny \texttt{\dots}};
+		\node [style=none] (79) at (1, -4.5) {  \texttt{\dots}};
 		\node [style=none] (80) at (1, -3.5) {\texttt{P3}};
 		\node [style=none] (81) at (1, -5.5) {\texttt{PN}};
 		\node [style=none] (82) at (-5, -1) {};

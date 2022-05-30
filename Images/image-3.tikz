@@ -77,11 +77,11 @@
 		\node [style=none] (280) at (7.75, -7.5) {};
 		\node [style=none] (281) at (7.75, -9.5) {};
 		\node [style=none] (282) at (7.25, -9.5) {};
-		\node [style=none] (283) at (1, -14) {};
+		\node [style=none] (283) at (1, -13) {};
 		\node [style=none] (284) at (1, 0) {};
 		\node [style=none] (285) at (20, -1) {};
 		\node [style=none] (286) at (0, -1) {};
-		\node [style=right align, anchor=east, rotate=-90] (287) at (0.5, -13.75) {processes};
+		\node [style=right align, anchor=east, rotate=-90] (287) at (0.5, -12.75) {processes};
 		\node [style=none] (288) at (5.5, -0.5) {};
 		\node [style=none] (289) at (14.5, -0.5) {};
 		\node [style=none] (290) at (14.5, -1) {};

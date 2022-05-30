@@ -29,7 +29,7 @@
 		\node [style=none] (27) at (3, 3) {};
 		\node [style=none] (28) at (10, 3) {};
 		\node [style=none] (29) at (10, 5) {};
-		\node [style=none] (30) at (6.5, 4) {\texttt{branch prediction}};
+		\node [style=none] (30) at (6.5, 4) {\small\texttt{branch prediction}};
 		\node [style=none] (31) at (3, 3.5) {};
 		\node [style=none] (32) at (0.5, 3.5) {};
 		\node [style=none] (33) at (0.5, 0.25) {};
@@ -58,7 +58,7 @@
 		\node [style=none] (65) at (18, -7) {};
 		\node [style=none] (66) at (27, -7) {};
 		\node [style=none] (67) at (27, -5) {};
-		\node [style=none] (68) at (22.5, -6) {\texttt{physical register file}};
+		\node [style=none] (68) at (22.5, -6) {\small\texttt{physical register file}};
 		\node [style=none] (69) at (19, -2) {};
 		\node [style=none] (70) at (19, -4.75) {};
 		\node [style=none] (71) at (20, -5) {};
@@ -103,7 +103,7 @@
 		\node [style=none] (114) at (3, -7) {};
 		\node [style=none] (115) at (10, -7) {};
 		\node [style=none] (116) at (10, -5) {};
-		\node [style=none] (117) at (6.5, -6) {\texttt{branch resolution}};
+		\node [style=none] (117) at (6.5, -6) {\small\texttt{branch resolution}};
 		\node [style=none] (118) at (3, -6) {};
 		\node [style=none] (119) at (-3.5, -6) {};
 		\node [style=none] (120) at (-3.5, 4.5) {};

@@ -16,7 +16,7 @@
 		\node [style=none] (13) at (10, -2) {};
 		\node [style=none] (14) at (13, 0) {};
 		\node [style=none] (15) at (13, -2) {};
-		\node [style=none] (16) at (11.5, -1) {\texttt{execute}};
+		\node [style=none] (16) at (11.5, -1) {\small\texttt{execute}};
 		\node [style=none] (17) at (8, -1) {};
 		\node [style=none] (18) at (9.75, -1) {};
 		\node [style=none] (19) at (6.5, -1.5) {\texttt{rename}};

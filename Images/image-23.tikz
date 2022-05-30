@@ -87,8 +87,8 @@
 		\node [style=none] (87) at (0, -4) {};
 		\node [style=none] (88) at (0, 0) {};
 		\node [style=none] (89) at (0.75, -4) {};
-		\node [style=none, text=white] (90) at (10, -7.5) {\textit{GPRs}};
-		\node [style=none, text=white] (91) at (10, -8.5) {\textit{FPRs}};
+		\node [style=none, text=white] (90) at (10, -7.675) {\texttt{GPRs}};
+		\node [style=none, text=white] (91) at (10, -8.375) {\texttt{FPRs}};
 		\node [style=none] (92) at (8.5, -7) {};
 		\node [style=none] (93) at (8.5, -9) {};
 		\node [style=none] (94) at (11.5, -7) {};

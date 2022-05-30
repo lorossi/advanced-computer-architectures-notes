@@ -129,9 +129,9 @@
 		\node [style=none] (127) at (16, -6.25) {\texttt{free}};
 		\node [style=none] (128) at (16, -7.75) {\texttt{list}};
 		\node [style=none] (129) at (16, -7) {\texttt{register}};
-		\node [style=none] (130) at (2, -5) {};
-		\node [style=none] (131) at (2, -9) {};
-		\node [style=none, rotate=-90] (132) at (1.5, -7) {\texttt{write data}};
+		\node [style=none] (130) at (2.5, -5) {};
+		\node [style=none] (131) at (2.5, -9) {};
+		\node [style=none, rotate=-90] (132) at (2.15, -7) {\texttt{write}};
 		\node [style=none] (133) at (23.5, -2) {};
 		\node [style=none] (134) at (22.5, -3) {};
 		\node [style=none] (137) at (23, -5) {};
@@ -174,6 +174,7 @@
 		\node [style=none] (175) at (18, -17) {};
 		\node [style=none] (176) at (28, -17) {};
 		\node [style=none] (177) at (28, -15) {};
+		\node [style=none, rotate=-90] (178) at (1.5, -7) {\texttt{data}};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (0.center)

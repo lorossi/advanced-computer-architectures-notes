@@ -772,7 +772,7 @@
 		\node [style=none] (972) at (35, -23) {};
 		\node [style=none] (973) at (35, -24) {};
 		\node [style=none] (974) at (34, -24) {};
-		\node [style=none] (976) at (32, 0.5) {\huge multiprocessing};
+		\node [style=none] (976) at (31.5, 0.5) {\LARGE multiprocessing};
 		\node [style=none] (977) at (31.5, -24.5) {};
 		\node [style=none] (978) at (31.5, -0.5) {};
 		\node [style=none] (1234) at (40.5, 0.5) {\huge SMT};
@@ -998,8 +998,8 @@
 		\node [style=none] (1460) at (44, -24) {};
 		\node [style=none] (1461) at (43, -24) {};
 		\node [style=none] (1462) at (5, -9) {};
-		\node [style=left align, rotate=90] (1463) at (-1.75, -25.5) {\huge time};
-		\node [style=none] (1464) at (4.5, -25.25) {\large 4 parallel threads};
+		\node [style=left align, rotate=90] (1463) at (-2, -25.5) {\huge time};
+		\node [style=none] (1464) at (4.5, -25.25) {\Large 4 parallel threads};
 		\node [style=none] (1465) at (0.5, -24) {};
 		\node [style=none] (1466) at (0.5, -24.5) {};
 		\node [style=none] (1467) at (8.5, -24.5) {};
