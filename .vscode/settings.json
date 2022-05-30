@@ -49,6 +49,7 @@
   },
   "cSpell.words": [
     "ADDV",
+    "Almasi",
     "analyzed",
     "Antidependence",
     "BNEZ",
@@ -81,6 +82,7 @@
     "tikztemp",
     "Tomasulo",
     "VLIW",
+    "writable",
     "writebacks"
   ]
 }
