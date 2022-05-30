@@ -6,10 +6,11 @@
 %   So don't change the order!
 \RequirePackage[a4paper]{geometry} % page settings
 \RequirePackage[utf8]{inputenc} % utf encoding
+\RequirePackage{ccicons} % creative common icons
 \RequirePackage[dvipsnames]{xcolor} % text colours
 \RequirePackage[style=english]{csquotes} % for better quotes
 \RequirePackage{babel} % language specific stuff
-\usepackage[T1]{fontenc} % UTF encoding
+\RequirePackage[T1]{fontenc} % UTF encoding
 \RequirePackage{lmodern} % allows text at arbitrarily size
 \RequirePackage{tikz} % for drawings
 \RequirePackage{amsmath} % math environments
@@ -17,9 +18,7 @@
 \RequirePackage{amssymb} % math symbols
 \RequirePackage{mathtools} % math operators for asmmath
 \RequirePackage{hyperref} % links colouring
-\RequirePackage{ccicons} % creative common icons
 \RequirePackage{verbatim} % monospaced text blocks
-\RequirePackage{listings} % syntax highlighting
 \RequirePackage{enumitem} % custom enum
 \RequirePackage{graphicx} % images
 \RequirePackage{fontawesome} % dings
@@ -28,46 +27,27 @@
 \RequirePackage{xspace} % for spacing after commands
 \RequirePackage{xfrac} % for diagonal fractions
 \RequirePackage{tocloft} % for spacing in TOC
-\RequirePackage{nameref} % for named references
+\RequirePackage{anyfontsize} % for better font sizes
+\RequirePackage{subcaption} % for subfigures and subcaptions
 \RequirePackage[style=iso]{datetime2} % datetime command
 
 \ProcessOptions\relax
 
-%%%%%%%%%%%%%%%% TIKZ and TIKZIT CONFIGURATIONS %%%%%%%%%%%%%%%%
-% image path is relative to wherever the package is called from
-\IfFileExists{tikzstyle.tikzstyles}{
-  \input{tikzstyle.tikzstyles}
-  % tiks libraries for automata and drawing
-  \usetikzlibrary{automata, positioning, backgrounds, arrows, arrows.meta, shapes, shapes.geometric, shapes.misc}
-  % standard layers used in .tikz files
-  \pgfdeclarelayer{edgelayer}
-  \pgfdeclarelayer{nodelayer}
-  \pgfsetlayers{background,edgelayer,nodelayer,main}
-  % style is applied by default to any tikzpicture included via \tikzfig
-  \tikzstyle{tikzfig}=[baseline=-0.25em,scale=0.5]
-  % style for blank nodes
-  \tikzstyle{none}=[inner sep=0mm]
-  % eternalize tikz so that it does not renders all the images each time
-  \usetikzlibrary{external}
-  \tikzexternalize[prefix=tikztemp/]
-}
-
-% command to add tikzit image
-\newcommand{\tikzfig}[2][1] {
-  \IfFileExists{Images/#2} {
-    \scalebox{#1}{
-    \tikzstyle{every picture}=[tikzfig]
-    \tikzsetnextfilename{#2}
-    \input{Images/#2}
-    }
-  }{
-    % image not found, just write it down
-    \textcolor{BrickRed}{
-      \colorbox{white}{Image Images/#2 not found!}
-    }
-  }
-}
-%%%%%%%%%%%%%%%% end of TIKZ and TIKZIT CONFIGURATIONS %%%%%%%%%%%%%%%%
+% tikz libraries for automata and drawing
+\usetikzlibrary{automata, positioning, backgrounds, arrows, arrows.meta, shapes, shapes.geometric, shapes.misc}
+% tikz styles
+\input{tikzstyle.tikzstyles}
+% standard layers used in .tikz files
+\pgfdeclarelayer{edgelayer}
+\pgfdeclarelayer{nodelayer}
+\pgfsetlayers{background,edgelayer,nodelayer,main}
+% style is applied by default to any tikzpicture included via \tikzfig
+\tikzstyle{tikzfig}=[baseline=-0.25em,scale=0.5]
+% style for blank nodes
+\tikzstyle{none}=[inner sep=0mm]
+% eternalize tikz so that it does not renders all the images each time
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikztemp/]
 
 % images folder
 \graphicspath{{Images/}}
@@ -129,6 +109,22 @@
 \advance\cftsubsecindent 0.5em\relax
 \advance\cftsubsecnumwidth 0.5em\relax
 
+% command to add tikzit image
+\newcommand{\tikzfig}[2][1] {
+  \IfFileExists{Images/#2} {
+    \scalebox{#1}{
+    \tikzstyle{every picture}=[tikzfig]
+    \tikzsetnextfilename{#2}
+    \input{Images/#2}
+    }
+  }{
+    % image not found, just write it down
+    \textcolor{BrickRed}{
+      \colorbox{white}{Image Images/#2 not found!}
+    }
+  }
+}
+
 % command for indented quote block
 \newcommand{\indentquote}[1]{
   \vspace*{1em}
@@ -144,6 +140,14 @@
   \hspace*{-0.75em}
   \textit{\textquote{#1}}
   \hspace*{-0.75em}
+}
+
+% command for my signature
+\newcommand{\signature}{
+  \hspace{5cm}
+  \begin{flushright}
+    \textit{Lorenzo Rossi}
+  \end{flushright}
 }
 
 % white on gray text
@@ -176,7 +180,12 @@
   \pagenumbering{gobble}
 
   \title{\Huge{#1}}
-  \author{\Large Lorenzo Rossi and everyone who kindly helped!}
+
+  \iflanguage{italian} {
+    \author{\Large Lorenzo Rossi e tutti coloro che mi hanno aiutato!}
+  }{
+    \author{\Large Lorenzo Rossi and everyone who kindly helped!}
+  }
   \date{#2}
 
   \maketitle
@@ -184,15 +193,25 @@
   \vspace{7.5cm}
 
   \begin{center}
-    \large{\textbf{Last update: \today}} \\
-    \bigskip
-    \large{These notes are distributed under Creative Commons 4.0 license \ CC BY-NC \ccbynceu} \\
+     \iflanguage{italian} {
+      \large{\textbf{Ultimo aggiornamento: \today}} \\
+      \bigskip
+      \large{Questi appunti sono distributi con licenza Creative Commons 4.0 - CC BY-NC \ccbynceu} \\
+    }{
+      \large{\textbf{Last update: \today}} \\
+      \bigskip
+      \large{These notes are distributed under Creative Commons 4.0 license - CC BY-NC \ccbynceu} \\
+    }
   \end{center}
 
   \begin{figure}[b]
     \centering
     \includegraphics[width=5cm]{logo.png} \\
-    \footnotesize no alpaca has been harmed while writing these notes
+    \iflanguage{italian} {
+      \footnotesize nessun alpaca è stato ferito nella scrittura di questi appunti
+    }{
+      \footnotesize no alpaca has been harmed while writing these notes
+    }
   \end{figure}
 
   \newpage
