@@ -1,4 +1,4 @@
-# Advanced Computer Architectures note
+# Advanced Computer Architectures notes
 
 This repository contains the notes for the Advanced Computer Architectures course, relative to the 2021/2022 class of Computer Science and Engineering held at Politecnico di Milano.
 
