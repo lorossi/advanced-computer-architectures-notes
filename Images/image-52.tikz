@@ -1,0 +1,143 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -6.5) {};
+		\node [style=none] (2) at (3, -6.5) {};
+		\node [style=none] (3) at (3, 0) {};
+		\node [style=none] (4) at (0.5, -6) {};
+		\node [style=none] (5) at (2.5, -6) {};
+		\node [style=none] (6) at (2.5, -4) {};
+		\node [style=none] (7) at (0.5, -4) {};
+		\node [style=none] (8) at (0.5, -2.5) {};
+		\node [style=none] (9) at (2.5, -2.5) {};
+		\node [style=none] (10) at (2.5, -0.5) {};
+		\node [style=none] (11) at (0.5, -0.5) {};
+		\node [style=top align] (12) at (1.5, 0) {\texttt{node}};
+		\node [style=none] (13) at (1.5, -1.5) { \texttt{P}};
+		\node [style=none] (14) at (1.5, -5) { \footnotesize\texttt{cache}};
+		\node [style=none] (15) at (1.5, -2.75) {};
+		\node [style=none] (16) at (1.5, -3.75) {};
+		\node [style=none] (34) at (9, -5) {};
+		\node [style=none] (35) at (11, -5) {};
+		\node [style=none] (53) at (0, -9) {};
+		\node [style=none] (54) at (0, -10) {};
+		\node [style=none] (55) at (15, -9) {};
+		\node [style=none] (56) at (15, -10) {};
+		\node [style=none] (57) at (7.5, -9.5) {\texttt{interconnection network}};
+		\node [style=none] (58) at (9, -2) {};
+		\node [style=none] (59) at (11, -2) {};
+		\node [style=none] (60) at (1.5, -6.75) {};
+		\node [style=none] (61) at (1.5, -8.75) {};
+		\node [style=none] (68) at (7.5, -11.75) {};
+		\node [style=none] (69) at (4.5, -12) {};
+		\node [style=none] (70) at (4.5, -14) {};
+		\node [style=none] (71) at (10.5, -14) {};
+		\node [style=none] (72) at (10.5, -12) {};
+		\node [style=none] (73) at (7.5, -13) {\texttt{main memory}};
+		\node [style=none] (74) at (7.5, -10.25) {};
+		\node [style=none] (75) at (5, 0) {};
+		\node [style=none] (76) at (5, -6.5) {};
+		\node [style=none] (77) at (8, -6.5) {};
+		\node [style=none] (78) at (8, 0) {};
+		\node [style=none] (79) at (5.5, -6) {};
+		\node [style=none] (80) at (7.5, -6) {};
+		\node [style=none] (81) at (7.5, -4) {};
+		\node [style=none] (82) at (5.5, -4) {};
+		\node [style=none] (83) at (5.5, -2.5) {};
+		\node [style=none] (84) at (7.5, -2.5) {};
+		\node [style=none] (85) at (7.5, -0.5) {};
+		\node [style=none] (86) at (5.5, -0.5) {};
+		\node [style=top align] (87) at (6.5, 0) {\texttt{node}};
+		\node [style=none] (88) at (6.5, -1.5) { \texttt{P}};
+		\node [style=none] (89) at (6.5, -5) { \footnotesize\texttt{cache}};
+		\node [style=none] (90) at (6.5, -2.75) {};
+		\node [style=none] (91) at (6.5, -3.75) {};
+		\node [style=none] (92) at (6.5, -6.75) {};
+		\node [style=none] (93) at (6.5, -8.75) {};
+		\node [style=none] (94) at (12, 0) {};
+		\node [style=none] (95) at (12, -6.5) {};
+		\node [style=none] (96) at (15, -6.5) {};
+		\node [style=none] (97) at (15, 0) {};
+		\node [style=none] (98) at (12.5, -6) {};
+		\node [style=none] (99) at (14.5, -6) {};
+		\node [style=none] (100) at (14.5, -4) {};
+		\node [style=none] (101) at (12.5, -4) {};
+		\node [style=none] (102) at (12.5, -2.5) {};
+		\node [style=none] (103) at (14.5, -2.5) {};
+		\node [style=none] (104) at (14.5, -0.5) {};
+		\node [style=none] (105) at (12.5, -0.5) {};
+		\node [style=top align] (106) at (13.5, 0) {\texttt{node}};
+		\node [style=none] (107) at (13.5, -1.5) { \texttt{P}};
+		\node [style=none] (108) at (13.5, -5) { \footnotesize\texttt{cache}};
+		\node [style=none] (109) at (13.5, -2.75) {};
+		\node [style=none] (110) at (13.5, -3.75) {};
+		\node [style=none] (111) at (13.5, -6.75) {};
+		\node [style=none] (112) at (13.5, -8.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=big] (2.center)
+			 to (3.center)
+			 to [in=360, out=180] (0.center)
+			 to (1.center)
+			 to cycle;
+		\draw [style=light fill] (7.center)
+			 to (4.center)
+			 to (5.center)
+			 to (6.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=light fill] (11.center)
+			 to (8.center)
+			 to (9.center)
+			 to (10.center)
+			 to cycle;
+		\draw [style=double arrow] (15.center) to (16.center);
+		\draw [style=dashed] (34.center) to (35.center);
+		\draw [style=light fill] (54.center)
+			 to (53.center)
+			 to (55.center)
+			 to (56.center)
+			 to cycle;
+		\draw [style=dashed] (58.center) to (59.center);
+		\draw [style=double arrow] (60.center) to (61.center);
+		\draw [style=light fill] (72.center)
+			 to (71.center)
+			 to (70.center)
+			 to (69.center)
+			 to cycle;
+		\draw [style=double arrow] (74.center) to (68.center);
+		\draw [style=big] (77.center)
+			 to (78.center)
+			 to [in=360, out=180] (75.center)
+			 to (76.center)
+			 to cycle;
+		\draw [style=light fill] (82.center)
+			 to (79.center)
+			 to (80.center)
+			 to (81.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=light fill] (86.center)
+			 to (83.center)
+			 to (84.center)
+			 to (85.center)
+			 to cycle;
+		\draw [style=double arrow] (90.center) to (91.center);
+		\draw [style=double arrow] (92.center) to (93.center);
+		\draw [style=big] (96.center)
+			 to (97.center)
+			 to [in=360, out=180] (94.center)
+			 to (95.center)
+			 to cycle;
+		\draw [style=light fill] (101.center)
+			 to (98.center)
+			 to (99.center)
+			 to (100.center)
+			 to cycle;
+		\draw [style=light fill] (105.center)
+			 to (102.center)
+			 to (103.center)
+			 to (104.center)
+			 to cycle;
+		\draw [style=double arrow] (109.center) to (110.center);
+		\draw [style=double arrow] (111.center) to (112.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,67 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -4) {};
+		\node [style=none] (2) at (2, -4) {};
+		\node [style=none] (3) at (2, 0) {};
+		\node [style=none, rotate=90] (4) at (1, -2) {\texttt{HOST}};
+		\node [style=none] (5) at (3, 0) {};
+		\node [style=none] (6) at (3, -4) {};
+		\node [style=none] (7) at (5, -4) {};
+		\node [style=none] (8) at (5, 0) {};
+		\node [style=none, rotate=90] (9) at (4, -2) {\texttt{HOST}};
+		\node [style=none] (10) at (6, 0) {};
+		\node [style=none] (11) at (6, -4) {};
+		\node [style=none] (12) at (8, -4) {};
+		\node [style=none] (13) at (8, 0) {};
+		\node [style=none, rotate=90] (14) at (7, -2) {\texttt{HOST}};
+		\node [style=none] (15) at (9, 0) {};
+		\node [style=none] (16) at (9, -4) {};
+		\node [style=none] (17) at (11, -4) {};
+		\node [style=none] (18) at (11, 0) {};
+		\node [style=none, rotate=90] (19) at (10, -2) {\texttt{HOST}};
+		\node [style=none] (20) at (-2, -6) {};
+		\node [style=none] (21) at (13, -6) {};
+		\node [style=none] (22) at (15, -6) {};
+		\node [style=none] (23) at (-4, -6) {};
+		\node [style=none] (24) at (-2, -6) {};
+		\node [style=none] (25) at (1, -4.25) {};
+		\node [style=none] (26) at (1, -5.75) {};
+		\node [style=none] (27) at (4, -4.25) {};
+		\node [style=none] (28) at (4, -5.75) {};
+		\node [style=none] (29) at (7, -4.25) {};
+		\node [style=none] (30) at (7, -5.75) {};
+		\node [style=none] (31) at (10, -4.25) {};
+		\node [style=none] (32) at (10, -5.75) {};
+		\node [style=bottom align] (33) at (5.5, -6) {network};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (0.center)
+			 to (1.center)
+			 to (2.center)
+			 to (3.center)
+			 to cycle;
+		\draw [style=light fill] (5.center)
+			 to (6.center)
+			 to (7.center)
+			 to (8.center)
+			 to cycle;
+		\draw [style=light fill] (10.center)
+			 to (11.center)
+			 to (12.center)
+			 to (13.center)
+			 to cycle;
+		\draw [style=light fill] (15.center)
+			 to (16.center)
+			 to (17.center)
+			 to (18.center)
+			 to cycle;
+		\draw [style=big] (20.center) to (21.center);
+		\draw [style=big dashed] (21.center) to (22.center);
+		\draw [style=big dashed] (24.center) to (23.center);
+		\draw [style=double arrow] (25.center) to (26.center);
+		\draw [style=double arrow] (27.center) to (28.center);
+		\draw [style=double arrow] (29.center) to (30.center);
+		\draw [style=double arrow] (31.center) to (32.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

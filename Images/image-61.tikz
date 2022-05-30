@@ -1,0 +1,209 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, -0.5) {};
+		\node [style=none] (1) at (0, -7) {};
+		\node [style=none] (2) at (3, -7) {};
+		\node [style=none] (3) at (3, -0.5) {};
+		\node [style=none] (4) at (0.5, -6.5) {};
+		\node [style=none] (5) at (2.5, -6.5) {};
+		\node [style=none] (6) at (2.5, -4.5) {};
+		\node [style=none] (7) at (0.5, -4.5) {};
+		\node [style=none] (8) at (0.5, -3) {};
+		\node [style=none] (9) at (2.5, -3) {};
+		\node [style=none] (10) at (2.5, -1) {};
+		\node [style=none] (11) at (0.5, -1) {};
+		\node [style=top align] (12) at (1.5, -0.5) {\texttt{node}};
+		\node [style=none] (13) at (1.5, -2) { \texttt{P}};
+		\node [style=none] (15) at (1.5, -3.25) {};
+		\node [style=none] (16) at (1.5, -4.25) {};
+		\node [style=none] (34) at (9, -5) {};
+		\node [style=none] (35) at (11, -5) {};
+		\node [style=none] (53) at (0, -9) {};
+		\node [style=none] (54) at (0, -10) {};
+		\node [style=none] (55) at (15, -9) {};
+		\node [style=none] (56) at (15, -10) {};
+		\node [style=none] (57) at (7.5, -9.5) {\texttt{interconnection network}};
+		\node [style=none] (58) at (9, -2) {};
+		\node [style=none] (59) at (11, -2) {};
+		\node [style=none] (60) at (1.5, -7.25) {};
+		\node [style=none] (61) at (1.5, -8.75) {};
+		\node [style=none] (68) at (7.25, -17.5) {};
+		\node [style=none] (69) at (4.25, -17.75) {};
+		\node [style=none] (70) at (4.25, -19.75) {};
+		\node [style=none] (71) at (10.25, -19.75) {};
+		\node [style=none] (72) at (10.25, -17.75) {};
+		\node [style=none] (73) at (7.25, -18.75) {\texttt{main memory}};
+		\node [style=none] (74) at (7.25, -16) {};
+		\node [style=none] (113) at (1.5, -5.5) {\tiny\texttt{private}};
+		\node [style=none] (114) at (0.5, -14) {};
+		\node [style=none] (115) at (2.5, -14) {};
+		\node [style=none] (116) at (2.5, -12) {};
+		\node [style=none] (117) at (0.5, -12) {};
+		\node [style=none] (118) at (1.5, -13.15) { \tiny\texttt{cache 0}};
+		\node [style=none] (119) at (1.5, -12.75) {\tiny\texttt{shared}};
+		\node [style=none] (120) at (1.5, -5) {\tiny\texttt{multiple}};
+		\node [style=none] (121) at (1.5, -6) {\tiny\texttt{caches}};
+		\node [style=none] (122) at (1.5, -10.25) {};
+		\node [style=none] (123) at (1.5, -11.75) {};
+		\node [style=none] (124) at (5, -0.5) {};
+		\node [style=none] (125) at (5, -7) {};
+		\node [style=none] (126) at (8, -7) {};
+		\node [style=none] (127) at (8, -0.5) {};
+		\node [style=none] (128) at (5.5, -6.5) {};
+		\node [style=none] (129) at (7.5, -6.5) {};
+		\node [style=none] (130) at (7.5, -4.5) {};
+		\node [style=none] (131) at (5.5, -4.5) {};
+		\node [style=none] (132) at (5.5, -3) {};
+		\node [style=none] (133) at (7.5, -3) {};
+		\node [style=none] (134) at (7.5, -1) {};
+		\node [style=none] (135) at (5.5, -1) {};
+		\node [style=top align] (136) at (6.5, -0.5) {\texttt{node}};
+		\node [style=none] (137) at (6.5, -2) { \texttt{P}};
+		\node [style=none] (138) at (6.5, -3.25) {};
+		\node [style=none] (139) at (6.5, -4.25) {};
+		\node [style=none] (140) at (6.5, -7.25) {};
+		\node [style=none] (141) at (6.5, -8.75) {};
+		\node [style=none] (142) at (6.5, -5.5) {\tiny\texttt{private}};
+		\node [style=none] (143) at (6.5, -5) {\tiny\texttt{multiple}};
+		\node [style=none] (144) at (6.5, -6) {\tiny\texttt{caches}};
+		\node [style=none] (145) at (12, -0.5) {};
+		\node [style=none] (146) at (12, -7) {};
+		\node [style=none] (147) at (15, -7) {};
+		\node [style=none] (148) at (15, -0.5) {};
+		\node [style=none] (149) at (12.5, -6.5) {};
+		\node [style=none] (150) at (14.5, -6.5) {};
+		\node [style=none] (151) at (14.5, -4.5) {};
+		\node [style=none] (152) at (12.5, -4.5) {};
+		\node [style=none] (153) at (12.5, -3) {};
+		\node [style=none] (154) at (14.5, -3) {};
+		\node [style=none] (155) at (14.5, -1) {};
+		\node [style=none] (156) at (12.5, -1) {};
+		\node [style=top align] (157) at (13.5, -0.5) {\texttt{node}};
+		\node [style=none] (158) at (13.5, -2) { \texttt{P}};
+		\node [style=none] (159) at (13.5, -3.25) {};
+		\node [style=none] (160) at (13.5, -4.25) {};
+		\node [style=none] (161) at (13.5, -7.25) {};
+		\node [style=none] (162) at (13.5, -8.75) {};
+		\node [style=none] (163) at (13.5, -5.5) {\tiny\texttt{private}};
+		\node [style=none] (164) at (13.5, -5) {\tiny\texttt{multiple}};
+		\node [style=none] (165) at (13.5, -6) {\tiny\texttt{caches}};
+		\node [style=none] (166) at (5.5, -14) {};
+		\node [style=none] (167) at (7.5, -14) {};
+		\node [style=none] (168) at (7.5, -12) {};
+		\node [style=none] (169) at (5.5, -12) {};
+		\node [style=none] (170) at (6.5, -13.15) { \tiny\texttt{cache 1}};
+		\node [style=none] (171) at (6.5, -12.75) {\tiny\texttt{shared}};
+		\node [style=none] (172) at (6.5, -10.25) {};
+		\node [style=none] (173) at (6.5, -11.75) {};
+		\node [style=none] (174) at (12.5, -14) {};
+		\node [style=none] (175) at (14.5, -14) {};
+		\node [style=none] (176) at (14.5, -12) {};
+		\node [style=none] (177) at (12.5, -12) {};
+		\node [style=none] (178) at (13.5, -13.15) { \tiny\texttt{cache 2}};
+		\node [style=none] (179) at (13.5, -12.75) {\tiny\texttt{shared}};
+		\node [style=none] (180) at (13.5, -10.25) {};
+		\node [style=none] (181) at (13.5, -11.75) {};
+		\node [style=none] (182) at (9, -13) {};
+		\node [style=none] (183) at (11, -13) {};
+		\node [style=none] (184) at (1.5, -14.25) {};
+		\node [style=none] (185) at (1.5, -16) {};
+		\node [style=none] (186) at (13.5, -16) {};
+		\node [style=none] (187) at (13.5, -14.25) {};
+		\node [style=none] (188) at (9, -16) {};
+		\node [style=none] (189) at (11, -16) {};
+		\node [style=none] (190) at (6.5, -16) {};
+		\node [style=none] (191) at (6.5, -14.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=big] (2.center)
+			 to (3.center)
+			 to [in=360, out=180] (0.center)
+			 to (1.center)
+			 to cycle;
+		\draw [style=light fill] (7.center)
+			 to (4.center)
+			 to (5.center)
+			 to (6.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=light fill] (11.center)
+			 to (8.center)
+			 to (9.center)
+			 to (10.center)
+			 to cycle;
+		\draw [style=double arrow] (15.center) to (16.center);
+		\draw [style=dashed] (34.center) to (35.center);
+		\draw [style=light fill] (54.center)
+			 to (53.center)
+			 to (55.center)
+			 to (56.center)
+			 to cycle;
+		\draw [style=dashed] (58.center) to (59.center);
+		\draw [style=double arrow] (60.center) to (61.center);
+		\draw [style=light fill] (72.center)
+			 to (71.center)
+			 to (70.center)
+			 to (69.center)
+			 to cycle;
+		\draw [style=big] (74.center) to (68.center);
+		\draw [style=light fill] (117.center)
+			 to (114.center)
+			 to (115.center)
+			 to (116.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=double arrow, in=90, out=-90] (122.center) to (123.center);
+		\draw [style=big] (126.center)
+			 to (127.center)
+			 to [in=360, out=180] (124.center)
+			 to (125.center)
+			 to cycle;
+		\draw [style=light fill] (131.center)
+			 to (128.center)
+			 to (129.center)
+			 to (130.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=light fill] (135.center)
+			 to (132.center)
+			 to (133.center)
+			 to (134.center)
+			 to cycle;
+		\draw [style=double arrow] (138.center) to (139.center);
+		\draw [style=double arrow] (140.center) to (141.center);
+		\draw [style=big] (147.center)
+			 to (148.center)
+			 to [in=360, out=180] (145.center)
+			 to (146.center)
+			 to cycle;
+		\draw [style=light fill] (152.center)
+			 to (149.center)
+			 to (150.center)
+			 to (151.center)
+			 to [in=360, out=180] cycle;
+		\draw [style=light fill] (156.center)
+			 to (153.center)
+			 to (154.center)
+			 to (155.center)
+			 to cycle;
+		\draw [style=double arrow] (159.center) to (160.center);
+		\draw [style=double arrow] (161.center) to (162.center);
+		\draw [style=light fill] (168.center)
+			 to [in=360, out=180] (169.center)
+			 to (166.center)
+			 to (167.center)
+			 to cycle;
+		\draw [style=double arrow, in=90, out=-90] (172.center) to (173.center);
+		\draw [style=light fill] (174.center)
+			 to (175.center)
+			 to (176.center)
+			 to [in=360, out=180] (177.center)
+			 to cycle;
+		\draw [style=double arrow, in=90, out=-90] (180.center) to (181.center);
+		\draw [style=dashed] (182.center) to (183.center);
+		\draw [style=big] (189.center) to (186.center);
+		\draw [style=big] (188.center) to (74.center);
+		\draw [style=big] (185.center) to (74.center);
+		\draw [style=big arrow] (185.center) to (184.center);
+		\draw [style=big arrow] (190.center) to (191.center);
+		\draw [style=big arrow] (186.center) to (187.center);
+		\draw [style=big dashed] (189.center) to (188.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

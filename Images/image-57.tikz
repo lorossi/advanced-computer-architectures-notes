@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -1) {};
+		\node [style=none] (2) at (1, 0) {};
+		\node [style=none] (3) at (1, -1) {};
+		\node [style=none] (4) at (0.5, -0.5) {\texttt{M}};
+		\node [style=none] (5) at (2.5, -0.5) {\texttt{S}};
+		\node [style=none] (6) at (3.5, -0.5) {\texttt{I}};
+		\node [style=none] (7) at (2, 0) {};
+		\node [style=none] (8) at (2, -1) {};
+		\node [style=none] (9) at (3, 0) {};
+		\node [style=none] (10) at (3, -1) {};
+		\node [style=none] (11) at (7.5, -0.5) {\texttt{ADDRESS TAG}};
+		\node [style=none] (12) at (11, -1) {};
+		\node [style=none] (13) at (11, 0) {};
+		\node [style=none] (14) at (4, -1) {};
+		\node [style=none] (15) at (4, 0) {};
+		\node [style=none] (16) at (1.5, -0.5) {\texttt{E}};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (12.center)
+			 to (13.center)
+			 to (0.center)
+			 to (1.center)
+			 to cycle;
+		\draw [style=light fill] (3.center) to (2.center);
+		\draw [style=light fill] (8.center) to (7.center);
+		\draw [style=light fill] (9.center) to (10.center);
+		\draw [style=light fill] (14.center) to (15.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
