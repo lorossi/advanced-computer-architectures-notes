@@ -21,7 +21,7 @@
 \RequirePackage{verbatim} % monospaced text blocks
 \RequirePackage{enumitem} % custom enum
 \RequirePackage{graphicx} % images
-\RequirePackage{fontawesome} % dings
+\RequirePackage{pifont} % dings
 \RequirePackage{titlesec} % for sections customization
 \RequirePackage{amsmath} % for better math typesetting
 \RequirePackage{xspace} % for spacing after commands
@@ -73,8 +73,8 @@
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{0.5em}{}
 
 % add commands for checkmark
-\newcommand{\cmark}{\faCheck\xspace} % check
-\newcommand{\xmark}{\faTimes\xspace}  % cross
+\newcommand{\cmark}{\ding{51}\xspace} % check
+\newcommand{\xmark}{\ding{53}\xspace}  % cross
 \newcommand{\colorcmark}{\textcolor{ForestGreen}{\cmark}\xspace} % green check
 \newcommand{\colorxmark}{\textcolor{BrickRed}{\xmark}\xspace} % red cross
 
