@@ -1,0 +1,47 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -1) {};
+		\node [style=none] (2) at (5, -1) {};
+		\node [style=none] (3) at (5, 0) {};
+		\node [style=none] (4) at (5, -1) {};
+		\node [style=none] (5) at (5, -2) {};
+		\node [style=none] (6) at (10, -2) {};
+		\node [style=none] (7) at (10, -1) {};
+		\node [style=none] (8) at (10, -2) {};
+		\node [style=none] (9) at (10, -3) {};
+		\node [style=none] (10) at (15, -3) {};
+		\node [style=none] (11) at (15, -2) {};
+		\node [style=none, text=white] (12) at (2.5, -0.5) {\texttt{LOAD}};
+		\node [style=none, text=white] (13) at (7.5, -1.5) {\texttt{MUL}};
+		\node [style=none, text=white] (14) at (12.5, -2.5) {\texttt{ADD}};
+		\node [style=none] (15) at (-1, -4) {};
+		\node [style=none] (16) at (16, -4) {};
+		\node [style=bottom align] (17) at (15, -4) {time};
+		\node [style=none] (18) at (10, -4) {};
+		\node [style=none] (19) at (5, -4) {};
+		\node [style=none] (20) at (0, -4) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=red fill] (1.center)
+			 to (2.center)
+			 to (3.center)
+			 to (0.center)
+			 to cycle;
+		\draw [style=purple fill] (5.center)
+			 to (6.center)
+			 to (7.center)
+			 to (4.center)
+			 to cycle;
+		\draw [style=green fill] (9.center)
+			 to (10.center)
+			 to (11.center)
+			 to (8.center)
+			 to cycle;
+		\draw [style=big arrow] (15.center) to (16.center);
+		\draw [style=dashed] (1.center) to (20.center);
+		\draw [style=dashed] (5.center) to (19.center);
+		\draw [style=dashed] (9.center) to (18.center);
+		\draw [style=dashed] (10.center) to (17);
+	\end{pgfonlayer}
+\end{tikzpicture}
