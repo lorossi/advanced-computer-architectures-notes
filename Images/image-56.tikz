@@ -43,7 +43,7 @@
 		\node [style=none] (88) at (6.5, -2.25) {};
 		\node [style=none] (89) at (9.5, -4.5) {};
 		\node [style=none] (90) at (9.5, -2.25) {};
-		\node [style=bottom align, text={rgb,255: red,191; green,0; blue,64}] (91) at (8.5, -4.5) {BusRd};
+		\node [style=bottom align, text={rgb,255: red,191; green,0; blue,64}] (91) at (8.5, -4.5) {\texttt{BusRd}};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (2.center)

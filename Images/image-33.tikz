@@ -34,7 +34,7 @@
 		\node [style=none] (38) at (-10, -4) {};
 		\node [style=none] (47) at (-0.25, -3.5) {};
 		\node [style=none] (48) at (-3, -3.5) {};
-		\node [style=none] (49) at (-12, -2) {\(n\) registers};
+		\node [style=top align] (49) at (-12, -2) {\(n\) registers};
 		\node [style=none] (53) at (-4, -2.5) {};
 		\node [style=none] (54) at (-4, -1) {};
 		\node [style=none] (55) at (-4, -0.5) {\texttt{RRB}};
@@ -53,10 +53,8 @@
 		\node [style=none] (68) at (-13, -3.5) {\texttt{R1}};
 		\node [style=none] (69) at (-9, -3.5) {\texttt{RN}};
 		\node [style=none] (70) at (-11, -3.5) {  \texttt{\dots}};
-		\node [style=none] (71) at (-16.25, -2.75) {};
-		\node [style=none] (72) at (-7.5, -2.75) {};
-		\node [style=none] (73) at (-7.5, -2.5) {};
-		\node [style=none] (74) at (-16.25, -2.5) {};
+		\node [style=none] (73) at (-8.25, -2) {};
+		\node [style=none] (74) at (-15.75, -2) {};
 		\node [style=none] (75) at (1, -0.5) {\texttt{P0}};
 		\node [style=none] (76) at (1, -1.5) {\texttt{P1}};
 		\node [style=none] (77) at (1, -2.5) {\texttt{P2}};
@@ -67,6 +65,8 @@
 		\node [style=none] (83) at (-3, -1) {};
 		\node [style=none] (84) at (-5, 0) {};
 		\node [style=none] (85) at (-3, 0) {};
+		\node [style=none] (86) at (-8, -2) {};
+		\node [style=none] (87) at (-16, -2) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (2.center)
@@ -113,9 +113,7 @@
 			 to (66.center)
 			 to (64.center);
 		\draw [style=light fill] (64.center) to (63.center);
-		\draw [style=big] (71.center) to (74.center);
-		\draw [style=big] (74.center) to (73.center);
-		\draw [style=big] (73.center) to (72.center);
+		\draw [style=double arrow] (74.center) to (73.center);
 		\draw [style=light fill] (34.center) to (33.center);
 		\draw [style=light fill] (36.center) to (35.center);
 		\draw [style=light fill] (37.center) to (38.center);
@@ -124,5 +122,7 @@
 			 to (85.center)
 			 to (84.center)
 			 to cycle;
+		\draw [style=dashed] (87.center) to (65.center);
+		\draw [style=dashed] (86.center) to (63.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

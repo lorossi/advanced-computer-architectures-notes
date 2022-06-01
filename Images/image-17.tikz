@@ -39,8 +39,8 @@
 		\node [style=none] (35) at (11, -8) {};
 		\node [style=none] (36) at (12, -7.5) {\texttt{1}};
 		\node [style=none] (37) at (12, -0.25) {1-\textit{BHT}};
-		\node [style=none] (38) at (14, -8) {};
-		\node [style=none] (39) at (14, -1) {};
+		\node [style=none] (38) at (14, -7.75) {};
+		\node [style=none] (39) at (14, -1.25) {};
 		\node [style=left align] (40) at (14.5, -4.5) {\(2^k\) entries};
 		\node [style=none] (41) at (13, -6.5) {};
 		\node [style=none] (42) at (17.5, -6.5) {};
@@ -57,6 +57,8 @@
 		\node [style=left align] (57) at (6, -6) {\(k\) \textit{LSBs}};
 		\node [style=none] (58) at (7, -1.5) {};
 		\node [style=none] (59) at (7, -1.25) {};
+		\node [style=none] (60) at (14, -8) {};
+		\node [style=none] (61) at (14, -1) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (0.center)
@@ -108,5 +110,7 @@
 			 to (50.center);
 		\draw [style=big arrow] (55.center) to (56.center);
 		\draw [style=big] (55.center) to (51.center);
+		\draw [style=dashed] (60.center) to (34.center);
+		\draw [style=dashed] (61.center) to (1.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

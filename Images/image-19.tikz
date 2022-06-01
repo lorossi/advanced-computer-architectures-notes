@@ -109,16 +109,16 @@
 		\node [style=none] (180) at (9, -14) {};
 		\node [style=none] (181) at (0, -14) {};
 		\node [style=none] (184) at (-8, -0.5) {\(k\)-bits branch address};
-		\node [style=none] (185) at (12, 0) {};
-		\node [style=none] (186) at (12, -10) {};
+		\node [style=none] (185) at (12, -0.25) {};
+		\node [style=none] (186) at (12, -9.75) {};
 		\node [style=left align] (187) at (12.5, -5) {\(2^k\) entries};
 		\node [style=left align] (188) at (17.5, -12.5) {\(m\)-bits global branch history};
 		\node [style=none] (190) at (4.5, -14) {};
 		\node [style=none] (191) at (4.5, -15.75) {};
 		\node [style=none] (192) at (4.5, -16.5) {\texttt{T/NT} branch prediction};
 		\node [style=none] (197) at (-1, -0.5) {\small \(n\)-\textit{bits}};
-		\node [style=none] (198) at (-2, 1) {};
-		\node [style=none] (199) at (11, 1) {};
+		\node [style=none] (198) at (-1.75, 1) {};
+		\node [style=none] (199) at (10.75, 1) {};
 		\node [style=none] (200) at (4.5, 1.5) {\(2^m\) \textit{BHT}};
 		\node [style=none] (203) at (16, -12.5) {};
 		\node [style=none] (204) at (14, -12.5) {};
@@ -134,8 +134,8 @@
 		\node [style=none] (216) at (14, -15.5) {};
 		\node [style=none] (217) at (16, -15.5) {};
 		\node [style=none] (218) at (14, -13) {};
-		\node [style=none] (224) at (17, -15.5) {};
-		\node [style=none] (225) at (17, -10.5) {};
+		\node [style=none] (224) at (17, -15.25) {};
+		\node [style=none] (225) at (17, -10.75) {};
 		\node [style=left align] (226) at (17.5, -13.5) {\(m\)-items shift register};
 		\node [style=none] (227) at (-8, -4.5) {};
 		\node [style=none] (228) at (-2.25, -4.5) {};
@@ -150,6 +150,12 @@
 		\node [style=none] (237) at (-4, -1) {};
 		\node [style=none] (238) at (-4, 0) {};
 		\node [style=none] (239) at (-12, 0) {};
+		\node [style=none] (240) at (-2, 1) {};
+		\node [style=none] (241) at (11, 1) {};
+		\node [style=none] (242) at (12, 0) {};
+		\node [style=none] (243) at (12, -10) {};
+		\node [style=none] (244) at (17, -10.5) {};
+		\node [style=none] (245) at (17, -15.5) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (1.center)
@@ -241,5 +247,11 @@
 			 to (237.center)
 			 to (236.center)
 			 to cycle;
+		\draw [style=dashed] (240.center) to (0.center);
+		\draw [style=dashed] (241.center) to (146.center);
+		\draw [style=dashed] (242.center) to (146.center);
+		\draw [style=dashed] (243.center) to (148.center);
+		\draw [style=dashed] (244.center) to (213.center);
+		\draw [style=dashed] (245.center) to (217.center);
 	\end{pgfonlayer}
 \end{tikzpicture}
