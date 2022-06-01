@@ -1,4 +1,4 @@
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=1.0, x=0.5cm, y=0.5cm]
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=none] (0) at (0, 0) {};
 		\node [style=none] (1) at (3, 0) {};
@@ -288,7 +288,7 @@
 		\node [style=none] (302) at (-5, -29) {};
 		\node [style=none] (303) at (58, -26) {};
 		\node [style=none] (304) at (58, -29) {};
-		\node [style=left align] (305) at (-4, -27.5) {\Large \texttt{Memory subsystem}};
+		\node [style=left align] (305) at (-4, -27.5) {\texttt{MEMORY SUBSYSTEMS}};
 		\node [style=none] (306) at (-4.5, -14) {};
 		\node [style=none] (307) at (-4.5, -25.75) {};
 		\node [style=none] (314) at (-3.5, -26) {};
@@ -305,27 +305,31 @@
 		\node [style=none] (325) at (43.5, -25.75) {};
 		\node [style=none] (326) at (44.5, -26) {};
 		\node [style=none] (327) at (44.5, -14.25) {};
-		\node [style=none] (328) at (2, -11.5) {\Large \texttt{Elements 0, 4, 8, \ldots}};
-		\node [style=none] (329) at (18, -11.5) {\Large \texttt{Elements 1, 5, 9, \ldots}};
-		\node [style=none] (330) at (34, -11.5) {\Large \texttt{Elements 2, 6, 10, \ldots}};
-		\node [style=none] (331) at (50, -11.5) {\Large \texttt{Elements 4, 8, 12, \ldots}};
+		\node [style=none] (328) at (2, -11.5) {\footnotesize \texttt{Elements 0, 4, 8, \ldots}};
+		\node [style=none] (329) at (18, -11.5) {\footnotesize\texttt{Elements 1, 5, 9, \ldots}};
+		\node [style=none] (330) at (34, -11.5) {\footnotesize\texttt{Elements 2, 6, 10, \ldots}};
+		\node [style=none] (331) at (50, -11.5) {\footnotesize\texttt{Elements 4, 8, 12, \ldots}};
 		\node [style=none] (332) at (-6, -25) {};
 		\node [style=none] (333) at (10, -25) {};
 		\node [style=none] (334) at (10, 3) {};
 		\node [style=none] (335) at (-6, 3) {};
 		\node [style=none] (336) at (-6.25, -23) {};
 		\node [style=none] (337) at (-9.25, -23) {};
-		\node [style=right align] (338) at (-9.5, -23) {\Huge lane};
-		\node [style=none] (339) at (-5.25, -11.5) {};
-		\node [style=none] (340) at (-9.25, -11.5) {};
-		\node [style=right align] (341) at (-9.5, -11.5) {\Huge vector registers};
-		\node [style=none] (342) at (-7, -8) {};
+		\node [style=right align] (338) at (-9.5, -23) { \Large lanes};
+		\node [style=none] (339) at (58, -11.5) {};
+		\node [style=none] (340) at (60, -11.5) {};
+		\node [style=left align] (341) at (60.25, -11.5) {\Large vector registers};
+		\node [style=none] (342) at (-7, -7.5) {};
 		\node [style=none] (343) at (-7, 2) {};
 		\node [style=none] (344) at (58, 2) {};
-		\node [style=none] (345) at (58, -8) {};
+		\node [style=none] (345) at (58, -7.5) {};
 		\node [style=none] (346) at (-7.25, -3) {};
 		\node [style=none] (347) at (-9.25, -3) {};
-		\node [style=right align] (348) at (-9.5, -3) {\Huge functional unit};
+		\node [style=right align] (348) at (-9.5, -3) {\Large functional units};
+		\node [style=none] (349) at (-7, -15) {};
+		\node [style=none] (350) at (58, -15) {};
+		\node [style=none] (351) at (-7, -8.5) {};
+		\node [style=none] (352) at (58, -8.5) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (3.center)
@@ -633,16 +637,23 @@
 		\draw [style=big arrow] (322.center) to (323.center);
 		\draw [style=big arrow] (324.center) to (325.center);
 		\draw [style=big arrow] (326.center) to (327.center);
-		\draw [style=red line] (332.center) to (333.center);
-		\draw [style=red line] (333.center) to (334.center);
-		\draw [style=red line] (334.center) to (335.center);
-		\draw [style=red line, in=90, out=-90] (335.center) to (332.center);
+		\draw [style=red line] (335.center)
+			 to [in=90, out=-90] (332.center)
+			 to (333.center)
+			 to (334.center)
+			 to cycle;
 		\draw [style=red arrow] (337.center) to (336.center);
-		\draw [style=big arrow] (340.center) to (339.center);
-		\draw [style=green line] (342.center) to (345.center);
-		\draw [style=green line] (345.center) to (344.center);
-		\draw [style=green line] (344.center) to (343.center);
-		\draw [style=green line] (343.center) to (342.center);
+		\draw [style=blue arrow] (340.center) to (339.center);
+		\draw [style=green line] (344.center)
+			 to (343.center)
+			 to (342.center)
+			 to (345.center)
+			 to cycle;
 		\draw [style=green arrow] (347.center) to (346.center);
+		\draw [style=blue line] (352.center)
+			 to (351.center)
+			 to (349.center)
+			 to [in=180, out=0] (350.center)
+			 to cycle;
 	\end{pgfonlayer}
 \end{tikzpicture}

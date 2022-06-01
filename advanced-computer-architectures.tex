@@ -2997,7 +2997,7 @@ A definition of parallel architectures, as defined by \textit{Almasi} and \texti
 
 \indentquote{A collection of processing elements that cooperatres and communicated to solve large problems fast.}
 
-The aim of the parallel architecture is to replicate processors to add performance rather than designing a faster processor.
+The aim of the parallel architecture is to replicate processors to add performance, rather than designing a faster processor.
 Parallel architecture extends the traditional architecture by adding a communication layer between processors.
 As such, new abstractions \textit{(for both hardware and software interfaces)} and different structures to realize them are needed.
 
@@ -3083,14 +3083,14 @@ They can then be divided in:
   \item \textbf{Centralized} shared memory architectures
         \begin{itemize}
           \item at most a few dozen processor chips (less than \(100\) cores)
-          \item large caches, single memory split in multiple banks
+          \item large \textbf{caches}, single memory split in multiple banks
           \item often called symmetric multiprocessors \textit{(SMP)}
-          \item the architecture is called Uniform Memory Access \textit{(UMA)}
+          \item the architecture is called \textbf{Uniform Memory Access} \textit{(UMA)}
         \end{itemize}
   \item \textbf{Distributed} memory architectures
         \begin{itemize}
-          \item able to support large count of processors
-          \item requires high bandwidth interconnection
+          \item able to support large count of \textbf{processors}
+          \item requires high bandwidth \textbf{interconnection}
           \item data communication among processors slows down the operations
         \end{itemize}
 \end{itemize}
@@ -3135,30 +3135,34 @@ As already said, the \textbf{Memory Address Space Model} can be divided in two c
   \bigskip
 \end{figure}
 
-Furthermore, the physical memory can be organized to be either:
-\begin{itemize}
-  \item \textbf{Centralized}
-        \begin{itemize}
-          \item also called \textit{Unified Memory Architecture}, or \textit{UMA}
-          \item represented in Figure~\ref{subfig:uma}
-        \end{itemize}
-  \item \textbf{Distributed}
-        \begin{itemize}
-          \item also called \textit{Shared Memory Architecture}, or \textit{SMA}
-          \item represented in Figure~\ref{subfig:sma}
-        \end{itemize}
-\end{itemize}
+\begin{minipage}{\textwidth}
+  \bigskip
+  Furthermore, the physical memory can be organized to be either:
+  \begin{itemize}
+    \item \textbf{Centralized}
+          \begin{itemize}
+            \item also called \textit{Unified Memory Architecture}, or \textit{UMA}
+            \item represented in Figure~\ref{subfig:uma}
+          \end{itemize}
+    \item \textbf{Distributed}
+          \begin{itemize}
+            \item also called \textit{Shared Memory Architecture}, or \textit{SMA}
+            \item represented in Figure~\ref{subfig:sma}
+          \end{itemize}
+  \end{itemize}
+  \bigskip
+\end{minipage}
 
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \begin{subfigure}[b]{0.495\textwidth}
+  \begin{subfigure}[t]{0.495\textwidth}
     \centering
     \tikzfig[1]{image-52.tikz}
     \caption{\textit{Unified Memory Architecture}}
     \label{subfig:uma}
   \end{subfigure}
-  \begin{subfigure}[b]{0.495\textwidth}
+  \begin{subfigure}[t]{0.495\textwidth}
     \centering
     \tikzfig[1]{image-53.tikz}
     \caption{\textit{Shared Memory Architecture}}
@@ -3175,7 +3179,7 @@ The main differences among them are shown in Table~\ref{tab:address-spaces-diffe
 
 \begin{table}[htbp]
   \begin{tabular}{r|c|c}
-    \(\Rsh\)                          & \textit{Single address space} & \textit{Multiple address space} \\ \hline
+    \(\Rsh\)                          & \textit{single address space} & \textit{multiple address space} \\ \hline
     \textit{communication}            & through shared variables      & through message passing         \\
     \textit{communication management} & implicit                      & explicit                        \\
     \textit{advantages}               & no single centralized memory  & no cache coherency problems
@@ -3228,19 +3232,19 @@ Operations of the two models:
 \begin{itemize}
   \item \textbf{Shared memory}:
         \begin{itemize}
-          \item Program is a collection of threads of control, can be created dynamically
-          \item Each thread has a set of private variables and a set of shared variables
-          \item Threads communicate implicitly by writing and reading shared variables
-          \item Threads coordinate by synchronizing on shared variables
+          \item Program is a collection of threads of control, can be created \textbf{dynamically}
+          \item Each thread has a set of private variables and a set of \textbf{shared variables}
+          \item Threads communicate implicitly by writing and reading \textbf{shared variables}
+          \item Threads coordinate by synchronizing on \textbf{shared variables}
         \end{itemize}
   \item \textbf{Message passing}:
         \begin{itemize}
-          \item Program is a collection of named processes, fixed at startup time
-          \item There's no shared data between processes
-          \item Logically shared data is partitioned over local processes
-          \item Processes communicate by explicitly sending and receiving messages
+          \item Program is a collection of named processes, fixed at \textbf{startup time}
+          \item There's no \textbf{shared data} between processes
+          \item Logically shared data is \textbf{partitioned} over local processes
+          \item Processes communicate by explicitly \textbf{sending} and \textbf{receiving} messages
                 \begin{itemize}
-                  \item the most common software interface to pass message is called Message Passing Interface or \textit{MPI}
+                  \item the most common software interface to pass message is called Message Passing Interface \textit{(MPI)}
                 \end{itemize}
         \end{itemize}
 \end{itemize}
@@ -3249,15 +3253,15 @@ Operations of the two models:
 Furthermore, message passing among parallel processors introduces two more issues, more relevant in large scale systems:
 
 \begin{enumerate}
-  \item All data layout must be handled by software
+  \item All data layout must be handled by \textbf{software}
         \begin{itemize}
           \item data cannot be retrieved remotely without explicit communication
         \end{itemize}
-  \item Message passing has a high software overhead
+  \item Message passing has a high software \textbf{overhead}
         \begin{itemize}
-          \item early machines had to invoke the \textit{OS} on each message \textit{(taking \(100\mu s \div 1ms\) per message)}
-          \item user level access to network interface has dozen of cycles of overhead
-          \item while sending messages might be cheap, receiving messages is expensive due to the introduction of polling or interrupt mechanisms
+          \item early machines had to invoke the \textit{OS} on each message \textit{(spending \(100\mu s \div 1ms\) per message)}
+          \item user level access to network interface has \textbf{dozen of cycles} of overhead
+          \item while sending messages might be cheap, \textbf{receiving messages is expensive} due to the introduction of polling or interrupt mechanisms
         \end{itemize}
 \end{enumerate}
 
@@ -3280,12 +3284,11 @@ It's a valuable resource as can be used both for shared and local data.
 There are \(2\) main categories of shared memory machines:
 
 \begin{enumerate}
-  \item Non cache coherent
-  \item Cache coherent
+  \item \textbf{Non cache coherent}
+  \item \textbf{Cache coherent}
 \end{enumerate}
 
-Both will work with any data placement, eventually resulting in slow executions.
-Critical portions of the code can be optimized to be sped up.
+Both will work with any data placement, eventually resulting in slow executions, but critical portions of the code can be optimized to be sped up.
 In large scale systems, the logically distributed shared memory can is implemented as physically distributed memory modules.
 
 The cache, however, needs introduce a new problem: \textbf{cache coherency}.
@@ -3297,15 +3300,14 @@ Informally, it is described as:
 \(2\) main categories of shared memory architectures are identified:
 
 \begin{enumerate}
-  \item \textbf{Private} data - used by a single processor
-  \item \textbf{Shared} data - used by multiple processors to communicate
+  \item \textbf{Private data}, used by a single processor
+  \item \textbf{Shared data}, used by multiple processors to communicate
 \end{enumerate}
 
 When shared data is cached, the corresponding value may be replicated in multiple caches.
 While reducing the access latency \textit{(and the relative cost of memory bandwidth)}, this replication provides a reduction of shared data contention read by multiple processors simultaneously.
 The use of multiple copies of the same data introduces the already mentioned problem of cache coherency.
 
-\bigskip
 Consider the following sequence of operations performed by a \textit{shared data SIMD} with \(2\) processors:
 
 \begin{enumerate}
@@ -3320,7 +3322,7 @@ The two processors see different values for the same shared variable.
 This is a common problem with write back caches, because the value written back to memory depends on the circumstances of the access itself: processes accessing main memory may see old values of the same variable.
 
 \textit{Alternatively} the cache can be bypassed, forcing the processor to read the value from main memory.
-This solution however slows down significantly the access to memory, increasing the latency and the bandwidth.
+This solution however slows down significantly the access to memory, increasing the latency and requiring more bandwidth.
 
 At the same time, it's not possible to require that the \texttt{READ} of \texttt{B} can instantaneously know that \texttt{A} has performed a \texttt{STORE} operation.
 This problem is called \textbf{memory consistency} and it's complementary to the cache coherency:
@@ -3334,13 +3336,13 @@ This problem is called \textbf{memory consistency} and it's complementary to the
 The coherency must be preserved while writing and reading data from the cache:
 
 \begin{itemize}
-  \item Reading does not create issues, as multiple copies of the same data are kept in the cache
-  \item Writing is an operation that must be done in a way that guarantees coherency
+  \item \textbf{Reading does not create issues}, as multiple copies of the same data are kept in the cache
+  \item \textbf{Writing} is an operation that must be done in a way that \textbf{guarantees coherency}
         \begin{itemize}
-          \item a processor must have exclusive access to the cache while writing
-          \item all processor must get the new values after a write operation
-          \item coherency protocols must locate all the caches that share an object to be written
-          \item a write to a shared data can cause either to invalide all other copies or to update the shared copies
+          \item a processor must have \textbf{exclusive access} to the cache while writing
+          \item all processor must \textbf{receive the new values} after a \texttt{write} operation
+          \item coherency protocols must \textbf{locate all the caches} that share an object to be written
+          \item a write to a shared data can cause either to \textbf{invalidate} all other copies or to \textbf{update} the shared copies
         \end{itemize}
 \end{itemize}
 
@@ -3364,40 +3366,40 @@ In a coherent multiprocessor, the cache provides:
         \end{itemize}
 \end{itemize}
 
-\bigskip
 In order to solve the two problems, an hardware based technique called \textbf{Cache Coherence Protocols} has been introduced.
 It works by tracking the status of any sharing of a data block.
 There are \(2\) classes of protocols:
 
 \begin{enumerate}
-  \item Snooping protocols
-  \item Directory Based protocols
+  \item \textbf{Snooping} protocols
+  \item \textbf{Directory Based} protocols
 \end{enumerate}
 
 \subsubsection{Snooping Protocols}
 
-All cache controllers monitor \textit{(or snoop)} the bus to determine whether they have a copy of the data requested in the block or not.
+All cache controllers monitor \textit{(or snoop)} the \textit{BUS} to determine whether they have a copy of the data requested in the block or not.
 Every cache that has a copy of the shared data also has a copy of the sharing status of the block, removing the need of keeping a centralized state.
 
 All requests for shared data are sent to all processors.
-This solution requires broadcast, since the cache controllers must know the sharing status of all the data blocks.
-This solution is particularly suitable for \textbf{Centralized Shared Memory Architectures}, especially for small scale multiprocessors with single bus.
+This solution requires broadcast, since the cache controllers must know the sharing status of all the data blocks and it's particularly suitable for \textbf{Centralized Shared Memory Architectures}, especially for small scale multiprocessors with single \textit{BUS}.
 
 \bigskip
 One of the first implementations of this protocol has been proposed by \textit{Goodman} in \(1983\).
 The cache snoops upon \textit{DMA} transfers, doing \inlinequote{the right thing} when it is necessary:
 
 \begin{itemize}
-  \item \textit{BUS} is a broadcast medium
   \item The cache controller snoops all transactions on the shared \textit{BUS}
+  \begin{itemize}
+    \item the \textit{BUS} is merely a broadcast medium
+  \end{itemize}
   \item If a block contains the address tag of a variable contained in the cache, then:
         \begin{itemize}
           \item the processor must \textit{take action}, either \textbf{invalidating}, \textbf{updating} or \textbf{supplying} the value
-          \item the action depends on the state of the block and on the protocol
+          \item the action depends on the \textbf{state} of the block and on the protocol
         \end{itemize}
 \end{itemize}
 
-A simple example of the snooping protocol is represented in Figure~\ref{fig:snooping-protocol}.
+A simple example of the hardware implementation of the snooping protocol is represented in Figure~\ref{fig:snooping-protocol}.
 
 \begin{figure}[htbp]
   \bigskip
@@ -3409,7 +3411,7 @@ A simple example of the snooping protocol is represented in Figure~\ref{fig:snoo
 \end{figure}
 
 \bigskip
-Since every bus transaction check the cache address tags, this operation can interfere with the processor operations, causing stall when the variable is not available in the cache.
+Since every \textit{BUS} transaction check the cache address tags, this operation can interfere with the processor operations, causing stall when the variable is not available in the cache.
 
 To reduce the interference with the processor's accesses to the cache, the tag portion of the address is duplicated for snooping activities.
 An extra read port is added to the address tag portion of the cache.
@@ -3432,63 +3434,58 @@ When a \textbf{miss} happens, the following actions are performed:
 
 \paragraph{Write-Invalidate Protocol}
 
-The writing processor issues and invalidation signal over the bus to cause all copies in other caches to be invalidated before changing its local copy.
-Then it is free to update the local data until another processor asks for it.
+The writing processor issues and invalidation signal over the \textit{BUS} to cause all copies in other caches to be invalidated before changing its local copy: at this point, it is free to update the local data until another processor asks for it.
 
-All caches on the bus check to see if they have a copy of the data and, if so, they must invalidate the block containing the data.
-This scheme allows multiple readers byt only a single writer.
-
-This scheme uses the bus only on the first write to invalidate other copies.
-Subsequent writes do not result in bus activity.
+All caches on the \textit{BUS} check to see if they have a copy of the data and, if so, they must invalidate the block containing it.
+This scheme allows multiple \textbf{readers but} only a \textbf{single writer}: the \textit{BUS} is used only on the first write to invalidate all other copies while subsequent writes do not result in \textit{BUS} activity.
 
 \bigskip
 Different operations of the protocol:
 
 \begin{itemize}
-  \item Basic Bus Based Protocol
+  \item Basic \textbf{Bus Based} Protocol
         \begin{itemize}
           \item each processor keeps track of cache and state
-          \item all transactions over bus are snooped
+          \item all transactions over \textit{BUS} are snooped
         \end{itemize}
-  \item Writes invalidate all other caches
+  \item Writes \textbf{invalidate} all other caches
         \begin{itemize}
           \item multiple readers can read the same block
-          \item a single write invalidates all other copies
+          \item a single \texttt{write} invalidates all other copies
         \end{itemize}
-  \item Each block in cache has two states
+  \item Each block in cache has \textbf{two states}
         \begin{itemize}
           \item the state of a block is a \(p\)-vector of states
           \item hardware state bits are associated with block that are in the cache
-          \item other block can be seen as being in invalid in that cache
+          \item other blocks can be seen as being in invalid in that cache
         \end{itemize}
 \end{itemize}
 
-\bigskip
-Finally, on a write operation, all other copies of the same data are invalidated.
-The bus itself is used to serialize the access to the data, as the write operations cannot complete until exclusive bus access is obtained.
+Finally, on a \texttt{write} operation, all other copies of the same data are \textbf{invalidated}.
+The \textit{BUS} itself is used to serialize the access to the data, as the write operations cannot complete until exclusive \textit{BUS} access is obtained.
 
 \paragraph{Write-Update Protocol}
 
-In the \textbf{Write-Update protocol}, when a write operation is performed, all the redundant copies of the data are invalidated.
-The processor that performs the write also has the duty of updating the main memory and all the other processors' memory, by broadcasting it over the bus.
+In the \textbf{Write-Update protocol}, when a \texttt{write} operation is performed, all the redundant copies of the data are \textbf{invalidated}.
+The processor that performs the write also has the duty of updating the main memory and all the other processors' memory, by broadcasting the new value over the \textit{BUS}.
 All caches check if they have a copy of the data and, if so, all copies are updated with the new value.
-This scheme requires the continuos broadcast all write operations to the shared data.
+This scheme requires the continuous broadcast of all \texttt{write} operations to the shared data.
 
-This protocol is similar to the \textbf{Write-Through} because all writes are sent over the bus to update copies of the shared data.
-It also has the advantage of making the new values appear in caches sooner, reducing the latency.
-In case of a read miss, the memory is always up to date.
+This protocol is similar to the \textbf{Write-Through} because all writes are sent over the \textit{BUS} to update copies of the shared data, but it has the advantage of making the new values appear in caches sooner, reducing the latency.
+In case of a \texttt{read} miss, the memory is always up to date.
 
 \paragraph{Write-through vs Write-back}
 
-The main difference between the two protocol is:
+The main difference between the two protocols is:
 
 \begin{itemize}
   \item \textbf{Write-through}: the memory is always up to date
   \item \textbf{Write-back}: the caches must be snooped into until the most recent copy is found
 \end{itemize}
 
-The write-through protocol is simple, as every write is observable.
-Each one of them goes on the bus, and as such only one write can take place at a time in any processor, with the downside of using a lot of bandwidth.
+The write-through protocol is simple, as every write \texttt{operation} is observable:
+each one of them goes on the \textit{BUS}, and as such only one \texttt{write} can take place at a time in any processor.
+As a downside, it uses a lot of bandwidth.
 
 \paragraph{Invalidate vs Update}
 
@@ -3499,24 +3496,23 @@ Before choosing one of the two protocols, a basic question on the program behavi
 Then, the two protocols can be compared:
 
 \begin{itemize}
-  \item Invalidate
+  \item \textbf{Invalidate}
         \begin{itemize}
-          \item yes: readers will take a miss
-          \item no: multiple writes can be performed without added traffic and old copies will be cleared out
+          \item[\cmark] yes: readers will take a miss
+          \item[\xmark] no: multiple writes can be performed without added traffic and old copies will be cleared out
         \end{itemize}
-  \item Updated
+  \item \textbf{Updated}
         \begin{itemize}
-          \item yes: misses on later references will be avoided
-          \item no: multiple useless updates will be broadcast over the bus
+          \item[\cmark] yes: misses on later references will be avoided
+          \item[\xmark] no: multiple useless updates will be broadcast over the \textit{BUS}
         \end{itemize}
 \end{itemize}
 
-\bigskip
 In the same way, most of commercial cache based multiprocessors use:
 
 \begin{itemize}
-  \item \textbf{Write-Back Caches} to reduce bus traffic, allowing more processors on a single bus
-  \item \textbf{Write-Invalidate Protocol} to preserve bus bandwidth
+  \item \textbf{Write-Back Caches} to reduce \textit{BUS} traffic, allowing more processors on a single \textit{BUS}
+  \item \textbf{Write-Invalidate Protocol} to preserve \textit{BUS} bandwidth
 \end{itemize}
 
 \paragraph{Cache State Transition Diagram}
@@ -3527,7 +3523,8 @@ Each cache line has state bits, relative to the state of the data.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \begin{subfigure}[b]{0.6\textwidth}
+  \begin{subfigure}[]{\textwidth}
+    \centering
     \begin{tikzpicture}[auto, node distance=3cm, >=Triangle]
       \node [state, initial, initial above, initial text={write miss},  minimum size=1cm](M) {\texttt{M}};
       \node [state, minimum size=1cm, below=of M](I) {\texttt{I}};
@@ -3546,9 +3543,9 @@ Each cache line has state bits, relative to the state of the data.
     \label{subfig:MSI-state-transition-diagram}
     \bigskip
   \end{subfigure}
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[]{\textwidth}
     \centering
-    \tikzfig[0.9]{image-55.tikz}
+    \tikzfig[01]{image-55.tikz}
     \caption{Structure of a \textit{MSI} cache line}
     \label{subfig:MSI-cache-line}
   \end{subfigure}
@@ -3559,12 +3556,12 @@ Each cache line has state bits, relative to the state of the data.
 The basic \textit{MSI} protocol is not completely suitable to be applied to the real world, since it has a few limitations:
 
 \begin{itemize}
-  \item Operations are not atomic
+  \item Operations are not \textbf{atomic}
         \begin{itemize}
-          \item deadlock and race conditions may be introduced
-          \item \textbf{solution}: the processor sends invalidate can hold bus until other processor receive the message
+          \item \textit{deadlocks} and \textit{race conditions} may be introduced
+          \item \textbf{solution}: the processor sends invalidate can hold \textit{BUS} until other processor receive the message
         \end{itemize}
-  \item The system is hard to extend
+  \item The system is \textbf{hard to extend}
         \begin{itemize}
           \item \textbf{solution}: add an exclusive state to indicate clean block in only one cache \textit{(MESI Protocol)}
         \end{itemize}
@@ -3585,11 +3582,12 @@ Each cache block can then be in one out of \(4\) states:
 
 The \textbf{exclusive} state distinguishes between \textbf{exclusive} \textit{(writable)} and \textbf{owned} \textit{(written)} states.
 
-In order to support this protocol, all cache controllers snoop on a special bus called \textit{BusRd}.
-The issuer chooses between the \textbf{shared} and \textbf{exclusive} states, and the bus is used to send the message to the other caches.
+In order to support this protocol, all cache controllers snoop on a special \textit{BUS} called \texttt{BusRd}.
+The issuer chooses between the \textbf{shared} and \textbf{exclusive} states, and the \textit{BUS} is used to send the message to the other caches.
 
 \bigskip
-An illustration of the bus is shown in Figure~\ref{subfig:MESI-bus-rd}, while the state of the cache lines with \textit{MESI} is represented in Table~\ref{tab:MESI-cache-line}.
+An illustration of the \textit{BUS} is shown in Figure~\ref{subfig:MESI-bus-rd}, while the state of the cache lines with \textit{MESI} is represented in Table~\ref{tab:MESI-cache-line}.
+The transition diagram and relative cache line are represented in Figure~\ref{fig:MESI-protocol}.
 
 \begin{figure}[htbp]
   \centering
@@ -3609,15 +3607,12 @@ An illustration of the bus is shown in Figure~\ref{subfig:MESI-bus-rd}, while th
       \textit{Line valid?}                   & \colorcmark       & \colorcmark        & \colorxmark                       & \colorcmark              \\
       \textit{Copy in memory}                & has to be updated & valid              & valid                             & \(-\)                    \\
       \textit{Other copies in other caches}? & \colorxmark       & \colorxmark        & maybe                             & maybe                    \\
-      \textit{A write on this line}          & access the bus    & access the bus     & access the bus,  update the cache & direct access to the bus
+      \textit{A write on this line}          & access the \textit{BUS}    & access the \textit{BUS}     & access the \textit{BUS},  update the cache & direct access to the \textit{BUS}
     \end{tabular}
   }
   \caption{State of cache lines with \textit{MESI} Protocol}
   \label{tab:MESI-cache-line}
 \end{table}
-
-\bigskip
-The transition diagram and relative cache line are represented in Figure~.
 
 \begin{figure}[htbp]
   \bigskip
@@ -3643,7 +3638,7 @@ The transition diagram and relative cache line are represented in Figure~.
       (E) edge [above, sloped, pos=0.75] node {\footnotesize other processors read} (S);
     \end{tikzpicture}
 
-    \caption{\textit{MESI} Protocol State Transition Diagram}
+    \caption{State Transition Diagram}
     \label{subfig:MESI-state-transition-diagram}
     \bigskip
   \end{subfigure}
@@ -3654,12 +3649,14 @@ The transition diagram and relative cache line are represented in Figure~.
     \caption{Structure of a cache line}
     \label{subfig:MESI-cache-line}
   \end{subfigure}
+  \caption{\textit{MESI} Protocol Implementation}
+  \label{fig:MESI-protocol}
 \end{figure}
 
 \bigskip
 \begin{itemize}
   \item In both \textbf{shared} and \textbf{exclusive} states, the memory has an up to date version of the data
-  \item A write to an \textbf{exclusive} block does not require to send the invalidation signal on the bus, since no other copies of the block are in cache
+  \item A write to an \textbf{exclusive} block does not require to send the invalidation signal on the \textit{BUS}, since no other copies of the block are in cache
   \item A write to a \textbf{shared} block implies the invalidation of the other copies of the block in cache
 \end{itemize}
 
@@ -3668,16 +3665,16 @@ The transition diagram and relative cache line are represented in Figure~.
 To improve the reading speed (thus reducing the access latency), often processors have two level caches, both on the same chip:
 
 \begin{itemize}
-  \item A \textit{L2} cache, large
-  \item A \textit{L1} cache, small
+  \item A \texttt{L2} cache, large
+  \item A \texttt{L1} cache, small
         \begin{itemize}
           \item entries in \texttt{L1} must be in \texttt{L2}
-          \item invalidation in \texttt{L2} \(\Rightarrow\) invalidation in \texttt{L1}
-          \item snooping on \texttt{L2} does not affect \texttt{L1} bandwidth
+          \item an invalidation in \texttt{L2} \textbf{implies} an invalidation in \texttt{L1}
+          \item \textit{snooping} on \texttt{L2} does not affect \texttt{L1} bandwidth
         \end{itemize}
 \end{itemize}
 
-When a read-miss for a value is detected in a value, a read request for the value is placed on the bus.
+When a read-miss for a value is detected in a value, a read request for the value is placed on the \textit{BUS}.
 The cache containing the value needs to supply and change its status to shared.
 The main memory may respond to the request as well.
 % TODO evaluate if it's necessary to add the image from slide 101
@@ -3696,12 +3693,10 @@ An illustration of this hardware setup is shown in Figure~\ref{fig:MESI-bus-rd-l
 
 \paragraph{False sharing}
 
-A cache line might contain more than one value.
-Cache coherence is not done at the line level and not at word level.
+A cache line might contain more than one value, and cache coherence is not maintained at the line level or at word level.
 
 Suppose processor \(\texttt{P}_1\) writes \(\texttt{word}_i\) and processor \(\texttt{P}_2\) writes \(\texttt{word}_k\) at the same line address.
-The block may be invalidated many times unnecessarily, since the addresses share a common block.
-
+The block may be invalidated many times unnecessarily, since both the addresses share a common block.
 Such event is called \textbf{false sharing}.
 
 \bigskip
@@ -3727,7 +3722,7 @@ Likewise, according to \textit{Lamport}, a system is sequentially consistent if:
 The \textbf{sequential consistency} \textit{(or SC)} is then defined as the arbitrary order preserving interleaving of memory references of sequential programs.
 
 \bigskip
-In order to guarantee the \textbf{memory consistency}, the result of any execution is the same as if the accesses of each processor were kept om order an the accesses among different processors were interleaved.
+In order to guarantee the \textbf{memory consistency}, the result of any execution is the same as if the accesses of each processor were kept in order and the accesses among different processors were interleaved.
 The simplest way to implement sequential consistency is to require a processor to delay the completion of any memory access until all the invalidations caused by that access are completed.
 
 \paragraph{Relaxed Memory Models}
@@ -3737,28 +3732,26 @@ In order to preserve sequential consistency, all possible read/write orderings m
 The relaxed models are defined by which of these four sets of orderings they relax:
 
 \begin{itemize}
-  \item Total store ordering relaxes \(W \rightarrow R\)
-  \item Partial store ordering relaxes \(W \rightarrow W\)
-  \item Relaxing \(R \rightarrow W, R \rightarrow R\) ordering yields a variety of models depending on how synchronization operations enforce ordering (thus releasing consistency)
+  \item \textbf{Total store} ordering relaxes \(W \rightarrow R\)
+  \item \textbf{Partial store} ordering relaxes \(W \rightarrow W\)
+  \item Relaxing \(R \rightarrow W, R \rightarrow R\) ordering yields a \textbf{variety of models} depending on how synchronization operations enforce ordering \textit{(thus releasing consistency)}
 \end{itemize}
 
 \bigskip
-Not all dependences assumed by \textit{SC} are supported, software has to explicitly insert additional dependences where needed according to the memory model.
+Not all dependences assumed by \textit{SC} are supported, so the software has to explicitly insert additional dependences where needed according to the memory model.
 
 \subsubsection{Synchronization}
 
-The need for synchronization arises whenever there are concurrent processes in a system \textit{(even in uniprocessor systems)}.
+The need for \textbf{synchronization} arises whenever there are concurrent processes in a system \textit{(even in uniprocessor systems)}.
 \(2\) main classes of synchronization are identified:
 
 \begin{enumerate}
-  \item Producer-Consumer, a consumer process must wait until the producer process has produced data
-  \item Mutual Exclusion, only one process uses a resource at a given time
+  \item \textbf{Producer-Consumer}, a \textit{consumer} process must wait until the \textit{producer} process has produced data
+  \item \textbf{Mutual Exclusion}, only one \textit{process} uses a resource at a given time
 \end{enumerate}
 
 \bigskip
-The synchronization of two processes makes sense only if they communicate data.
-A consistent view is needed only when one process shares its updates to the other.
-The latter only need to ensure that they receive updates after they acquire access to the shared data.
+The synchronization of two processes makes sense only if they communicate data: consistent view is needed only when one process shares its updates to others, and it's only needed to ensure that each process get updated after they acquire access to the shared data.
 
 \begin{figure}[htbp]
   \bigskip
@@ -3774,26 +3767,26 @@ The latter only need to ensure that they receive updates after they acquire acce
 Performance of cache in \textbf{Symmetric Multi Processors} \textit{(SMP)}, is a combination of:
 
 \begin{itemize}
-  \item Uniprocessor cache miss traffic
-  \item Traffic caused by communication, resulting in invalidations and cache misses
-  \item Coherence misses \textit{(communication misses)}
+  \item \textbf{Uniprocessor} cache miss traffic
+  \item \textbf{Traffic} caused by communication, resulting in invalidations and cache misses
+  \item Coherence \textbf{misses} \textit{(communication misses)}
 \end{itemize}
 
 \bigskip
 \textbf{True} sharing misses arise from the communication of data through the cache coherence mechanism:
 
 \begin{itemize}
-  \item Invalidation due to first write to shared line
-  \item Read by anther CPU on the same line in different cache
-  \item Miss occurs if line size were of 1 word
+  \item \textbf{Invalidation} due to first write to shared line
+  \item Read by anther CPU on the \textbf{same} line in \textbf{different} cache
+  \item \textbf{Miss} occurs if line size were of \(1\) word
 \end{itemize}
 
 \textbf{False} sharing misses when a line is invalidated because some word in the line, other than the one being read, is written into:
 
 \begin{itemize}
-  \item Invalidation does not cause a new value to be communicated, but only causes an extra cache miss
-  \item Line is shared, by no word in line is actually shared
-  \item Miss would not occurs if line size were of 1 word
+  \item Invalidation does not cause a new value to be communicated, but only \textbf{causes an extra cache miss}
+  \item Line is \textbf{shared}, by no word in line is actually shared
+  \item \textbf{Miss} would not occurs if line size were of \(1\) word
 \end{itemize}
 
 \subsubsection{Scaling broadcast coherence}
@@ -3801,15 +3794,15 @@ Performance of cache in \textbf{Symmetric Multi Processors} \textit{(SMP)}, is a
 When a processor gets a miss, it must probe every other cache.
 This causes a limit in the scale up, because it implies higher communication traffic and more snoop bandwidth into tags.
 
-The bandwidth can be improved by using multiple interleaved buses with interleaved tag banks.
-Buses however don't scale to large number of connections, so point-to-point networks can be used with large number for large scale systems.
-The limitation would now be the tag bandwidth while broadcasting snoop request.
+The bandwidth can be improved by using multiple interleaved \textit{BUSES} with interleaved tag banks.
+However they don't scale to large number of connections, so point-to-point networks can be used with large number for large scale systems.
+The limitation would now be represented by the tag bandwidth while broadcasting snoop request.
 
 In real world applications, most snoops fail to find a match and, as such, there's no scalability with respect to the number of processors.
 
 \paragraph{Extension of coherence protocols}
 
-Shared memory bus and snooping bandwidth create a bottleneck for scaling symmetric multiprocessors.
+Shared memory \textit{BUS} and snooping bandwidth create a bottleneck for scaling symmetric multiprocessors.
 In order to solve this problem, the following modifications are proposed:
 
 \begin{itemize}
@@ -3839,14 +3832,14 @@ An illustration of this extension is shown in Figure~\ref{fig:MESI-extension}.
 They are:
 
 \begin{itemize}
-  \item Vector architectures
-  \item SIMD extensions
+  \item \textbf{Vector} architectures
+  \item \textbf{SIMD} extensions
         \begin{itemize}
           \item \textit{MMX} - Multimedia Extension
           \item \textit{SSE} - Streaming \textit{SIMD} Extension
           \item \textit{AVX} - Advanced Vector Extension
         \end{itemize}
-  \item Graphics Processor Units \textit{(GPUs)}
+  \item \textbf{Graphics Processor Units} \textit{(GPUs)}
         \begin{itemize}
           \item heterogeneous architectures: require system processor and system memory in addition to \textit{GPU} and graphics memory
         \end{itemize}
@@ -3873,13 +3866,13 @@ New applications, \textit{(such as graphics, machine vision, speech recognition,
 
 It is widely accepted that \textit{DLP} will account for more mainstream parallelism growth than \textit{TLP} in the next decade.
 
-\subsubsection{Supercomputers}
+\subsection{Supercomputers}
 
 Definition of a supercomputer:
 
 \begin{itemize}
   \item Fastest machine the world at a given task
-  \item A device that can turn a compute=bound problem into a I/O bound problem \textit{(???)}
+  \item A device that can turn a compute bound problem into a I/O bound problem
   \item Any machine costing \(\$30M+\) {\tiny capitalism is a blessing in disguise}
   \item Any machine designed by \textit{Seymour Cray} {\tiny damn son what a chad}
 \end{itemize}
@@ -3891,16 +3884,17 @@ The \textit{CDC600}, a computer designed by \textit{Seymour Cray} and built by \
 \textbf{Vector processors} have high level operations that work on linear arrays of number \textit{(also called vectors)}.
 A language that can handle vectors \textit{(and not scalar values)} is needed as well.
 
+\bigskip
 \textit{Basic idea}:
 \begin{itemize}
-  \item Read sets of data elements into \textit{vector registers}
-  \item Operate on those registers
-  \item Disperse the results back into memory
-  \item Adaptable to different data types
+  \item \textbf{Read} sets of data elements into \textit{vector registers}
+  \item \textbf{Operate} on those registers
+  \item \textbf{Disperse} the results back into memory
+  \item Adaptable to \textbf{different data types}
         \begin{itemize}
           \item a vector size can be seen as \(64\) 64-bits elements, \(32\) 128-bits elements, \ldots
         \end{itemize}
-  \item A single instruction operates on vectors of data
+  \item A single instruction operates on \textbf{vectors} of data
         \begin{itemize}
           \item the result involves many registers to register operations
           \item used to hide memory latency
@@ -3909,7 +3903,7 @@ A language that can handle vectors \textit{(and not scalar values)} is needed as
 \end{itemize}
 
 \bigskip
-It's called \textbf{stride} of an array \textit{(also referred to as increment, pitch or step size)} the number of locations in memory between beginnings of successive array elements, measured in bytes or in units of the size of the array's elements. The stride cannot be smaller than the element size but can be larger, indicating extra space between elements.
+It's called \textbf{stride} of an array \textit{(also referred to as increment, pitch or step size)} the number of locations in memory between beginnings of successive array elements, measured in bytes or in units of the size of the array's elements. The stride \textbf{cannot be smaller} than the element size but can be larger, indicating extra space between elements.
 
 \begin{figure}[htbp]
   \bigskip
@@ -3938,10 +3932,10 @@ There are \(2\) styles of vector architectures:
 
 \begin{itemize}
   \item \textbf{Memory-Memory} vector processors: all vector operations are memory to memory
-  \item \textbf{Vector-Register} processors: all vector operations are between vector registers \textit{(except load and store)}
+  \item \textbf{Vector-Register} processors: all vector operations are between vector registers \textit{(except \texttt{LOAD} and \texttt{STORE})}
 \end{itemize}
 
-The execution is done by using a deep pipeline, allowing very fast clock frequency and higher speeds.
+The execution is done by using a \textbf{deep pipeline}, allowing very fast clock frequency and higher speeds.
 Since elements in the vectors are independent, there are no hazards and the pipelines are always full.
 
 Vectors applications are not limited to scientific computing, as they are used in:
@@ -3962,7 +3956,7 @@ The structure of the vector unit is represented in Figure~\ref{fig:vector-unit-s
 \begin{figure}
   \bigskip
   \centering
-  \tikzfig[0.4]{image-26.tikz}
+  \tikzfig[0.65]{image-26.tikz}
   \caption{\textit{Vector Unit} structure}
   \label{fig:vector-unit-structure}
   \bigskip
@@ -3974,21 +3968,21 @@ The \textit{VMIPS} is an architecture loosely based on \textit{CRAY-1} supercomp
 It features:
 
 \begin{itemize}
-  \item \(8\) Vector registers
+  \item \(8\) \textbf{Vector registers}
         \begin{itemize}
           \item each register holds a \(64\) elements vector with \(64\) bits per element
           \item the register file has at least \(16\) read ports and \(8\) write ports
         \end{itemize}
-  \item Vector functional units
+  \item \textbf{Vector functional units}
         \begin{itemize}
           \item fully pipelined so they can start a new operation every cycle
         \end{itemize}
-  \item Vector load store unit
+  \item \textbf{Vector load store unit}
         \begin{itemize}
           \item fully pipelined so they can read one word per clock cycle
         \end{itemize}
-  \item \(32\) general purpose scalar registers
-  \item \(32\) floating point scalar registers
+  \item \(32\) general purpose \textbf{scalar registers}
+  \item \(32\) floating point \textbf{scalar registers}
 \end{itemize}
 
 \bigskip
@@ -3996,17 +3990,17 @@ It features:
 
 \begin{minipage}{\textwidth}
   \bigskip
-  \begin{minipage}[t]{0.4\textwidth}
+  \begin{minipage}[t]{0.33\textwidth}
     \begin{verbatim}
-      # C code
+      // C code
       for (i = 0; i < 64; i++)
         C[i] = A[i] + B[i];
     \end{verbatim}
   \end{minipage}
-  \begin{minipage}[t]{0.29\textwidth}
+  \begin{minipage}[t]{0.33\textwidth}
     \begin{verbatim}
-      # Scalar Code
-      LI R4, #64
+      // Scalar Code
+      LI R4, //64
     loop:
       L.D F0, 0(R1)
       L.D F2, 0(R2)
@@ -4019,10 +4013,10 @@ It features:
       BNEZ R4, loop
 \end{verbatim}
   \end{minipage}
-  \begin{minipage}[t]{0.29\textwidth}
+  \begin{minipage}[t]{0.33\textwidth}
     \begin{verbatim}
-    # Vector Code
-    LI VLR, #64
+    // Vector Code
+    LI VLR, //64
     LV V1, R1
     LV V2, R2
     ADDV.D V3,V1,V2
@@ -4036,10 +4030,10 @@ It features:
 
 \textit{VMIPS} functional units consume one vector element per clock cycle, so the execution time of one vector instruction is approximately the vector length.
 
-To simplify the calculations, the \textbf{Convoy notion} has been introduced.
-It considers a set of vector instructions that could potentially execute together \textit{(generating no structural hazards)}.
+To simplify the calculations, the \textbf{Convoy notion} has been introduced:
+it considers a set of vector instructions that could potentially execute together \textit{(generating no structural hazards)}.
 
-For a vector of length \(n\) and \(m\) convoys in a program, \(n \times m\) clock cycles are needed.
+For a vector of length \(n\) and \(m\) convoys in a program, \(n \cdot m\) clock cycles are needed.
 
 \paragraph{Vector startup time}
 
@@ -4056,7 +4050,7 @@ The representation of the pipeline during startup is shown in Figure~\ref{fig:ve
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-64.tikz}
+  \tikzfig[0.7]{image-64.tikz}
   \caption{Vector Unit startup time penalty}
   \label{fig:vector-unit-startup}
   \bigskip
@@ -4085,9 +4079,9 @@ It is executed at compile time via heuristic algorithms and it requires extensiv
 
 \paragraph{Stripmining}
 
-\textit{Problem}: vector registers have finite length.
+\textit{Problem}: vector registers have \textbf{finite length}.
 
-\textit{Solution}: break loops into pieces that fit in registers.
+\textit{Solution}: \textbf{break loops} into pieces that fit in registers.
 This technique is called \textbf{stripmining}.
 
 \bigskip
@@ -4103,21 +4097,21 @@ for (i = 0; i < N; i++)
   \end{minipage}
   \begin{minipage}[t]{0.33\textwidth}
     \begin{verbatim}
-andi x1, xN, 63 # N mod 64
-setvlr x1 # Do remainder
+andi x1, xN, 63 // N mod 64
+setvlr x1 // Do remainder
 loop:
 vld v1, xA
-sll x2, x1, 3 # Multiply by 8
-add xA, x2 # Bump pointer
+sll x2, x1, 3 // Multiply by 8
+add xA, x2 // Bump pointer
 vld v2, xB
 add xB, x2
 vfadd.d v3, v1, v2
 vsd v3, xC
 add xC, x2
-sub xN, x1 # Subtract elements
+sub xN, x1 // Subtract
 li x1, 64
-setvlr x1 # Reset full length
-bgtz xN, loop # loop again
+setvlr x1 // Reset full length
+bgtz xN, loop // loop again
   \end{verbatim}
   \end{minipage}
   \begin{minipage}[t]{0.33\textwidth}
@@ -4129,9 +4123,9 @@ bgtz xN, loop # loop again
 \paragraph{Vector Conditional Execution}
 \label{par:vector-conditional-execution}
 
-\textit{Problem}: want to vectorize loops with conditional code.
+\textit{Problem}: \textbf{vectorize} loops with conditional code.
 
-\textit{Solution}: add vector mask to registers:
+\textit{Solution}: add \textbf{vector masks} to registers:
 
 \begin{itemize}
   \item vector version of predicate registers, \(1\) bit per element and maskable vector instructions
@@ -4159,11 +4153,11 @@ for (i = 0; i < N; i++)
   \end{minipage}
   \begin{minipage}[t]{0.695\textwidth}
     \begin{verbatim}
-cvm # Turn on all elements
-vld vA, xA # Load entire A vector
-vfsgts.d vA, f0 # Set bits in mask register where A > 0
-vld vA, xB # Load B vector into A under mask
-vsd vA, xA # Store A back to memory under mask
+cvm // Turn on all elements
+vld vA, xA // Load entire A vector
+vfsgts.d vA, f0 // Set bits in mask register where A > 0
+vld vA, xB // Load B vector into A under mask
+vsd vA, xA // Store A back to memory under mask
     \end{verbatim}
   \end{minipage}
 \end{minipage}
@@ -4171,19 +4165,19 @@ vsd vA, xA # Store A back to memory under mask
 \subsubsection{Advantages over scalar}
 
 \begin{itemize}
-  \item Vectors operations chaining
+  \item \textbf{Vectors operations chaining}
         \begin{itemize}
           \item a vector operation can start as soon as the individual elements of its vector source operand become available
           \item the results of the first functional unit in the chain are forwarded to the second functional unit
           \item implemented by allowing the processor to read and write a particular vector register at the same time, provided it is to different scalar elements
           \item flexible chaining: allow a vector instruction to chain to essentially any other vector instruction, assuming that it does not generate any structural hazard
         \end{itemize}
-  \item Pipeline stalls greatly decreased
+  \item \textbf{Pipeline stalls greatly decreased}
         \begin{itemize}
           \item vector version: only the first element of the vector must be stalled, and after that the results can come out at every cycle
           \item a scalar processor can try to get a similar effect through loop unrolling but it cannot get the dynamic instruction count decrease
         \end{itemize}
-  \item The operations are executed in parallel, along multiple lines
+  \item \textbf{The operations are executed in parallel}, along multiple lines
 \end{itemize}
 
 \bigskip
@@ -4204,7 +4198,7 @@ The advantage of vector chaining is represented in Figure~\ref{fig:vector-chaini
     \caption{with}
     \label{subfig:with-vector-chaining}
   \end{subfigure}
-  \caption{Vector chaining}
+  \caption{Comparison of instruction executions with and without vector chaining}
   \label{fig:vector-chaining}
   \bigskip
 \end{figure}
@@ -4223,9 +4217,9 @@ The advantage of vector chaining is represented in Figure~\ref{fig:vector-chaini
 The \textbf{multimedia extension}, also called \textit{SIMD} extension. It features:
 
 \begin{itemize}
-  \item very short vectors added to existing \textit{ISAs} for microprocessors
-  \item existing \(64\) bits registers split into \(2 \times 32 b\) or \(4 \times 16 b\) or \(8 \times 8 b\)
-  \item execution of the single instructions on all the elements within the register \textit{(Figure~\ref{fig:operations-in-vector-form})}
+  \item very short vectors \textbf{added} to existing \textit{ISAs} for microprocessors
+  \item existing \(64\) bits registers \textbf{split} into \(2 \times 32 b\) or \(4 \times 16 b\) or \(8 \times 8 b\)
+  \item execution of the single instructions on \textbf{all the elements within the register} \textit{(Figure~\ref{fig:operations-in-vector-form})}
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -4242,18 +4236,18 @@ The \textbf{multimedia extension}, also called \textit{SIMD} extension. It featu
 Multimedia Extensions, compared to Vector Architectures, feature:
 
 \begin{itemize}
-  \item A limited instruction set
+  \item \textbf{A limited instruction set}
         \begin{itemize}
           \item no vector length control
           \item no strided \texttt{LOAD} and \texttt{STORE} or \texttt{SCATTER} and \texttt{GATHER}
           \item no unit-stride loads must be aligned to \(64/128\) bit boundary
         \end{itemize}
-  \item A limited vector register length
+  \item \textbf{A limited vector register length}
         \begin{itemize}
           \item requires superscalar dispatch to keep multiply/add/load units busy
           \item loop unrolling to hide latencies increase register pressure
         \end{itemize}
-  \item Trend towards fuller vector support in microprocessors
+  \item \textbf{Trend towards fuller vector support in microprocessors}
         \begin{itemize}
           \item better support for misaligned memory access
           \item support of double precision \textit{(64 bit floating point)}
@@ -4263,13 +4257,13 @@ Multimedia Extensions, compared to Vector Architectures, feature:
 \subsection{Vector Computers recap}
 
 \begin{itemize}
-  \item Vectors provide efficient execution of data parallel loop codes
-  \item Vector ISA provides compact encoding of machine parallelism
-  \item Vector ISA scales to more lanes without changing binary code
-  \item Vector registers provide fast temporary storage to reduce memory bandwidth demands and simplify dependency checking between vector operations
-  \item Scatter/gather, masking, compress/expand operations increase set of vectorizable loops
-  \item Requires extensive compiler analysis \textit{(or programmer annotation)} to be certain that loops can be vectorized
-  \item Full long vector support is still only in supercomputers, while microprocessors have limited packed or subword-\textit{SIMD} operations support
+  \item Vectors provide \textbf{efficient execution} of data parallel loop codes
+  \item Vector ISA provides \textbf{compact encoding} of machine parallelism
+  \item Vector ISA \textbf{scales to more lanes} without changing binary code
+  \item Vector registers \textbf{provide fast temporary storage} to reduce memory bandwidth demands and simplify dependency checking between vector operations
+  \item Scatter/gather, masking, compress/expand operations \textbf{increase set of vectorizable loops}
+  \item Requires \textbf{extensive compiler analysis} \textit{(or programmer annotation)} to be certain that loops can be vectorized
+  \item Full \textbf{long vector support} is still \textbf{only in supercomputers}, while microprocessors have limited packed or subword-\textit{SIMD} operations support
 \end{itemize}
 
 \subsection{Graphic Processing Units - \textit{GPUs}}
@@ -4294,9 +4288,9 @@ The host \textit{CPU} issues data parallel kernels to \textit{GP-GPU} device for
 \texttt{CUDA} programming model:
 
 \begin{itemize}
-  \item Programmer writes a serial program that calls parallel \textbf{kernels}
-  \item A kernel executes in parallel across a set of parallel \textbf{threads}
-  \item Programmer organizes these threads into thread block and grids of \textbf{thread blocks}
+  \item The \textbf{programmer writes} a serial program that calls parallel \textbf{kernels}
+  \item A \textbf{kernel executes} in parallel across a set of parallel \textbf{threads}
+  \item The \textbf{programmer organizes} these threads into thread block and grids of \textbf{thread blocks}
   \item A \textbf{thread block} is a set of concurrent threads that can cooperate among themselves through barrier synchronization and through shared memory space private to the block
   \item A \textbf{grid} is a set of thread block that may be executed independently and thus may execute in parallel (or any order)
         \begin{itemize}
@@ -4320,7 +4314,7 @@ The host \textit{CPU} issues data parallel kernels to \textit{GP-GPU} device for
 \end{itemize}
 
 \bigskip
-GPUs use a SIMT \textit{(Single Instruction Multiple Thread)} model, where individual \textit{(scalar)} instruction streams for each \texttt{CUDA} thread are grouped together for \textit{SIMD} execution on hardware.
+GPUs use a \textit{SIMT} \textit{(Single Instruction Multiple Thread)} model, where individual \textit{(scalar)} instruction streams for each \texttt{CUDA} thread are grouped together for \textit{SIMD} execution on hardware.
 \textit{NVIDIA} groups \(32\) threads (\(\mu T\)) into a \textbf{warp}.
 
 Warps are multithreaded on cores, and each of them is managed by the hardware.

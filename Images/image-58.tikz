@@ -40,7 +40,7 @@
 		\node [style=none] (79) at (1.5, -8.5) { \footnotesize\texttt{L2}};
 		\node [style=none] (80) at (1.5, -6.25) {};
 		\node [style=none] (81) at (1.5, -7.25) {};
-		\node [style=none] (86) at (1.5, -10.5) { \scriptsize\texttt{snooper}};
+		\node [style=none] (86) at (1.5, -10.5) { \tiny\texttt{snooper}};
 		\node [style=none] (87) at (0.5, -11.5) {};
 		\node [style=none] (88) at (2.5, -11.5) {};
 		\node [style=none] (89) at (2.5, -9.5) {};
@@ -69,7 +69,6 @@
 		\node [style=none] (112) at (6.5, -8.5) { \footnotesize\texttt{L2}};
 		\node [style=none] (113) at (6.5, -6.25) {};
 		\node [style=none] (114) at (6.5, -7.25) {};
-		\node [style=none] (115) at (6.5, -10.5) { \scriptsize\texttt{snooper}};
 		\node [style=none] (116) at (5.5, -11.5) {};
 		\node [style=none] (117) at (7.5, -11.5) {};
 		\node [style=none] (118) at (7.5, -9.5) {};
@@ -98,11 +97,12 @@
 		\node [style=none] (141) at (13.5, -8.5) { \footnotesize\texttt{L2}};
 		\node [style=none] (142) at (13.5, -6.25) {};
 		\node [style=none] (143) at (13.5, -7.25) {};
-		\node [style=none] (144) at (13.5, -10.5) { \scriptsize\texttt{snooper}};
 		\node [style=none] (145) at (12.5, -11.5) {};
 		\node [style=none] (146) at (14.5, -11.5) {};
 		\node [style=none] (147) at (14.5, -9.5) {};
 		\node [style=none] (148) at (12.5, -9.5) {};
+		\node [style=none] (149) at (13.5, -10.5) { \tiny\texttt{snooper}};
+		\node [style=none] (150) at (6.5, -10.5) { \tiny\texttt{snooper}};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=big] (2.center)

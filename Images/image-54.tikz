@@ -1,10 +1,10 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=none] (0) at (0, 0) {};
-		\node [style=none] (1) at (2, -5) {};
-		\node [style=none] (2) at (0, -5) {};
-		\node [style=none] (3) at (2, 0) {};
-		\node [style=none] (4) at (0, 0) {};
+		\node [style=none] (0) at (0, 1) {};
+		\node [style=none] (1) at (2, -6) {};
+		\node [style=none] (2) at (0, -6) {};
+		\node [style=none] (3) at (2, 1) {};
+		\node [style=none] (4) at (0, 1) {};
 		\node [style=none, rotate=-90] (5) at (1, -2.5) {\texttt{processor}};
 		\node [style=none] (6) at (6, 0) {};
 		\node [style=none] (7) at (6, -2) {};
