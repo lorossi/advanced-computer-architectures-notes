@@ -479,9 +479,10 @@ There are \(2\) apparent solutions:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.8]{image-4.tikz}
-  \caption{Comparison between fine and coarse multithreading}
-  \label{fig:multithreading-comparion}
+  \tikzfig[1]{image-4.tikz}
+  \caption{\centering Comparison between fine and coarse multithreading. Each column shows the evolution of \(2\) different processes spread on \(4\) different threads over a set amount of time.
+    A filled square illustrates a thread occupied by a process, while the empty ones represent an empty \texttt{(idle)} thread.}
+  \label{fig:multithreading-fine-coarse-comparison}
   \bigskip
 \end{figure}
 
@@ -510,8 +511,8 @@ Comparison between many multithreading paradigms is shown in Figure~\ref{fig:mul
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.5]{image-6.tikz}
-  \caption{\centering Multithreading comparison - each column shows the evolution of \(5\) different processes spread on \(4\) different threads over a set amount of time.
+  \tikzfig[0.85]{image-6.tikz}
+  \caption{\centering Multithreading comparison. Each column shows the evolution of \(5\) different processes spread on \(4\) different threads over a set amount of time.
     A filled square illustrates a thread occupied by a process, while the empty ones represent an empty \texttt{(idle)} thread.}
   \label{fig:multithreading-comparison}
   \bigskip
@@ -577,6 +578,7 @@ Motivations for \textit{SIMD}:
 \begin{itemize}
   \item The cost of the control unit is shared between all execution units
   \item Only one copy of the code in execution is necessary
+  \item All the computation is fully synchronized
 \end{itemize}
 
 In real life:
@@ -587,103 +589,15 @@ In real life:
   \item \textit{SIMD} instructions sent to all the execution units, which has its own memory and registers and exploit an interconnection network to exchange data
 \end{itemize}
 
+\bigskip
+\textit{SIMD} architectures will be explored in depth in Section~\ref{sec:simd}.
+
 \begin{figure}[htbp]
   \bigskip
   \centering
   \tikzfig[1]{image-7.tikz}
   \caption{\textit{SIMD} architecture}
   \label{fig:simd-architecture}
-  \bigskip
-\end{figure}
-
-\subsubsection{Vector processing}
-
-\textbf{Vector processors} have high level operations that work on linear arrays of number \textit{(also called vectors)}.
-A language that can handle vectors \textit{(and not scalar values)} is needed as well.
-
-\begin{figure}[htbp]
-  \bigskip
-  \centering
-  \tikzfig[1]{image-8.tikz}
-  \caption{Vector processing}
-  \label{fig:vector-processing}
-  \bigskip
-\end{figure}
-
-A vector processor consists of a pipelined scalar unit and a vector units.
-There are \(2\) styles of vector architectures:
-
-\begin{itemize}
-  \item \textbf{memory-memory} vector processors: all vector operations are memory to memory
-  \item \textbf{vector-register} processors: all vector operations are between vector registers \textit{(except load and store)}
-\end{itemize}
-
-The execution is done by using a deep pipeline, allowing very fast clock frequency and higher speeds.
-Since elements in the vectors are independent, there are no hazards and the pipelines are always full.
-
-Vectors applications are not limited to scientific computing, as they are used in:
-
-\begin{itemize}
-  \item Multimedia Processing
-  \item Standard benchmarks kernels
-  \item Lossy and Lossless Compression
-  \item Cryptography and Hashing
-  \item Speech and handwriting recognition
-  \item Operating systems and networking
-  \item Databases
-  \item Language run time support
-  \item \ldots
-\end{itemize}
-
-\bigskip
-\textit{Example of vector code:}
-
-\begin{minipage}{\textwidth}
-  \bigskip
-  \begin{minipage}[t]{0.4\textwidth}
-    \begin{verbatim}
-      # C code
-      for (i = 0; i < 64; i++)
-        C[i] = A[i] + B[i];
-    \end{verbatim}
-  \end{minipage}
-  \begin{minipage}[t]{0.29\textwidth}
-    \begin{verbatim}
-      # Scalar Code
-      LI R4, #64
-    loop:
-      L.D F0, 0(R1)
-      L.D F2, 0(R2)
-      ADD.D F4, F2, F0
-      S.D F4, 0(R3)
-      DADDIU R1, 8
-      DADDIU R2, 8
-      DADDIU R3, 8
-      DSUBIU R4, 1
-      BNEZ R4, loop
-\end{verbatim}
-  \end{minipage}
-  \begin{minipage}[t]{0.29\textwidth}
-    \begin{verbatim}
-    # Vector Code
-    LI VLR, #64
-    LV V1, R1
-    LV V2, R2
-    ADDV.D V3,V1,V2
-    SV V3, R3
-  \end{verbatim}
-  \end{minipage}
-  \bigskip
-\end{minipage}
-
-The structure of the vector unit is represented in Figure~\ref{fig:vector-unit-structure}.
-
-\begin{figure}
-  \bigskip
-  \centering
-  \tikzfig[0.4]{image-26.tikz}
-  \caption{\textit{Vector Unit} structure}
-  \label{fig:vector-unit-structure}
   \bigskip
 \end{figure}
 
@@ -695,9 +609,11 @@ The structure of the vector unit is represented in Figure~\ref{fig:vector-unit-s
   \item \textbf{Single user} machines for high performance on one application
   \item Multiprogrammed multiprocessors running many tasks \textbf{simultaneously}
   \item Some combinations of the two aforementioned functions
-  \item Can be build starting from standard CPUs
 \end{itemize}
 
+They can also be built starting from standard CPUs
+
+\bigskip
 Each processor fetches its own instructions and operates on its own data.
 Processors are often off the shelf microprocessors, with the upside of being able to build a scalable architecture and having an high cost performance ratio.
 
@@ -730,6 +646,9 @@ To fully exploit a \textit{MIMD} with \(n\) processors, there must be:
           \item It has the disadvantage of the high volume of data communication between processors
         \end{itemize}
 \end{itemize}
+
+\bigskip
+\textit{SIMD} architectures will be explored in depth in Section~\ref{sec:mimd}.
 
 \clearpage
 
@@ -1092,12 +1011,12 @@ Its performance depends on:
 There are many methods to deal with the performance loss due to branch hazards:
 
 \begin{itemize}
-  \item Static branch prediction techniques: the actions for a branch are fixed for each branch during the entire execution
+  \item \textbf{Static} branch prediction techniques: the actions for a branch are fixed for each branch during the entire execution
         \begin{itemize}
           \item used in processors where the expectation is that the branch behaviour is highly predictable at compile time
           \item can be used to assist dynamic predictors
         \end{itemize}
-  \item Dynamic branch prediction techniques: the actions for a branch can change during the program execution
+  \item \textbf{Dynamic} branch prediction techniques: the actions for a branch can change during the program execution
 \end{itemize}
 
 In both cases, care must be taken not to change the processor state until the branch is definitely known.
@@ -1793,6 +1712,7 @@ Results are then dispatched to other \textit{FUs} through a \textit{Common Data 
 Finally, \texttt{LOAD} and \texttt{STORE} operations are treated as \textit{FUs}, as Reservation Stations are more complex than architectural registers to allow more compiler-level optimizations.
 
 \paragraph{Structure of the Reservation Stations}
+
 The Reservation Station is composed by \(5\) fields:
 
 \begin{itemize}
@@ -3742,11 +3662,11 @@ To improve the reading speed (thus reducing the access latency), often processor
 \begin{itemize}
   \item A \textit{L2} cache, large
   \item A \textit{L1} cache, small
-  \begin{itemize}
-    \item entries in \texttt{L1} must be in \texttt{L2}
-    \item invalidation in \texttt{L2} \(\Rightarrow\) invalidation in \texttt{L1}
-    \item snooping on \texttt{L2} does not affect \texttt{L1} bandwidth
-  \end{itemize}
+        \begin{itemize}
+          \item entries in \texttt{L1} must be in \texttt{L2}
+          \item invalidation in \texttt{L2} \(\Rightarrow\) invalidation in \texttt{L1}
+          \item snooping on \texttt{L2} does not affect \texttt{L1} bandwidth
+        \end{itemize}
 \end{itemize}
 
 When a read-miss for a value is detected in a value, a read request for the value is placed on the bus.
@@ -3907,6 +3827,524 @@ An illustration of this extension is shown in Figure~\ref{fig:MESI-extension}.
 \section{SIMD}
 \label{sec:simd}
 
+\(3\) variations of the \textit{SIMD} model are commonly used in parallel processors.
+They are:
 
+\begin{itemize}
+  \item Vector architectures
+  \item SIMD extensions
+        \begin{itemize}
+          \item \textit{MMX} - Multimedia Extension
+          \item \textit{SSE} - Streaming \textit{SIMD} Extension
+          \item \textit{AVX} - Advanced Vector Extension
+        \end{itemize}
+  \item Graphics Processor Units \textit{(GPUs)}
+        \begin{itemize}
+          \item heterogeneous architectures: require system processor and system memory in addition to \textit{GPU} and graphics memory
+        \end{itemize}
+\end{itemize}
+
+\subsection{SIMD vs MIMD}
+
+SIMD architectures can exploit significant data level parallelism for:
+
+\begin{itemize}
+  \item matrix-oriented scientific computing
+  \item media-oriented image and sound processors
+\end{itemize}
+
+\textit{SIMD} is generally more energy efficient than \textit{MIMD}, as it only needs to fetch one instruction per data operation.
+This feature makes \textit{SIMD} attractive for personal mobile devices.
+Finally, \textit{SIMD} allows programmers to continue to think sequentially, as opposed to \textit{MIMD} \textit{(where programmers need to think in parallel)}.
+
+\subsection{Resurgence of DLP}
+
+The convergence of application demands and technology constraints drivers the architecture choice.
+New applications, \textit{(such as graphics, machine vision, speech recognition, machine learning, \ldots)} require large numerical computations that are often trivially data parallel.
+SIMD based architectures \textit{(such as vector-SIMD, subword-SIMD, SIMT, GPUs)} are the most efficient choice for these applications.
+
+It is widely accepted that \textit{DLP} will account for more mainstream parallelism growth than \textit{TLP} in the next decade.
+
+\subsubsection{Supercomputers}
+
+Definition of a supercomputer:
+
+\begin{itemize}
+  \item Fastest machine the world at a given task
+  \item A device that can turn a compute=bound problem into a I/O bound problem \textit{(???)}
+  \item Any machine costing \(\$30M+\) {\tiny capitalism is a blessing in disguise}
+  \item Any machine designed by \textit{Seymour Cray} {\tiny damn son what a chad}
+\end{itemize}
+
+The \textit{CDC600}, a computer designed by \textit{Seymour Cray} and built by \textit{Cray Research} in \(1964\), is regarded as the first supercomputer.
+
+\subsection{Vector Architectures and Vector Processing}
+
+\textbf{Vector processors} have high level operations that work on linear arrays of number \textit{(also called vectors)}.
+A language that can handle vectors \textit{(and not scalar values)} is needed as well.
+
+\textit{Basic idea}:
+\begin{itemize}
+  \item Read sets of data elements into \textit{vector registers}
+  \item Operate on those registers
+  \item Disperse the results back into memory
+  \item Adaptable to different data types
+        \begin{itemize}
+          \item a vector size can be seen as \(64\) 64-bits elements, \(32\) 128-bits elements, \ldots
+        \end{itemize}
+  \item A single instruction operates on vectors of data
+        \begin{itemize}
+          \item the result involves many registers to register operations
+          \item used to hide memory latency
+          \item leverages memory bandwidth
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+It's called \textbf{stride} of an array \textit{(also referred to as increment, pitch or step size)} the number of locations in memory between beginnings of successive array elements, measured in bytes or in units of the size of the array's elements. The stride cannot be smaller than the element size but can be larger, indicating extra space between elements.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \begin{subfigure}[b]{0.495\textwidth}
+    \centering
+    \tikzfig[1]{image-8.tikz}
+    \caption{Scalar model, \(1\) operation at a time}
+    \label{subfig:vector-model}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.495\textwidth}
+    \centering
+    \tikzfig[1]{image-8a.tikz}
+    \caption{Vector mode, \(n\) operations at a time}
+    \label{subfig:scalar-model}
+  \end{subfigure}
+  \caption{Comparison of scalar and vector models}
+  \label{fig:comparison-of-models}
+  \bigskip
+\end{figure}
+
+\subsubsection{Vector processing}
+
+A vector processor consists of a pipelined scalar unit and a vector units.
+There are \(2\) styles of vector architectures:
+
+\begin{itemize}
+  \item \textbf{Memory-Memory} vector processors: all vector operations are memory to memory
+  \item \textbf{Vector-Register} processors: all vector operations are between vector registers \textit{(except load and store)}
+\end{itemize}
+
+The execution is done by using a deep pipeline, allowing very fast clock frequency and higher speeds.
+Since elements in the vectors are independent, there are no hazards and the pipelines are always full.
+
+Vectors applications are not limited to scientific computing, as they are used in:
+
+\begin{itemize}
+  \item Multimedia Processing
+  \item Standard benchmarks kernels
+  \item Lossy and Lossless Compression
+  \item Cryptography and Hashing
+  \item Speech and handwriting recognition
+  \item Operating systems and networking
+  \item Databases
+  \item Language run time support
+\end{itemize}
+
+The structure of the vector unit is represented in Figure~\ref{fig:vector-unit-structure}.
+
+\begin{figure}
+  \bigskip
+  \centering
+  \tikzfig[0.4]{image-26.tikz}
+  \caption{\textit{Vector Unit} structure}
+  \label{fig:vector-unit-structure}
+  \bigskip
+\end{figure}
+
+\subsubsection{VMIPS}
+
+The \textit{VMIPS} is an architecture loosely based on \textit{CRAY-1} supercomputer.
+It features:
+
+\begin{itemize}
+  \item \(8\) Vector registers
+        \begin{itemize}
+          \item each register holds a \(64\) elements vector with \(64\) bits per element
+          \item the register file has at least \(16\) read ports and \(8\) write ports
+        \end{itemize}
+  \item Vector functional units
+        \begin{itemize}
+          \item fully pipelined so they can start a new operation every cycle
+        \end{itemize}
+  \item Vector load store unit
+        \begin{itemize}
+          \item fully pipelined so they can read one word per clock cycle
+        \end{itemize}
+  \item \(32\) general purpose scalar registers
+  \item \(32\) floating point scalar registers
+\end{itemize}
+
+\bigskip
+\textit{Example of vector code}:
+
+\begin{minipage}{\textwidth}
+  \bigskip
+  \begin{minipage}[t]{0.4\textwidth}
+    \begin{verbatim}
+      # C code
+      for (i = 0; i < 64; i++)
+        C[i] = A[i] + B[i];
+    \end{verbatim}
+  \end{minipage}
+  \begin{minipage}[t]{0.29\textwidth}
+    \begin{verbatim}
+      # Scalar Code
+      LI R4, #64
+    loop:
+      L.D F0, 0(R1)
+      L.D F2, 0(R2)
+      ADD.D F4, F2, F0
+      S.D F4, 0(R3)
+      DADDIU R1, 8
+      DADDIU R2, 8
+      DADDIU R3, 8
+      DSUBIU R4, 1
+      BNEZ R4, loop
+\end{verbatim}
+  \end{minipage}
+  \begin{minipage}[t]{0.29\textwidth}
+    \begin{verbatim}
+    # Vector Code
+    LI VLR, #64
+    LV V1, R1
+    LV V2, R2
+    ADDV.D V3,V1,V2
+    SV V3, R3
+  \end{verbatim}
+  \end{minipage}
+  \bigskip
+\end{minipage}
+
+\subsubsection{Vector Execution Time}
+
+\textit{VMIPS} functional units consume one vector element per clock cycle, so the execution time of one vector instruction is approximately the vector length.
+
+To simplify the calculations, the \textbf{Convoy notion} has been introduced.
+It considers a set of vector instructions that could potentially execute together \textit{(generating no structural hazards)}.
+
+For a vector of length \(n\) and \(m\) convoys in a program, \(n \times m\) clock cycles are needed.
+
+\paragraph{Vector startup time}
+
+The vector unit has a startup time penalty.
+It is composed by two factors:
+
+\begin{itemize}
+  \item \textbf{Functional unit} latency \textit{(time through the pipeline)}
+  \item \textbf{Dead} time or recovery time \textit{(time before another vector instructions can start travelling the pipeline)}
+\end{itemize}
+
+The representation of the pipeline during startup is shown in Figure~\ref{fig:vector-unit-startup}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-64.tikz}
+  \caption{Vector Unit startup time penalty}
+  \label{fig:vector-unit-startup}
+  \bigskip
+\end{figure}
+
+\subsubsection{Interleaved Vector Memory System}
+
+The access to each item in a memory bank is interleaved.
+The bank busy time is defined as the time before bak is ready to accept the next request.
+
+The \textit{Cray-1} had \(16\) banks with \(4\) cycles bank busy time and \(12\) cycles latency.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-65.tikz}
+  \caption{Interleaved Vector Memory System}
+  \label{fig:interleaved-vector-memory-system}
+  \bigskip
+\end{figure}
+
+\subsubsection{Automatic code vectorization}
+
+The code vectorization is a process that automatically detects the best way to reorder the operation sequencing.
+It is executed at compile time via heuristic algorithms and it requires extensive loop dependence analysis.
+
+\paragraph{Stripmining}
+
+\textit{Problem}: vector registers have finite length.
+
+\textit{Solution}: break loops into pieces that fit in registers.
+This technique is called \textbf{stripmining}.
+
+\bigskip
+\textit{Code example:}
+\bigskip
+
+\begin{minipage}{\textwidth}
+  \begin{minipage}[t]{0.33\textwidth}
+    \begin{verbatim}
+for (i = 0; i < N; i++)
+  C[i] = A[i] + B[i];
+  \end{verbatim}
+  \end{minipage}
+  \begin{minipage}[t]{0.33\textwidth}
+    \begin{verbatim}
+andi x1, xN, 63 # N mod 64
+setvlr x1 # Do remainder
+loop:
+vld v1, xA
+sll x2, x1, 3 # Multiply by 8
+add xA, x2 # Bump pointer
+vld v2, xB
+add xB, x2
+vfadd.d v3, v1, v2
+vsd v3, xC
+add xC, x2
+sub xN, x1 # Subtract elements
+li x1, 64
+setvlr x1 # Reset full length
+bgtz xN, loop # loop again
+  \end{verbatim}
+  \end{minipage}
+  \begin{minipage}[t]{0.33\textwidth}
+    \centering
+    \tikzfig[0.7]{image-66.tikz}
+  \end{minipage}
+\end{minipage}
+
+\paragraph{Vector Conditional Execution}
+\label{par:vector-conditional-execution}
+
+\textit{Problem}: want to vectorize loops with conditional code.
+
+\textit{Solution}: add vector mask to registers:
+
+\begin{itemize}
+  \item vector version of predicate registers, \(1\) bit per element and maskable vector instructions
+  \item vector operations become bubble \textit{(or \texttt{NOP})} at elements where mask bit is clear
+\end{itemize}
+
+Two different implementation can be used to execute the vector instructions:
+
+\begin{itemize}
+  \item Simple implementation: execute all \(N\) operations, turn off result writeback according to mask
+  \item Density time implementation: scan mask vectors and only execute elements with non zero mask
+\end{itemize}
+
+\bigskip
+\textit{Code example:}
+\bigskip
+
+\begin{minipage}{\textwidth}
+  \begin{minipage}[t]{0.3\textwidth}
+    \begin{verbatim}
+for (i = 0; i < N; i++)
+  if (A[i] > 0)
+    A[i] = B{i}
+    \end{verbatim}
+  \end{minipage}
+  \begin{minipage}[t]{0.695\textwidth}
+    \begin{verbatim}
+cvm # Turn on all elements
+vld vA, xA # Load entire A vector
+vfsgts.d vA, f0 # Set bits in mask register where A > 0
+vld vA, xB # Load B vector into A under mask
+vsd vA, xA # Store A back to memory under mask
+    \end{verbatim}
+  \end{minipage}
+\end{minipage}
+
+\subsubsection{Advantages over scalar}
+
+\begin{itemize}
+  \item Vectors operations chaining
+        \begin{itemize}
+          \item a vector operation can start as soon as the individual elements of its vector source operand become available
+          \item the results of the first functional unit in the chain are forwarded to the second functional unit
+          \item implemented by allowing the processor to read and write a particular vector register at the same time, provided it is to different scalar elements
+          \item flexible chaining: allow a vector instruction to chain to essentially any other vector instruction, assuming that it does not generate any structural hazard
+        \end{itemize}
+  \item Pipeline stalls greatly decreased
+        \begin{itemize}
+          \item vector version: only the first element of the vector must be stalled, and after that the results can come out at every cycle
+          \item a scalar processor can try to get a similar effect through loop unrolling but it cannot get the dynamic instruction count decrease
+        \end{itemize}
+  \item The operations are executed in parallel, along multiple lines
+\end{itemize}
+
+\bigskip
+The advantage of vector chaining is represented in Figure~\ref{fig:vector-chaining}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \begin{subfigure}[b]{0.495\textwidth}
+    \centering
+    \tikzfig[0.8]{image-62.tikz}
+    \caption{without}
+    \label{subfig:wihtout-vector-chaining}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.495\textwidth}
+    \centering
+    \tikzfig[0.8]{image-63.tikz}
+    \caption{with}
+    \label{subfig:with-vector-chaining}
+  \end{subfigure}
+  \caption{Vector chaining}
+  \label{fig:vector-chaining}
+  \bigskip
+\end{figure}
+
+\paragraph{Vector Memory-Memory vs Vector Register Machines}
+
+\begin{itemize}
+  \item Vector memory-memory architectures \textit{(VMMAs)} require greater main memory bandwidth because all operands must be read in and out of memory
+  \item \textit{VMMAs} make it difficult to overlap execution of multiple vector operations because dependencies on memory addresses must be checked
+  \item \textit{VMMAs} incur in greater startup latencies
+  \item All major vector machines since Cray-1 have had vector register architectures
+\end{itemize}
+
+\subsubsection{Multimedia Extension}
+
+The \textbf{multimedia extension}, also called \textit{SIMD} extension. It features:
+
+\begin{itemize}
+  \item very short vectors added to existing \textit{ISAs} for microprocessors
+  \item existing \(64\) bits registers split into \(2 \times 32 b\) or \(4 \times 16 b\) or \(8 \times 8 b\)
+  \item execution of the single instructions on all the elements within the register \textit{(Figure~\ref{fig:operations-in-vector-form})}
+\end{itemize}
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-67.tikz}
+  \caption{Operation of instructions in vector form, \texttt{A + B = C} where all the variables are \(4\) \(16\) bits vectors}
+  \label{fig:operations-in-vector-form}
+  \bigskip
+\end{figure}
+
+\paragraph{Multimedia Extensions vs Vector Architectures}
+
+Multimedia Extensions, compared to Vector Architectures, feature:
+
+\begin{itemize}
+  \item A limited instruction set
+        \begin{itemize}
+          \item no vector length control
+          \item no strided \texttt{LOAD} and \texttt{STORE} or \texttt{SCATTER} and \texttt{GATHER}
+          \item no unit-stride loads must be aligned to \(64/128\) bit boundary
+        \end{itemize}
+  \item A limited vector register length
+        \begin{itemize}
+          \item requires superscalar dispatch to keep multiply/add/load units busy
+          \item loop unrolling to hide latencies increase register pressure
+        \end{itemize}
+  \item Trend towards fuller vector support in microprocessors
+        \begin{itemize}
+          \item better support for misaligned memory access
+          \item support of double precision \textit{(64 bit floating point)}
+        \end{itemize}
+\end{itemize}
+
+\subsection{Vector Computers recap}
+
+\begin{itemize}
+  \item Vectors provide efficient execution of data parallel loop codes
+  \item Vector ISA provides compact encoding of machine parallelism
+  \item Vector ISA scales to more lanes without changing binary code
+  \item Vector registers provide fast temporary storage to reduce memory bandwidth demands and simplify dependency checking between vector operations
+  \item Scatter/gather, masking, compress/expand operations increase set of vectorizable loops
+  \item Requires extensive compiler analysis \textit{(or programmer annotation)} to be certain that loops can be vectorized
+  \item Full long vector support is still only in supercomputers, while microprocessors have limited packed or subword-\textit{SIMD} operations support
+\end{itemize}
+
+\subsection{Graphic Processing Units - \textit{GPUs}}
+
+Originally \textit{(mid-1990s)}, \textit{GPUs} were dedicated fixed functions for generating 3D graphics, including high performance \textit{(SP)} floating point units.
+They provided workstation-like graphics for PCs while the user had no real way to program them, but they could merely configure the pipeline.
+
+Over time, more programmable features were added to the \textit{GPU}, enabling million ov vertices to be rendered in a single frame with very constrained programming models.
+
+Some users noticed they could do general purpose computation by mapping input and output data to images and computation to vertex and pixel shading computations.
+It was however a very difficult programming model as the programmer had to exploit the graphics pipeline to perform general computation.
+
+\subsubsection{General Purpose \textit{GPUs} - \textit{GP-GPUS}}
+
+In \(2006\), \textit{NVIDIA} introduced \textit{GeForce 8800 GPU} supporting a new programming language, called \texttt{CUDA} \textit{("Compute Unified Device Architecture")}.
+Subsequently, the other companies in the industry started pushing for \texttt{OpenCL} \textit{("Open Computing Language")}, a vendor neutral version of the same language available for multiple platforms.
+
+\texttt{CUDA} takes advantage of the \textit{GPU} computational performance and memory bandwidth to accelerate some kernels for general purpose computing.
+The host \textit{CPU} issues data parallel kernels to \textit{GP-GPU} device for execution.
+
+\bigskip
+\texttt{CUDA} programming model:
+
+\begin{itemize}
+  \item Programmer writes a serial program that calls parallel \textbf{kernels}
+  \item A kernel executes in parallel across a set of parallel \textbf{threads}
+  \item Programmer organizes these threads into thread block and grids of \textbf{thread blocks}
+  \item A \textbf{thread block} is a set of concurrent threads that can cooperate among themselves through barrier synchronization and through shared memory space private to the block
+  \item A \textbf{grid} is a set of thread block that may be executed independently and thus may execute in parallel (or any order)
+        \begin{itemize}
+          \item Thread creation, scheduling and termination are handled by underlying hardware
+          \item \texttt{CUDA} model \textbf{virtualizes} the processor
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Hardware execution model}
+
+\begin{itemize}
+  \item The \textit{GPU} is built from multiple parallel cores, each one containing a multithreaded \textit{SIMD} processor with multiple lanes but without scalar processor
+        \begin{itemize}
+          \item each tread block executes on one core.
+          \item some newer models feature a scalar unit
+        \end{itemize}
+  \item The \textit{CPU} sends thw whole grid over to the \textit{GPU}, which distributes thread blocks among cores
+        \begin{itemize}
+          \item the programmer is not aware of the number of cores
+        \end{itemize}
+\end{itemize}
+
+\bigskip
+GPUs use a SIMT \textit{(Single Instruction Multiple Thread)} model, where individual \textit{(scalar)} instruction streams for each \texttt{CUDA} thread are grouped together for \textit{SIMD} execution on hardware.
+\textit{NVIDIA} groups \(32\) threads (\(\mu T\)) into a \textbf{warp}.
+
+Warps are multithreaded on cores, and each of them is managed by the hardware.
+One warp composed by \(32\) threads \textit{\(\mu T\)} represents a single thread in the hardware.
+Multiple threads are then interleaved in execution on a single core to reduce latencies to memory and FUs.
+
+A single thread block can contain multiple warps (up to \(512 \mu T\) in \texttt{CUDA}), all mapped into a single core.
+Multiple blocks can also execute on a single core.
+Individual parallel threads of a warp start together but are free to branch and execute in parallel.
+
+\textit{SIMT} model gives the illusion of many independent threads running on a single core, but for efficiency sake the programmer must try and keep each \(\mu T\) as aligned as possible, in \textit{SIMD} fashion.
+
+\bigskip
+Simple \texttt{if-then-else} instructions are compiled into predicated execution, equivalent to vector masking \textit{(technique already explored in Paragraph~\ref{par:vector-conditional-execution})}.
+More complex control flow code must be compiled into branches.
+
+Hardware tracks which \(\mu T\) take or don't take branches.
+If all go in the same direction, the hardware can execute the block in \textit{SIMD} fashion.
+Otherwise, a mask vector indicating \textit{taken} or \textit{not taken} is created.
+
+The \textit{not taken} paths keep running under the mask,  while the \textit{taken} paths \texttt{PC} and mask are pushed into a hardware stack in order to be executed later.
+
+\bigskip
+An illustration of the hardware execution model is shown in Figure~\ref{fig:gpu-hardware-model}.
+
+\begin{figure}[htbp]
+  \bigskip
+  \centering
+  \tikzfig[1]{image-68.tikz}
+  \caption{Hardware execution model}
+  \label{fig:gpu-hardware-model}
+  \bigskip
+\end{figure}
 
 \end{document}
