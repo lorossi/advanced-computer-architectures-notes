@@ -14,9 +14,9 @@
 		\node [style=none] (14) at (4, 0) {};
 		\node [style=none, text=white] (15) at (0.5, -0.5) {\texttt{IF}};
 		\node [style=none, text=white] (16) at (4.5, -0.5) {\texttt{WB}};
-		\node [style=none] (46) at (0, 0.5) {};
-		\node [style=none] (48) at (5, 0.5) {};
-		\node [style=top align] (49) at (2.5, 0.5) {\small functional unit latency};
+		\node [style=none] (46) at (0.25, 1) {};
+		\node [style=none] (48) at (4.75, 1) {};
+		\node [style=top align] (49) at (2.5, 1) {\small functional unit latency};
 		\node [style=none, text=white] (50) at (1.5, -0.5) {\texttt{ID}};
 		\node [style=none, text=white] (51) at (2.5, -0.5) {\texttt{EX}};
 		\node [style=none, text=white] (52) at (3.5, -0.5) {\texttt{ME}};
@@ -255,6 +255,8 @@
 		\node [style=none, rotate=90] (296) at (20.5, -12) {\small instruction};
 		\node [style=none, rotate=90] (297) at (20.5, -7.5) {\small dead time};
 		\node [style=none] (298) at (10, -12) {};
+		\node [style=none] (299) at (0, 1) {};
+		\node [style=none] (300) at (5, 1) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=green fill] (0.center)
@@ -394,5 +396,7 @@
 		\draw [style=dashed] (122.center) to (293.center);
 		\draw [style=dashed] (4.center) to (294.center);
 		\draw [style=dashed] (298.center) to (218.center);
+		\draw [style=dashed] (299.center) to (0.center);
+		\draw [style=dashed] (4.center) to (300.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

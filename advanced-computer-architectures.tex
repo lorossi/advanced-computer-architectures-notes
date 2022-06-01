@@ -2309,54 +2309,60 @@ The structure of the \textit{ROB} is represented in Figure~\ref{fig:structure-of
 \begin{figure}[htpb]
   \bigskip
   \centering
-  \tikzfig[1]{image-36.tikz}
-  \caption{Structure of the \textit{ROB}}
+  \begin{subfigure}[]{\textwidth}
+    \centering
+    \tikzfig[1]{image-36.tikz}
+    \caption{\textit{ROB} structure}
+    \label{subfig:structure-rob}
+  \end{subfigure}
+  \par\bigskip
+  \begin{subfigure}[]{\textwidth}
+    \centering
+    \tikzfig[1]{image-38.tikz}
+    \caption{\textit{ROB} entries}
+    \label{subfig:rob-entries}
+  \end{subfigure}
+  \caption{Structure of the \textit{ROB} and its entries}
   \label{fig:structure-of-ROB}
   \bigskip
 \end{figure}
 
-The structure of an entry is similar to the one showed in Figure~\ref{fig:structure-entries-rob}:
-
-\begin{itemize}
-  \item The \texttt{TAG}, given by the index in the \textit{ROB}
-  \item The new instructions are dispatched to free slots while
-  \item Instruction space is reclaimed when done by setting the \texttt{P} bit
-  \item In \textbf{dispatch} stage:
-        \begin{itemize}
-          \item non busy source operands are read from register files and copied to \texttt{SRC} fields where the \texttt{P} bit is set
-          \item busy source operands copy \texttt{TAG} of producer and clear the \texttt{P} bit
-          \item the \texttt{V} bit is set valid
-        \end{itemize}
-  \item In \textbf{issue} stage:
-        \begin{itemize}
-          \item the \texttt{I} bit is set valid
-        \end{itemize}
-  \item On \textbf{completion}:
-        \begin{itemize}
-          \item source tags are searched and the \texttt{P} bit is set
-          \item result and \texttt{EXCEPTION} flags are written back to \textit{ROB}
-        \end{itemize}
-  \item On \textbf{commit}:
-        \begin{itemize}
-          \item \texttt{EXCEPTION} flags are checked
-          \item \texttt{RESULT} is copied into register files
-        \end{itemize}
-  \item On \textbf{trap}:
-        \begin{itemize}
-          \item machine and \textit{ROB} are flushed
-          \item \texttt{FREE} pointer is set as \texttt{OLDEST}
-          \item the execution resumes from \texttt{HANDLER}
-        \end{itemize}
-\end{itemize}
-
-\begin{figure}[htbp]
+\begin{minipage}{\textwidth}
   \bigskip
-  \centering
-  \tikzfig[1]{image-38.tikz}
-  \caption{Structure of the entries of the \textit{ROB}}
-  \label{fig:structure-entries-rob}
-  \bigskip
-\end{figure}
+  The structure of an entry contains:
+
+  \begin{itemize}
+    \item The \texttt{TAG}, given by the index in the \textit{ROB}
+    \item The new instructions are dispatched to free slots while
+    \item Instruction space is reclaimed when done by setting the \texttt{P} bit
+    \item In \textbf{dispatch} stage:
+          \begin{itemize}
+            \item non busy source operands are read from register files and copied to \texttt{SRC} fields where the \texttt{P} bit is set
+            \item busy source operands copy \texttt{TAG} of producer and clear the \texttt{P} bit
+            \item the \texttt{V} bit is set valid
+          \end{itemize}
+    \item In \textbf{issue} stage:
+          \begin{itemize}
+            \item the \texttt{I} bit is set valid
+          \end{itemize}
+    \item On \textbf{completion}:
+          \begin{itemize}
+            \item source tags are searched and the \texttt{P} bit is set
+            \item result and \texttt{EXCEPTION} flags are written back to \textit{ROB}
+          \end{itemize}
+    \item On \textbf{commit}:
+          \begin{itemize}
+            \item \texttt{EXCEPTION} flags are checked
+            \item \texttt{RESULT} is copied into register files
+          \end{itemize}
+    \item On \textbf{trap}:
+          \begin{itemize}
+            \item machine and \textit{ROB} are flushed
+            \item \texttt{FREE} pointer is set as \texttt{OLDEST}
+            \item the execution resumes from \texttt{HANDLER}
+          \end{itemize}
+  \end{itemize}
+\end{minipage}
 
 \bigskip
 In order to separate the completion stage from the commit stage, the \textit{ROB} must hold register results from the former until the latter.
@@ -2402,7 +2408,7 @@ A scheme of this structure is represented in Figure~\ref{fig:exceptions-in-order
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-37.tikz}
+  \tikzfig[0.7]{image-37.tikz}
   \caption{Scheme of the in order commit for precise exceptions}
   \label{fig:exceptions-in-order-commit}
   \bigskip
@@ -2947,7 +2953,7 @@ In detail, exceptions are handled by:
   \bigskip
   \centering
   \tikzfig[0.65]{image-46.tikz}
-  \caption{Interrupt handling in \(5\) stages pipeline - \textit{illustration of dubious utility}}
+  \caption{Interrupt handling in \(5\) stages pipeline - \textit{i'm not sure what this Figure exactly meant to represent}}
   \label{fig:interrupt-handling-5-stages-pipeline}
   \bigskip
 \end{figure}
@@ -2981,6 +2987,8 @@ There are \(3\) technique to speculate on exceptions:
           \item exception handler is launched only after pipeline if flushed
         \end{itemize}
 \end{itemize}
+
+\clearpage
 
 \section{MIMD and parallel architectures}
 \label{sec:mimd}
@@ -3846,11 +3854,11 @@ They are:
 
 \subsection{SIMD vs MIMD}
 
-SIMD architectures can exploit significant data level parallelism for:
+\textit{SIMD} architectures can exploit significant data level parallelism for:
 
 \begin{itemize}
-  \item matrix-oriented scientific computing
-  \item media-oriented image and sound processors
+  \item \textbf{matrix-oriented} scientific computing
+  \item \textbf{media-oriented} image and sound processors
 \end{itemize}
 
 \textit{SIMD} is generally more energy efficient than \textit{MIMD}, as it only needs to fetch one instruction per data operation.
@@ -3861,7 +3869,7 @@ Finally, \textit{SIMD} allows programmers to continue to think sequentially, as 
 
 The convergence of application demands and technology constraints drivers the architecture choice.
 New applications, \textit{(such as graphics, machine vision, speech recognition, machine learning, \ldots)} require large numerical computations that are often trivially data parallel.
-SIMD based architectures \textit{(such as vector-SIMD, subword-SIMD, SIMT, GPUs)} are the most efficient choice for these applications.
+\textit{SIMD} based architectures \textit{(such as vector-SIMD, subword-SIMD, SIMT, GPUs)} are the most efficient choice for these applications.
 
 It is widely accepted that \textit{DLP} will account for more mainstream parallelism growth than \textit{TLP} in the next decade.
 
