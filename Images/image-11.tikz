@@ -12,6 +12,8 @@
 		\node [style=none] (9) at (8, -1) {};
 		\node [style=none] (10) at (10, -1) {};
 		\node [style=none] (11) at (10, 0) {};
+		\node [style=none] (12) at (2, -1) {};
+		\node [style=none] (13) at (2, -2) {};
 		\node [style=none] (14) at (4, -2) {};
 		\node [style=none] (15) at (4, -1) {};
 		\node [style=none] (16) at (6, -1) {};
@@ -20,6 +22,8 @@
 		\node [style=none] (19) at (8, -1) {};
 		\node [style=none] (20) at (10, -1) {};
 		\node [style=none] (21) at (10, -2) {};
+		\node [style=none] (22) at (12, -2) {};
+		\node [style=none] (23) at (12, -1) {};
 		\node [style=none] (24) at (4, -2) {};
 		\node [style=none] (25) at (4, -3) {};
 		\node [style=none] (26) at (6, -3) {};
@@ -66,11 +70,11 @@
 		\node [style=none] (67) at (13, -4.5) {\texttt{EX}};
 		\node [style=none] (68) at (15, -4.5) {\texttt{ME}};
 		\node [style=none] (69) at (17, -4.5) {\texttt{WB}};
-		\node [style=none, color=white] (70) at (3, -1.5) {\texttt{IF}};
-		\node [style=none, color=white] (71) at (5, -1.5) {\texttt{ID}};
-		\node [style=none, color=white] (72) at (7, -1.5) {\texttt{EX}};
-		\node [style=none, color=white] (73) at (9, -1.5) {\texttt{ME}};
-		\node [style=none, color=white] (74) at (11, -1.5) {\texttt{WB}};
+		\node [style=none] (70) at (3, -1.5) {\texttt{IF}};
+		\node [style=none] (71) at (5, -1.5) {\texttt{ID}};
+		\node [style=none] (72) at (7, -1.5) {\texttt{EX}};
+		\node [style=none] (73) at (9, -1.5) {\texttt{ME}};
+		\node [style=none] (74) at (11, -1.5) {\texttt{WB}};
 		\node [style=none] (75) at (5, -2.5) {\texttt{IF}};
 		\node [style=none] (76) at (7, -2.5) {\texttt{ID}};
 		\node [style=none] (77) at (9, -2.5) {\texttt{EX}};
@@ -81,15 +85,11 @@
 		\node [style=none] (82) at (11, -3.5) {\texttt{EX}};
 		\node [style=none] (83) at (13, -3.5) {\texttt{ME}};
 		\node [style=none] (84) at (15, -3.5) {\texttt{WB}};
-		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{beq \$1, \$2, L1}};
-		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{add \$4, \$5, \$6}};
-		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{lw \$3, 300(\$0)}};
-		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{lw \$7, 400(\$0)}};
-		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{lw \$8, 300(\$0)}};
-		\node [style=none] (93) at (12.5, -1.5) {};
-		\node [style=left align] (94) at (15, -1.5) {branch delay};
-		\node [style=none] (95) at (2, -2) {};
-		\node [style=none] (96) at (12, -1) {};
+		\node [style=right align] (85) at (-0.5, -0.5) {\texttt{untaken branch}};
+		\node [style=right align] (88) at (-0.5, -4.5) {\texttt{instruction i+4}};
+		\node [style=right align] (89) at (-0.5, -3.5) {\texttt{instruction i+3}};
+		\node [style=right align] (90) at (-0.5, -2.5) {\texttt{instruction i+2}};
+		\node [style=right align] (91) at (-0.5, -1.5) {\texttt{instruction i+1}};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (0.center)
@@ -101,6 +101,15 @@
 		\draw [style=solid] (4.center) to (5.center);
 		\draw [style=solid] (7.center) to (6.center);
 		\draw [style=solid] (8.center) to (9.center);
+		\draw [style=light fill] (12.center)
+			 to (13.center)
+			 to (22.center)
+			 to (23.center)
+			 to cycle;
+		\draw [style=solid] (15.center) to (14.center);
+		\draw [style=solid] (16.center) to (17.center);
+		\draw [style=solid] (19.center) to (18.center);
+		\draw [style=solid] (20.center) to (21.center);
 		\draw [style=light fill] (24.center)
 			 to (25.center)
 			 to (34.center)
@@ -128,31 +137,5 @@
 		\draw [style=solid] (52.center) to (53.center);
 		\draw [style=solid] (55.center) to (54.center);
 		\draw [style=solid] (56.center) to (57.center);
-		\draw [style=red arrow] (94) to (93.center);
-		\draw [style=red fill] (95.center)
-			 to (2.center)
-			 to (15.center)
-			 to (24.center)
-			 to cycle;
-		\draw [style=red fill] (24.center)
-			 to (27.center)
-			 to (16.center)
-			 to (15.center)
-			 to cycle;
-		\draw [style=red fill] (16.center)
-			 to (19.center)
-			 to (28.center)
-			 to (27.center)
-			 to cycle;
-		\draw [style=red fill] (19.center)
-			 to (20.center)
-			 to (31.center)
-			 to (28.center)
-			 to cycle;
-		\draw [style=red fill] (31.center)
-			 to (32.center)
-			 to (96.center)
-			 to (20.center)
-			 to cycle;
 	\end{pgfonlayer}
 \end{tikzpicture}

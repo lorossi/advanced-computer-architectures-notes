@@ -1,8 +1,6 @@
 \documentclass[english]{article}
 \usepackage{notestemplate}
 
-% TODO - when everything is done, re-number all images
-
 \begin{document}
 
 \makecover{Advanced Computer Architectures}{2021/2022}
@@ -511,7 +509,7 @@ Comparison between many multithreading paradigms is shown in Figure~\ref{fig:mul
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.85]{image-6.tikz}
+  \tikzfig[0.85]{image-5.tikz}
   \caption{\centering Multithreading comparison. Each column shows the evolution of \(5\) different processes spread on \(4\) different threads over a set amount of time.
     A filled square illustrates a thread occupied by a process, while the empty ones represent an empty \texttt{(idle)} thread.}
   \label{fig:multithreading-comparison}
@@ -595,7 +593,7 @@ In real life:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-7.tikz}
+  \tikzfig[1]{image-6.tikz}
   \caption{\textit{SIMD} architecture}
   \label{fig:simd-architecture}
   \bigskip
@@ -725,7 +723,7 @@ The stages are usually represented like in Figure~\ref{fig:mips-pipeline-stages}
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1.5]{image-25.tikz}
+  \tikzfig[1.5]{image-7.tikz}
   \caption{Stages in \textit{MIPS} pipelines}
   \label{fig:mips-pipeline-stages}
   \bigskip
@@ -811,7 +809,7 @@ While using floating points operations, a few questions might arise:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-23.tikz}
+  \tikzfig[1]{image-8.tikz}
   \caption{Complex-in order pipeline}
   \label{fig:complex-in-order-pipeline}
   \bigskip
@@ -825,7 +823,7 @@ The pipeline is now constituted by \(6\) stages, normally represented like in Fi
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1.5]{image-43.tikz}
+  \tikzfig[1.5]{image-9.tikz}
   \caption{Pipeline stages with issue}
   \label{fig:mips-pipeline-stages-issue}
   \bigskip
@@ -845,7 +843,7 @@ Formally, all the different executions must be balanced.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.7]{image-24.tikz}
+  \tikzfig[0.7]{image-10.tikz}
   \caption{Complex pipelining}
   \label{fig:complex-pipelining-2}
   \bigskip
@@ -1047,7 +1045,7 @@ There is a one cycle penalty.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-9.tikz}
+  \tikzfig[1]{image-11.tikz}
   \caption{Branch always not taken: success}
   \label{fig:branch-always-not-taken}
   \bigskip
@@ -1056,7 +1054,7 @@ There is a one cycle penalty.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-10.tikz}
+  \tikzfig[1]{image-12.tikz}
   \caption{Branch always not taken: fail}
   \label{fig:branch-always-not-taken-fail}
   \bigskip
@@ -1112,7 +1110,7 @@ If the branch:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-11.tikz}
+  \tikzfig[1]{image-13.tikz}
   \caption{Delayed branch}
   \label{fig:delayed-branch}
   \bigskip
@@ -1161,7 +1159,7 @@ An illustration of this strategy is represented in Figure~\ref{fig:from-before}.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-12.tikz}
+  \tikzfig[1]{image-14.tikz}
   \caption{From before}
   \label{fig:from-before}
   \bigskip
@@ -1178,7 +1176,7 @@ An illustration of this strategy is represented in Figure~\ref{fig:from-target}.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-13.tikz}
+  \tikzfig[1]{image-15.tikz}
   \caption{From target}
   \label{fig:from-target}
   \bigskip
@@ -1195,7 +1193,7 @@ An illustration of this strategy is represented in Figure~\ref{fig:from-fall-thr
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-14.tikz}
+  \tikzfig[1]{image-16.tikz}
   \caption{From fall through}
   \label{fig:from-fall-through}
   \bigskip
@@ -1244,7 +1242,7 @@ The predicted target address is expressed as \texttt{PC}-relative.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-15.tikz}
+  \tikzfig[1]{image-17.tikz}
   \caption{Typical entry of the \textit{BTB}}
   \label{fig:typical-entry-BTB}
   \bigskip
@@ -1255,7 +1253,7 @@ The structure and operation of the \textit{BTB} is shown in Figure~\ref{fig:stru
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.8]{image-16.tikz}
+  \tikzfig[0.8]{image-18.tikz}
   \caption{Structure of the \textit{BTB}}
   \label{fig:structure-of-BTB}
   \bigskip
@@ -1270,7 +1268,7 @@ The structure of the \textit{BTB} is shown in Figure~\ref{fig:structure-of-BHT}.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-17.tikz}
+  \tikzfig[1]{image-19.tikz}
   \caption{Structure of the \textit{BHT}}
   \label{fig:structure-of-BHT}
   \bigskip
@@ -1394,7 +1392,7 @@ A \((1, 1)\) Correlating Predictor denotes a \(1\)-bit predictor with \(1\)-bit 
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.8]{image-18.tikz}
+  \tikzfig[0.8]{image-20.tikz}
   \caption{Structure of the \textit{Correlating Branch Predictors}}
   \label{fig:structure-of-CBP}
   \bigskip
@@ -1411,7 +1409,7 @@ The general structure of a \((m, n)\) \textit{CBP} is represented in Figure~\ref
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.8]{image-19.tikz}
+  \tikzfig[0.8]{image-21.tikz}
   \caption{Structure of the \textit{(m, n) Correlating Branch Predictors}}
   \label{fig:m-n-CBP}
   \bigskip
@@ -1464,13 +1462,13 @@ The structure of a \textit{GShare} predictor is represented in Figure~\ref{fig:G
   \centering
   \begin{minipage}[b]{0.6\textwidth}
     \centering
-    \tikzfig[0.6]{image-20.tikz}
+    \tikzfig[0.6]{image-22.tikz}
     \caption{GA Predictor}
     \label{fig:GA-predictor}
   \end{minipage}
   \begin{minipage}[b]{0.39\textwidth}
     \centering
-    \tikzfig[0.6]{image-21.tikz} % 6pt too wide with 0.6 zoom
+    \tikzfig[0.6]{image-23.tikz} % 6pt too wide with 0.6 zoom
     \caption{GShare Predictor}
     \label{fig:GShare-predictor}
   \end{minipage}
@@ -1640,7 +1638,7 @@ An illustration of the new pipeline is represented in Figure~\ref{fig:pipeline-o
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-35.tikz}
+  \tikzfig[1]{image-24.tikz}
   \caption{Pipeline introduced by the \textit{Scoreboard}}
   \label{fig:pipeline-of-scoreboard}
   \bigskip
@@ -1649,7 +1647,7 @@ An illustration of the new pipeline is represented in Figure~\ref{fig:pipeline-o
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-34.tikz}
+  \tikzfig[1]{image-25.tikz}
   \caption{Structure of the \textit{Scoreboard}}
   \label{fig:structure-of-scoreboard}
   \bigskip
@@ -2030,7 +2028,7 @@ An illustration of the inner working instruction-level is represented in Figure~
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-27.tikz}
+  \tikzfig[1]{image-26.tikz}
   \caption{\textit{VLIW} - instructions level}
   \label{fig:vliw-instruction-level}
   \bigskip
@@ -2039,7 +2037,7 @@ An illustration of the inner working instruction-level is represented in Figure~
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-28.tikz}
+  \tikzfig[1]{image-27.tikz}
   \caption{\textit{VLIW} - pipeline level}
   \label{fig:vliw-pipeline-level}
   \bigskip
@@ -2103,13 +2101,13 @@ A comparison of scheduled and unscheduled code can be found in Figure~\ref{fig:c
 
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[0.7]{image-29.tikz}
+    \tikzfig[0.7]{image-28.tikz}
     \caption{Basic blocks}
     \label{fig:basic-blocks}
   \end{subfigure}
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[0.7]{image-32.tikz}
+    \tikzfig[0.7]{image-29.tikz}
     \caption{Trace scheduled code}
     \label{fig:trace-scheduled-code}
   \end{subfigure}
@@ -2145,7 +2143,7 @@ An illustration of the \textit{RRB} is shown in Figure~\ref{fig:rotating-registe
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-33.tikz}
+  \tikzfig[1]{image-30.tikz}
   \caption{Rotating Register File}
   \label{fig:rotating-register-file}
   \bigskip
@@ -2223,7 +2221,7 @@ An illustration of the performance improvements can be found in Figure~\ref{fig:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-30.tikz}
+  \tikzfig[1]{image-31.tikz}
   \caption{Performance improvement of loop unrolling}
   \label{fig:performance-improvement-loop-unrolling}
   \bigskip
@@ -2240,7 +2238,7 @@ An illustration of the performance improvements can be found in Figure~\ref{fig:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-31.tikz}
+  \tikzfig[1]{image-32.tikz}
   \caption{Performance improvement of software pipelining}
   \label{fig:performance-improvement-software-pipelining}
   \bigskip
@@ -2311,15 +2309,15 @@ The structure of the \textit{ROB} is represented in Figure~\ref{fig:structure-of
   \centering
   \begin{subfigure}[]{\textwidth}
     \centering
-    \tikzfig[1]{image-36.tikz}
+    \tikzfig[1]{image-33.tikz}
     \caption{\textit{ROB} structure}
     \label{subfig:structure-rob}
   \end{subfigure}
   \par\bigskip
   \begin{subfigure}[]{\textwidth}
     \centering
-    \tikzfig[1]{image-38.tikz}
-    \caption{\textit{ROB} entries}
+    \tikzfig[1]{image-34.tikz}
+    \caption{\textit{ROB} entry}
     \label{subfig:rob-entries}
   \end{subfigure}
   \caption{Structure of the \textit{ROB} and its entries}
@@ -2408,7 +2406,7 @@ A scheme of this structure is represented in Figure~\ref{fig:exceptions-in-order
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.7]{image-37.tikz}
+  \tikzfig[0.7]{image-35.tikz}
   \caption{Scheme of the in order commit for precise exceptions}
   \label{fig:exceptions-in-order-commit}
   \bigskip
@@ -2575,7 +2573,7 @@ A simple illustration of this technique is shown in Image~\ref{fig:explicit-regi
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-39.tikz}
+  \tikzfig[1]{image-36.tikz}
   \caption{Explicit Register Renaming}
   \label{fig:explicit-register-renaming}
   \bigskip
@@ -2631,7 +2629,7 @@ A schematic of the Unified Physical Register File is shown in Image~\ref{fig:uni
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-40.tikz}
+  \tikzfig[1]{image-37.tikz}
   \caption{Unified Physical Register File}
   \label{fig:unified-physical-register-file}
   \bigskip
@@ -2658,7 +2656,7 @@ A simplified implementation of the pipeline with a Physical Register File is sho
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.7]{image-41.tikz}
+  \tikzfig[0.7]{image-38.tikz}
   \caption{Pipeline Design with Physical Register File}
   \label{fig:pipeline-design-with-physical-register-file}
   \bigskip
@@ -2757,7 +2755,7 @@ An illustration of the architecture in the two-issue Superscalar Register Renami
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.7]{image-42.tikz}
+  \tikzfig[0.7]{image-39.tikz}
   \caption{Two issue Superscalar Register Renaming}
   \label{fig:two-issue-superscalar-register-renaming}
   \bigskip
@@ -2775,7 +2773,7 @@ When they are raised, a special routine called \textbf{Interrupt Handler} will t
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-44.tikz}
+  \tikzfig[1]{image-40.tikz}
   \caption{Interrupt event}
   \label{fig:interrupt-event}
   \bigskip
@@ -2841,7 +2839,7 @@ The operation of an interrupt is shown in Figure~\ref{fig:operation-interrupt}.
 \begin{figure}
   \bigskip
   \centering
-  \tikzfig[1]{image-45.tikz}
+  \tikzfig[1]{image-41.tikz}
   \caption{Operation of an interrupt}
   \label{fig:operation-interrupt}
   \bigskip
@@ -2952,7 +2950,7 @@ In detail, exceptions are handled by:
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.65]{image-46.tikz}
+  \tikzfig[0.65]{image-42.tikz}
   \caption{Interrupt handling in \(5\) stages pipeline - \textit{i'm not sure what this Figure exactly meant to represent}}
   \label{fig:interrupt-handling-5-stages-pipeline}
   \bigskip
@@ -3049,7 +3047,7 @@ Examples of \textit{MIMD} machines are:
   \begin{subfigure}[b]{0.33\textwidth}
     \bigskip
     \centering
-    \tikzfig[0.5]{image-47.tikz}
+    \tikzfig[0.5]{image-43.tikz}
     \caption{Symmetric multiprocessor}
     \label{subfig:symmetric-multiprocessor}
     \bigskip
@@ -3057,7 +3055,7 @@ Examples of \textit{MIMD} machines are:
   \begin{subfigure}[b]{0.33\textwidth}
     \bigskip
     \centering
-    \tikzfig[0.5]{image-48.tikz}
+    \tikzfig[0.5]{image-44.tikz}
     \caption{Non uniform shared memory}
     \label{subfig:non-uniform-shared-memory}
     \bigskip
@@ -3065,7 +3063,7 @@ Examples of \textit{MIMD} machines are:
   \begin{subfigure}[b]{0.33\textwidth}
     \bigskip
     \centering
-    \tikzfig[0.5]{image-49.tikz}
+    \tikzfig[0.5]{image-45.tikz}
     \caption{Cluster}
     \label{subfig:cluster}
     \bigskip
@@ -3120,13 +3118,13 @@ As already said, the \textbf{Memory Address Space Model} can be divided in two c
   \centering
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[1]{image-50.tikz}
+    \tikzfig[1]{image-46.tikz}
     \caption{Single address}
     \label{subfig:single-address-space}
   \end{subfigure}
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[1]{image-51.tikz}
+    \tikzfig[1]{image-47.tikz}
     \caption{Multiple address}
     \label{subfig:multiple-address-space}
   \end{subfigure}
@@ -3158,13 +3156,13 @@ As already said, the \textbf{Memory Address Space Model} can be divided in two c
   \centering
   \begin{subfigure}[t]{0.495\textwidth}
     \centering
-    \tikzfig[1]{image-52.tikz}
+    \tikzfig[1]{image-48.tikz}
     \caption{\textit{Unified Memory Architecture}}
     \label{subfig:uma}
   \end{subfigure}
   \begin{subfigure}[t]{0.495\textwidth}
     \centering
-    \tikzfig[1]{image-53.tikz}
+    \tikzfig[1]{image-49.tikz}
     \caption{\textit{Shared Memory Architecture}}
     \label{subfig:sma}
   \end{subfigure}
@@ -3404,7 +3402,7 @@ A simple example of the hardware implementation of the snooping protocol is repr
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-54.tikz}
+  \tikzfig[1]{image-50.tikz}
   \caption{Snooping Protocol}
   \label{fig:snooping-protocol}
   \bigskip
@@ -3539,16 +3537,18 @@ Each cache line has state bits, relative to the state of the data.
       (S) edge [bend left] node {write} (M);
     \end{tikzpicture}
 
-    \caption{\textit{MSI} Protocol State Transition Diagram}
+    \caption{State Transition Diagram}
     \label{subfig:MSI-state-transition-diagram}
     \bigskip
   \end{subfigure}
   \begin{subfigure}[]{\textwidth}
     \centering
-    \tikzfig[01]{image-55.tikz}
-    \caption{Structure of a \textit{MSI} cache line}
+    \tikzfig[01]{image-51.tikz}
+    \caption{Structure of a cache line}
     \label{subfig:MSI-cache-line}
   \end{subfigure}
+  \caption{\textit{MSI} Protocol Implementation}
+  \label{fig:MSI-protocol}
 \end{figure}
 
 \subsubsection{Snoopy Cache Variations}
@@ -3592,7 +3592,7 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
 \begin{figure}[htbp]
   \centering
   \bigskip
-  \tikzfig[1]{image-56.tikz}
+  \tikzfig[1]{image-52.tikz}
   \caption{Hardware support for \textit{MESI}}
   \label{subfig:MESI-bus-rd}
   \bigskip
@@ -3645,7 +3645,7 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
 
   \begin{subfigure}{\textwidth}
     \centering
-    \tikzfig[1]{image-57.tikz}
+    \tikzfig[1]{image-53.tikz}
     \caption{Structure of a cache line}
     \label{subfig:MESI-cache-line}
   \end{subfigure}
@@ -3685,7 +3685,7 @@ An illustration of this hardware setup is shown in Figure~\ref{fig:MESI-bus-rd-l
 \begin{figure}[htbp]
   \centering
   \bigskip
-  \tikzfig[1]{image-58.tikz}
+  \tikzfig[1]{image-54.tikz}
   \caption{Hardware support for \textit{MESI} with Level-2 Caches}
   \label{fig:MESI-bus-rd-level-2}
   \bigskip
@@ -3705,7 +3705,7 @@ An illustration of such a memory block is shown in Figure~\ref{fig:MESI-false-sh
 \begin{figure}[htbp]
   \centering
   \bigskip
-  \tikzfig[1]{image-59.tikz}
+  \tikzfig[1]{image-55.tikz}
   \caption{False sharing in \textit{MESI}}
   \label{fig:MESI-false-sharing}
   \bigskip
@@ -3756,7 +3756,7 @@ The synchronization of two processes makes sense only if they communicate data: 
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-60.tikz}
+  \tikzfig[1]{image-56.tikz}
   \caption{I don't even know what this is meant to be. It was on the slides. I'm just kinda giving up.}
   \label{fig:i-dont-know}
   \bigskip
@@ -3817,7 +3817,7 @@ An illustration of this extension is shown in Figure~\ref{fig:MESI-extension}.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-61.tikz}
+  \tikzfig[1]{image-57.tikz}
   \caption{Extension of coherence protocols}
   \label{fig:MESI-extension}
   \bigskip
@@ -3910,13 +3910,13 @@ It's called \textbf{stride} of an array \textit{(also referred to as increment, 
   \centering
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[1]{image-8.tikz}
+    \tikzfig[1]{image-58.tikz}
     \caption{Scalar model, \(1\) operation at a time}
     \label{subfig:vector-model}
   \end{subfigure}
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[1]{image-8a.tikz}
+    \tikzfig[1]{image-59.tikz}
     \caption{Vector mode, \(n\) operations at a time}
     \label{subfig:scalar-model}
   \end{subfigure}
@@ -3956,7 +3956,7 @@ The structure of the vector unit is represented in Figure~\ref{fig:vector-unit-s
 \begin{figure}
   \bigskip
   \centering
-  \tikzfig[0.65]{image-26.tikz}
+  \tikzfig[0.65]{image-60.tikz}
   \caption{\textit{Vector Unit} structure}
   \label{fig:vector-unit-structure}
   \bigskip
@@ -4050,7 +4050,7 @@ The representation of the pipeline during startup is shown in Figure~\ref{fig:ve
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.7]{image-64.tikz}
+  \tikzfig[0.7]{image-61.tikz}
   \caption{Vector Unit startup time penalty}
   \label{fig:vector-unit-startup}
   \bigskip
@@ -4066,7 +4066,7 @@ The \textit{Cray-1} had \(16\) banks with \(4\) cycles bank busy time and \(12\)
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-65.tikz}
+  \tikzfig[1]{image-62.tikz}
   \caption{Interleaved Vector Memory System}
   \label{fig:interleaved-vector-memory-system}
   \bigskip
@@ -4116,7 +4116,7 @@ bgtz xN, loop // loop again
   \end{minipage}
   \begin{minipage}[t]{0.33\textwidth}
     \centering
-    \tikzfig[0.7]{image-66.tikz}
+    \tikzfig[0.7]{image-63.tikz}
   \end{minipage}
 \end{minipage}
 
@@ -4188,13 +4188,13 @@ The advantage of vector chaining is represented in Figure~\ref{fig:vector-chaini
   \centering
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[0.8]{image-62.tikz}
+    \tikzfig[0.8]{image-64.tikz}
     \caption{without}
     \label{subfig:wihtout-vector-chaining}
   \end{subfigure}
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
-    \tikzfig[0.8]{image-63.tikz}
+    \tikzfig[0.8]{image-65.tikz}
     \caption{with}
     \label{subfig:with-vector-chaining}
   \end{subfigure}
@@ -4225,7 +4225,7 @@ The \textbf{multimedia extension}, also called \textit{SIMD} extension. It featu
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-67.tikz}
+  \tikzfig[1]{image-66.tikz}
   \caption{Operation of instructions in vector form, \texttt{A + B = C} where all the variables are \(4\) \(16\) bits vectors}
   \label{fig:operations-in-vector-form}
   \bigskip
@@ -4343,7 +4343,7 @@ An illustration of the hardware execution model is shown in Figure~\ref{fig:gpu-
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1]{image-68.tikz}
+  \tikzfig[1]{image-67.tikz}
   \caption{Hardware execution model}
   \label{fig:gpu-hardware-model}
   \bigskip

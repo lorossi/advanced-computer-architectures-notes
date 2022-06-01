@@ -1,257 +1,116 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=none] (0) at (-2, 0) {};
-		\node [style=none] (1) at (0, 0) {};
-		\node [style=none] (72) at (-2, -10) {};
-		\node [style=none] (73) at (0, -10) {};
-		\node [style=none] (75) at (-1, -10) {};
-		\node [style=none] (76) at (-2, -1) {};
-		\node [style=none] (77) at (-2, -2) {};
-		\node [style=none] (78) at (-2, -3) {};
-		\node [style=none] (79) at (-2, -4) {};
-		\node [style=none] (80) at (-2, -5) {};
-		\node [style=none] (81) at (-2, -6) {};
-		\node [style=none] (82) at (-2, -7) {};
-		\node [style=none] (83) at (-2, -8) {};
-		\node [style=none] (84) at (-2, -9) {};
-		\node [style=none] (85) at (0, -9) {};
-		\node [style=none] (86) at (0, -9) {};
-		\node [style=none] (87) at (0, -8) {};
-		\node [style=none] (88) at (0, -7) {};
-		\node [style=none] (89) at (0, -6) {};
-		\node [style=none] (90) at (0, -5) {};
-		\node [style=none] (91) at (0, -4) {};
-		\node [style=none] (92) at (0, -3) {};
-		\node [style=none] (93) at (0, -2) {};
-		\node [style=none] (94) at (0, -1) {};
-		\node [style=none] (95) at (1, 0) {};
-		\node [style=none] (96) at (3, 0) {};
-		\node [style=none] (97) at (1, -10) {};
-		\node [style=none] (98) at (3, -10) {};
-		\node [style=none] (100) at (2, -10) {};
-		\node [style=none] (101) at (1, -1) {};
-		\node [style=none] (102) at (1, -2) {};
-		\node [style=none] (103) at (1, -3) {};
-		\node [style=none] (104) at (1, -4) {};
-		\node [style=none] (105) at (1, -5) {};
-		\node [style=none] (106) at (1, -6) {};
-		\node [style=none] (107) at (1, -7) {};
-		\node [style=none] (108) at (1, -8) {};
-		\node [style=none] (109) at (1, -9) {};
-		\node [style=none] (110) at (3, -9) {};
-		\node [style=none] (111) at (3, -9) {};
-		\node [style=none] (112) at (3, -8) {};
-		\node [style=none] (113) at (3, -7) {};
-		\node [style=none] (114) at (3, -6) {};
-		\node [style=none] (115) at (3, -5) {};
-		\node [style=none] (116) at (3, -4) {};
-		\node [style=none] (117) at (3, -3) {};
-		\node [style=none] (118) at (3, -2) {};
-		\node [style=none] (119) at (3, -1) {};
-		\node [style=none] (120) at (6, 0) {};
-		\node [style=none] (121) at (8, 0) {};
-		\node [style=none] (122) at (6, -10) {};
-		\node [style=none] (123) at (8, -10) {};
-		\node [style=none] (125) at (7, -10) {};
-		\node [style=none] (126) at (6, -1) {};
-		\node [style=none] (127) at (6, -2) {};
-		\node [style=none] (128) at (6, -3) {};
-		\node [style=none] (129) at (6, -4) {};
-		\node [style=none] (130) at (6, -5) {};
-		\node [style=none] (131) at (6, -6) {};
-		\node [style=none] (132) at (6, -7) {};
-		\node [style=none] (133) at (6, -8) {};
-		\node [style=none] (134) at (6, -9) {};
-		\node [style=none] (135) at (8, -9) {};
-		\node [style=none] (136) at (8, -9) {};
-		\node [style=none] (137) at (8, -8) {};
-		\node [style=none] (138) at (8, -7) {};
-		\node [style=none] (139) at (8, -6) {};
-		\node [style=none] (140) at (8, -5) {};
-		\node [style=none] (141) at (8, -4) {};
-		\node [style=none] (142) at (8, -3) {};
-		\node [style=none] (143) at (8, -2) {};
-		\node [style=none] (144) at (8, -1) {};
-		\node [style=none] (145) at (9, 0) {};
-		\node [style=none] (146) at (11, 0) {};
-		\node [style=none] (147) at (9, -10) {};
-		\node [style=none] (148) at (11, -10) {};
-		\node [style=none] (150) at (10, -10) {};
-		\node [style=none] (151) at (9, -1) {};
-		\node [style=none] (152) at (9, -2) {};
-		\node [style=none] (153) at (9, -3) {};
-		\node [style=none] (154) at (9, -4) {};
-		\node [style=none] (155) at (9, -5) {};
-		\node [style=none] (156) at (9, -6) {};
-		\node [style=none] (157) at (9, -7) {};
-		\node [style=none] (158) at (9, -8) {};
-		\node [style=none] (159) at (9, -9) {};
-		\node [style=none] (160) at (11, -9) {};
-		\node [style=none] (161) at (11, -9) {};
-		\node [style=none] (162) at (11, -8) {};
-		\node [style=none] (163) at (11, -7) {};
-		\node [style=none] (164) at (11, -6) {};
-		\node [style=none] (165) at (11, -5) {};
-		\node [style=none] (166) at (11, -4) {};
-		\node [style=none] (167) at (11, -3) {};
-		\node [style=none] (168) at (11, -2) {};
-		\node [style=none] (169) at (11, -1) {};
-		\node [style=none] (170) at (-1, -10) {};
-		\node [style=none] (171) at (2, -10) {};
-		\node [style=none] (172) at (7, -10) {};
-		\node [style=none] (173) at (10, -10) {};
-		\node [style=none] (174) at (10, -11.75) {};
-		\node [style=none] (175) at (7, -11.75) {};
-		\node [style=none] (176) at (2, -11.75) {};
-		\node [style=none] (177) at (-1, -11.75) {};
-		\node [style=none] (178) at (-2, -12) {};
-		\node [style=none] (179) at (11, -12) {};
-		\node [style=none] (180) at (9, -14) {};
-		\node [style=none] (181) at (0, -14) {};
-		\node [style=none] (184) at (-8, -0.5) {\(k\)-bits branch address};
-		\node [style=none] (185) at (12, -0.25) {};
-		\node [style=none] (186) at (12, -9.75) {};
-		\node [style=left align] (187) at (12.5, -5) {\(2^k\) entries};
-		\node [style=left align] (188) at (17.5, -12.5) {\(m\)-bits global branch history};
-		\node [style=none] (190) at (4.5, -14) {};
-		\node [style=none] (191) at (4.5, -15.75) {};
-		\node [style=none] (192) at (4.5, -16.5) {\texttt{T/NT} branch prediction};
-		\node [style=none] (197) at (-1, -0.5) {\small \(n\)-\textit{bits}};
-		\node [style=none] (198) at (-1.75, 1) {};
-		\node [style=none] (199) at (10.75, 1) {};
-		\node [style=none] (200) at (4.5, 1.5) {\(2^m\) \textit{BHT}};
-		\node [style=none] (203) at (16, -12.5) {};
-		\node [style=none] (204) at (14, -12.5) {};
-		\node [style=none] (205) at (14, -13.5) {};
-		\node [style=none] (206) at (16, -13.5) {};
-		\node [style=none] (207) at (14, -14.5) {};
-		\node [style=none] (208) at (16, -14.5) {};
-		\node [style=none] (211) at (10.5, -13) {};
-		\node [style=none] (212) at (14, -10.5) {};
-		\node [style=none] (213) at (16, -10.5) {};
-		\node [style=none] (214) at (14, -11.5) {};
-		\node [style=none] (215) at (16, -11.5) {};
-		\node [style=none] (216) at (14, -15.5) {};
-		\node [style=none] (217) at (16, -15.5) {};
-		\node [style=none] (218) at (14, -13) {};
-		\node [style=none] (224) at (17, -15.25) {};
-		\node [style=none] (225) at (17, -10.75) {};
-		\node [style=left align] (226) at (17.5, -13.5) {\(m\)-items shift register};
-		\node [style=none] (227) at (-8, -4.5) {};
-		\node [style=none] (228) at (-2.25, -4.5) {};
-		\node [style=none] (229) at (-8, -1) {};
-		\node [style=none] (230) at (3.5, -5) {};
-		\node [style=none] (231) at (5.5, -5) {};
-		\node [style=none] (232) at (3.5, -0.5) {};
-		\node [style=none] (233) at (5.5, -0.5) {};
-		\node [style=none] (234) at (3.5, -9.5) {};
-		\node [style=none] (235) at (5.5, -9.5) {};
-		\node [style=none] (236) at (-12, -1) {};
-		\node [style=none] (237) at (-4, -1) {};
-		\node [style=none] (238) at (-4, 0) {};
-		\node [style=none] (239) at (-12, 0) {};
-		\node [style=none] (240) at (-2, 1) {};
-		\node [style=none] (241) at (11, 1) {};
-		\node [style=none] (242) at (12, 0) {};
-		\node [style=none] (243) at (12, -10) {};
-		\node [style=none] (244) at (17, -10.5) {};
-		\node [style=none] (245) at (17, -15.5) {};
+		\node [style=none] (48) at (3.5, -0.5) {\(n\)-bits branch address};
+		\node [style=none] (0) at (11, -1) {};
+		\node [style=none] (1) at (13, -1) {};
+		\node [style=none] (2) at (13, -2) {};
+		\node [style=none] (3) at (11, -2) {};
+		\node [style=none] (4) at (12, -1.5) {\texttt{0}};
+		\node [style=none] (5) at (11, -2) {};
+		\node [style=none] (6) at (13, -2) {};
+		\node [style=none] (7) at (13, -3) {};
+		\node [style=none] (8) at (11, -3) {};
+		\node [style=none] (9) at (12, -2.5) {\texttt{0}};
+		\node [style=none] (10) at (11, -3) {};
+		\node [style=none] (11) at (13, -3) {};
+		\node [style=none] (12) at (13, -4) {};
+		\node [style=none] (13) at (11, -4) {};
+		\node [style=none] (14) at (12, -3.5) {\texttt{1}};
+		\node [style=none] (15) at (11, -4) {};
+		\node [style=none] (16) at (13, -4) {};
+		\node [style=none] (17) at (13, -5) {};
+		\node [style=none] (18) at (11, -5) {};
+		\node [style=none] (19) at (12, -4.5) {\texttt{0}};
+		\node [style=none] (20) at (13, -5) {};
+		\node [style=none] (21) at (11, -5) {};
+		\node [style=none] (22) at (11, -5) {};
+		\node [style=none] (23) at (13, -5) {};
+		\node [style=none] (24) at (13, -6) {};
+		\node [style=none] (25) at (11, -6) {};
+		\node [style=none] (26) at (12, -5.5) {\texttt{1}};
+		\node [style=none] (27) at (11, -6) {};
+		\node [style=none] (28) at (13, -6) {};
+		\node [style=none] (29) at (13, -7) {};
+		\node [style=none] (30) at (11, -7) {};
+		\node [style=none] (31) at (12, -6.5) {\texttt{1}};
+		\node [style=none] (32) at (11, -7) {};
+		\node [style=none] (33) at (13, -7) {};
+		\node [style=none] (34) at (13, -8) {};
+		\node [style=none] (35) at (11, -8) {};
+		\node [style=none] (36) at (12, -7.5) {\texttt{1}};
+		\node [style=none] (37) at (12, -0.25) {1-\textit{BHT}};
+		\node [style=none] (38) at (14, -7.75) {};
+		\node [style=none] (39) at (14, -1.25) {};
+		\node [style=left align] (40) at (14.5, -4.5) {\(2^k\) entries};
+		\node [style=none] (41) at (13, -6.5) {};
+		\node [style=none] (42) at (17.5, -6.5) {};
+		\node [style=left align] (43) at (18, -6.5) {\texttt{T/NT}};
+		\node [style=none] (44) at (0, -1) {};
+		\node [style=none] (45) at (7, -1) {};
+		\node [style=none] (46) at (7, 0) {};
+		\node [style=none] (47) at (0, 0) {};
+		\node [style=none] (50) at (4, -1.25) {};
+		\node [style=none] (51) at (5.5, -1.5) {};
+		\node [style=none] (53) at (4, -1.5) {};
+		\node [style=none] (55) at (5.5, -6.5) {};
+		\node [style=none] (56) at (10.75, -6.5) {};
+		\node [style=left align] (57) at (6, -6) {\(k\) \textit{LSBs}};
+		\node [style=none] (58) at (7, -1.5) {};
+		\node [style=none] (59) at (7, -1.25) {};
+		\node [style=none] (60) at (14, -8) {};
+		\node [style=none] (61) at (14, -1) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=light fill] (1.center)
-			 to (73.center)
-			 to (72.center)
-			 to [in=270, out=90] (0.center);
-		\draw [style=light fill] (86.center) to (84.center);
-		\draw [style=light fill] (94.center) to (76.center);
-		\draw [style=light fill] (77.center) to (93.center);
-		\draw [style=light fill] (92.center) to (78.center);
-		\draw [style=light fill] (79.center) to (91.center);
-		\draw [style=light fill] (90.center) to (80.center);
-		\draw [style=light fill] (81.center) to (89.center);
-		\draw [style=light fill] (88.center) to (82.center);
-		\draw [style=light fill] (83.center) to (87.center);
-		\draw [style=light fill] (96.center)
-			 to (98.center)
-			 to (97.center)
-			 to [in=270, out=90] (95.center);
-		\draw [style=light fill] (111.center) to (109.center);
-		\draw [style=light fill] (119.center) to (101.center);
-		\draw [style=light fill] (102.center) to (118.center);
-		\draw [style=light fill] (117.center) to (103.center);
-		\draw [style=light fill] (104.center) to (116.center);
-		\draw [style=light fill] (115.center) to (105.center);
-		\draw [style=light fill] (106.center) to (114.center);
-		\draw [style=light fill] (113.center) to (107.center);
-		\draw [style=light fill] (108.center) to (112.center);
-		\draw [style=light fill] (95.center) to (96.center);
-		\draw [style=light fill] (0.center) to (1.center);
-		\draw [style=light fill] (121.center)
-			 to (123.center)
-			 to (122.center)
-			 to [in=270, out=90] (120.center);
-		\draw [style=light fill] (136.center) to (134.center);
-		\draw [style=light fill] (144.center) to (126.center);
-		\draw [style=light fill] (127.center) to (143.center);
-		\draw [style=light fill] (142.center) to (128.center);
-		\draw [style=light fill] (129.center) to (141.center);
-		\draw [style=light fill] (140.center) to (130.center);
-		\draw [style=light fill] (131.center) to (139.center);
-		\draw [style=light fill] (138.center) to (132.center);
-		\draw [style=light fill] (133.center) to (137.center);
-		\draw [style=light fill] (120.center) to (121.center);
-		\draw [style=light fill] (147.center)
-			 to [in=270, out=90] (145.center)
-			 to (146.center)
-			 to (148.center)
+		\draw [style=light fill] (0.center)
+			 to (1.center)
+			 to (2.center)
+			 to (3.center)
 			 to cycle;
-		\draw [style=light fill] (161.center) to (159.center);
-		\draw [style=light fill] (169.center) to (151.center);
-		\draw [style=light fill] (152.center) to (168.center);
-		\draw [style=light fill] (167.center) to (153.center);
-		\draw [style=light fill] (154.center) to (166.center);
-		\draw [style=light fill] (165.center) to (155.center);
-		\draw [style=light fill] (156.center) to (164.center);
-		\draw [style=light fill] (163.center) to (157.center);
-		\draw [style=light fill] (158.center) to (162.center);
-		\draw [style=big arrow] (170.center) to (177.center);
-		\draw [style=big arrow] (171.center) to (176.center);
-		\draw [style=big arrow] (172.center) to (175.center);
-		\draw [style=big arrow] (173.center) to (174.center);
-		\draw [style=light fill] (179.center)
-			 to (178.center)
-			 to (181.center)
-			 to (180.center)
+		\draw [style=light fill] (5.center)
+			 to (6.center)
+			 to (7.center)
+			 to (8.center)
 			 to cycle;
-		\draw [style=double arrow] (186.center) to (185.center);
-		\draw [style=green arrow] (190.center) to (191.center);
-		\draw [style=double arrow] (198.center) to (199.center);
-		\draw [style=light fill] (217.center)
-			 to (213.center)
-			 to (212.center)
-			 to (216.center)
+		\draw [style=light fill] (10.center)
+			 to (11.center)
+			 to (12.center)
+			 to (13.center)
 			 to cycle;
-		\draw [style=solid] (207.center) to (208.center);
-		\draw [style=solid] (205.center) to (206.center);
-		\draw [style=solid, in=180, out=0] (204.center) to (203.center);
-		\draw [style=solid] (214.center) to (215.center);
-		\draw [style=big arrow] (218.center) to (211.center);
-		\draw [style=double arrow] (224.center) to (225.center);
-		\draw [style=big arrow] (227.center) to (228.center);
-		\draw [style=big] (229.center) to (227.center);
-		\draw [style=dashed] (230.center) to (231.center);
-		\draw [style=dashed] (232.center) to (233.center);
-		\draw [style=dashed] (234.center) to (235.center);
-		\draw [style=light fill] (239.center)
-			 to (238.center)
-			 to (237.center)
-			 to (236.center)
+		\draw [style=light fill] (18.center)
+			 to (15.center)
+			 to (16.center)
+			 to (17.center)
 			 to cycle;
-		\draw [style=dashed] (240.center) to (0.center);
-		\draw [style=dashed] (241.center) to (146.center);
-		\draw [style=dashed] (242.center) to (146.center);
-		\draw [style=dashed] (243.center) to (148.center);
-		\draw [style=dashed] (244.center) to (213.center);
-		\draw [style=dashed] (245.center) to (217.center);
+		\draw [style=light fill] (20.center) to (21.center);
+		\draw [style=light fill] (22.center)
+			 to (23.center)
+			 to (24.center)
+			 to (25.center)
+			 to cycle;
+		\draw [style=light fill] (27.center)
+			 to (28.center)
+			 to (29.center)
+			 to (30.center)
+			 to cycle;
+		\draw [style=light fill] (35.center)
+			 to (32.center)
+			 to (33.center)
+			 to (34.center)
+			 to cycle;
+		\draw [style=double arrow] (38.center) to (39.center);
+		\draw [style=green arrow] (41.center) to (42.center);
+		\draw [style=light fill] (47.center)
+			 to (44.center)
+			 to (45.center)
+			 to (46.center)
+			 to cycle;
+		\draw [style=big] (59.center)
+			 to (58.center)
+			 to (53.center)
+			 to (50.center);
+		\draw [style=big arrow] (55.center) to (56.center);
+		\draw [style=big] (55.center) to (51.center);
+		\draw [style=dashed] (60.center) to (34.center);
+		\draw [style=dashed] (61.center) to (1.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

@@ -26,29 +26,29 @@
 		\node [style=none] (23) at (2, -3) {};
 		\node [style=none] (24) at (1, -16) {};
 		\node [style=none] (25) at (2, -16) {};
-		\node [style=none] (26) at (5, -19) {};
-		\node [style=none] (27) at (2, -19) {};
-		\node [style=none] (28) at (2, -23) {};
-		\node [style=none] (29) at (5, -23) {};
+		\node [style=none] (26) at (6, -19) {};
+		\node [style=none] (27) at (3, -19) {};
+		\node [style=none] (28) at (3, -23) {};
+		\node [style=none] (29) at (6, -23) {};
 		\node [style=none] (30) at (1, -19) {};
 		\node [style=none] (31) at (-2, -19) {};
 		\node [style=none] (32) at (-2, -22) {};
 		\node [style=none] (33) at (1, -22) {};
 		\node [style=none] (34) at (-0.5, -18.75) {};
-		\node [style=none] (35) at (3.5, -18.75) {};
+		\node [style=none] (35) at (4.5, -18.75) {};
 		\node [style=none] (36) at (-0.5, -22) {};
 		\node [style=none] (37) at (1, -25) {};
-		\node [style=none] (40) at (3.5, -23) {};
+		\node [style=none] (40) at (4.5, -23) {};
 		\node [style=none] (41) at (2, -25) {};
-		\node [style=none] (42) at (1.5, -1.5) {\large \texttt{BB}};
-		\node [style=none] (43) at (4.5, -7) {\large \texttt{BB}};
+		\node [style=none] (42) at (1.5, -1.5) {\large \color{white} \texttt{BB}};
+		\node [style=none] (43) at (4.5, -7) {\large \color{white} \texttt{BB}};
 		\node [style=none] (44) at (-0.5, -8) {\large \texttt{BB}};
-		\node [style=none] (45) at (1.5, -14.5) {\large \texttt{BB}};
-		\node [style=none] (46) at (3.5, -21) {\large \texttt{BB}};
-		\node [style=none] (47) at (-0.5, -20.5) {\large \texttt{BB}};
+		\node [style=none] (45) at (1.5, -14.5) {\large \color{white} \texttt{BB}};
+		\node [style=none] (46) at (4.5, -21) {\large\texttt{BB}};
+		\node [style=none] (47) at (-0.5, -20.5) {\large \color{white}  \texttt{BB}};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=light fill] (1.center)
+		\draw [style=green fill] (1.center)
 			 to (3.center)
 			 to (0.center)
 			 to (2.center)
@@ -58,12 +58,12 @@
 			 to (6.center)
 			 to (7.center)
 			 to cycle;
-		\draw [style=light fill] (8.center)
+		\draw [style=green fill] (8.center)
 			 to (9.center)
 			 to (10.center)
 			 to (11.center)
 			 to cycle;
-		\draw [style=light fill] (12.center)
+		\draw [style=green fill] (12.center)
 			 to (13.center)
 			 to (14.center)
 			 to (15.center)
@@ -73,16 +73,16 @@
 			 to (28.center)
 			 to (29.center)
 			 to cycle;
-		\draw [style=light fill] (30.center)
+		\draw [style=green fill] (30.center)
 			 to (31.center)
 			 to (32.center)
 			 to (33.center)
 			 to cycle;
 		\draw [style=solid arrow] (22.center) to (20.center);
-		\draw [style=solid arrow] (23.center) to (21.center);
+		\draw [style=green arrow] (23.center) to (21.center);
 		\draw [style=solid arrow] (18.center) to (16.center);
-		\draw [style=solid arrow] (19.center) to (17.center);
-		\draw [style=solid arrow] (24.center) to (34.center);
+		\draw [style=green arrow] (19.center) to (17.center);
+		\draw [style=green arrow] (24.center) to (34.center);
 		\draw [style=solid arrow] (25.center) to (35.center);
 		\draw [style=dashed] (36.center) to (37.center);
 		\draw [style=dashed] (41.center) to (40.center);

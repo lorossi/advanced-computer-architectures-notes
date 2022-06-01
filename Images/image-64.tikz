@@ -1,402 +1,47 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=none] (0) at (0, 0) {};
-		\node [style=none] (4) at (5, 0) {};
-		\node [style=none] (5) at (0, -1) {};
-		\node [style=none] (6) at (1, -1) {};
-		\node [style=none] (7) at (2, -1) {};
-		\node [style=none] (8) at (3, -1) {};
-		\node [style=none] (9) at (5, -1) {};
-		\node [style=none] (10) at (4, -1) {};
-		\node [style=none] (11) at (1, 0) {};
-		\node [style=none] (12) at (2, 0) {};
-		\node [style=none] (13) at (3, 0) {};
-		\node [style=none] (14) at (4, 0) {};
-		\node [style=none, text=white] (15) at (0.5, -0.5) {\texttt{IF}};
-		\node [style=none, text=white] (16) at (4.5, -0.5) {\texttt{WB}};
-		\node [style=none] (46) at (0.25, 1) {};
-		\node [style=none] (48) at (4.75, 1) {};
-		\node [style=top align] (49) at (2.5, 1) {\small functional unit latency};
-		\node [style=none, text=white] (50) at (1.5, -0.5) {\texttt{ID}};
-		\node [style=none, text=white] (51) at (2.5, -0.5) {\texttt{EX}};
-		\node [style=none, text=white] (52) at (3.5, -0.5) {\texttt{ME}};
-		\node [style=none] (53) at (1, -1) {};
-		\node [style=none] (54) at (6, -1) {};
-		\node [style=none] (55) at (1, -2) {};
-		\node [style=none] (56) at (2, -2) {};
-		\node [style=none] (57) at (3, -2) {};
-		\node [style=none] (58) at (4, -2) {};
-		\node [style=none] (59) at (6, -2) {};
-		\node [style=none] (60) at (5, -2) {};
-		\node [style=none] (61) at (2, -1) {};
-		\node [style=none] (62) at (3, -1) {};
-		\node [style=none] (63) at (4, -1) {};
-		\node [style=none] (64) at (5, -1) {};
-		\node [style=none, text=white] (65) at (1.5, -1.5) {\texttt{IF}};
-		\node [style=none, text=white] (66) at (5.5, -1.5) {\texttt{WB}};
-		\node [style=none, text=white] (67) at (2.5, -1.5) {\texttt{ID}};
-		\node [style=none, text=white] (68) at (3.5, -1.5) {\texttt{EX}};
-		\node [style=none, text=white] (69) at (4.5, -1.5) {\texttt{ME}};
-		\node [style=none] (70) at (2, -2) {};
-		\node [style=none] (71) at (7, -2) {};
-		\node [style=none] (72) at (2, -3) {};
-		\node [style=none] (73) at (3, -3) {};
-		\node [style=none] (74) at (4, -3) {};
-		\node [style=none] (75) at (5, -3) {};
-		\node [style=none] (76) at (7, -3) {};
-		\node [style=none] (77) at (6, -3) {};
-		\node [style=none] (78) at (3, -2) {};
-		\node [style=none] (79) at (4, -2) {};
-		\node [style=none] (80) at (5, -2) {};
-		\node [style=none] (81) at (6, -2) {};
-		\node [style=none, text=white] (82) at (2.5, -2.5) {\texttt{IF}};
-		\node [style=none, text=white] (83) at (6.5, -2.5) {\texttt{WB}};
-		\node [style=none, text=white] (84) at (3.5, -2.5) {\texttt{ID}};
-		\node [style=none, text=white] (85) at (4.5, -2.5) {\texttt{EX}};
-		\node [style=none, text=white] (86) at (5.5, -2.5) {\texttt{ME}};
-		\node [style=none] (87) at (3, -3) {};
-		\node [style=none] (88) at (8, -3) {};
-		\node [style=none] (89) at (3, -4) {};
-		\node [style=none] (90) at (4, -4) {};
-		\node [style=none] (91) at (5, -4) {};
-		\node [style=none] (92) at (6, -4) {};
-		\node [style=none] (93) at (8, -4) {};
-		\node [style=none] (94) at (7, -4) {};
-		\node [style=none] (95) at (4, -3) {};
-		\node [style=none] (96) at (5, -3) {};
-		\node [style=none] (97) at (6, -3) {};
-		\node [style=none] (98) at (7, -3) {};
-		\node [style=none, text=white] (99) at (3.5, -3.5) {\texttt{IF}};
-		\node [style=none, text=white] (100) at (7.5, -3.5) {\texttt{WB}};
-		\node [style=none, text=white] (101) at (4.5, -3.5) {\texttt{ID}};
-		\node [style=none, text=white] (102) at (5.5, -3.5) {\texttt{EX}};
-		\node [style=none, text=white] (103) at (6.5, -3.5) {\texttt{ME}};
-		\node [style=none] (104) at (4, -4) {};
-		\node [style=none] (105) at (9, -4) {};
-		\node [style=none] (106) at (4, -5) {};
-		\node [style=none] (107) at (5, -5) {};
-		\node [style=none] (108) at (6, -5) {};
-		\node [style=none] (109) at (7, -5) {};
-		\node [style=none] (110) at (9, -5) {};
-		\node [style=none] (111) at (8, -5) {};
-		\node [style=none] (112) at (5, -4) {};
-		\node [style=none] (113) at (6, -4) {};
-		\node [style=none] (114) at (7, -4) {};
-		\node [style=none] (115) at (8, -4) {};
-		\node [style=none, text=white] (116) at (4.5, -4.5) {\texttt{IF}};
-		\node [style=none, text=white] (117) at (8.5, -4.5) {\texttt{WB}};
-		\node [style=none, text=white] (118) at (5.5, -4.5) {\texttt{ID}};
-		\node [style=none, text=white] (119) at (6.5, -4.5) {\texttt{EX}};
-		\node [style=none, text=white] (120) at (7.5, -4.5) {\texttt{ME}};
-		\node [style=none] (121) at (5, -5) {};
-		\node [style=none] (122) at (10, -5) {};
-		\node [style=none] (123) at (5, -6) {};
-		\node [style=none] (124) at (6, -6) {};
-		\node [style=none] (125) at (7, -6) {};
-		\node [style=none] (126) at (8, -6) {};
-		\node [style=none] (127) at (10, -6) {};
-		\node [style=none] (128) at (9, -6) {};
-		\node [style=none, text=white] (129) at (5.5, -5.5) {\texttt{IF}};
-		\node [style=none, text=white] (130) at (9.5, -5.5) {\texttt{WB}};
-		\node [style=none, text=white] (131) at (6.5, -5.5) {\texttt{ID}};
-		\node [style=none, text=white] (132) at (7.5, -5.5) {\texttt{EX}};
-		\node [style=none, text=white] (133) at (8.5, -5.5) {\texttt{ME}};
-		\node [style=none] (134) at (6, -5) {};
-		\node [style=none] (135) at (7, -5) {};
-		\node [style=none] (136) at (8, -5) {};
-		\node [style=none] (137) at (9, -5) {};
-		\node [style=none] (138) at (8, -6) {};
-		\node [style=none] (139) at (6, -6) {};
-		\node [style=none] (140) at (11, -6) {};
-		\node [style=none] (141) at (6, -7) {};
-		\node [style=none] (142) at (7, -7) {};
-		\node [style=none] (143) at (8, -7) {};
-		\node [style=none] (144) at (9, -7) {};
-		\node [style=none] (145) at (11, -7) {};
-		\node [style=none] (146) at (10, -7) {};
-		\node [style=none, text=white] (147) at (6.5, -6.5) {\texttt{IF}};
-		\node [style=none, text=white] (148) at (10.5, -6.5) {\texttt{WB}};
-		\node [style=none, text=white] (149) at (7.5, -6.5) {\texttt{ID}};
-		\node [style=none, text=white] (150) at (8.5, -6.5) {\texttt{EX}};
-		\node [style=none, text=white] (151) at (9.5, -6.5) {\texttt{ME}};
-		\node [style=none] (152) at (7, -6) {};
-		\node [style=none] (153) at (8, -6) {};
-		\node [style=none] (154) at (9, -6) {};
-		\node [style=none] (155) at (10, -6) {};
-		\node [style=none] (156) at (9, -7) {};
-		\node [style=none] (157) at (7, -7) {};
-		\node [style=none] (158) at (12, -7) {};
-		\node [style=none] (159) at (7, -8) {};
-		\node [style=none] (160) at (8, -8) {};
-		\node [style=none] (161) at (9, -8) {};
-		\node [style=none] (162) at (10, -8) {};
-		\node [style=none] (163) at (12, -8) {};
-		\node [style=none] (164) at (11, -8) {};
-		\node [style=none, text=white] (165) at (7.5, -7.5) {\texttt{IF}};
-		\node [style=none, text=white] (166) at (11.5, -7.5) {\texttt{WB}};
-		\node [style=none, text=white] (167) at (8.5, -7.5) {\texttt{ID}};
-		\node [style=none, text=white] (168) at (9.5, -7.5) {\texttt{EX}};
-		\node [style=none, text=white] (169) at (10.5, -7.5) {\texttt{ME}};
-		\node [style=none] (170) at (8, -7) {};
-		\node [style=none] (171) at (9, -7) {};
-		\node [style=none] (172) at (10, -7) {};
-		\node [style=none] (173) at (11, -7) {};
-		\node [style=none] (174) at (10, -8) {};
-		\node [style=none] (175) at (8, -8) {};
-		\node [style=none] (176) at (13, -8) {};
-		\node [style=none] (177) at (8, -9) {};
-		\node [style=none] (178) at (9, -9) {};
-		\node [style=none] (179) at (10, -9) {};
-		\node [style=none] (180) at (11, -9) {};
-		\node [style=none] (181) at (13, -9) {};
-		\node [style=none] (182) at (12, -9) {};
-		\node [style=none, text=white] (183) at (8.5, -8.5) {\texttt{IF}};
-		\node [style=none, text=white] (184) at (12.5, -8.5) {\texttt{WB}};
-		\node [style=none, text=white] (185) at (9.5, -8.5) {\texttt{ID}};
-		\node [style=none, text=white] (186) at (10.5, -8.5) {\texttt{EX}};
-		\node [style=none, text=white] (187) at (11.5, -8.5) {\texttt{ME}};
-		\node [style=none] (188) at (9, -8) {};
-		\node [style=none] (189) at (10, -8) {};
-		\node [style=none] (190) at (11, -8) {};
-		\node [style=none] (191) at (12, -8) {};
-		\node [style=none] (192) at (11, -9) {};
-		\node [style=none] (193) at (9, -9) {};
-		\node [style=none] (194) at (14, -9) {};
-		\node [style=none] (195) at (9, -10) {};
-		\node [style=none] (196) at (10, -10) {};
-		\node [style=none] (197) at (11, -10) {};
-		\node [style=none] (198) at (12, -10) {};
-		\node [style=none] (199) at (14, -10) {};
-		\node [style=none] (200) at (13, -10) {};
-		\node [style=none, text=white] (201) at (9.5, -9.5) {\texttt{IF}};
-		\node [style=none, text=white] (202) at (13.5, -9.5) {\texttt{WB}};
-		\node [style=none, text=white] (203) at (10.5, -9.5) {\texttt{ID}};
-		\node [style=none, text=white] (204) at (11.5, -9.5) {\texttt{EX}};
-		\node [style=none, text=white] (205) at (12.5, -9.5) {\texttt{ME}};
-		\node [style=none] (206) at (10, -9) {};
-		\node [style=none] (207) at (11, -9) {};
-		\node [style=none] (208) at (12, -9) {};
-		\node [style=none] (209) at (13, -9) {};
-		\node [style=none] (210) at (12, -10) {};
-		\node [style=none] (211) at (9.75, -12) {};
-		\node [style=none] (212) at (5.25, -12) {};
-		\node [style=bottom align] (213) at (7.5, -12) {\small dead time};
-		\node [style=none] (214) at (5, -12) {};
-		\node [style=none] (215) at (5, -6) {};
-		\node [style=none] (216) at (10, -10) {};
-		\node [style=none] (217) at (15, -10) {};
-		\node [style=none] (218) at (10, -11) {};
-		\node [style=none] (224) at (11, -10) {};
-		\node [style=none] (225) at (12, -10) {};
-		\node [style=none] (226) at (13, -10) {};
-		\node [style=none] (227) at (14, -10) {};
-		\node [style=none, text=white] (228) at (10.5, -10.5) {\texttt{IF}};
-		\node [style=none, text=white] (229) at (14.5, -10.5) {\texttt{WB}};
-		\node [style=none, text=white] (230) at (11.5, -10.5) {\texttt{ID}};
-		\node [style=none, text=white] (231) at (12.5, -10.5) {\texttt{EX}};
-		\node [style=none, text=white] (232) at (13.5, -10.5) {\texttt{ME}};
-		\node [style=none] (233) at (11, -11) {};
-		\node [style=none] (234) at (16, -11) {};
-		\node [style=none] (235) at (11, -12) {};
-		\node [style=none] (241) at (12, -11) {};
-		\node [style=none] (242) at (13, -11) {};
-		\node [style=none] (243) at (14, -11) {};
-		\node [style=none] (244) at (15, -11) {};
-		\node [style=none, text=white] (245) at (11.5, -11.5) {\texttt{IF}};
-		\node [style=none, text=white] (246) at (15.5, -11.5) {\texttt{WB}};
-		\node [style=none, text=white] (247) at (12.5, -11.5) {\texttt{ID}};
-		\node [style=none, text=white] (248) at (13.5, -11.5) {\texttt{EX}};
-		\node [style=none, text=white] (249) at (14.5, -11.5) {\texttt{ME}};
-		\node [style=none] (250) at (12, -12) {};
-		\node [style=none] (252) at (13, -12) {};
-		\node [style=none] (253) at (14, -12) {};
-		\node [style=none] (254) at (15, -12) {};
-		\node [style=none] (255) at (16, -12) {};
-		\node [style=none] (256) at (12, -12) {};
-		\node [style=none] (257) at (17, -12) {};
-		\node [style=none] (258) at (12, -13) {};
-		\node [style=none] (259) at (13, -12) {};
-		\node [style=none] (260) at (14, -12) {};
-		\node [style=none] (261) at (15, -12) {};
-		\node [style=none] (262) at (16, -12) {};
-		\node [style=none, text=white] (263) at (12.5, -12.5) {\texttt{IF}};
-		\node [style=none, text=white] (264) at (16.5, -12.5) {\texttt{WB}};
-		\node [style=none, text=white] (265) at (13.5, -12.5) {\texttt{ID}};
-		\node [style=none, text=white] (266) at (14.5, -12.5) {\texttt{EX}};
-		\node [style=none, text=white] (267) at (15.5, -12.5) {\texttt{ME}};
-		\node [style=none] (268) at (13, -13) {};
-		\node [style=none] (269) at (18, -13) {};
-		\node [style=none] (270) at (13, -14) {};
-		\node [style=none] (271) at (14, -13) {};
-		\node [style=none] (272) at (15, -13) {};
-		\node [style=none] (273) at (16, -13) {};
-		\node [style=none] (274) at (17, -13) {};
-		\node [style=none, text=white] (275) at (13.5, -13.5) {\texttt{IF}};
-		\node [style=none, text=white] (276) at (17.5, -13.5) {\texttt{WB}};
-		\node [style=none, text=white] (277) at (14.5, -13.5) {\texttt{ID}};
-		\node [style=none, text=white] (278) at (15.5, -13.5) {\texttt{EX}};
-		\node [style=none, text=white] (279) at (16.5, -13.5) {\texttt{ME}};
-		\node [style=none] (280) at (14, -14) {};
-		\node [style=none] (281) at (15, -14) {};
-		\node [style=none] (282) at (16, -14) {};
-		\node [style=none] (283) at (17, -14) {};
-		\node [style=none] (284) at (18, -14) {};
-		\node [style=none] (285) at (20, -13.75) {};
-		\node [style=none] (286) at (20, -10.25) {};
-		\node [style=none] (287) at (20, -5.25) {};
-		\node [style=none] (288) at (20, -0.25) {};
-		\node [style=none] (289) at (20, -9.75) {};
-		\node [style=none] (290) at (20, -4.75) {};
-		\node [style=none] (291) at (19.5, -14) {};
-		\node [style=none] (292) at (19.5, -10) {};
-		\node [style=none] (293) at (19.5, -5) {};
-		\node [style=none] (294) at (19.5, 0) {};
-		\node [style=none, rotate=90] (295) at (20.5, -2.5) {\small instruction};
-		\node [style=none, rotate=90] (296) at (20.5, -12) {\small instruction};
-		\node [style=none, rotate=90] (297) at (20.5, -7.5) {\small dead time};
-		\node [style=none] (298) at (10, -12) {};
-		\node [style=none] (299) at (0, 1) {};
-		\node [style=none] (300) at (5, 1) {};
+		\node [style=none] (1) at (0, -1) {};
+		\node [style=none] (2) at (5, -1) {};
+		\node [style=none] (3) at (5, 0) {};
+		\node [style=none] (4) at (5, -1) {};
+		\node [style=none] (5) at (5, -2) {};
+		\node [style=none] (6) at (10, -2) {};
+		\node [style=none] (7) at (10, -1) {};
+		\node [style=none] (8) at (10, -2) {};
+		\node [style=none] (9) at (10, -3) {};
+		\node [style=none] (10) at (15, -3) {};
+		\node [style=none] (11) at (15, -2) {};
+		\node [style=none, text=white] (12) at (2.5, -0.5) {\texttt{LOAD}};
+		\node [style=none, text=white] (13) at (7.5, -1.5) {\texttt{MUL}};
+		\node [style=none, text=white] (14) at (12.5, -2.5) {\texttt{ADD}};
+		\node [style=none] (15) at (-1, -4) {};
+		\node [style=none] (16) at (16, -4) {};
+		\node [style=bottom align] (17) at (15, -4) {time};
+		\node [style=none] (18) at (10, -4) {};
+		\node [style=none] (19) at (5, -4) {};
+		\node [style=none] (20) at (0, -4) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=green fill] (0.center)
-			 to (5.center)
-			 to (9.center)
+		\draw [style=red fill] (1.center)
+			 to (2.center)
+			 to (3.center)
+			 to (0.center)
+			 to cycle;
+		\draw [style=purple fill] (5.center)
+			 to (6.center)
+			 to (7.center)
 			 to (4.center)
 			 to cycle;
-		\draw [style=green fill] (6.center) to (11.center);
-		\draw [style=green fill] (12.center) to (7.center);
-		\draw [style=green fill] (13.center) to (8.center);
-		\draw [style=green fill] (14.center) to (10.center);
-		\draw [style=double arrow] (46.center) to (48.center);
-		\draw [style=green fill] (53.center)
-			 to (55.center)
-			 to (59.center)
-			 to (54.center)
+		\draw [style=green fill] (9.center)
+			 to (10.center)
+			 to (11.center)
+			 to (8.center)
 			 to cycle;
-		\draw [style=green fill] (56.center) to (61.center);
-		\draw [style=green fill] (62.center) to (57.center);
-		\draw [style=green fill] (63.center) to (58.center);
-		\draw [style=green fill] (64.center) to (60.center);
-		\draw [style=green fill] (70.center)
-			 to (72.center)
-			 to (76.center)
-			 to (71.center)
-			 to cycle;
-		\draw [style=green fill] (73.center) to (78.center);
-		\draw [style=green fill] (79.center) to (74.center);
-		\draw [style=green fill] (80.center) to (75.center);
-		\draw [style=green fill] (81.center) to (77.center);
-		\draw [style=green fill] (87.center)
-			 to (89.center)
-			 to (93.center)
-			 to (88.center)
-			 to cycle;
-		\draw [style=green fill] (90.center) to (95.center);
-		\draw [style=green fill] (96.center) to (91.center);
-		\draw [style=green fill] (97.center) to (92.center);
-		\draw [style=green fill] (98.center) to (94.center);
-		\draw [style=green fill] (104.center)
-			 to (106.center)
-			 to (110.center)
-			 to (105.center)
-			 to cycle;
-		\draw [style=green fill] (107.center) to (112.center);
-		\draw [style=green fill] (113.center) to (108.center);
-		\draw [style=green fill] (114.center) to (109.center);
-		\draw [style=green fill] (115.center) to (111.center);
-		\draw [style=red fill] (122.center)
-			 to (121.center)
-			 to (123.center)
-			 to (127.center)
-			 to cycle;
-		\draw [style=red fill] (134.center) to (124.center);
-		\draw [style=red fill] (135.center) to (125.center);
-		\draw [style=red fill] (137.center) to (128.center);
-		\draw [style=red fill] (136.center) to (138.center);
-		\draw [style=red fill] (140.center)
-			 to (139.center)
-			 to (141.center)
-			 to (145.center)
-			 to cycle;
-		\draw [style=red fill] (152.center) to (142.center);
-		\draw [style=red fill] (153.center) to (143.center);
-		\draw [style=red fill] (155.center) to (146.center);
-		\draw [style=red fill] (154.center) to (156.center);
-		\draw [style=red fill] (158.center)
-			 to (157.center)
-			 to (159.center)
-			 to (163.center)
-			 to cycle;
-		\draw [style=red fill] (170.center) to (160.center);
-		\draw [style=red fill] (171.center) to (161.center);
-		\draw [style=red fill] (173.center) to (164.center);
-		\draw [style=red fill] (172.center) to (174.center);
-		\draw [style=red fill] (176.center)
-			 to (175.center)
-			 to (177.center)
-			 to (181.center)
-			 to cycle;
-		\draw [style=red fill] (188.center) to (178.center);
-		\draw [style=red fill] (189.center) to (179.center);
-		\draw [style=red fill] (191.center) to (182.center);
-		\draw [style=red fill] (190.center) to (192.center);
-		\draw [style=red fill] (194.center)
-			 to (193.center)
-			 to (195.center)
-			 to (199.center)
-			 to cycle;
-		\draw [style=red fill] (206.center) to (196.center);
-		\draw [style=red fill] (207.center) to (197.center);
-		\draw [style=red fill] (209.center) to (200.center);
-		\draw [style=red fill] (208.center) to (210.center);
-		\draw [style=double arrow, in=180, out=0] (212.center) to (211.center);
-		\draw [style=dashed] (214.center) to (215.center);
-		\draw [style=green fill] (216.center)
-			 to (218.center)
-			 to (244.center)
-			 to (217.center)
-			 to cycle;
-		\draw [style=green fill] (233.center)
-			 to (235.center)
-			 to (255.center)
-			 to [in=270, out=90] (234.center)
-			 to cycle;
-		\draw [style=green fill] (233.center) to (224.center);
-		\draw [style=green fill] (225.center) to (241.center);
-		\draw [style=green fill] (226.center) to (242.center);
-		\draw [style=green fill] (227.center) to (243.center);
-		\draw [style=green fill] (250.center) to (241.center);
-		\draw [style=green fill] (242.center) to (252.center);
-		\draw [style=green fill] (243.center) to (253.center);
-		\draw [style=green fill] (244.center) to (254.center);
-		\draw [style=green fill] (256.center)
-			 to (258.center)
-			 to (274.center)
-			 to (257.center)
-			 to cycle;
-		\draw [style=green fill] (268.center)
-			 to (270.center)
-			 to (284.center)
-			 to [in=270, out=90] (269.center)
-			 to cycle;
-		\draw [style=green fill] (268.center) to (259.center);
-		\draw [style=green fill] (260.center) to (271.center);
-		\draw [style=green fill] (261.center) to (272.center);
-		\draw [style=green fill] (262.center) to (273.center);
-		\draw [style=green fill] (280.center) to (271.center);
-		\draw [style=green fill] (272.center) to (281.center);
-		\draw [style=green fill] (273.center) to (282.center);
-		\draw [style=green fill] (274.center) to (283.center);
-		\draw [style=double arrow] (288.center) to (290.center);
-		\draw [style=double arrow] (287.center) to (289.center);
-		\draw [style=double arrow] (286.center) to (285.center);
-		\draw [style=dashed] (284.center) to (291.center);
-		\draw [style=dashed] (217.center) to (292.center);
-		\draw [style=dashed] (122.center) to (293.center);
-		\draw [style=dashed] (4.center) to (294.center);
-		\draw [style=dashed] (298.center) to (218.center);
-		\draw [style=dashed] (299.center) to (0.center);
-		\draw [style=dashed] (4.center) to (300.center);
+		\draw [style=big arrow] (15.center) to (16.center);
+		\draw [style=dashed] (1.center) to (20.center);
+		\draw [style=dashed] (5.center) to (19.center);
+		\draw [style=dashed] (9.center) to (18.center);
+		\draw [style=dashed] (10.center) to (17);
 	\end{pgfonlayer}
 \end{tikzpicture}

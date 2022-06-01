@@ -1,294 +1,97 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=none] (177) at (17, -4) {};
-		\node [style=none] (178) at (17, -12) {};
-		\node [style=none] (179) at (38, -12) {};
-		\node [style=none] (180) at (38, -4) {};
-		\node [style=none] (0) at (-1, 0) {};
-		\node [style=none] (1) at (-1, -2) {};
-		\node [style=none] (2) at (2, -2) {};
-		\node [style=none] (3) at (2, 0) {};
-		\node [style=none] (4) at (0.5, -1) {\texttt{PC}};
-		\node [style=none] (5) at (2, -1) {};
-		\node [style=none] (6) at (4.75, -1) {};
-		\node [style=none] (7) at (5, 0) {};
-		\node [style=none] (8) at (5, -2) {};
-		\node [style=none] (9) at (8, -2) {};
-		\node [style=none] (10) at (8, 0) {};
-		\node [style=none] (11) at (6.5, -1) {\texttt{fetch}};
-		\node [style=none] (12) at (8, -1) {};
-		\node [style=none] (13) at (10.75, -1) {};
-		\node [style=none] (14) at (11, 0) {};
-		\node [style=none] (15) at (11, -2) {};
-		\node [style=none] (16) at (14, -2) {};
-		\node [style=none] (17) at (14, 0) {};
-		\node [style=none] (18) at (12.5, -0.5) {\texttt{decode}};
-		\node [style=none] (19) at (14, -0.5) {};
-		\node [style=none] (21) at (12.5, -1.5) {\texttt{rename}};
-		\node [style=none] (26) at (3, 5) {};
-		\node [style=none] (27) at (3, 3) {};
-		\node [style=none] (28) at (10, 3) {};
-		\node [style=none] (29) at (10, 5) {};
-		\node [style=none] (30) at (6.5, 4) {\small\texttt{branch prediction}};
-		\node [style=none] (31) at (3, 3.5) {};
-		\node [style=none] (32) at (0.5, 3.5) {};
-		\node [style=none] (33) at (0.5, 0.25) {};
-		\node [style=none] (34) at (10, 3.5) {};
-		\node [style=none] (35) at (12, 3.5) {};
-		\node [style=none] (36) at (12, 0.25) {};
-		\node [style=none] (37) at (6.5, 3) {};
-		\node [style=none] (38) at (6.5, 0.25) {};
-		\node [style=none] (41) at (13, 0) {};
-		\node [style=none] (42) at (13, 4.5) {};
-		\node [style=none] (43) at (10.25, 4.5) {};
-		\node [style=none] (48) at (22.5, -1) {\texttt{ROB}};
-		\node [style=none] (50) at (29.75, -1) {};
-		\node [style=none] (51) at (30, 0) {};
-		\node [style=none] (52) at (30, -2) {};
-		\node [style=none] (53) at (33, -2) {};
-		\node [style=none] (54) at (33, 0) {};
-		\node [style=none] (55) at (31.5, -1) {\texttt{commit}};
-		\node [style=none] (58) at (18, 0) {};
-		\node [style=none] (59) at (18, -2) {};
-		\node [style=none] (60) at (27, -2) {};
-		\node [style=none] (61) at (27, 0) {};
-		\node [style=none] (62) at (17.75, -0.5) {};
-		\node [style=none] (63) at (27, -1) {};
-		\node [style=none] (64) at (18, -5) {};
-		\node [style=none] (65) at (18, -7) {};
-		\node [style=none] (66) at (27, -7) {};
-		\node [style=none] (67) at (27, -5) {};
-		\node [style=none] (68) at (22.5, -6) {\small\texttt{physical register file}};
-		\node [style=none] (69) at (19, -2) {};
-		\node [style=none] (70) at (19, -4.75) {};
-		\node [style=none] (71) at (20, -5) {};
-		\node [style=none] (72) at (20, -2.25) {};
-		\node [style=none] (73) at (22, -2) {};
-		\node [style=none] (74) at (22, -4.75) {};
-		\node [style=none] (75) at (23, -5) {};
-		\node [style=none] (76) at (23, -2.25) {};
-		\node [style=none] (77) at (25, -2) {};
-		\node [style=none] (78) at (25, -4.75) {};
-		\node [style=none] (79) at (26, -5) {};
-		\node [style=none] (80) at (26, -2.25) {};
-		\node [style=none] (81) at (18, -9) {};
-		\node [style=none] (82) at (21, -9) {};
-		\node [style=none] (83) at (21, -11) {};
-		\node [style=none] (84) at (18, -11) {};
-		\node [style=none] (85) at (19.5, -9.625) {\texttt{branch}};
-		\node [style=none] (86) at (19.5, -10.375) {\texttt{unit}};
-		\node [style=none] (87) at (22, -9) {};
-		\node [style=none] (88) at (22, -11) {};
-		\node [style=none] (89) at (24, -11) {};
-		\node [style=none] (90) at (24, -9) {};
-		\node [style=none] (91) at (25, -9) {};
-		\node [style=none] (92) at (27, -9) {};
-		\node [style=none] (93) at (27, -11) {};
-		\node [style=none] (94) at (25, -11) {};
-		\node [style=none] (95) at (23, -10) {\texttt{ALU}};
-		\node [style=none] (96) at (26, -10) {\texttt{MEM}};
-		\node [style=none] (101) at (19, -7) {};
-		\node [style=none] (102) at (19, -8.75) {};
-		\node [style=none] (103) at (20, -9) {};
-		\node [style=none] (104) at (20, -7.25) {};
-		\node [style=none] (105) at (22.5, -7) {};
-		\node [style=none] (106) at (22.5, -8.75) {};
-		\node [style=none] (107) at (23.5, -9) {};
-		\node [style=none] (108) at (23.5, -7.25) {};
-		\node [style=none] (109) at (25.5, -7) {};
-		\node [style=none] (110) at (25.5, -8.75) {};
-		\node [style=none] (111) at (26.5, -9) {};
-		\node [style=none] (112) at (26.5, -7.25) {};
-		\node [style=none] (113) at (3, -5) {};
-		\node [style=none] (114) at (3, -7) {};
-		\node [style=none] (115) at (10, -7) {};
-		\node [style=none] (116) at (10, -5) {};
-		\node [style=none] (117) at (6.5, -6) {\small\texttt{branch resolution}};
-		\node [style=none] (118) at (3, -6) {};
-		\node [style=none] (119) at (-3.5, -6) {};
-		\node [style=none] (120) at (-3.5, 4.5) {};
-		\node [style=none] (121) at (2.75, 4.5) {};
-		\node [style=none] (122) at (6.5, -5) {};
-		\node [style=none] (123) at (6.5, -2.25) {};
-		\node [style=none] (124) at (10, -5.5) {};
-		\node [style=none] (125) at (12.5, -5.5) {};
-		\node [style=none] (126) at (12.5, -2.25) {};
-		\node [style=none] (127) at (10, -6) {};
-		\node [style=none] (128) at (16, -6) {};
-		\node [style=none] (129) at (16, -1.5) {};
-		\node [style=none] (130) at (17.75, -1.5) {};
-		\node [style=none] (131) at (30, -9) {};
-		\node [style=none] (132) at (33, -9) {};
-		\node [style=none] (133) at (33, -11) {};
-		\node [style=none] (134) at (30, -11) {};
-		\node [style=none] (135) at (31.5, -9.625) {\texttt{store}};
-		\node [style=none] (136) at (31.5, -10.375) {\texttt{buffer}};
-		\node [style=none] (137) at (31.5, -8.75) {};
-		\node [style=none] (138) at (31.5, -2) {};
-		\node [style=none] (139) at (30, -9.5) {};
-		\node [style=none] (140) at (29.75, -10.5) {};
-		\node [style=none] (141) at (27.25, -9.5) {};
-		\node [style=none] (142) at (27, -10.5) {};
-		\node [style=none] (143) at (35, -9) {};
-		\node [style=none] (144) at (35, -11) {};
-		\node [style=none] (145) at (37, -11) {};
-		\node [style=none] (146) at (37, -9) {};
-		\node [style=none] (147) at (36, -10) {\texttt{D\$}};
-		\node [style=none] (148) at (33, -10.5) {};
-		\node [style=none] (149) at (34.75, -10.5) {};
-		\node [style=none] (150) at (35, -9.5) {};
-		\node [style=none] (151) at (33.25, -9.5) {};
-		\node [style=right align, text={rgb,255: red,191; green,0; blue,64}] (152) at (3, -6.5) {\texttt{kill}};
-		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (153) at (6.5, -4.5) {\texttt{kill}};
-		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (154) at (11.25, -7) {\texttt{kill}};
-		\node [style=none] (155) at (10, -6.5) {};
-		\node [style=none] (156) at (12.5, -6.5) {};
-		\node [style=none] (157) at (12.5, -13) {};
-		\node [style=none] (158) at (31.5, -13) {};
-		\node [style=none] (159) at (31.5, -11.25) {};
-		\node [style=none] (162) at (29, 1) {};
-		\node [style=none] (163) at (29, -3) {};
-		\node [style=none] (164) at (34, -3) {};
-		\node [style=none] (165) at (34, 1) {};
-		\node [style=none] (166) at (28, 1) {};
-		\node [style=none] (167) at (28, -3) {};
-		\node [style=none] (168) at (17, -3) {};
-		\node [style=none] (169) at (17, 1) {};
-		\node [style=none] (170) at (15, 1) {};
-		\node [style=none] (171) at (15, -3) {};
-		\node [style=none] (172) at (-2, -3) {};
-		\node [style=none] (173) at (-2, 1) {};
-		\node [style=none] (174) at (3.5, 1.5) {in order};
-		\node [style=none] (175) at (22.5, 1.5) {out of order};
-		\node [style=none] (176) at (31.5, 1.5) {in order};
-		\node [style=right align] (181) at (38, -4.5) {\texttt{execute}};
+		\node [style=none] (51) at (6.5, -4.5) {};
+		\node [style=left align] (0) at (0.25, 0.5) {\small\texttt{add r1, r2, r3}};
+		\node [style=left align] (1) at (0.25, -0.5) {\small\texttt{subi r4, r1, \#4}};
+		\node [style=left align] (2) at (0.25, -1.5) {\small\texttt{slli r4, r4, \#2}};
+		\node [style=none] (3) at (6.5, 1) {};
+		\node [style=none] (4) at (0, 1) {};
+		\node [style=none] (5) at (0, -8) {};
+		\node [style=none] (6) at (6.5, -8) {};
+		\node [style=left align] (8) at (0.25, -5.5) {\small\texttt{lw r3, 3(r4)}};
+		\node [style=left align] (9) at (0.25, -6.5) {\small\texttt{add r2, r2, r3}};
+		\node [style=left align] (10) at (0.25, -7.5) {\small\texttt{sw 8(r4), r2}};
+		\node [style=none] (13) at (-7, -3.5) {};
+		\node [style=none] (14) at (-0.25, -3.5) {};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (15) at (-7, -3) {\small\texttt{INTERRUPT EVENT}};
+		\node [style=none] (16) at (6.5, -3.25) {};
+		\node [style=none] (17) at (9, -3.25) {};
+		\node [style=none] (18) at (9, 3.5) {};
+		\node [style=none] (19) at (18, 3.5) {};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (20) at (13.5, 6) {\small\texttt{PC} is disabled};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (21) at (13.5, 5) {all interrupts are disabled};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (22) at (13.5, 4) {enter supervisor mode};
+		\node [style=none] (23) at (18, 1.75) {};
+		\node [style=none] (24) at (17, 1.5) {};
+		\node [style=none] (25) at (19, 1.5) {};
+		\node [style=none] (26) at (17, -0.5) {};
+		\node [style=none] (27) at (19, -0.5) {};
+		\node [style=none, text=white] (28) at (18, 0.5) {\(\small\texttt{HI}_{1}\)};
+		\node [style=none] (29) at (18, -0.5) {};
+		\node [style=none] (30) at (18, -2.25) {};
+		\node [style=none] (31) at (17, -2.5) {};
+		\node [style=none] (32) at (19, -2.5) {};
+		\node [style=none] (33) at (17, -4.5) {};
+		\node [style=none] (34) at (19, -4.5) {};
+		\node [style=none, text=white] (35) at (18, -3.5) {\(\small\texttt{HI}_{2}\)};
+		\node [style=none] (36) at (18, -4.75) {};
+		\node [style=none] (37) at (18, -6.25) {};
+		\node [style=none] (38) at (17, -6.5) {};
+		\node [style=none] (39) at (19, -6.5) {};
+		\node [style=none] (40) at (17, -8.5) {};
+		\node [style=none] (41) at (19, -8.5) {};
+		\node [style=none, text=white] (42) at (18, -7.5) {\(\small\texttt{HI}_{n}\)};
+		\node [style=none] (43) at (18, -8.5) {};
+		\node [style=none, rotate=90, text={rgb,255: red,191; green,0; blue,64}] (44) at (19.75, -3.5) {\small\texttt{INTERRUPT HANDLER}};
+		\node [style=none] (45) at (18, -10.5) {};
+		\node [style=none] (46) at (9, -10.5) {};
+		\node [style=none] (47) at (9, -4) {};
+		\node [style=none] (48) at (6.75, -4) {};
+		\node [style=none] (49) at (0, -2.5) {};
+		\node [style=none] (50) at (0, -4.5) {};
+		\node [style=none] (52) at (6.5, -2.5) {};
+		\node [style=left align, text=white] (7) at (0.25, -3.5) {\small\texttt{lw r2, 0(r4)}};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (53) at (13.5, -11) {\small\texttt{PC} is restored};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (54) at (13.5, -11.75) {all interrupts are re enabled};
+		\node [style=none, text={rgb,255: red,191; green,0; blue,64}] (55) at (13.5, -12.5) {enter user mode};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=light fill] (178.center)
-			 to (177.center)
-			 to (180.center)
-			 to (179.center)
+		\draw [style=light fill] (4.center)
+			 to [in=90, out=-90] (5.center)
+			 to (6.center)
+			 to (3.center)
 			 to cycle;
-		\draw [style=light fill] (3.center)
-			 to (0.center)
-			 to (1.center)
-			 to (2.center)
-			 to cycle;
-		\draw [style=big arrow] (5.center) to (6.center);
-		\draw [style=light fill] (10.center)
-			 to (7.center)
-			 to (8.center)
-			 to (9.center)
-			 to cycle;
-		\draw [style=big arrow] (12.center) to (13.center);
-		\draw [style=light fill] (17.center)
-			 to (14.center)
-			 to (15.center)
-			 to (16.center)
-			 to cycle;
-		\draw [style=light fill] (29.center)
+		\draw [style=red arrow] (13.center) to (14.center);
+		\draw [style=red line] (16.center)
+			 to (17.center)
+			 to (18.center)
+			 to [in=180, out=0] (19.center);
+		\draw [style=red fill] (24.center)
 			 to (26.center)
 			 to (27.center)
-			 to (28.center)
+			 to (25.center)
 			 to cycle;
-		\draw [style=green arrow] (32.center) to (33.center);
-		\draw [style=green arrow] (37.center) to (38.center);
-		\draw [style=green arrow] (35.center) to (36.center);
-		\draw [style=green line] (34.center) to (35.center);
-		\draw [style=green line] (32.center) to (31.center);
-		\draw [style=green line] (41.center) to (42.center);
-		\draw [style=green arrow] (42.center) to (43.center);
-		\draw [style=light fill] (51.center)
+		\draw [style=red arrow] (29.center) to (30.center);
+		\draw [style=red fill] (31.center)
+			 to (33.center)
+			 to (34.center)
+			 to (32.center)
+			 to cycle;
+		\draw [style=dashed, color={rgb,255: red,191; green,0; blue,64}, thick] (36.center) to (37.center);
+		\draw [style=red fill] (38.center)
+			 to (40.center)
+			 to (41.center)
+			 to (39.center)
+			 to cycle;
+		\draw [style=red arrow] (19.center) to (23.center);
+		\draw [style=red line] (43.center) to (45.center);
+		\draw [style=red line] (45.center) to (46.center);
+		\draw [style=red line] (46.center) to (47.center);
+		\draw [style=red arrow] (47.center) to (48.center);
+		\draw [style=red fill] (49.center)
+			 to (50.center)
+			 to (51.center)
 			 to (52.center)
-			 to (53.center)
-			 to (54.center)
 			 to cycle;
-		\draw [style=light fill] (61.center)
-			 to (58.center)
-			 to (59.center)
-			 to (60.center)
-			 to cycle;
-		\draw [style=big arrow] (19.center) to (62.center);
-		\draw [style=big arrow] (63.center) to (50.center);
-		\draw [style=light fill] (67.center)
-			 to (64.center)
-			 to (65.center)
-			 to (66.center)
-			 to cycle;
-		\draw [style=big arrow] (69.center) to (70.center);
-		\draw [style=big arrow] (71.center) to (72.center);
-		\draw [style=big arrow] (73.center) to (74.center);
-		\draw [style=big arrow, in=270, out=90] (75.center) to (76.center);
-		\draw [style=big arrow] (77.center) to (78.center);
-		\draw [style=big arrow] (79.center) to (80.center);
-		\draw [style=light fill] (82.center)
-			 to (83.center)
-			 to (84.center)
-			 to (81.center)
-			 to cycle;
-		\draw [style=light fill] (89.center)
-			 to (88.center)
-			 to (87.center)
-			 to (90.center)
-			 to cycle;
-		\draw [style=light fill] (92.center)
-			 to (93.center)
-			 to (94.center)
-			 to (91.center)
-			 to cycle;
-		\draw [style=big arrow] (101.center) to (102.center);
-		\draw [style=big arrow] (103.center) to (104.center);
-		\draw [style=big arrow] (105.center) to (106.center);
-		\draw [style=big arrow] (107.center) to (108.center);
-		\draw [style=big arrow] (109.center) to (110.center);
-		\draw [style=big arrow] (111.center) to (112.center);
-		\draw [style=light fill] (113.center)
-			 to (114.center)
-			 to (115.center)
-			 to (116.center)
-			 to cycle;
-		\draw [style=red arrow] (120.center) to (121.center);
-		\draw [style=red line] (120.center) to (119.center);
-		\draw [style=red line] (119.center) to (118.center);
-		\draw [style=red arrow] (122.center) to (123.center);
-		\draw [style=red arrow] (125.center) to (126.center);
-		\draw [style=red line] (124.center) to (125.center);
-		\draw [style=red line] (127.center) to (128.center);
-		\draw [style=red line] (128.center) to (129.center);
-		\draw [style=red arrow] (129.center) to (130.center);
-		\draw [style=light fill] (132.center)
-			 to (133.center)
-			 to (134.center)
-			 to (131.center)
-			 to cycle;
-		\draw [style=big arrow] (138.center) to (137.center);
-		\draw [style=big arrow] (139.center) to (141.center);
-		\draw [style=big arrow] (142.center) to (140.center);
-		\draw [style=light fill] (145.center)
-			 to (144.center)
-			 to (143.center)
-			 to (146.center)
-			 to cycle;
-		\draw [style=big arrow] (148.center) to (149.center);
-		\draw [style=big arrow] (150.center) to (151.center);
-		\draw [style=red arrow] (158.center) to (159.center);
-		\draw [style=red line] (155.center) to (156.center);
-		\draw [style=red line] (156.center) to (157.center);
-		\draw [style=red line] (157.center) to (158.center);
-		\draw [style=dashed] (165.center)
-			 to (164.center)
-			 to (163.center)
-			 to (162.center)
-			 to cycle;
-		\draw [style=dashed] (167.center)
-			 to (168.center)
-			 to (169.center)
-			 to (166.center)
-			 to [in=90, out=-90] cycle;
-		\draw [style=dashed] (171.center)
-			 to (172.center)
-			 to (173.center)
-			 to (170.center)
-			 to [in=90, out=-90] cycle;
 	\end{pgfonlayer}
 \end{tikzpicture}
