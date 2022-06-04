@@ -2454,7 +2454,7 @@ Furthermore, \(3\) possible \textbf{commit} sequences are possible:
         \end{itemize}
   \item \textbf{Store commit}:
         \begin{itemize}
-          \item same as \textbf{Store commit} but memory \textit{(and not a register)} is updated
+          \item same as \textbf{Normal commit} but memory \textit{(and not a register)} is updated
         \end{itemize}
   \item \textbf{Instruction is a branch with incorrect prediction}:
         \begin{itemize}
@@ -2493,7 +2493,7 @@ Further observations:
 \begin{itemize}
   \item The \textit{ROB} replaces all store buffers, because \texttt{STORE} execute in two steps
         \begin{itemize}
-          \item the second step happens is when the instruction commits
+          \item the second step happens when the instruction commits
         \end{itemize}
   \item The renaming function of the reservation stations is completely replaced by the \textit{ROB}
         \begin{itemize}
@@ -2517,7 +2517,7 @@ Further observations:
 
 \subsubsection{Exception handling}
 
-The use of a \textit{ROB} with in orde instruction commit provides precise exceptions.
+The use of a \textit{ROB} with in order instruction commit provides precise exceptions.
 Exceptions are handled by ignoring them until they are ready to commit.
 
 3 different scenarios can then be identified at commit stage:
@@ -2538,7 +2538,7 @@ Its duties include:
   \item Keep a \textit{FIFO} ordering, so stores are retired in program order
 \end{itemize}
 
-While issuing a \texttt{LOAD}, the head current head of store queue must be recorded in order to know which \texttt{STORE} instructions are ahead.
+While issuing a \texttt{LOAD}, the current head of store queue must be recorded in order to know which \texttt{STORE} instructions are ahead.
 When the address is actually found, the \texttt{STORE} queue is checked:
 
 \begin{itemize}
@@ -2622,7 +2622,7 @@ It works by interfacing \textit{Registers} to \textit{Functional Units}:
 \end{itemize}
 
 The \textbf{Renaming Map} is a  simple data structure that supplies the physical register number of the register that currently corresponds to the requested architectural register.
-At the \textbf{Instruction Commit} stage the renaming stable is updated permanently to indicate that the physical register holding the destination value corresponds to the actual architectural register.
+At the \textbf{Instruction Commit} stage the renaming table is updated permanently to indicate that the physical register, holding the destination value, corresponds to the actual architectural register.
 
 A schematic of the Unified Physical Register File is shown in Image~\ref{fig:unified-physical-register-file}.
 
@@ -2642,12 +2642,12 @@ Any physical register being used to hold the older value of the architectural re
 Deallocating registers is a more complicated:
 
 \begin{itemize}
-  \item Before freeing up a physical register, checks that the it is \textbf{no longer being used} now and in the near future must be made
+  \item Before freeing up a physical register, checks that it is \textbf{no longer being used} now and in the near future, must be made
   \item A physical register corresponds to an architectural register \textbf{until it is rewritten}
   \item There may be \textbf{pending uses} of the physical register: the processor must check if any source operand corresponds to that register in the \textit{FU} queue
         \begin{itemize}
           \item if it does not appear, it can be allocated
-          \item otherwise, the processor can wait until another instructions that writes the same architectural register commits. This is an easy to implement solution that might cause slight delays
+          \item otherwise, the processor can wait until another instructions that writes the same architectural register commits. This is an easy way to implement a solution that might cause slight delays
         \end{itemize}
 \end{itemize}
 
