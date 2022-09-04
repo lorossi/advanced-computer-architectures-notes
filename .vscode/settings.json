@@ -2,14 +2,24 @@
   "latex-workshop.latex.recipes": [
     {
       "name": "build with externalized images",
-      "tools": ["envsetup", "pdflatex", "pdflatex"]
+      "tools": ["cleanstyles", "pdflatex", "pdflatex"]
+    },
+    {
+      "name": "clean and build with externalized images",
+      "tools": ["cleanfiles", "cleanstyles", "pdflatex", "pdflatex"]
     }
   ],
   "latex-workshop.latex.tools": [
     {
-      "name": "envsetup",
+      "name": "cleanstyles",
       "command": "python3",
-      "args": ["envsetup.py"],
+      "args": ["envsetup.py", "clean"],
+      "env": {}
+    },
+    {
+      "name": "cleanfiles",
+      "command": "python3",
+      "args": ["envsetup.py", "delete"],
       "env": {}
     },
     {
@@ -53,6 +63,7 @@
     "analyzed",
     "andi",
     "Antidependence",
+    "auxlock",
     "bgtz",
     "BNEZ",
     "cleantikz",
