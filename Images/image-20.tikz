@@ -84,8 +84,8 @@
 		\node [style=right align] (99) at (-5.25, 5.75) {Branch History Table};
 		\node [style=none] (100) at (-5, 6.5) {};
 		\node [style=none] (101) at (-5, 4.25) {};
-		\node [style=none] (102) at (-13.5, 4.25) {};
-		\node [style=none] (103) at (-13.5, 6.5) {};
+		\node [style=none] (102) at (-13, 4.25) {};
+		\node [style=none] (103) at (-13, 6.5) {};
 		\node [style=none] (104) at (-5, 5.5) {};
 		\node [style=none] (105) at (-1.75, 5.5) {};
 		\node [style=left align] (106) at (7.25, 5) {\textit{if last branch taken}};

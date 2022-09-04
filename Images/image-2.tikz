@@ -4,14 +4,17 @@
 		\node [style=none] (11) at (-3, 0) {};
 		\node [style=right align, text={rgb,255: red,191; green,0; blue,64}] (12) at (-2.75, 2.25) {evaluate};
 		\node [style=left align, text={rgb,255: red,0; green,128; blue,128}] (13) at (2.75, 2.25) {simulate};
-		\node [style=bottom align, text={rgb,255: red,31; green,117; blue,254}] (14) at (0, -3.25) {implement};
-		\node [style=none] (16) at (0, -3) {};
 		\node [style=none] (17) at (3, 0) {};
+		\node [style=none] (18) at (0, -3) {};
+		\node [style=none] (19) at (3, 0) {};
+		\node [style=left align, text={rgb,255: red,31; green,117; blue,254}] (20) at (2.75, -2.25) {implement};
+		\node [style=right align, text={rgb,255: red,255; green,117; blue,56}] (21) at (-2.75, -2.25) {repeat};
+		\node [style=none] (22) at (-3, 0) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=red arrow, in=180, out=90] (11.center) to (0.center);
-		\draw [style=blue line, bend left=45] (17.center) to (16.center);
 		\draw [style=green arrow, in=90, out=0] (0.center) to (17.center);
-		\draw [style=blue arrow, bend left=45] (16.center) to (11.center);
+		\draw [style=blue arrow, in=0, out=-90] (19.center) to (18.center);
+		\draw [style=orange arrow, in=-90, out=180] (18.center) to (22.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

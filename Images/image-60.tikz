@@ -319,17 +319,17 @@
 		\node [style=none] (339) at (58, -11.5) {};
 		\node [style=none] (340) at (60, -11.5) {};
 		\node [style=left align] (341) at (60.25, -11.5) {\Large vector registers};
-		\node [style=none] (342) at (-7, -7.5) {};
+		\node [style=none] (342) at (-7, -7.75) {};
 		\node [style=none] (343) at (-7, 2) {};
 		\node [style=none] (344) at (58, 2) {};
-		\node [style=none] (345) at (58, -7.5) {};
+		\node [style=none] (345) at (58, -7.75) {};
 		\node [style=none] (346) at (-7.25, -3) {};
 		\node [style=none] (347) at (-9.25, -3) {};
 		\node [style=right align] (348) at (-9.5, -3) {\Large functional units};
-		\node [style=none] (349) at (-7, -15) {};
-		\node [style=none] (350) at (58, -15) {};
-		\node [style=none] (351) at (-7, -8.5) {};
-		\node [style=none] (352) at (58, -8.5) {};
+		\node [style=none] (349) at (-7, -14.75) {};
+		\node [style=none] (350) at (58, -14.75) {};
+		\node [style=none] (351) at (-7, -8.25) {};
+		\node [style=none] (352) at (58, -8.25) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (3.center)

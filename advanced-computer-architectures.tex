@@ -159,12 +159,12 @@ The picked qualities may change according to the use case or the user itself.
 \begin{enumerate}
   \item Computer system user
         \begin{itemize}
-          \item minimize elapsed time for program execution
+          \item \textbf{le} for program execution
           \item \(\texttt{execution time} = \texttt{time end } - \texttt{ time start}\)
         \end{itemize}
   \item Computer center manager
         \begin{itemize}
-          \item maximize completion rate
+          \item \textbf{le}
           \item \(\texttt{completion rate} = \texttt{number of jobs } \div \texttt{ elapsed time}\)
         \end{itemize}
 \end{enumerate}
@@ -744,15 +744,20 @@ There are three classes of hazards:
           \item \textit{Read after write} - \textit{RAW}
                 \begin{itemize}[label=\(\rightarrow\)]
                   \item the instruction tries to read a source register before it is written by a previous instruction
+                  \item it's also called \textit{dependence} by compilers
+                  \item caused by an actual need for communication
                 \end{itemize}
           \item \textit{Write after read} - \textit{WAR}
                 \begin{itemize}[label=\(\rightarrow\)]
                   \item the instruction tries to write a destination register before it is read by a previous instruction
+                  \item it's also called \textit{anti dependence} by compilers
+                  \item caused by the reuse of the same register for different purposes
                 \end{itemize}
           \item \textit{Write after write} - \textit{WAW}
                 \begin{itemize}[label=\(\rightarrow\)]
                   \item the instruction tries to write the before it is written by a previous instruction
-                  \item it's also called \textit{anti dependency} by compilers
+                  \item it's also called \textit{output dependence} by compilers
+                  \item caused by the reuse of the same register for different purposes
                 \end{itemize}
         \end{itemize}
   \item \textbf{Control} hazards \textit{stalls}, due to attempt to make a decision on the next instruction to execute before the condition itself is evaluated
@@ -1097,8 +1102,8 @@ However, it's also the most complicated between the  \(5\).
 
 The compiler statically schedules and independent instruction in the branch delay slot, which is then executed whether or not the branch is taken.
 
-If the branch delay consists of one cycle (as in \textit{MIPS}), there's only a one delay shot.
-Almost all processors with delayed branch have a single delay shot, as it's difficult for the compiler to fill more than one slot.
+If the branch delay consists of one cycle (as in \textit{MIPS}), there's only a one delay slot.
+Almost all processors with delayed branch have a single delay slot, as it's difficult for the compiler to fill more than one slot.
 
 If the branch:
 
@@ -1565,14 +1570,14 @@ The two main techniques used by hardware to minimize stalls are:
 \subsubsection{CDC6600 Scoreboard}
 \label{par:CDC6600-scoreboard}
 
-As discussed earlier \textit{(Section~\ref{sec:instructions-issuing})}, a specific data structure is needed to solve data  dependences without specialized compilers.
+As discussed earlier \textit{(Section~\ref{sec:instructions-issuing})}, a specific data structure is needed to solve data dependences without specialized compilers.
 The first implementation of such an an hardware is found in the \textbf{CDC6600 Scoreboard}, created in \textit{1963}.
 
 Its key idea is to allow instruction behind stalls to proceed, with the result of a \(250\%\) speedup with regards to no dynamic scheduling and a \(170\%\) speedup with regards to instructions reordering by compiler.
 It has the downside of having a \textbf{slow memory} \textit{(due to the absence of cache)} and \textbf{no forwarding hardware}.
 Furthermore, it has a low number of \textit{FUs} and it does not issue on structural hazards.
 
-Is solves the issue of data  dependences that cannot be hidden with bypassing or forwarding due to the hardware stalls of the pipeline by allowing out of order execution and commit of instructions.
+Is solves the issue of data dependences that cannot be hidden with bypassing or forwarding due to the hardware stalls of the pipeline by allowing out of order execution and commit of instructions.
 
 \bigskip
 The scoreboard centralizes the hazard management.
@@ -1604,7 +1609,7 @@ The scoreboard is operated by:
   \item \textbf{Controlling} when instruction can write results
 \end{enumerate}
 
-As a result, a new pipeline is introduced, where the \texttt{ID} stage  is divided in two parts:
+As a result, a new pipeline is introduced, where the \texttt{ID} stage is divided in two parts:
 \begin{enumerate}
   \item \textit{issue}, where the instruction is decoded and \textbf{structural hazards} are checked
   \item \textit{read operands}, where the operation waits until there are no \textbf{data hazards}
@@ -1658,7 +1663,7 @@ An illustration of the new pipeline is represented in Figure~\ref{fig:pipeline-o
 The four stages of the scoreboard control are:
 
 \begin{itemize}
-  \item \textbf{Issue}: instructions are decoded and structural hazards are checked for
+  \item \textbf{Issue}: instructions are decoded and structural hazards \textit{(WAW)} are checked for
         \begin{itemize}
           \item instructions are issued in program order for hazard checking
           \item if the \textit{FU} for the instruction is free and no other active instruction has the same destination register, the scoreboard issues the instruction and updates its internal data structure
@@ -1687,7 +1692,8 @@ The four stages of the scoreboard control are:
         \end{itemize}
 \end{itemize}
 
-This structure adds a few implications:
+\bigskip
+This structure creates a few implications:
 
 \begin{itemize}
   \item \textit{WAW} are detected \textit{(and the pipeline is stalled)} until the other instruction is completed
@@ -1703,15 +1709,15 @@ It was invented at IBM \(3\) years after \textit{CDC 6600} scoreboard with the s
 
 The key idea behind this algorithm is to \textbf{distribute} the control login and the buffers within \textit{FUs}, as opposed to the scoreboard \textit{(in which the control logic is centralized)}.
 
-The operand buffers are called \textbf{Reservation Stations}.
-Each instruction is also an entry to a Reservation Station and its operands are replaced by values or pointers (a technique known as \textbf{Implicit Register Renaming}) in order to avoid \textit{WAR} and \textit{RAW} hazards.
+The operand buffers are called \textbf{Reservation Stations} (or \textit{RS}):
+each instruction is also an entry to a \textit{RS} and its operands are replaced by values or pointers (a technique known as \textbf{Implicit Register Renaming}) in order to avoid \textit{WAR} and \textit{RAW} hazards.
 
 Results are then dispatched to other \textit{FUs} through a \textit{Common Data Bus}, communicating both the data and the source.
-Finally, \texttt{LOAD} and \texttt{STORE} operations are treated as \textit{FUs}, as Reservation Stations are more complex than architectural registers to allow more compiler-level optimizations.
+Finally, \texttt{LOAD} and \texttt{STORE} operations are treated as \textit{FUs}, as \textit{RS} are more complex than architectural registers to allow more compiler-level optimizations.
 
 \paragraph{Structure of the Reservation Stations}
 
-The Reservation Station is composed by \(5\) fields:
+The Reservation Station is composed by \(5\) \textbf{fields}:
 
 \begin{itemize}
   \item \texttt{TAG} - indicating the \textit{RS} itself
@@ -1721,21 +1727,21 @@ The Reservation Station is composed by \(5\) fields:
         \begin{itemize}
           \item its value is zero if the source operator is already available in \texttt{Vj} or \texttt{Vk}
         \end{itemize}
-  \item \texttt{BUSY} - indicates the \textit{RS} ib busy
+  \item \texttt{BUSY} - indicates the \textit{RS} is busy
 \end{itemize}
 
 In this description, only one between the \texttt{V}-field and the \texttt{Q}-field is valid for each operand.
 
 \bigskip
-Furthermore, a few more components exist:
+Furthermore, a few more components are needed, such as:
 
 \begin{itemize}
-  \item \textit{Register File} and the \textit{Store} buffers have a \textit{Value} (\texttt{V}) and a \textit{Pointer} (\texttt{Q}) field
+  \item \textbf{Register File} and the \textbf{Store} buffers have a \textit{Value} (\texttt{V}) and a \textit{Pointer} (\texttt{Q}) field
         \begin{itemize}
-          \item  \texttt{Q} corresponds to the number of the \textit{RS} producing the result (\texttt{V}) to be stored in \textit{Register File} or \textit{Store} buffers
+          \item \texttt{Q} corresponds to the number of the \textit{RS} producing the result (\texttt{V}) to be stored in \textit{Register File} or \textit{Store} buffers
           \item if \texttt{Q = 0}, no active instructions is producing a result and the \textit{Register File} (or \textit{Store}) buffer contains the wrong value
         \end{itemize}
-  \item Load and Store buffers have an \textit{Address} (\texttt{A}) field, with the former having also a \textit{Busy} field (\texttt{BUSY})
+  \item \textbf{Load} and \textbf{Store} buffers have an \textit{Address} (\texttt{A}) field, with the former having also a \textit{Busy} field (\texttt{BUSY})
         \begin{itemize}
           \item the \texttt{A} field holds information for memory address calculation: initially contains the instruction offset, while after the calculation it stores the effective address
         \end{itemize}
@@ -1793,64 +1799,62 @@ In more detail:
 
 \paragraph{Focus on \texttt{LOAD} and \texttt{STORE} in Tomasulo Algorithm}
 
-\texttt{LOAD} and \texttt{STORE} instructions go through a functional unit for effective computation before proceeding to the effective load and store buffers.
+\texttt{LOAD} and \texttt{STORE} instructions go through a functional unit for effective computation before proceeding to their respective load and store buffers.
 \texttt{LOAD} take a second execution step to access memory, then go to \textit{Write} stage to send the value from memory to \textit{Register File} and/or \textit{RS}, while \texttt{STORE} complete their execution in their \textit{Write} stage.
-
-All write operations occur in the write stage, simplifying the algorithm.
+All write operations occur in the write stage, thus simplifying the algorithm.
 
 \bigskip
 A \texttt{LOAD} and a \texttt{STORE} instruction can be done in different order, provided they access different memory locations.
 Otherwise, a \textit{WAR} \textit{(interchange in load-store sequence)} or a \textit{RAW} \textit{(interchange in store-load sequence)} may result \textit{(generating a \textit{WAW} if two stores are interchanged)}.
-
-\texttt{LOAD} instructions can be reordered freely.
+However, \texttt{LOAD} instructions can be reordered freely.
 
 In order to detect such hazards, data memory addresses associated with any earlier memory operation must have been computed by the \textit{CPU}.
 
 \bigskip
 \texttt{LOAD} instructions executed out of order with previous \texttt{STORE} assume that the address is computed in program order.
-When teh \texttt{LOAD} address has been computed, it can be compared with \texttt{A} fields in active \texttt{STORE} Buffers: in case of a match, load is not sent to its buffer until conflicting \texttt{STORE} completes.
+When the \texttt{LOAD} address has been computed, it can be compared with \texttt{A} fields in active \texttt{STORE} Buffers: in case of a match, load is not sent to its buffer until conflicting \texttt{STORE} completes.
 
 Store instructions must check for matching addresses in both \texttt{LOAD} and \texttt{STORE} buffers.
 This is a \textbf{dynamic disambiguation} and, opposing to the static disambiguation, is not performed by the compiler.
-
 As a drawback, more hardware is required to perform these operations: each \textit{RS} must contain a fast associative buffer, because single \textit{CDB} \textit{(Common Data Bus)}  may limit performance.
 
 \paragraph{Tomasulo and Loops}
 
-Tomasulo algorithm can overlap iterations of loops due to:
+Tomasulo algorithm can \textbf{overlap} iterations of loops due to:
 
 \begin{itemize}
   \item \textbf{Register Renaming}
         \begin{itemize}
-          \item multiple iterations use different physical destinations for registers
-          \item static register names are replaced from code with dynamic registers \textit{"pointers"}, effectively increasing the size of the register file
-          \item instruction issue is advanced past integer control flow operations
+          \item \textbf{multiple iterations} use \textbf{different physical destinations} for registers
+          \item \textbf{static register names are replaced} from code with dynamic registers \textit{"pointers"}, effectively increasing the size of the register file
+          \item \textbf{instruction issue is advanced} past integer control flow operations
         \end{itemize}
   \item \textbf{Fast branch resolution}
         \begin{itemize}
-          \item Integer unit must \textit{"get ahead"} of floating point unit so that multiple iterations can be issued
+          \item integer unit must \textit{"get ahead"} of floating point unit so that multiple iterations can be issued
         \end{itemize}
 \end{itemize}
 
 \paragraph{Comparison between Tomasulo Algorithm and Scoreboard}
 
 The main advantages of the Tomasulo algorithm over the scoreboard are:
+
 \begin{itemize}
-  \item Control and buffers are distributed with \textit{FUs}
+  \item Control and buffers are \textbf{distributed} with \textit{FUs}
         \begin{itemize}
           \item \textit{FUs} buffers are called \textbf{reservation stations} and have pending operands
         \end{itemize}
-  \item Registers in instructions are replaced by values or pointers to \textit{RS}
+  \item Registers in instructions are \textbf{replaced} by values or pointers to \textit{RS}
         \begin{itemize}
           \item avoids \textit{WAR} and \textit{WAW} hazards
           \item since there are more \textit{RS} than registers, there's an higher optimization than compilers alone can do
         \end{itemize}
-  \item The result are propagated from \textit{RS} to \textit{FU} via \textit{Common Data Bus}
+  \item The result are \textbf{propagated} from \textit{RS} to \textit{FU} via \textit{Common Data Bus}
         \begin{itemize}
           \item the value is propagated \textbf{to all \textit{FUs}}
         \end{itemize}
   \item \texttt{LOAD} and \texttt{STORE} instructions are treated as \textit{FUs} with \textit{RSs}
-  \item Integer instructions can go past branches, allowing \textit{FP} ops beyond basic block in \textit{FP} queue
+  \item Integer instructions can go past \textbf{branches}, allowing \textit{FP} ops beyond basic block in \textit{FP} queue
 \end{itemize}
 
 \subsection{Limits of \textit{ILP}}
@@ -1917,7 +1921,7 @@ A perfect dynamic scheduled \textit{CPU} should:
 \begin{enumerate}
   \item Look arbitrarily far ahead to find set of instructions to issue and predict all branches perfectly
   \item Rename all registers in use, avoiding all \textit{WAR} and \textit{RAW} hazards
-  \item Determine whether there are data  dependences among instructions in the issue packet, renaming them if necessary
+  \item Determine whether there are data dependences among instructions in the issue packet, renaming them if necessary
   \item Determine and handle all memory dependences among issuing instructions
   \item Provide enough replicated functional units to allow all ready instructions to issue
 \end{enumerate}
@@ -1928,8 +1932,8 @@ Size of the window size affects the number of comparisons needed to determine \t
 The number of comparisons that are needed with infinite register is:
 \[ \displaystyle 2 \sum^{n-1}_{i=1} i = 2 \cdot \dfrac{(n-1)n}{2} = n^2 - n \]
 
-For a window size of \(2000\) almost \(4\) million comparisons are needed.
-A more realistic window with a size of \(50\) instructions still needs \(2450\) comparisons.
+For a window size of \(2000\) almost \textbf{\(4\) million comparisons} are needed;
+a more realistic window with a size of \(50\) instructions still needs \(2450\) comparisons.
 
 Today's \textit{CPUs} have constraints deriving from the limited number of register, the search for dependent instructions and the in order instructions issue.
 
@@ -1938,7 +1942,7 @@ Today's \textit{CPUs} have constraints deriving from the limited number of regis
 \begin{itemize}
   \item Number of \textit{FUs}
   \item Number of \textit{buses}
-  \item Number of ports for teh register file
+  \item Number of ports for the register file
 \end{itemize}
 
 All these limitations impose that the maximum number of instructions that can be issued, executed or committed in the same clock cycle is much smaller than the window size.
@@ -2045,12 +2049,12 @@ An illustration of the inner working instruction-level is represented in Figure~
 
 \subsubsection{Compiler responsibilities}
 
-The compiler has to schedule the instructions to maximize the parallel execution
+The \textbf{compiler} has to schedule the instructions (via \textbf{static scheduling}) to maximize the parallel execution:
+
 \begin{itemize}
   \item It can exploit \textit{ILP} and \textit{LLP} \textit{(Loop level parallelism)}
   \item It is necessary to map the instructions over the machine functional units
-  \item This mapping must account for time constraints and  dependences among the tasks themselves
-  \item it performs \textbf{static scheduling}
+  \item This mapping must account for time constraints and dependences among the tasks themselves
 \end{itemize}
 
 The idea behind the static scheduling in \textit{VLIW} is to utilize all functional units \textit{(FUs)} in each cycle as much as possible to reach a better \textit{ILP} and therefore higher parallel speedups.
@@ -2059,8 +2063,7 @@ The idea behind the static scheduling in \textit{VLIW} is to utilize all functio
 \label{sec:trace-scheduling}
 
 Compilers use sophisticated algorithms to schedule code and exploit \textit{ILP}.
-However, the amount of parallelism available in a single \textbf{basic block}, as previously pointed out, is quite small.
-Furthermore, \textbf{data dependence} can limit the amount of \textit{ILP} that can be exploited to less than the average block size.
+However, the amount of parallelism available in a single \textbf{basic block}, as previously pointed out, is quite small; furthermore, \textbf{data dependence} can limit the amount of \textit{ILP} that can be exploited to less than the average block size.
 
 A \textbf{basic block} \textit{(BB)} is defined as a sequence of straight non branch instructions.
 
@@ -2130,8 +2133,8 @@ In addition to the need of compensation codes, there are a few more restrictions
 In order to ensure \ref{enum:data-flow-trace-scheduling}, the \textbf{Data} and \textbf{Control} dependency must be maintained.
 Furthermore, control dependency can be eliminated using \textbf{predicate instructions} (via \textit{Hyperblock scheduling}) and branch removal or by using \textbf{speculative instructions} (via \textit{Speculative Scheduling}) and speculatively moving instructions before branches.
 
-Finally, Trace Scheduling within loops require lots of registers, due to the duplicated code.
-In order to solve this issue, a new set of register must be allocated for each iteration.
+Finally, Trace Scheduling within loops require lots of registers, due to the duplicated code:
+in order to solve this issue, a new set of register must be allocated for each iteration.
 
 This solution is achieved via the use of \textbf{Rotating Register Files} \textit{(RRB)}.
 The address of the \textit{RRB} register points to the base of the current register set.
@@ -2152,23 +2155,23 @@ An illustration of the \textit{RRB} is shown in Figure~\ref{fig:rotating-registe
 \subsubsection{Pros and cons of \textit{VLIW}}
 
 \textit{Pros}:
-\begin{itemize}
-  \item Simple \textit{HW}
-  \item It's easy to increate the number of FU
-  \item Good compilers can efficiently detect parallelism
+\begin{itemize}[label=\cmark]
+  \item \textbf{Simple} \textit{HW}
+  \item It's \textbf{easy} to increate the number of FU
+  \item Good \textbf{compilers} can efficiently \textbf{detect parallelism}
 \end{itemize}
 
 \bigskip
 \textit{Cons}:
-\begin{itemize}
-  \item Huge number of registers to keep active each FU, each needed to store operands and results
-  \item Large data transport capabilities between:
+\begin{itemize}[label=\xmark]
+  \item \textbf{Huge number of registers }to keep active each FU, each needed to store operands and results
+  \item \textbf{Large data transport} capabilities between:
         \begin{itemize}
           \item FUs and register files
-          \item Register files and memory
+          \item register files and memory
         \end{itemize}
-  \item High bandwidth between instruction cache and fetch unit
-  \item Large code size
+  \item H\textbf{igh bandwidth} between instruction cache and fetch unit
+  \item \textbf{Large code} size
 \end{itemize}
 
 \subsubsection{Static Scheduling methods}
@@ -2277,16 +2280,15 @@ The total energy consumed may be less depending on the number of instructions in
 
 \subsection{Reorder Buffer}
 
-The \textbf{Reorder Buffer} (or \textit{ROB}) holds instructions in \textit{FIFO} order, exactly as issued.
-When instructions are complete, their results are placed back in the \textit{ROB}.
+The \textbf{Reorder Buffer} (or \textit{ROB}) holds instructions in \textit{FIFO} order, exactly as issued:
+when the instructions complete, their results are placed back in the \textit{ROB}.
 
-Operands are supplied to the other instructions between their completion and their commit.
-Results are tagged with \textit{ROB} buffer number instead of the reservation station.
+Operands are supplied to the other instructions between their completion and their commit, while results are tagged with \textit{ROB} buffer number instead of the reservation station.
 
 During the instruction commit the values in the head of the \textit{ROB} are placed in registers.
 
 \bigskip
-\textit{ROB} are structured as a circular buffer with \textbf{Head} and \textbf{Tail} pointers.
+\textit{ROB} are structured as a circular buffer with \textbf{head} and \textbf{tail} pointers.
 Entries between those two are valid and they are allocated and freed whenever an instruction enters or leaves the \textit{ROB}.
 
 Its main entries include:
@@ -2375,11 +2377,11 @@ Each entry, allocated in program order during decode, holds:
 \end{itemize}
 
 They buffer completed values and exception states until the in-order commit point.
-Completed values can be used by  dependences before reaching that point.
+Completed values can be used by dependences before reaching that point.
 
 \subsection{Interrupts and Exceptions with hardware speculation}
 
-Hardware Speculation greatly increases the complexity of control  dependences.
+Hardware Speculation greatly increases the complexity of control dependences.
 In fact, branch prediction may not be enough to keep an high level of \textit{ILP}.
 
 Special care must be ensued while handling \textbf{interrupts} and \textbf{exceptions}, because:
@@ -2406,7 +2408,7 @@ A scheme of this structure is represented in Figure~\ref{fig:exceptions-in-order
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.7]{image-35.tikz}
+  \tikzfig[0.8]{image-35.tikz}
   \caption{Scheme of the in order commit for precise exceptions}
   \label{fig:exceptions-in-order-commit}
   \bigskip
@@ -2517,8 +2519,8 @@ Further observations:
 
 \subsubsection{Exception handling}
 
-The use of a \textit{ROB} with in order instruction commit provides precise exceptions.
-Exceptions are handled by ignoring them until they are ready to commit.
+The use of a \textit{ROB} with in order instruction commit provides precise exceptions:
+they are handled by ignoring them until they are ready to commit.
 
 3 different scenarios can then be identified at commit stage:
 
@@ -2605,7 +2607,7 @@ The advantages of Explicit Renaming Support are:
   \item Allows data to be fetched from \textbf{single} register file
         \begin{itemize}
           \item there's no need to bypass values from reorder buffer
-          \item this  can be important for balancing the pipeline
+          \item this can be important for balancing the pipeline
         \end{itemize}
 \end{itemize}
 
@@ -2621,7 +2623,7 @@ It works by interfacing \textit{Registers} to \textit{Functional Units}:
   \item It commits only updates the mapping of architectural registers to the physical registers, \textbf{without actually moving data}
 \end{itemize}
 
-The \textbf{Renaming Map} is a  simple data structure that supplies the physical register number of the register that currently corresponds to the requested architectural register.
+The \textbf{Renaming Map} is a simple data structure that supplies the physical register number of the register that currently corresponds to the requested architectural register.
 At the \textbf{Instruction Commit} stage the renaming table is updated permanently to indicate that the physical register, holding the destination value, corresponds to the actual architectural register.
 
 A schematic of the Unified Physical Register File is shown in Image~\ref{fig:unified-physical-register-file}.
@@ -2676,7 +2678,7 @@ The \(4\) stages now become:
         \end{itemize}
   \item \textbf{Read operands} - wait until no hazard happens and then read operands
         \begin{itemize}
-          \item all real  dependences (\textit{RAW} hazards) are resolved in this stage, since the processor waits for instructions to write back data
+          \item all real dependences (\textit{RAW} hazards) are resolved in this stage, since the processor waits for instructions to write back data
         \end{itemize}
   \item \textbf{Execution} on operands
         \begin{itemize}
@@ -2991,13 +2993,13 @@ There are \(3\) technique to speculate on exceptions:
 \section{MIMD and parallel architectures}
 \label{sec:mimd}
 
-A definition of parallel architectures, as defined by \textit{Almasi} and \textit{Gottlieb} in 1989 is:
+A definition of \textbf{parallel architectures}, as defined by \textit{Almasi} and \textit{Gottlieb} in 1989 is:
 
 \indentquote{A collection of processing elements that cooperatres and communicated to solve large problems fast.}
 
-The aim of the parallel architecture is to replicate processors to add performance, rather than designing a faster processor.
-Parallel architecture extends the traditional architecture by adding a communication layer between processors.
-As such, new abstractions \textit{(for both hardware and software interfaces)} and different structures to realize them are needed.
+The aim of the parallel architecture is to replicate processors to add performance, rather than designing a faster processor;
+parallel architecture extends the traditional architecture by adding a communication layer between processors.
+New abstractions \textit{(for both hardware and software interfaces)} and different structures to realize them are needed.
 
 \bigskip
 \textit{ILP} architectures \textit{(like superscalar and VLIW)} support fine grained, instruction level, parallelism but they fail to support large scale parallel systems.
@@ -3024,22 +3026,22 @@ Examples of \textit{MIMD} machines are:
 \begin{itemize}
   \item \textbf{Symmetric} multiprocessor machines
         \begin{itemize}
-          \item multiple processors in box with shared memory communication
+          \item \textbf{multiple processors} in box with \textbf{shared memory} communication
           \item every processor runs a copy of the \textit{OS}
-          \item represented in Figure~\ref{subfig:symmetric-multiprocessor}
+          \item \textit{represented in Figure~\ref{subfig:symmetric-multiprocessor}}
         \end{itemize}
   \item \textbf{Non uniform} shared memory machine, with separate \textit{I/O} through host
         \begin{itemize}
-          \item multiple processors, each with local memory and scalable network
+          \item \textbf{multiple processors}, each with \textbf{local memory} and scalable network
           \item extremely light \textit{OS} on each node providing simple services
           \item network accessible host of \textit{I/O}
-          \item represented in Figure~\ref{subfig:non-uniform-shared-memory}
+          \item \textit{represented in Figure~\ref{subfig:non-uniform-shared-memory}}
         \end{itemize}
   \item \textbf{Cluster} machines
         \begin{itemize}
-          \item many independent machines connected with general network
+          \item many \textbf{independent machines} connected with general network
           \item communication happens through messages
-          \item represented in Figure~\ref{subfig:cluster}
+          \item \textit{represented in Figure~\ref{subfig:cluster}}
         \end{itemize}
 \end{itemize}
 
@@ -3072,44 +3074,48 @@ Examples of \textit{MIMD} machines are:
 
 \subsection{Memory sharing between processors}
 
-\textit{MIMD} architectures can be divided in \(2\) classes, depending on the number of processors involved.
-This categorization, in turn, dictates the memory organization an interconnection strategy.
-
-They can then be divided in:
+\textit{MIMD} architectures can be divided in \(2\) \textbf{classes}, depending on the number of processors involved;
+this categorization, in turn, dictates the memory organization an interconnection strategy.
 
 \begin{itemize}
   \item \textbf{Centralized} shared memory architectures
         \begin{itemize}
-          \item at most a few dozen processor chips (less than \(100\) cores)
-          \item large \textbf{caches}, single memory split in multiple banks
-          \item often called symmetric multiprocessors \textit{(SMP)}
+          \item at most a \textbf{few dozen processor} chips \textit{(less than \(100\) cores)}
+          \item \textbf{large caches}, single memory split in multiple banks
+          \item often called \textbf{Symmetric Multiprocessors} \textit{(SMP)}
           \item the architecture is called \textbf{Uniform Memory Access} \textit{(UMA)}
         \end{itemize}
   \item \textbf{Distributed} memory architectures
         \begin{itemize}
-          \item able to support large count of \textbf{processors}
+          \item able to support \textbf{large count of processors}
           \item requires high bandwidth \textbf{interconnection}
           \item data communication among processors slows down the operations
         \end{itemize}
 \end{itemize}
 
 \bigskip
-As already said, the \textbf{Memory Address Space Model} can be divided in two categories:
+The \textbf{Memory Address Space Model} can be divided in two categories:
 
 \begin{itemize}
   \item \textbf{Single} logically shared address space
         \begin{itemize}
-          \item a memory reference can be made by any processor to any memory location
-          \item the address space is shared among processors, the same physical address on multiple processors refers to the same memory location
+          \item a memory reference can be made by \textbf{any processor} to \textbf{any memory location}
+          \item the \textbf{address space is shared} among processors
+                \begin{itemize}[label=\(\rightarrow\)]
+                  \item the \textbf{same physical address} on multiple processors refers to \textbf{the same memory} location
+                \end{itemize}
           \item model used in \textbf{shared memory} architectures
-          \item represented in Figure~\ref{subfig:single-address-space}
+          \item \textit{represented in Figure~\ref{subfig:single-address-space}}
         \end{itemize}
   \item \textbf{Multiple} and private address space
         \begin{itemize}
-          \item the processors communicate among them through send receive primitives
-          \item the address space is logically disjoint and cannot be addressed by different processors, the same physical address on different processors refers to different memory locations
+          \item the processors communicate among them through \textbf{message passing}
+          \item the \textbf{address space is logically disjoint} and cannot be addressed by different processors
+          \item \begin{itemize}[label=\(\rightarrow\)]
+                  \item the s\textbf{ame physical address} on different processors refers to \textbf{different memory} locations
+                \end{itemize}
           \item model used in \textbf{message passing} architectures
-          \item represented in Figure~\ref{subfig:multiple-address-space}
+          \item \textit{represented in Figure~\ref{subfig:multiple-address-space}}
         \end{itemize}
 \end{itemize}
 
@@ -3128,7 +3134,7 @@ As already said, the \textbf{Memory Address Space Model} can be divided in two c
     \caption{Multiple address}
     \label{subfig:multiple-address-space}
   \end{subfigure}
-  \caption{Illustration of single and multiple address spaces}
+  \caption{Illustration of single and multiple address spaces. \texttt{P0}, \texttt{P1}, \texttt{P2} and \texttt{P3} are processors, \texttt{M0}, \texttt{M1}, \texttt{M2} and \texttt{M3} are memory locations.}
   \label{fig:address-spaces}
   \bigskip
 \end{figure}
@@ -3140,12 +3146,12 @@ As already said, the \textbf{Memory Address Space Model} can be divided in two c
     \item \textbf{Centralized}
           \begin{itemize}
             \item also called \textit{Unified Memory Architecture}, or \textit{UMA}
-            \item represented in Figure~\ref{subfig:uma}
+            \item \textit{represented in Figure~\ref{subfig:uma}}
           \end{itemize}
     \item \textbf{Distributed}
           \begin{itemize}
             \item also called \textit{Shared Memory Architecture}, or \textit{SMA}
-            \item represented in Figure~\ref{subfig:sma}
+            \item \textit{represented in Figure~\ref{subfig:sma}}
           \end{itemize}
   \end{itemize}
   \bigskip
@@ -3171,8 +3177,9 @@ As already said, the \textbf{Memory Address Space Model} can be divided in two c
 \end{figure}
 
 \bigskip
-It must be noted that the concept of addressing space \textit{(single or multiple)} and the physical memory organization \textit{(centralized or distributed)} are orthogonal to each other.
-Multiprocessor systems can have single addressing space and distributed physical memory.
+It must be noted that the concept of \textbf{addressing space} \textit{(single or multiple)} and the \textbf{physical memory organization} \textit{(centralized or distributed)} are \textbf{orthogonal} to each other:
+multiprocessor systems can have single addressing space and distributed physical memory.
+
 The main differences among them are shown in Table~\ref{tab:address-spaces-differences}.
 
 \begin{table}[htbp]
@@ -3193,38 +3200,41 @@ As mentioned before, the communication between processors can happen either via 
 
 Main advantages and disadvantages of each method:
 
-\begin{itemize}
-  \item \textbf{Shared memory}
-        \begin{itemize}[label=\cmark]
-          \item Low latency
-          \item Easier to program
-          \item Easier to use hardware controlled caching
-          \item Most common choice among uni processors and small scale multiprocessors
-          \item Implicit communication
-          \item Low overhead when cached
-          \item Communication happens using \texttt{LOAD} and \texttt{STORE} operations, with low software overhead
-        \end{itemize}
-        \begin{itemize}[label=\xmark]
-          \item Complex to build in a way that scales well
-          \item Requires synchronizing the processors
-          \item Hard to control data placement within the cache
-        \end{itemize}
-  \item \textbf{Message passing}
-        \begin{itemize}[label=\cmark]
-          \item Less hardware
-          \item Easier to design
-          \item Focus on local, non costly, operations
-          \item Explicit communication
-          \item Easier to control data placement due to lack of automatic caching
-        \end{itemize}
-        \begin{itemize}[label=\xmark]
-          \item Message passing overhead can be quite high
-          \item More complex to program
-          \item Introduces the problem of the reception technique \textit{(polling and interrupts)}
-        \end{itemize}
-\end{itemize}
+\begin{minipage}{0.99\textwidth}
+  \bigskip
+  \begin{itemize}
+    \item \textbf{Shared memory}
+          \begin{itemize}[label=\cmark]
+            \item Low latency
+            \item Easier to program
+            \item Easier to use hardware controlled caching
+            \item Most common choice among uni processors and small scale multiprocessors
+            \item Implicit communication
+            \item Low overhead when cached
+            \item Communication happens using \texttt{LOAD} and \texttt{STORE} operations, with low software overhead
+          \end{itemize}
+          \begin{itemize}[label=\xmark]
+            \item Complex to build in a way that scales well
+            \item Requires synchronizing the processors
+            \item Hard to control data placement within the cache
+          \end{itemize}
+    \item \textbf{Message passing}
+          \begin{itemize}[label=\cmark]
+            \item Less hardware
+            \item Easier to design
+            \item Focus on local, non costly, operations
+            \item Explicit communication
+            \item Easier to control data placement due to lack of automatic caching
+          \end{itemize}
+          \begin{itemize}[label=\xmark]
+            \item Message passing overhead can be quite high
+            \item More complex to program
+            \item Introduces the problem of the reception technique \textit{(polling and interrupts)}
+          \end{itemize}
+  \end{itemize}
+  \bigskip
+\end{minipage}
 
-\bigskip
 Operations of the two models:
 
 \begin{itemize}
@@ -3257,7 +3267,7 @@ Furthermore, message passing among parallel processors introduces two more issue
         \end{itemize}
   \item Message passing has a high software \textbf{overhead}
         \begin{itemize}
-          \item early machines had to invoke the \textit{OS} on each message \textit{(spending \(100\mu s \div 1ms\) per message)}
+          \item early machines had to invoke the \textit{OS} on each message \textit{(spending \(100\,\mu s \div 1\,ms\) per message)}
           \item user level access to network interface has \textbf{dozen of cycles} of overhead
           \item while sending messages might be cheap, \textbf{receiving messages is expensive} due to the introduction of polling or interrupt mechanisms
         \end{itemize}
@@ -3277,8 +3287,8 @@ It can be scaled easily to large scale systems and has an high throughput, as it
 
 \subsubsection{Cache Coherency}
 
-The cache is fast memory used to reduce latency of access to data.
-It's a valuable resource as can be used both for shared and local data.
+The cache is fast memory used to reduce latency of access to data:
+as such it's a valuable resource as can be used both for shared and local data.
 There are \(2\) main categories of shared memory machines:
 
 \begin{enumerate}
@@ -3294,7 +3304,6 @@ Informally, it is described as:
 
 \indentquote{Any write to a cache line must be followed by a read from the same cache line. Furthermore, all writes are seen in proper order}
 
-\bigskip
 \(2\) main categories of shared memory architectures are identified:
 
 \begin{enumerate}
@@ -3309,14 +3318,14 @@ The use of multiple copies of the same data introduces the already mentioned pro
 Consider the following sequence of operations performed by a \textit{shared data SIMD} with \(2\) processors:
 
 \begin{enumerate}
-  \item Processor \texttt{A} reads the shared variable \texttt{x}, loading it into its cache
-  \item Processor \texttt{B} reads the shared variable \texttt{x}, loading it into its cache
-  \item Processor \texttt{A} stores \texttt{0} into \texttt{x}
-  \item Processor \texttt{B} reads \texttt{x}
+  \item Processor \texttt{A} \textbf{reads} the shared variable \texttt{x}, loading it into its \textbf{cache}
+  \item Processor \texttt{B} \textbf{reads} the shared variable \texttt{x}, loading it into its \textbf{cache}
+  \item Processor \texttt{A} \textbf{stores} \texttt{0} into \texttt{x}
+  \item Processor \texttt{B} \textbf{reads} \texttt{x}
 \end{enumerate}
 
 What does \texttt{B} read?
-The two processors see different values for the same shared variable.
+\textbf{The two processors see different values for the same shared variable.}
 This is a common problem with write back caches, because the value written back to memory depends on the circumstances of the access itself: processes accessing main memory may see old values of the same variable.
 
 \textit{Alternatively} the cache can be bypassed, forcing the processor to read the value from main memory.
@@ -3340,7 +3349,11 @@ The coherency must be preserved while writing and reading data from the cache:
           \item a processor must have \textbf{exclusive access} to the cache while writing
           \item all processor must \textbf{receive the new values} after a \texttt{write} operation
           \item coherency protocols must \textbf{locate all the caches} that share an object to be written
-          \item a write to a shared data can cause either to \textbf{invalidate} all other copies or to \textbf{update} the shared copies
+          \item a write to a shared data can cause:
+                \begin{enumerate}
+                  \item \textbf{invalidation} of all other copies
+                  \item \textbf{update} of all shared copies
+                \end{enumerate}
         \end{itemize}
 \end{itemize}
 
@@ -3352,20 +3365,21 @@ In a coherent multiprocessor, the cache provides:
 \begin{itemize}
   \item \textbf{Migration} of shared data
         \begin{itemize}
-          \item a data item can be moved to a local cache and used in a transparent manner
-          \item the latency to access the item is reduced
-          \item the bandwidth to access the shared memory
+          \item a data item can be \textbf{moved to a local cache} and used in a transparent manner
+          \item the \textbf{latency} to access the item \textbf{is increased}
+          \item the \textbf{bandwidth} to access the shared memory \textbf{is increased}
         \end{itemize}
   \item \textbf{Replication} of shared data
         \begin{itemize}
-          \item a data item is replicated in several caches
-          \item the latency to access the item is reduced
-          \item the contention to access the shared memory is reduced
+          \item a data item is \textbf{replicated in several caches}
+          \item the \textbf{latency} to access the item \textbf{is reduced}
+          \item the \textbf{bandwidth} to access the shared memory \textbf{is reduced}
+          \item the \textbf{contention} to access the shared memory \textbf{is reduced}
         \end{itemize}
 \end{itemize}
 
-In order to solve the two problems, an hardware based technique called \textbf{Cache Coherence Protocols} has been introduced.
-It works by tracking the status of any sharing of a data block.
+In order to solve the two problems, a class of hardware based techniques called \textbf{Cache Coherence Protocols} has been introduced:
+it works by tracking the status of any sharing of a data block.
 There are \(2\) classes of protocols:
 
 \begin{enumerate}
@@ -3375,22 +3389,22 @@ There are \(2\) classes of protocols:
 
 \subsubsection{Snooping Protocols}
 
-All cache controllers monitor \textit{(or snoop)} the \textit{BUS} to determine whether they have a copy of the data requested in the block or not.
+All cache controllers monitor \textit{(or snoop)} the \texttt{BUS} to determine whether they have a copy of the data requested in the block or not.
 Every cache that has a copy of the shared data also has a copy of the sharing status of the block, removing the need of keeping a centralized state.
 
 All requests for shared data are sent to all processors.
-This solution requires broadcast, since the cache controllers must know the sharing status of all the data blocks and it's particularly suitable for \textbf{Centralized Shared Memory Architectures}, especially for small scale multiprocessors with single \textit{BUS}.
+This solution requires broadcast, since the cache controllers must know the sharing status of all the data blocks and it's particularly suitable for \textbf{Centralized Shared Memory Architectures}, especially for small scale multiprocessors with single \texttt{BUS}.
 
 \bigskip
 One of the first implementations of this protocol has been proposed by \textit{Goodman} in \(1983\).
 The cache snoops upon \textit{DMA} transfers, doing \inlinequote{the right thing} when it is necessary:
 
 \begin{itemize}
-  \item The cache controller snoops all transactions on the shared \textit{BUS}
-  \begin{itemize}
-    \item the \textit{BUS} is merely a broadcast medium
-  \end{itemize}
-  \item If a block contains the address tag of a variable contained in the cache, then:
+  \item The cache controller \textbf{snoops all transactions} on the shared \texttt{BUS}
+        \begin{itemize}
+          \item the \texttt{BUS} is merely a broadcast medium
+        \end{itemize}
+  \item If a block contains the \textbf{address tag} of a variable contained in the cache, then:
         \begin{itemize}
           \item the processor must \textit{take action}, either \textbf{invalidating}, \textbf{updating} or \textbf{supplying} the value
           \item the action depends on the \textbf{state} of the block and on the protocol
@@ -3409,21 +3423,21 @@ A simple example of the hardware implementation of the snooping protocol is repr
 \end{figure}
 
 \bigskip
-Since every \textit{BUS} transaction check the cache address tags, this operation can interfere with the processor operations, causing stall when the variable is not available in the cache.
+Since every \texttt{BUS} transaction check the cache address tags, this operation can interfere with the processor operations, causing stall when the variable is not available in the cache.
 
 To reduce the interference with the processor's accesses to the cache, the tag portion of the address is duplicated for snooping activities.
-An extra read port is added to the address tag portion of the cache.
+An extra read port is also added to the address tag portion of the cache.
 
 \bigskip
 When a \textbf{miss} happens, the following actions are performed:
 
 \begin{itemize}
-  \item in case of a \textbf{write} operation:
+  \item In case of a \textbf{write} operation:
         \begin{enumerate}
           \item the address is invalidated in all other caches before the write is performed
           \item this process is called \textbf{Write-Invalidate Protocol}
         \end{enumerate}
-  \item in case of a \textbf{read} operation:
+  \item In case of a \textbf{read} operation:
         \begin{enumerate}
           \item if a dirty copy is found in some cache, a write back is performed before the memory is read
           \item this process is called \textbf{Write-Update Protocol} or \textbf{Write-Broadcast Protocol}
@@ -3432,10 +3446,11 @@ When a \textbf{miss} happens, the following actions are performed:
 
 \paragraph{Write-Invalidate Protocol}
 
-The writing processor issues and invalidation signal over the \textit{BUS} to cause all copies in other caches to be invalidated before changing its local copy: at this point, it is free to update the local data until another processor asks for it.
+The writing processor issues and invalidation signal over the \texttt{BUS} to cause all copies in other caches to be invalidated before changing its local copy:
+at this point it is free to update the local data until another processor asks for it.
 
-All caches on the \textit{BUS} check to see if they have a copy of the data and, if so, they must invalidate the block containing it.
-This scheme allows multiple \textbf{readers but} only a \textbf{single writer}: the \textit{BUS} is used only on the first write to invalidate all other copies while subsequent writes do not result in \textit{BUS} activity.
+All caches on the \texttt{BUS} check to see if they have a copy of the data and, if so, they must invalidate the block containing it.
+This scheme allows multiple \textbf{readers but} only a \textbf{single writer}: the \texttt{BUS} is used only on the first write to invalidate all other copies while subsequent writes do not result in \texttt{BUS} activity.
 
 \bigskip
 Different operations of the protocol:
@@ -3444,7 +3459,7 @@ Different operations of the protocol:
   \item Basic \textbf{Bus Based} Protocol
         \begin{itemize}
           \item each processor keeps track of cache and state
-          \item all transactions over \textit{BUS} are snooped
+          \item all transactions over \texttt{BUS} are snooped
         \end{itemize}
   \item Writes \textbf{invalidate} all other caches
         \begin{itemize}
@@ -3460,17 +3475,17 @@ Different operations of the protocol:
 \end{itemize}
 
 Finally, on a \texttt{write} operation, all other copies of the same data are \textbf{invalidated}.
-The \textit{BUS} itself is used to serialize the access to the data, as the write operations cannot complete until exclusive \textit{BUS} access is obtained.
+The \texttt{BUS} itself is used to serialize the access to the data, as the \texttt{WRITE} operations cannot complete until exclusive \texttt{BUS} access is obtained.
 
 \paragraph{Write-Update Protocol}
 
-In the \textbf{Write-Update protocol}, when a \texttt{write} operation is performed, all the redundant copies of the data are \textbf{invalidated}.
-The processor that performs the write also has the duty of updating the main memory and all the other processors' memory, by broadcasting the new value over the \textit{BUS}.
+In the \textbf{Write-Update protocol}, when a \texttt{WRITE} operation is performed, all the redundant copies of the data are \textbf{invalidated}.
+The processor that performs the write also has the duty of updating the main memory and all the other processors' memory, by broadcasting the new value over the \texttt{BUS}.
 All caches check if they have a copy of the data and, if so, all copies are updated with the new value.
-This scheme requires the continuous broadcast of all \texttt{write} operations to the shared data.
+This scheme requires the continuous broadcast of all \texttt{WRITE} operations to the shared data.
 
-This protocol is similar to the \textbf{Write-Through} because all writes are sent over the \textit{BUS} to update copies of the shared data, but it has the advantage of making the new values appear in caches sooner, reducing the latency.
-In case of a \texttt{read} miss, the memory is always up to date.
+This protocol is similar to the \textbf{Write-Through} because all writes are sent over the \texttt{BUS} to update copies of the shared data, but it has the advantage of making the new values appear in caches sooner \textit{(thus reducing the latency)}.
+In case of a \texttt{READ} miss, the memory is always up to date.
 
 \paragraph{Write-through vs Write-back}
 
@@ -3481,13 +3496,13 @@ The main difference between the two protocols is:
   \item \textbf{Write-back}: the caches must be snooped into until the most recent copy is found
 \end{itemize}
 
-The write-through protocol is simple, as every write \texttt{operation} is observable:
-each one of them goes on the \textit{BUS}, and as such only one \texttt{write} can take place at a time in any processor.
+The write-through protocol is simple, as every \texttt{WRITE} operation is observable:
+each one of them goes on the \texttt{BUS}, and as such only one \texttt{WRITE} can take place at a time in any processor.
 As a downside, it uses a lot of bandwidth.
 
 \paragraph{Invalidate vs Update}
 
-Before choosing one of the two protocols, a basic question on the program behaviour is asked:
+Before choosing one of the two protocols, a basic question on the program behaviour must be asked:
 
 \indentquote{Is a block written by one processor later read by others before it is overwritten?}
 
@@ -3499,18 +3514,18 @@ Then, the two protocols can be compared:
           \item[\cmark] yes: readers will take a miss
           \item[\xmark] no: multiple writes can be performed without added traffic and old copies will be cleared out
         \end{itemize}
-  \item \textbf{Updated}
+  \item \textbf{Update}
         \begin{itemize}
           \item[\cmark] yes: misses on later references will be avoided
-          \item[\xmark] no: multiple useless updates will be broadcast over the \textit{BUS}
+          \item[\xmark] no: multiple useless updates will be broadcast over the \texttt{BUS}
         \end{itemize}
 \end{itemize}
 
 In the same way, most of commercial cache based multiprocessors use:
 
 \begin{itemize}
-  \item \textbf{Write-Back Caches} to reduce \textit{BUS} traffic, allowing more processors on a single \textit{BUS}
-  \item \textbf{Write-Invalidate Protocol} to preserve \textit{BUS} bandwidth
+  \item \textbf{Write-Back Caches} to reduce \texttt{BUS} traffic, allowing more processors on a single \texttt{BUS}
+  \item \textbf{Write-Invalidate Protocol} to preserve \texttt{BUS} bandwidth
 \end{itemize}
 
 \paragraph{Cache State Transition Diagram}
@@ -3559,7 +3574,7 @@ The basic \textit{MSI} protocol is not completely suitable to be applied to the 
   \item Operations are not \textbf{atomic}
         \begin{itemize}
           \item \textit{deadlocks} and \textit{race conditions} may be introduced
-          \item \textbf{solution}: the processor sends invalidate can hold \textit{BUS} until other processor receive the message
+          \item \textbf{solution}: the processor sends invalidate can hold \texttt{BUS} until other processor receive the message
         \end{itemize}
   \item The system is \textbf{hard to extend}
         \begin{itemize}
@@ -3582,11 +3597,19 @@ Each cache block can then be in one out of \(4\) states:
 
 The \textbf{exclusive} state distinguishes between \textbf{exclusive} \textit{(writable)} and \textbf{owned} \textit{(written)} states.
 
-In order to support this protocol, all cache controllers snoop on a special \textit{BUS} called \texttt{BusRd}.
-The issuer chooses between the \textbf{shared} and \textbf{exclusive} states, and the \textit{BUS} is used to send the message to the other caches.
+In order to support this protocol, all cache controllers snoop on a special \texttt{BUS} called \texttt{BusRd}.
+The issuer chooses between the \textbf{shared} and \textbf{exclusive} states, and the \texttt{BUS} is used to send the message to the other caches.
+
+Characteristics of the states:
+
+\begin{itemize}
+  \item In both \textbf{shared} and \textbf{exclusive} states, the memory has an up to date version of the data
+  \item A write to an \textbf{exclusive} block does not require to send the invalidation signal on the \texttt{BUS}, since no other copies of the block are in cache
+  \item A write to a \textbf{shared} block implies the invalidation of the other copies of the block in cache
+\end{itemize}
 
 \bigskip
-An illustration of the \textit{BUS} is shown in Figure~\ref{subfig:MESI-bus-rd}, while the state of the cache lines with \textit{MESI} is represented in Table~\ref{tab:MESI-cache-line}.
+An illustration of the \texttt{BUS} is shown in Figure~\ref{subfig:MESI-bus-rd}, while the state of the cache lines with \textit{MESI} is represented in Table~\ref{tab:MESI-cache-line}.
 The transition diagram and relative cache line are represented in Figure~\ref{fig:MESI-protocol}.
 
 \begin{figure}[htbp]
@@ -3602,12 +3625,12 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
   \centering
   \scalebox{0.75}{
     \begin{tabular}{r|c|c|c|c}
-      \(\Rsh\)                               & \textit{Modified} & \textit{Exclusive} & \textit{Shared}                   & \textit{Invalid}         \\
+      \(\Rsh\)                               & \textit{Modified}       & \textit{Exclusive}      & \textit{Shared}                            & \textit{Invalid}                  \\
       \hline
-      \textit{Line valid?}                   & \colorcmark       & \colorcmark        & \colorxmark                       & \colorcmark              \\
-      \textit{Copy in memory}                & has to be updated & valid              & valid                             & \(-\)                    \\
-      \textit{Other copies in other caches}? & \colorxmark       & \colorxmark        & maybe                             & maybe                    \\
-      \textit{A write on this line}          & access the \textit{BUS}    & access the \textit{BUS}     & access the \textit{BUS},  update the cache & direct access to the \textit{BUS}
+      \textit{Line valid?}                   & \colorcmark             & \colorcmark             & \colorxmark                                & \colorcmark                       \\
+      \textit{Copy in memory}                & has to be updated       & valid                   & valid                                      & \(-\)                             \\
+      \textit{Other copies in other caches}? & \colorxmark             & \colorxmark             & maybe                                      & maybe                             \\
+      \textit{A write on this line}          & access the \texttt{BUS} & access the \texttt{BUS} & access the \texttt{BUS},  update the cache & direct access to the \texttt{BUS}
     \end{tabular}
   }
   \caption{State of cache lines with \textit{MESI} Protocol}
@@ -3620,9 +3643,9 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
   \begin{subfigure}{\textwidth}
     \centering
     \begin{tikzpicture}[auto, node distance=4cm, >=Triangle]
-      \node [state, initial, initial left, initial text={write miss},  minimum size=1cm](M) {\texttt{M}};
-      \node [state, initial, initial right, initial text={read miss, not shared}, minimum size=1cm, right=of M](E) {\texttt{E}};
-      \node [state, initial, initial left, initial text={read miss, shared}, minimum size=1cm, below=of M ](S) {\texttt{S}};
+      \node [state, initial, initial left, initial text={\texttt{WRITE} miss},  minimum size=1cm](M) {\texttt{M}};
+      \node [state, initial, initial right, initial text={\texttt{READ} miss, not shared}, minimum size=1cm, right=of M](E) {\texttt{E}};
+      \node [state, initial, initial left, initial text={\texttt{READ} miss, shared}, minimum size=1cm, below=of M ](S) {\texttt{S}};
       \node [state, minimum size=1cm, below=of E](I) {\texttt{I}};
 
       \path[->, thick]
@@ -3653,13 +3676,6 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
   \label{fig:MESI-protocol}
 \end{figure}
 
-\bigskip
-\begin{itemize}
-  \item In both \textbf{shared} and \textbf{exclusive} states, the memory has an up to date version of the data
-  \item A write to an \textbf{exclusive} block does not require to send the invalidation signal on the \textit{BUS}, since no other copies of the block are in cache
-  \item A write to a \textbf{shared} block implies the invalidation of the other copies of the block in cache
-\end{itemize}
-
 \subsubsection{Optimized Snoop with Level-2 Caches}
 
 To improve the reading speed (thus reducing the access latency), often processors have two level caches, both on the same chip:
@@ -3674,7 +3690,7 @@ To improve the reading speed (thus reducing the access latency), often processor
         \end{itemize}
 \end{itemize}
 
-When a read-miss for a value is detected in a value, a read request for the value is placed on the \textit{BUS}.
+When a \texttt{READ} miss for a value is detected in a value, a read request for the value is placed on the \texttt{BUS}.
 The cache containing the value needs to supply and change its status to shared.
 The main memory may respond to the request as well.
 % TODO evaluate if it's necessary to add the image from slide 101
@@ -3802,7 +3818,7 @@ In real world applications, most snoops fail to find a match and, as such, there
 
 \paragraph{Extension of coherence protocols}
 
-Shared memory \textit{BUS} and snooping bandwidth create a bottleneck for scaling symmetric multiprocessors.
+Shared memory \texttt{BUS} and snooping bandwidth create a bottleneck for scaling symmetric multiprocessors.
 In order to solve this problem, the following modifications are proposed:
 
 \begin{itemize}
@@ -3935,8 +3951,8 @@ There are \(2\) styles of vector architectures:
   \item \textbf{Vector-Register} processors: all vector operations are between vector registers \textit{(except \texttt{LOAD} and \texttt{STORE})}
 \end{itemize}
 
-The execution is done by using a \textbf{deep pipeline}, allowing very fast clock frequency and higher speeds.
-Since elements in the vectors are independent, there are no hazards and the pipelines are always full.
+The execution is done by using a \textbf{deep pipeline}, allowing very fast clock frequency and higher speeds;
+since elements in the vectors are independent, there are no hazards and the pipelines are always full.
 
 Vectors applications are not limited to scientific computing, as they are used in:
 
@@ -3951,12 +3967,12 @@ Vectors applications are not limited to scientific computing, as they are used i
   \item Language run time support
 \end{itemize}
 
-The structure of the vector unit is represented in Figure~\ref{fig:vector-unit-structure}.
+The structure of the Vector Unit is represented in Figure~\ref{fig:vector-unit-structure}.
 
 \begin{figure}
   \bigskip
   \centering
-  \tikzfig[0.65]{image-60.tikz}
+  \tikzfig[0.6]{image-60.tikz}
   \caption{\textit{Vector Unit} structure}
   \label{fig:vector-unit-structure}
   \bigskip
@@ -4050,7 +4066,7 @@ The representation of the pipeline during startup is shown in Figure~\ref{fig:ve
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[0.7]{image-61.tikz}
+  \tikzfig[1]{image-61.tikz}
   \caption{Vector Unit startup time penalty}
   \label{fig:vector-unit-startup}
   \bigskip
@@ -4189,13 +4205,13 @@ The advantage of vector chaining is represented in Figure~\ref{fig:vector-chaini
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
     \tikzfig[0.8]{image-64.tikz}
-    \caption{without}
+    \caption{without vector chaining}
     \label{subfig:wihtout-vector-chaining}
   \end{subfigure}
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
     \tikzfig[0.8]{image-65.tikz}
-    \caption{with}
+    \caption{with vector chaining}
     \label{subfig:with-vector-chaining}
   \end{subfigure}
   \caption{Comparison of instruction executions with and without vector chaining}
@@ -4218,7 +4234,7 @@ The \textbf{multimedia extension}, also called \textit{SIMD} extension. It featu
 
 \begin{itemize}
   \item very short vectors \textbf{added} to existing \textit{ISAs} for microprocessors
-  \item existing \(64\) bits registers \textbf{split} into \(2 \times 32 b\) or \(4 \times 16 b\) or \(8 \times 8 b\)
+  \item existing \(64\) bits registers \textbf{split} into \(2 \times 32 \, \texttt{b}\) or \(4 \times 16 \, \texttt{b}\) or \(8 \times 8 \, \texttt{b}\)
   \item execution of the single instructions on \textbf{all the elements within the register} \textit{(Figure~\ref{fig:operations-in-vector-form})}
 \end{itemize}
 
@@ -4250,7 +4266,7 @@ Multimedia Extensions, compared to Vector Architectures, feature:
   \item \textbf{Trend towards fuller vector support in microprocessors}
         \begin{itemize}
           \item better support for misaligned memory access
-          \item support of double precision \textit{(64 bit floating point)}
+          \item support of double precision \textit{(64 bits floating point)}
         \end{itemize}
 \end{itemize}
 
@@ -4271,7 +4287,7 @@ Multimedia Extensions, compared to Vector Architectures, feature:
 Originally \textit{(mid-1990s)}, \textit{GPUs} were dedicated fixed functions for generating 3D graphics, including high performance \textit{(SP)} floating point units.
 They provided workstation-like graphics for PCs while the user had no real way to program them, but they could merely configure the pipeline.
 
-Over time, more programmable features were added to the \textit{GPU}, enabling million ov vertices to be rendered in a single frame with very constrained programming models.
+Over time, more programmable features were added to the \textit{GPU}, enabling million of vertices to be rendered in a single frame with very constrained programming models.
 
 Some users noticed they could do general purpose computation by mapping input and output data to images and computation to vertex and pixel shading computations.
 It was however a very difficult programming model as the programmer had to exploit the graphics pipeline to perform general computation.
@@ -4302,12 +4318,12 @@ The host \textit{CPU} issues data parallel kernels to \textit{GP-GPU} device for
 \subsubsection{Hardware execution model}
 
 \begin{itemize}
-  \item The \textit{GPU} is built from multiple parallel cores, each one containing a multithreaded \textit{SIMD} processor with multiple lanes but without scalar processor
+  \item The \textit{GPU} is built from \textbf{multiple parallel cores}, each one containing a multithreaded \textit{SIMD} processor with multiple lanes but without scalar processor
         \begin{itemize}
           \item each tread block executes on one core.
           \item some newer models feature a scalar unit
         \end{itemize}
-  \item The \textit{CPU} sends thw whole grid over to the \textit{GPU}, which distributes thread blocks among cores
+  \item The \textit{CPU} \textbf{sends the whole grid over to the} \textit{GPU}, which distributes thread blocks among cores
         \begin{itemize}
           \item the programmer is not aware of the number of cores
         \end{itemize}
@@ -4328,14 +4344,14 @@ Individual parallel threads of a warp start together but are free to branch and 
 \textit{SIMT} model gives the illusion of many independent threads running on a single core, but for efficiency sake the programmer must try and keep each \(\mu T\) as aligned as possible, in \textit{SIMD} fashion.
 
 \bigskip
-Simple \texttt{if-then-else} instructions are compiled into predicated execution, equivalent to vector masking \textit{(technique already explored in Paragraph~\ref{par:vector-conditional-execution})}.
-More complex control flow code must be compiled into branches.
+Simple \texttt{if-then-else} instructions are compiled into predicated execution, equivalent to vector masking \textit{(technique already explored in Paragraph~\ref{par:vector-conditional-execution})};
+more complex control flow code must be compiled into branches.
 
-Hardware tracks which \(\mu T\) take or don't take branches.
-If all go in the same direction, the hardware can execute the block in \textit{SIMD} fashion.
+Hardware tracks which \(\mu T\) take or don't take branches:
+if all go in the same direction, the hardware can execute the block in \textit{SIMD} fashion.
 Otherwise, a mask vector indicating \textit{taken} or \textit{not taken} is created.
 
-The \textit{not taken} paths keep running under the mask,  while the \textit{taken} paths \texttt{PC} and mask are pushed into a hardware stack in order to be executed later.
+The \textit{not taken} paths keep running under the mask, while the \textit{taken} paths \texttt{PC} and mask are pushed into a hardware stack in order to be executed later.
 
 \bigskip
 An illustration of the hardware execution model is shown in Figure~\ref{fig:gpu-hardware-model}.

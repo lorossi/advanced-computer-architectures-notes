@@ -34,7 +34,7 @@
 		\node [style=none] (31) at (4.5, 3) {};
 		\node [style=none] (32) at (2.25, -4) {};
 		\node [style=none] (33) at (5.75, -4) {};
-		\node [style=bottom align, rotate=90] (34) at (12, 3.5) {bus drive};
+		\node [style=bottom align, rotate=90] (34) at (12, 3.5) {\texttt{BUS} drive};
 		\node [style=none] (35) at (8.25, -0.5) {};
 		\node [style=none] (36) at (8.25, -1.5) {};
 		\node [style=top align] (37) at (3, -0.5) {\texttt{A}};

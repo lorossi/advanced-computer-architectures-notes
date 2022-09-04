@@ -2,7 +2,7 @@
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=left align] (0) at (0.25, -1) {\texttt{add \$1, \$2, \$3}};
 		\node [style=left align] (1) at (0.25, -2) {\texttt{if \$1 == 0 then }};
-		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (2) at (0.25, -3) {\texttt{branch delay shot}};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (2) at (0.25, -3) {\texttt{branch delay  slot}};
 		\node [style=none] (3) at (0, 0) {};
 		\node [style=none] (4) at (0, -7) {};
 		\node [style=none] (5) at (9, -7) {};

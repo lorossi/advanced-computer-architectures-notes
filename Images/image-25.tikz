@@ -131,12 +131,12 @@
 		\node [style=none] (160) at (15, -10.5) {};
 		\node [style=none] (161) at (3, -10.5) {};
 		\node [style=none] (162) at (14, -9.5) {};
-		\node [style=none] (163) at (1.5, -9.5) {\texttt{10}};
+		\node [style=none] (163) at (1.5, -9.5) {\texttt{R10}};
 		\node [style=none] (164) at (0, -12) {};
 		\node [style=none] (165) at (3, -12) {};
 		\node [style=none] (166) at (0, -9) {};
 		\node [style=none] (167) at (3, -9) {};
-		\node [style=none] (168) at (1.5, -10.5) {\texttt{11}};
+		\node [style=none] (168) at (1.5, -10.5) {\texttt{R11}};
 		\node [style=none] (169) at (14, -7) {};
 		\node [style=none] (170) at (14, -8) {};
 		\node [style=none] (171) at (10, -8) {};
