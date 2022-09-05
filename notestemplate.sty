@@ -29,6 +29,7 @@
 \RequirePackage{tocloft} % for spacing in TOC
 \RequirePackage{anyfontsize} % for better font sizes
 \RequirePackage{subcaption} % for subfigures and subcaptions
+\RequirePackage{realboxes} % for table and images rotation
 \RequirePackage[style=iso]{datetime2} % datetime command
 
 \ProcessOptions\relax
@@ -66,15 +67,15 @@
 
 \renewcommand{\labelitemi}{\(\sbullet[.9]\)}
 \renewcommand{\labelitemii}{\(\sbullet[.65]\)}
-\renewcommand{\labelitemiii}{\(\striangle[.4]\)}
-\renewcommand{\labelitemiv}{\(\rightarrrow\)}
+\renewcommand{\labelitemiii}{\(\sbullet[.4]\)}
+\renewcommand{\labelitemiv}{\(\rightarrow\)}
 
 % new line after paragraph
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{0.5em}{}
 
 % add commands for checkmark
 \newcommand{\cmark}{\ding{51}\xspace} % check
-\newcommand{\xmark}{\ding{55}\xspace}  % cross
+\newcommand{\xmark}{\ding{55}\xspace} % cross
 \newcommand{\colorcmark}{\textcolor{ForestGreen}{\cmark}\xspace} % green check
 \newcommand{\colorxmark}{\textcolor{BrickRed}{\xmark}\xspace} % red cross
 
@@ -148,31 +149,6 @@
   \begin{flushright}
     \textit{Lorenzo Rossi}
   \end{flushright}
-}
-
-% white on gray text
-\newcommand{\whiteongray}[1]{
-  \textcolor{white}{\colorbox{gray}{\strut #1}}
-}
-
-% command for when I can't be bothered
-\newcommand{\TODO}{
-  \bigskip
-  \begin{center}
-  \Huge
-    \texttt{\textcolor{BrickRed}{TODO}}
-  \end{center}
-  \bigskip
-}
-
-% command for when I am slightly bothered
-\newcommand{\WIP}{
-  \bigskip
-  \begin{center}
-  \Huge
-    \texttt{\textcolor{ForestGreen}{WIP}}
-  \end{center}
-  \bigskip
 }
 
 % command for cover
