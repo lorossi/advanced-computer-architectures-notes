@@ -44,33 +44,33 @@ A big thank you to everyone who helped me!
 Created in \(1996\) and upgraded in \(1972\), it provides the first description of a computer.
 
 \begin{itemize}
-  \item \textit{SISD} - single instruction, single data
+  \item \textit{SISD} - \textbf{single} instruction, \textbf{single} data
         \begin{itemize}
           \item \textbf{Sequential} programs
           \item \textbf{Serial} (non parallel) computer
           \item \textbf{Deterministic} execution
-          \item Only one instruction stream is being executed at a time
+          \item Only \textbf{one instruction stream} is being executed at a time
         \end{itemize}
-  \item \textit{MISD} - multiple instructions, single data
+  \item \textit{MISD} - \textbf{multiple} instructions, \textbf{single} data
         \begin{itemize}
           \item Multiple processors working in \textbf{parallel} on the same data
           \item \textbf{Fail safe} due to high redundancy
           \item Same algorithm programmed and implemented in different ways, so if one fails the other are still able to compute the result
-          \item No practical market configuration
+          \item \textbf{No practical market configuration}
         \end{itemize}
-  \item \textit{SIMD} - single instruction, multiple data
+  \item \textit{SIMD} - \textbf{single} instruction, \textbf{multiple} data
         \begin{itemize}
           \item Each processor receives \textbf{different data} and performs the \textbf{same operations} on it
           \item Used in fields where a single operation must be performed in many different pieces of informations \textit{(like in image processing)}
           \item Each instructions is executed in \textbf{synchronous} way on the same data
           \item Best suited for specialized problems characterized by a high degree of regularity, such as graphics or images processing
-          \item Data level parallelism \textit{(DLP)}
+          \item \textbf{Data level parallelism} \textit{(DLP)}
         \end{itemize}
-  \item \textit{MIMD} - multiple instructions, multiple data
+  \item \textit{MIMD} - \textbf{multiple} instructions, \textbf{multiple} data
         \begin{itemize}
           \item \textbf{Array of processors} in parallel, each of them executing its instructions
           \item Execution can be \textbf{asynchronous} or \textbf{synchronous}, \textbf{deterministic} or \textbf{non-deterministic}
-          \item The most common type of parallel computer
+          \item The \textbf{most common} type of parallel computer
         \end{itemize}
 \end{itemize}
 
@@ -118,8 +118,8 @@ Nowadays, heterogeneous systems \textit{(systems that utilize more than one type
 
 \section{Performance and cost}
 
-There are multiple types \textit{(classes)} of computers, each with different needs.
-The performance measurement is not the same for each of them.
+There are multiple types \textit{(classes)} of computers, each with different needs:
+the performance measurement is not the same for each of them.
 \textit{Price, computing speed, power consumption} can be metrics to measure the performance of a computer.
 
 Programming has become so complicated that it's not possible to balance all the constraints manually.
@@ -159,12 +159,12 @@ The picked qualities may change according to the use case or the user itself.
 \begin{enumerate}
   \item Computer system user
         \begin{itemize}
-          \item \textbf{le} for program execution
+          \item \textbf{minimize elapsed time} for program execution
           \item \(\texttt{execution time} = \texttt{time end } - \texttt{ time start}\)
         \end{itemize}
   \item Computer center manager
         \begin{itemize}
-          \item \textbf{le}
+          \item \textbf{maximize completion rate}
           \item \(\texttt{completion rate} = \texttt{number of jobs } \div \texttt{ elapsed time}\)
         \end{itemize}
 \end{enumerate}
@@ -204,15 +204,19 @@ The locution \textbf{\(X\) is \(n\) times faster than \(Y\)} can be expressed as
   Performance(X) = \dfrac{1}{ExTime\ (x)}
 \end{gather*}
 
-So, in order to optimize a system, one must focus on the common sense.
-\textit{Sadly}, it is a valuable quality.
-
+So, in order to optimize a system, one must focus on the common sense (a \textit{sadly} valuable quality).
 While making a design trade off one must favour the frequent case over the infrequent one.
 
 \textit{For example}:
 \begin{itemize}
-  \item Instructions fetch and decode unit is used more frequently than multiplier, so it makes sense to optimize it first
-  \item If database server has \(50\) disks processor, storage dependability is more important than system dependability so it has to be optimized first
+  \item Instructions fetch and decode unit is used more frequently than multiplier
+        \begin{itemize}
+          \item it makes sense to optimize \textbf{instructions fetch unit} first
+        \end{itemize}
+  \item If database server has \(50\) disks processor, storage dependability is more important than system dependability
+        \begin{itemize}
+          \item i makes sense to optimize \textbf{storage dependability} first
+        \end{itemize}
 \end{itemize}
 
 \subsubsection{Amdahl's law}
@@ -286,10 +290,10 @@ In order to improve the \textit{CPU} time, an \textbf{instruction cache} can be 
 Using a more realistic model, while calculating \textit{CPU} time, one must must also account for:
 
 \begin{itemize}
-  \item The execution \textit{CPI} - \(\text{CPI}_\text{EXE}\)
-  \item The miss penalty - \(\text{MISS}_P\)
-  \item The miss rate - \(\text{MISS}_R\)
-  \item The memory references - \(\text{MEM}\)
+  \item The \textbf{execution} \textit{CPI} - \(\text{CPI}_\text{EXE}\)
+  \item The \textbf{miss penalty} - \(\text{MISS}_P\)
+  \item The \textbf{miss rate} - \(\text{MISS}_R\)
+  \item The memory \textbf{references} - \(\text{MEM}\)
 \end{itemize}
 
 Then the \(\text{CPI}_{\text{CACHE}}\) can be calculated as:
@@ -301,12 +305,12 @@ There are other metrics to measure the performance of a \textit{CPU}:
 
 \begin{itemize}
   \item \textit{MIPS} - million of instructions per second
-        \[ \dfrac{\texttt{number of instructions}}{\texttt{execution time} \cdot 10^6} = \dfrac{\texttt{clock frequency}}{\texttt{CPI} \cdot 10^6} \]
+        \[ MIPS = \dfrac{\texttt{number of instructions}}{\texttt{execution time} \cdot 10^6} = \dfrac{\texttt{clock frequency}}{\texttt{CPI} \cdot 10^6} \]
         \begin{itemize}
           \item the higher the \textit{MIPS}, he faster the machine
         \end{itemize}
   \item \textit{Execution time}
-        \[ \dfrac{\texttt{instruction count}}{\texttt{MIPS} \cdot 10^6} \]
+        \[ T_{execution} = \dfrac{\texttt{instruction count}}{\texttt{MIPS} \cdot 10^6} \]
   \item \textit{MFLOPS} - floating point operations in program
         \begin{itemize}
           \item assumes that floating points operations are independent of compiler and and ISA
@@ -330,10 +334,10 @@ Furthermore, the execution time is compared against test programs that:
 
 \subsection{Averaging metrics}
 
-The simplest approach to summarizing relative performance is to use the total execution time of the \(n\) programs.
-However, this does account for the different durations of the benchmarking programs.
+The simplest approach to summarizing relative performance is to use the total execution time of the \(n\) programs;
+however, this generalization does account for the different durations of the benchmarking programs.
 
-\(3\) different approaches using means can be described as shown in Table~\ref{tab:mean-approaches}.
+The \textbf{\(3\) different approaches} using means to average a metric are described in Table~\ref{tab:mean-approaches}.
 
 \begin{table}[htbp]
   \centering
@@ -393,18 +397,21 @@ Why is multithreading needed?
 Motivations for the paradigm change:
 
 \begin{itemize}
-  \item Moderns processors fail to utilize execution resources well enough
+  \item Moderns processors \textbf{fail to utilize execution resources} well enough
         \begin{itemize}
           \item There's no single culprit:
-                \begin{itemize}
-                  \item Memory conflicts
-                  \item Control hazards
-                  \item Branch misprediction
-                  \item Cache miss
+                \begin{itemize}[label=\xmark]
+                  \item \textit{memory conflicts}
+                  \item \textit{control hazards}
+                  \item \textit{branch misprediction}
+                  \item \textit{cache miss}
                   \item \ldots
                 \end{itemize}
           \item All those problems are correlated and there's no way of solving one of them without affecting all the others
-          \item There's the need for a general latency-tolerance solution which can hide all sources of latency: \textbf{parallel programming}
+          \item There's the need for a general latency-tolerance approach that can hide all sources of latency
+                \begin{itemize}[label=\cmark]
+                  \item a solution in found in \textbf{parallel programming}
+                \end{itemize}
         \end{itemize}
 \end{itemize}
 
@@ -425,9 +432,9 @@ In multithreading, multiple threads share the functions units of one processor v
 The processor must duplicate the independent state of each thread:
 
 \begin{itemize}
-  \item Separate copy of the register files
-  \item Separate \texttt{PC}
-  \item Separate page table
+  \item Separate copy of the \textbf{register files}
+  \item Separate \textbf{\texttt{PC}}
+  \item Separate\textbf{ page table}
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -447,31 +454,37 @@ There are \(2\) apparent solutions:
 \begin{enumerate}
   \item \textbf{Fine grained} multi threading
         \begin{itemize}
-          \item Switches from one thread to another at each instructions by taking turns, skipping when one thread is stalled
-          \item The executions of more threads is interleaved
-          \item The \textit{CPU} must be able to change thread at every clock cycle.
-          \item For \(n\) processes, each gets \(\sfrac{1}{n}\) of \textit{CPU} time and \(n\) times the original resources are needed
+          \item Switches from one thread to another at each instructions by \textbf{taking turns}
+                \begin{itemize}
+                  \item the switch happens when one thread stalls
+                \end{itemize}
+          \item The executions of more threads is \textbf{interleaved}
+          \item The \textit{CPU} must be able to change thread at \textbf{every clock cycle}
+          \item For \(n\) processes, each gets \(\sfrac{1}{n}\) of \textit{CPU} time
+                \begin{itemize}
+                  \item \(n\) times the original resources are needed
+                \end{itemize}
         \end{itemize}
   \item \textbf{Coarse grained} multithreading
         \begin{itemize}
-          \item Switching from one thread to another occurs only when there are long stalls in the active process
-          \item Two threads share many resources
-          \item The switching from one thread to the other requires different clock cycles to save the context
+          \item Switching from one thread to another occurs only when there are long \textbf{stalls} in the active process
+          \item The interested threads \textbf{share many resources}
+          \item The switching from one thread to the other requires \textbf{different clock cycles} to save the context
         \end{itemize}
 \end{enumerate}
 
 \bigskip
 
 \textbf{Disadvantages} of multithreading:
-\begin{itemize}
-  \item for short stalls it does not reduce the throughput loss
-  \item the \textit{CPU} starts the execution of instructions that belongs to a single thread
-  \item when there is one stall it is necessary to empty the pipeline before starting the new thread
+\begin{itemize}[label=\xmark]
+  \item For short stalls it \textbf{does not reduce the throughput loss}
+  \item The \textit{CPU} starts the execution of instructions that belongs to a \textbf{single thread}
+  \item When there is one stall it is necessary to \textbf{empty the pipeline} before starting the new thread
 \end{itemize}
 
 \textbf{Advantages} of multithreading:
-\begin{itemize}
-  \item in normal conditions the single thread is not slowed down
+\begin{itemize}[label=\cmark]
+  \item In normal conditions \textbf{the single thread is not slowed down}
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -484,8 +497,7 @@ There are \(2\) apparent solutions:
   \bigskip
 \end{figure}
 
-\bigskip
-Could a processors oriented ad \textit{ILP} exploit \textit{TLP}?
+\paragraph{Thread Level Parallelism - \textit{TLP}}
 
 \begin{itemize}
   \item \textbf{Thread level parallelism}, simultaneous multithreading
@@ -500,7 +512,7 @@ Could a processors oriented ad \textit{ILP} exploit \textit{TLP}?
           \item \textbf{Mapping table for registers} is needed in order to tell each process where to write data
           \item Each processor can manage a \textbf{set amount of threads}
         \end{itemize}
-  \item This is the most flexible way to manage multithreading but it requires more complex hardware
+  \item This is the most \textbf{flexible} way to manage multithreading but it requires more \textbf{complex hardware}
 \end{itemize}
 \bigskip
 
@@ -536,8 +548,7 @@ A \textbf{parallel computer} is a collection of processing elements that coopera
 
 The aim is to replicate processors to add performance and not design a single faster processor.
 Parallel architecture extends traditional computer architecture with a communication architecture.
-
-This concept needs:
+This solution needs:
 
 \begin{itemize}
   \item \textbf{Abstractions} for HW/SW interface
@@ -558,33 +569,27 @@ The characteristics of the \textit{SIMD} architectures \textit{(Single Instructi
   \item A \textbf{simple} programming model
 \end{itemize}
 
-The programming model features:
+The programming model features synchronized units with a single program counter, while each unit has its own addressing registers in order to use different data addresses.
 
-\begin{itemize}
-  \item Synchronized units
-        \begin{itemize}
-          \item a single program counter
-        \end{itemize}
-  \item Each unit has its own addressing registers
-        \begin{itemize}
-          \item each unit can use different data address
-        \end{itemize}
-\end{itemize}
-
+\bigskip
 Motivations for \textit{SIMD}:
 
 \begin{itemize}
-  \item The cost of the control unit is shared between all execution units
-  \item Only one copy of the code in execution is necessary
-  \item All the computation is fully synchronized
+  \item The \textbf{cost} of the control unit is \textbf{shared} between all execution units
+  \item Only\textbf{ one copy of the code} in execution is necessary
+  \item All the computation is \textbf{fully synchronized}
 \end{itemize}
 
 In real life:
 
 \begin{itemize}
-  \item \textit{SIMD} architectures are a mix of \textit{SISD} and \textit{SIMD}
-  \item A host computer executes sequential operations
-  \item \textit{SIMD} instructions sent to all the execution units, which has its own memory and registers and exploit an interconnection network to exchange data
+  \item \textit{SIMD} architectures are a \textbf{mix} of \textit{SISD} and \textit{SIMD}
+  \item A host computer executes \textbf{sequential operations}
+  \item \textit{SIMD} instructions sent to all the execution units
+        \begin{itemize}
+          \item each of them has its own memory and registers
+          \item an interconnection network is needed to exchange data
+        \end{itemize}
 \end{itemize}
 
 \bigskip
@@ -609,20 +614,20 @@ In real life:
   \item Some combinations of the two aforementioned functions
 \end{itemize}
 
-They can also be built starting from standard CPUs
+They can also be built starting from standard CPUs.
 
 \bigskip
 Each processor fetches its own instructions and operates on its own data.
 Processors are often off the shelf microprocessors, with the upside of being able to build a scalable architecture and having an high cost performance ratio.
 
-To fully exploit a \textit{MIMD} with \(n\) processors, there must be:
+In order to fully exploit a \textit{MIMD} with \(n\) processors, there must be:
 
 \begin{itemize}
-  \item At least \(n\) threads or processes to execute
+  \item At least \(n\) \textbf{threads} or \textbf{processes}  to execute
         \begin{itemize}
           \item those independent threads are typically identified by the programmer or created by the compiler
         \end{itemize}
-  \item Thread level parallelism
+  \item \textbf{Thread level parallelism} - \textit{TLP}
         \begin{itemize}
           \item parallelism is identified by the software \textit{(and not by hardware like in superscalar CPUs)}
         \end{itemize}
@@ -631,13 +636,13 @@ To fully exploit a \textit{MIMD} with \(n\) processors, there must be:
 \textit{MIMD} machines can be characterized in \(2\) classes, depending on the number of processors involved:
 
 \begin{itemize}
-  \item Centralized shared-memory architectures
+  \item \textbf{Centralized} shared-memory architectures
         \begin{itemize}
           \item At most a few dozen processors chips \textit{(less than \(100\) cores)}
           \item Large caches, single memory multiple banks
           \item This kind of structures is often \textbf{symmetric multiprocessors (SMP)} and the style of architecture is called \textbf{Uniform Memory Access (UMA)}
         \end{itemize}
-  \item Distributed memory architectures
+  \item \textbf{Distributed} memory architectures
         \begin{itemize}
           \item Supports \textbf{large processor count}
           \item Requires \textbf{high bandwidth} interconnection
@@ -646,13 +651,13 @@ To fully exploit a \textit{MIMD} with \(n\) processors, there must be:
 \end{itemize}
 
 \bigskip
-\textit{SIMD} architectures will be explored in depth in Section~\ref{sec:mimd}.
+\textit{MIMD} architectures will be explored in depth in Section~\ref{sec:mimd}.
 
 \clearpage
 
 \section{Pipeline recap}
 
-The pipeline \textit{CPI} \textit{(clocks per instruction)} can be calculated as the sum of:
+The pipeline \textit{CPI} \textit{(clocks per instruction)} can be calculated taking account of:
 
 \begin{itemize}
   \item \textbf{Ideal} pipeline \textit{CPI}
@@ -733,10 +738,10 @@ The stages are usually represented like in Figure~\ref{fig:mips-pipeline-stages}
 \label{sec:pipeline-hazards}
 
 An \textbf{hazard} is a fault in a pipeline.
-They are created whenever there is a dependence between instructions that are close enough such that the overlap introduced by pipelining would change the order of access the operands involved in said dependance.
-They prevent the next instruction in the pipeline from executing during its designated clock cycle, reduce the performance from the ideal speedup.
+An hazard is created whenever there is a dependence between instructions that are close enough such that the overlap introduced by pipelining would change the order of access the operands involved in said dependance.
+It prevents the next instruction in the pipeline from executing during its designated clock cycle, reducing the performance from the ideal speedup.
 
-There are three classes of hazards:
+There are \(3\) classes of hazards:
 \begin{enumerate}
   \item \textbf{Structural} hazards, due to attempt to use the same resource from different instructions at the same time
   \item \textbf{Data} hazards \textit{stalls}, due to attempt to use a result before it is ready
@@ -855,11 +860,11 @@ Formally, all the different executions must be balanced.
 \end{figure}
 
 \bigskip
-The main issues are:
+The main issues are found in:
 \begin{itemize}
   \item \textbf{Structural conflicts at the execution stage} if some \textit{FPU} or memory unit is not pipelined and takes more than one cycle
   \item \textbf{Structural conflicts at the write back stage} due to variable latencies of different Functional Units (or \textit{FUs})
-  \item Out of order write hazards due to variable latencies of different \textit{FUs}
+  \item \textbf{Out of order write hazards} due to variable latencies of different \textit{FUs}
   \item Hard to handle exceptions
 \end{itemize}
 
@@ -927,10 +932,10 @@ Such a suitable data structure would look like in Table~\ref{tab:data-structure-
 An instruction at the \texttt{issue} stage consults this table to check if:
 
 \begin{itemize}
-  \item The \textit{FU} is available by looking at the \textit{busy} column
-  \item A \textit{RAW} can arise by looking at the \textit{destination} column for its sources
-  \item A \textit{WAR} can arise by looking at the \textit{source} columns for its destinations
-  \item A \textit{WAW} can arise by looking at the \textit{destination} columns for its destinations
+  \item The \textit{FU} is \textbf{available} by looking at the \textit{busy} column
+  \item A \textit{RAW} can arise by looking at the \textit{destination} column for its \textbf{sources}
+  \item A \textit{WAR} can arise by looking at the \textit{source} columns for its \textbf{destinations}
+  \item A \textit{WAW} can arise by looking at the \textit{destination} columns for its \textbf{destinations}
 \end{itemize}
 
 When the checks are all completed:
@@ -1029,11 +1034,11 @@ In both cases, care must be taken not to change the processor state until the br
 There are \(5\) commonly used branch prediction techniques:
 
 \begin{itemize}
-  \item \textit{Branch always not taken}
-  \item \textit{Branch always taken}
-  \item \textit{Backward taken forward not taken}
-  \item \textit{Profile driven prediction}
-  \item \textit{Delayed branch}
+  \item Branch \textbf{always not taken}
+  \item Branch \textbf{always taken}
+  \item Backward \textbf{taken forward not taken}
+  \item Profile \textbf{driven prediction}
+  \item Delayed \textbf{branch}
 \end{itemize}
 
 Each one of these techniques will be discussed in the following Sections \textit{(from \ref{sec:branch-always-not-taken} to \ref{sec:delayed-branch})}.
@@ -1219,11 +1224,11 @@ Hardware is used to dynamically predict the outcome of a branch: the prediction 
 Dynamic Branch Prediction is based on two interacting mechanisms:
 
 \begin{enumerate}
-  \item Branch Outcome Predictor (\textit{BOP})
+  \item \textbf{Branch Outcome Predictor} \textit{(BOP)}
         \begin{itemize}
-          \item used to predict the direction of a branch (taken or not taken)
+          \item used to predict the direction of a branch \textit{(taken or not taken)}
         \end{itemize}
-  \item Branch Target Predictor (\textit{BTP})
+  \item \textbf{Branch Target Predictor} \textit{(BTP)}
         \begin{itemize}
           \item used to predict the branch target address in case of taken branch
         \end{itemize}
@@ -1266,7 +1271,7 @@ The structure and operation of the \textit{BTB} is shown in Figure~\ref{fig:stru
 
 \subsubsection{Branch History Table}
 
-The \textbf{Branch History Table} contains \(1\) bit for each entry that says whether the branch was recently taken or not.
+The \textbf{Branch History Table} contains \(1 \, bit\) for each entry that says whether the branch was recently taken or not.
 It is indexed by the lower portion of the address of the branch instruction.
 The structure of the \textit{BTB} is shown in Figure~\ref{fig:structure-of-BHT}.
 
@@ -1309,7 +1314,7 @@ Its structure is shown in Figure~\ref{fig:BHT-as-FSA}.
   \bigskip
 \end{figure}
 
-A misprediction occurs when:
+A \textbf{misprediction} occurs when:
 
 \begin{itemize}
   \item The prediction is \textbf{incorrect} for that branch
@@ -1503,8 +1508,8 @@ Two properties are critical to program correctness \textit{(and normally preserv
 There are main two software strategies to support \textit{ILP}:
 
 \begin{enumerate}
-  \item \textbf{Dynamic} Scheduling: depends on the hardware to locate parallelism
-  \item \textbf{Static} Scheduling: relies on the software to identify potential parallelism
+  \item \textbf{Dynamic} scheduling: depends on the hardware to locate parallelism
+  \item \textbf{Static} scheduling: relies on the software to identify potential parallelism
 \end{enumerate}
 
 Usually, hardware intensive approaches dominate desktop and server markets.
@@ -1521,7 +1526,7 @@ The hardware reorders the instruction execution to reduce pipeline stall while m
   \item Execution begins \textbf{as soon as operands are available}, possibly out of order execution
   \item Out of order execution introduces possibility or \textit{WAR} and \textit{WAW} data hazards
   \item Out of order execution implies \textbf{out of order completion}
-        \begin{itemize}[label=\(\rightarrow\)]
+        \begin{itemize}
           \item a \textit{reorder buffer} is needed to reorder the output
         \end{itemize}
 \end{enumerate}
@@ -1540,7 +1545,7 @@ The two main techniques used by hardware to minimize stalls are:
                 \end{itemize}
           \item The \texttt{ALU} needs \textbf{multiplexers} that allow it to select the correct inputs from the pipeline
           \item This technique can be generalized to include \textbf{passing a result directly to the functional unit} that requires it
-                \begin{itemize}[label=\(\rightarrow\)]
+                \begin{itemize}
                   \item in that case, a result is forwarded from the pipeline register corresponding to the output of one unit to the input of another, rather than just from the result of a unit to the input of the same unit
                 \end{itemize}
         \end{itemize}
@@ -1696,10 +1701,10 @@ The four stages of the scoreboard control are:
 This structure creates a few implications:
 
 \begin{itemize}
-  \item \textit{WAW} are detected \textit{(and the pipeline is stalled)} until the other instruction is completed
-  \item There's no register renaming
-  \item Multiple instructions must be dispatched in the execution phase, creating the need for multiple or pipelined execution units
-  \item Scoreboard keeps track of dependences and the state of the operations
+  \item \textit{WAW} are \textbf{detected} \textit{(and the pipeline is stalled)} until the other instruction is completed
+  \item There's \textbf{no register renaming}
+  \item \textbf{Multiple instructions must be dispatched} in the execution phase, creating the need for multiple or pipelined execution units
+  \item Scoreboard \textbf{keeps track of dependences} and the state of the operations
 \end{itemize}
 
 \subsubsection{Tomasulo algorithm}
@@ -1755,7 +1760,7 @@ The Tomasulo algorithm is structured in \(3\) different stages: \textbf{Issue}, 
 In more detail:
 
 \begin{enumerate}
-  \item \textit{Issue} stage:
+  \item \textbf{Issue} stage:
         \begin{itemize}
           \item Get an instruction \texttt{I} from the queue
                 \begin{itemize}
@@ -1772,7 +1777,7 @@ In more detail:
                   \item since the in-order issue is used, the \textit{Register File} can be linked to \texttt{I}
                 \end{itemize}
         \end{itemize}
-  \item \textit{Execute} stage:
+  \item \textbf{Execute} stage:
         \begin{itemize}
           \item When both the operands are ready, then the operation is executed. Otherwise, watch the \textit{Common Data Bus} for results.
                 \begin{itemize}
@@ -1786,7 +1791,7 @@ In more detail:
                   \item \texttt{STORE} operations wait for the value to be stored before sending it into the memory unit
                 \end{itemize}
         \end{itemize}
-  \item \textit{Write} stage:
+  \item \textbf{Write} stage:
         \begin{itemize}
           \item When the result is available, it is written on the \textit{Common Data Bus}
                 \begin{itemize}
@@ -1907,10 +1912,10 @@ A few requirements must be satisfied in order to start an ideal machine:
 Furthermore, a few \textbf{initial assumptions} must be made:
 
 \begin{itemize}
-  \item \textit{CPU} can issue an unlimited number of instructions, looking arbitrarily far ahead in the computation
-  \item There's no restriction on types of instructions that can be executed in one cycle \textit{(including loads and stores)}
-  \item All \textit{FUs} have unitary latency: any sequence of depending instructions can issue on successive cycles
-  \item All LOAD and STORE execute in \(1\) cycle, thanks to perfect caches
+  \item \textit{CPU} can issue an\textbf{ unlimited number of instructions}, looking arbitrarily far ahead in the computation
+  \item There's \textbf{no restriction on types of instructions} that can be executed in one cycle \textit{(including loads and stores)}
+  \item All \textit{FUs} \textbf{have unitary latency}: any sequence of depending instructions can issue on successive cycles
+  \item All \textit{LOAD} and \textit{STORE} execute in \(1\) cycle, thanks to perfect caches
 \end{itemize}
 
 \subsubsection{Limits dynamic analysis}
@@ -1919,11 +1924,11 @@ Furthermore, a few \textbf{initial assumptions} must be made:
 A perfect dynamic scheduled \textit{CPU} should:
 
 \begin{enumerate}
-  \item Look arbitrarily far ahead to find set of instructions to issue and predict all branches perfectly
-  \item Rename all registers in use, avoiding all \textit{WAR} and \textit{RAW} hazards
-  \item Determine whether there are data dependences among instructions in the issue packet, renaming them if necessary
-  \item Determine and handle all memory dependences among issuing instructions
-  \item Provide enough replicated functional units to allow all ready instructions to issue
+  \item \textbf{Look arbitrarily far ahead} to find set of instructions to issue and predict all branches perfectly
+  \item \textbf{Rename all registers} in use, avoiding all \textit{WAR} and \textit{RAW} hazards
+  \item Determine whether there are \textbf{data dependences among instructions} in the issue packet, renaming them if necessary
+  \item Determine and handle all \textbf{memory dependences among issuing instructions}
+  \item \textbf{Provide} enough replicated \textbf{functional units} to allow all ready instructions to issue
 \end{enumerate}
 
 \subsubsection{Limits on window size}
@@ -1940,9 +1945,9 @@ Today's \textit{CPUs} have constraints deriving from the limited number of regis
 \subsubsection{Other limits of modern \textit{CPUs}}
 
 \begin{itemize}
-  \item Number of \textit{FUs}
-  \item Number of \textit{buses}
-  \item Number of ports for the register file
+  \item \textbf{Number} of \textit{FUs}
+  \item \textbf{Number} of \textit{buses}
+  \item \textbf{Number} of \textbf{ports} for the register file
 \end{itemize}
 
 All these limitations impose that the maximum number of instructions that can be issued, executed or committed in the same clock cycle is much smaller than the window size.
@@ -1950,16 +1955,15 @@ All these limitations impose that the maximum number of instructions that can be
 In real life, the maximum size of issue width is capped at \(6\).
 Increasing the issue rate above this value \textit{(i.e. at \(12\))} would require the \textit{CPU} to:
 \begin{itemize}
-  \item issue \(3\) or \(4\) data memory accesses per cycle
-  \item resolve \(2\) or \(3\) branches per cycle
-  \item rename and access more than \(20\) registers per cycle
-  \item fetch between \(12\) and \(24\) instructions per cycle
+  \item \textbf{Issue} \(3\) or \(4\) data memory accesses per cycle
+  \item \textbf{Resolve} \(2\) or \(3\) branches per cycle
+  \item \textbf{Rename} and access more than \(20\) registers per cycle
+  \item \textbf{Fetch} between \(12\) and \(24\) instructions per cycle
 \end{itemize}
 
-The complexities of implementing these capabilities is likely to mean sacrifices in the maximum clock rate.
-Power consumption is nowadays an issue and it would grow too much.
+The complexities of implementing these capabilities is likely to mean sacrifices in the maximum clock rate:
+power consumption is nowadays an issue and it would grow too much.
 
-\bigskip
 The key question to answer is whether a technique is \textbf{energy efficient} enough:
 
 \indentquote{Does it increase power consumption faster than it increases performances?}
@@ -1974,8 +1978,8 @@ Multiple issue processors techniques are all energy \textbf{inefficient}, as:
 \subsection{Static Scheduling}
 
 Compilers can use sophisticated algorithms for code scheduling to exploit \textit{ILP}.
-The amount of parallelism available within a basic block \textit{(a straight line code sequence with no branches in except to the entry and no branches out except at the exit)} is quite small.
-Data dependence can further limit the amount of \textit{ILP} that can be exploited within a basic block to much less than the average basic block size.
+The amount of parallelism available within a basic block \textit{(a straight line code sequence with no branches in except to the entry and no branches out except at the exit)} is quite small, and
+data dependence can further limit the amount of \textit{ILP} that can be exploited within a basic block to much less than the average basic block size.
 To obtain substantial performance enhancements, \textit{ILP} must be exploited across multiple basic blocks \textit{(i.e. across branches)}.
 
 The static detection and resolution of dependences is accomplished by the compiler, so they are avoided by code reordering.
@@ -1986,7 +1990,7 @@ The compiler outputs dependency-free code.
 \begin{itemize}
   \item \textbf{Unpredictable} branches
   \item Variable memory \textbf{latency} \textit{(due to unpredictable cache misses)}
-  \item Huge increase in code \textbf{size}
+  \item Huge increase in \textbf{code size}
   \item High compiler \textbf{complexity}
 \end{itemize}
 
@@ -2000,11 +2004,11 @@ Those are meant to be intended to be issued at the same time and the compiler ha
 Its features includes:
 
 \begin{itemize}
-  \item Fixed number of instructions \textit{(between \(4\) and \(16\))}
+  \item \textbf{Fixed number} of instructions \textit{(between \(4\) and \(16\))}
   \item The instructions are scheduled by the \textbf{compiler}
         \begin{itemize}
-          \item the hardware has very limited control on what is going on
-          \item the instructions are going to have a very low dependency
+          \item the hardware has \textbf{very limited control} on what is going on
+          \item the instructions are going to have a \textbf{very low dependency}
         \end{itemize}
   \item The operations are put into wide \textbf{templates}
   \item \textbf{Explicit} parallelism
@@ -2052,9 +2056,9 @@ An illustration of the inner working instruction-level is represented in Figure~
 The \textbf{compiler} has to schedule the instructions (via \textbf{static scheduling}) to maximize the parallel execution:
 
 \begin{itemize}
-  \item It can exploit \textit{ILP} and \textit{LLP} \textit{(Loop level parallelism)}
-  \item It is necessary to map the instructions over the machine functional units
-  \item This mapping must account for time constraints and dependences among the tasks themselves
+  \item It can exploit \textit{ILP} and \textit{LLP} \textit{(Loop Level Parallelism)}
+  \item It is necessary to \textbf{map the instructions} over the machine functional units
+  \item This mapping must account for \textbf{time constraints and dependences} among the tasks themselves
 \end{itemize}
 
 The idea behind the static scheduling in \textit{VLIW} is to utilize all functional units \textit{(FUs)} in each cycle as much as possible to reach a better \textit{ILP} and therefore higher parallel speedups.
@@ -2184,10 +2188,10 @@ The static scheduling methods used in the \textit{VLIW} are:
   \item Software \textbf{pipelining} - \textit{Paragraph~\ref{par:software-pipelining}}
   \item Global code \textbf{scheduling} \textit{(across basic blocks)}
         \begin{itemize}
-          \item Trace scheduling - \textit{Paragraph~\ref{par:trace-scheduling}}
-          \item Superblock scheduling
-          \item Hyperblock scheduling
-          \item Speculative Trace scheduling
+          \item \textbf{Trace} scheduling - \textit{Paragraph~\ref{par:trace-scheduling}}
+          \item \textbf{Superblock} scheduling
+          \item \textbf{Hyperblock} scheduling
+          \item \textbf{Speculative} Trace scheduling
         \end{itemize}
 \end{itemize}
 
@@ -2215,7 +2219,6 @@ the inner loop gets \textit{unrolled} in order to execute \(4\) iterations at on
 A final clean up is needed to take care of those values of \texttt{N} that are not multiples of the unrolling factor (\(4\) in this example).
 
 This technique has the drawbacks of creating \textbf{longer code} and \textbf{losing performance} due to the costs of starting and closing each iteration.
-
 Furthermore, trace scheduling cannot proceed beyond a loop.
 
 \bigskip
@@ -2291,7 +2294,7 @@ During the instruction commit the values in the head of the \textit{ROB} are pla
 \textit{ROB} are structured as a circular buffer with \textbf{head} and \textbf{tail} pointers.
 Entries between those two are valid and they are allocated and freed whenever an instruction enters or leaves the \textit{ROB}.
 
-Its main entries include:
+Its main entries are:
 
 \begin{itemize}
   \item The \textbf{type} of the instruction
@@ -2333,8 +2336,8 @@ The structure of the \textit{ROB} is represented in Figure~\ref{fig:structure-of
 
   \begin{itemize}
     \item The \texttt{TAG}, given by the index in the \textit{ROB}
-    \item The new instructions are dispatched to free slots while
-    \item Instruction space is reclaimed when done by setting the \texttt{P} bit
+    \item The new instructions are \textbf{dispatched} to free slot
+    \item Instruction space is \textbf{reclaimed} when done by setting the \texttt{P} bit
     \item In \textbf{dispatch} stage:
           \begin{itemize}
             \item non busy source operands are read from register files and copied to \texttt{SRC} fields where the \texttt{P} bit is set
@@ -2394,14 +2397,14 @@ Special care must be ensued while handling \textbf{interrupts} and \textbf{excep
 Since branch prediction might be wrong, the issue is now to update the processor state accordingly.
 Finally, out of order completion, post interrupt and mispredict writebacks change the state of the program.
 
-To solve this problems executed instructions are held in \textit{ROB} until they are no longer speculative.
-The instruction commit is then \textit{in order}: exceptions and interrupt are handled by not being addressed until the instruction that caused them is recorded in the \textit{ROB}.
+To solve this problems executed instructions are held in \textit{ROB} until they are no longer speculative;
+the instruction commit is then \textit{in order}: exceptions and interrupt are handled by not being addressed until the instruction that caused them is recorded in the \textit{ROB}.
 
-Temporary storage \textit{(shadow registers and store buffers)} is then needed to hold all results before commit
+Temporary storage \textit{(in the form of shadow registers and store buffers)} is then needed to hold all results before commit
 Operands are supplied as well between execution complete and commit.
 
-Once the instruction is committed, its result is placed in the destination register.
-Therefore, it's easy to undo speculated instructions on exceptions and interrupts.
+Once the instruction is committed, its result is placed in the destination register;
+it's therefore easy to undo speculated instructions on exceptions and interrupts.
 
 A scheme of this structure is represented in Figure~\ref{fig:exceptions-in-order-commit}.
 
@@ -2525,9 +2528,9 @@ they are handled by ignoring them until they are ready to commit.
 3 different scenarios can then be identified at commit stage:
 
 \begin{itemize}
-  \item If a speculated instruction raises an exception, then the exception itself is recorded in the \textit{ROB}
-  \item If a branch misprediction arises and the instruction should not have been executed, then the exception is flushed along with the instruction when the \textit{ROB} is cleared
-  \item If the instruction reaches the head of the \textit{ROB}, then it's no longer speculative and it should be addressed
+  \item If a \textbf{speculated instruction raises an exception}, then the exception itself is recorded in the \textit{ROB}
+  \item If a \textbf{branch misprediction arises} and the instruction should not have been executed, then the exception is flushed along with the instruction when the \textit{ROB} is cleared
+  \item If the \textbf{instruction reaches the head of the \textit{ROB}}, then it's no longer speculative and it should be addressed
 \end{itemize}
 
 \subsubsection{Hardware support for Memory Disambiguation}
@@ -2536,18 +2539,15 @@ In order to keep track of all stores to memory in program order, a buffer is nee
 Its duties include:
 
 \begin{itemize}
-  \item Keep track of addresses and results and when they become available
-  \item Keep a \textit{FIFO} ordering, so stores are retired in program order
+  \item Keeping track of \textbf{addresses and results} and when they become available
+  \item Keeping a \textbf{\textit{FIFO} ordering}, so stores are retired in program order
 \end{itemize}
 
-While issuing a \texttt{LOAD}, the current head of store queue must be recorded in order to know which \texttt{STORE} instructions are ahead.
-When the address is actually found, the \texttt{STORE} queue is checked:
+While issuing a \texttt{LOAD}, the current head of the \texttt{STORE} queue must be recorded in order to know which \texttt{STORE} instructions are ahead;
+when the address is actually found, the \texttt{STORE} queue is checked:
 
 \begin{itemize}
-  \item If any \texttt{STORE} prior to \texttt{LOAD} is waiting for its address:
-        \begin{itemize}[label=\(\rightarrow\)]
-          \item the \texttt{LOAD} is stalled
-        \end{itemize}
+  \item If any \texttt{STORE} prior to \texttt{LOAD} is waiting for its address, \textbf{the \texttt{LOAD} is stalled}
   \item If any \texttt{LOAD} address matches any previous \texttt{STORE} address (found by \textit{associative lookup}):
         \begin{itemize}[label=\(\rightarrow\)]
           \item a \textbf{memory induced} \textit{RAW} hazard is created
@@ -2562,12 +2562,12 @@ All the actual \texttt{STORE} instructions commit in order, so there's no need t
 
 \textbf{Explicit Register Renaming} is a technique that uses physical register file that is larger than the number of register specified by the \textit{ISA}.
 
-The key \textit{idea} behind this technique is to allocate a new physical destination register for every instruction that writes.
-It's very similar to a compiler transformation called \textbf{Static Single Assignment} (\textit{SSA}) but at hardware level.
+The key \textit{idea} behind this technique is to allocate a new physical destination register for every instruction that writes;
+it's very similar to a compiler transformation called \textbf{Static Single Assignment} (\textit{SSA}) but at hardware level.
 It removes all chances of \textit{WAR} or \textit{WAW} hazards while allowing complete \textbf{out of order} completion.
 
-It works by keeping a translation table that maps each \textit{ISA} register to a physical register.
-Whenever a register is written, the corresponding entry on the map is replaced with a new register from the \textbf{freelist}.
+It works by keeping a translation table that maps each \textit{ISA} register to a physical register:
+whenever a register is written, the corresponding entry on the map is replaced with a new register from the \textbf{freelist}.
 A physical register is considered free when not used by any active instruction.
 
 A simple illustration of this technique is shown in Image~\ref{fig:explicit-register-renaming}.
@@ -2588,7 +2588,7 @@ Explicit Renaming Support includes:
   \item A physical register file that has \textbf{more registers} than specified by the \textit{ISA}
   \item Ability to figure out which physical registers are \textbf{free}
         \begin{itemize}
-          \item if no registers is free, the issue stage is stalled
+          \item if no register is free, the issue stage is stalled
         \end{itemize}
 \end{itemize}
 
@@ -2641,15 +2641,18 @@ A schematic of the Unified Physical Register File is shown in Image~\ref{fig:uni
 By using the Unified Physical Register File, the mapping between an architectural register and a physical one \textbf{is not speculative}.
 Any physical register being used to hold the older value of the architectural register is freed.
 
-Deallocating registers is a more complicated:
+Deallocating registers is however a more complicated task:
 
 \begin{itemize}
   \item Before freeing up a physical register, checks that it is \textbf{no longer being used} now and in the near future, must be made
   \item A physical register corresponds to an architectural register \textbf{until it is rewritten}
   \item There may be \textbf{pending uses} of the physical register: the processor must check if any source operand corresponds to that register in the \textit{FU} queue
         \begin{itemize}
-          \item if it does not appear, it can be allocated
-          \item otherwise, the processor can wait until another instructions that writes the same architectural register commits. This is an easy way to implement a solution that might cause slight delays
+          \item if it does not appear, it \textbf{can be allocated}
+          \item otherwise, the \textbf{processor can wait} until another instructions that writes the same architectural register commits
+                \begin{itemize}
+                  \item this is an easy way to implement a solution that might cause slight delays
+                \end{itemize}
         \end{itemize}
 \end{itemize}
 
@@ -2701,7 +2704,10 @@ The biggest bottleneck is found in dynamically scheduled superscalar processors:
 
 \begin{itemize}
   \item The \textbf{processor needs additional logic} to handle issue of every possible combination of dependent instructions in the same clock cycle
-  \item Since the number of possibilities increases with the square of the number of instructions that can be issued in one clock cycle, it's difficult to implement a logic supporting more than \(4\) instructions
+  \item The \textbf{number of combinations increases with the square with respect to the number of instructions} that can be issued in the same cycle
+        \begin{itemize}
+          \item it's difficult to implement a logic supporting more than \(4\) instructions
+        \end{itemize}
 \end{itemize}
 
 \bigskip
@@ -2742,11 +2748,14 @@ Once again, all these operations are done in parallel in a single clock cycle.
 
 \subsubsection{Superscalar Register Renaming}
 
+The \textbf{Register Renaming} technique can be applied to \textbf{superscalar processors} as well.
+Its operations are as follows:
+
 \begin{itemize}
-  \item During decode, instructions allocate a new physical destination register
-  \item Source operands are renamed to physical register with newest value
-  \item Execution unit only sees physical register numbers
-  \item RAW hazards must be checked between instruction issuing in the same cycle
+  \item During decode, \textbf{instructions allocate a new physical destination register}
+  \item Source \textbf{operands are renamed to physical register} with newest value
+  \item Execution \textbf{unit only sees physical register} numbers
+  \item \textit{RAW} hazards must be \textbf{checked between instruction} issuing in the same cycle
         \begin{itemize}
           \item this operation can be done in parallel using rename lookup
         \end{itemize}
@@ -2824,8 +2833,8 @@ This effectively implies that the execution can be restarted at the interrupt po
 This kind of interrupt is desirable because:
 
 \begin{itemize}
-  \item Many types of interrupts or exceptions need to be restartable
-  \item It's easier to figure out what actually happened and what caused the exception
+  \item Many types of interrupts or exceptions \textbf{need to be restartable}
+  \item It's \textbf{easier to figure out what actually happened} and what caused the exception
 \end{itemize}
 
 While restartability does not require preciseness, it makes a lot easier to restart the execution by:
@@ -2972,16 +2981,16 @@ In his famous paper, \textit{Jim Smith} proposes \(3\) methods for getting preci
 There are \(3\) technique to speculate on exceptions:
 
 \begin{itemize}
-  \item Prediction mechanism
+  \item \textbf{Prediction} mechanism
         \begin{itemize}[label=\(\rightarrow\)]
           \item exceptions are so rare that predicting no exceptions is surprisingly accurate
         \end{itemize}
-  \item Check Prediction mechanism
+  \item C\textbf{heck Prediction} mechanism
         \begin{itemize}[label=\(\rightarrow\)]
           \item exceptions are detected at the end of instruction execution pipeline
           \item dedicated hardware for different exception types
         \end{itemize}
-  \item Recovery mechanism
+  \item \textbf{Recovery} mechanism
         \begin{itemize}[label=\(\rightarrow\)]
           \item only write architectural state at commit point, so partially executed instruction can be thrown away after exception
           \item exception handler is launched only after pipeline if flushed
@@ -2993,7 +3002,7 @@ There are \(3\) technique to speculate on exceptions:
 \section{MIMD and parallel architectures}
 \label{sec:mimd}
 
-A definition of \textbf{parallel architectures}, as defined by \textit{Almasi} and \textit{Gottlieb} in 1989 is:
+The definition of \textbf{parallel architectures}, as defined by \textit{Almasi} and \textit{Gottlieb} in 1989 is:
 
 \indentquote{A collection of processing elements that cooperatres and communicated to solve large problems fast.}
 
@@ -3393,7 +3402,8 @@ All cache controllers monitor \textit{(or snoop)} the \texttt{BUS} to determine 
 Every cache that has a copy of the shared data also has a copy of the sharing status of the block, removing the need of keeping a centralized state.
 
 All requests for shared data are sent to all processors.
-This solution requires broadcast, since the cache controllers must know the sharing status of all the data blocks and it's particularly suitable for \textbf{Centralized Shared Memory Architectures}, especially for small scale multiprocessors with single \texttt{BUS}.
+This solution requires broadcast, since the cache controllers must know the sharing status of all the data blocks;
+as such, it's particularly suitable for \textbf{Centralized Shared Memory Architectures}, especially for small scale multiprocessors with single \texttt{BUS}.
 
 \bigskip
 One of the first implementations of this protocol has been proposed by \textit{Goodman} in \(1983\).
@@ -3423,7 +3433,7 @@ A simple example of the hardware implementation of the snooping protocol is repr
 \end{figure}
 
 \bigskip
-Since every \texttt{BUS} transaction check the cache address tags, this operation can interfere with the processor operations, causing stall when the variable is not available in the cache.
+Since every \texttt{BUS} transaction check the cache address tags, this operation can interfere with the processor operations, causing stalls when the variable is not available in the cache.
 
 To reduce the interference with the processor's accesses to the cache, the tag portion of the address is duplicated for snooping activities.
 An extra read port is also added to the address tag portion of the cache.
@@ -3470,11 +3480,11 @@ Different operations of the protocol:
         \begin{itemize}
           \item the state of a block is a \(p\)-vector of states
           \item hardware state bits are associated with block that are in the cache
-          \item other blocks can be seen as being in invalid in that cache
+          \item other blocks can be seen as being in \textit{invalid} in that cache
         \end{itemize}
 \end{itemize}
 
-Finally, on a \texttt{write} operation, all other copies of the same data are \textbf{invalidated}.
+Finally, on a \texttt{WRITE} operation, all other copies of the same data are \textbf{invalidated}.
 The \texttt{BUS} itself is used to serialize the access to the data, as the \texttt{WRITE} operations cannot complete until exclusive \texttt{BUS} access is obtained.
 
 \paragraph{Write-Update Protocol}
@@ -3568,7 +3578,7 @@ Each cache line has state bits, relative to the state of the data.
 
 \subsubsection{Snoopy Cache Variations}
 
-The basic \textit{MSI} protocol is not completely suitable to be applied to the real world, since it has a few limitations:
+The basic \textit{MSI protocol} is not completely suitable to be applied to the real world, since it has a few limitations:
 
 \begin{itemize}
   \item Operations are not \textbf{atomic}
@@ -3621,18 +3631,23 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
   \bigskip
 \end{figure}
 
+% I am really sorry for this abomination
 \begin{table}[htbp]
   \centering
-  \scalebox{0.75}{
-    \begin{tabular}{r|c|c|c|c}
-      \(\Rsh\)                               & \textit{Modified}       & \textit{Exclusive}      & \textit{Shared}                            & \textit{Invalid}                  \\
-      \hline
-      \textit{Line valid?}                   & \colorcmark             & \colorcmark             & \colorxmark                                & \colorcmark                       \\
-      \textit{Copy in memory}                & has to be updated       & valid                   & valid                                      & \(-\)                             \\
-      \textit{Other copies in other caches}? & \colorxmark             & \colorxmark             & maybe                                      & maybe                             \\
-      \textit{A write on this line}          & access the \texttt{BUS} & access the \texttt{BUS} & access the \texttt{BUS},  update the cache & direct access to the \texttt{BUS}
-    \end{tabular}
-  }
+  \scalebox{0.8}{
+    \Rotatebox{90}{
+      \begin{tabular}{r|c|c|c|c}
+        \(\Rsh\)                               & \textit{Modified} & \textit{Exclusive}              & \textit{Shared}                 & \textit{Invalid}                                                                                                                                                                                                                  \\
+        \hline
+        \textit{Line valid?}                   & \colorcmark       & \colorcmark                     & \colorcmark                     & \colorxmark                                                                                                                                                                                                                       \\
+        \textit{Copy in memory}                & has to be updated & valid                           & valid                           & invalid                                                                                                                                                                                                                           \\
+        \textit{Other copies in other caches}? & \colorxmark       & \colorxmark                     & maybe                           & \(-\)                                                                                                                                                                                                                             \\
+        \textit{Can be written?}               & \colorcmark       & \colorcmark                     & \colorxmark                     & \colorcmark                                                                                                                                                                                                                       \\
+        \textit{Can be read?}                  & \colorcmark       & \colorcmark                     & \colorcmark                     & \colorxmark                                                                                                                                                                                                                       \\
+        \textit{On read}                       & nothing happens   & nothing happens                 & nothing happens                 & \(\begin{cases}\text{transition to} \textit{ Exclusive } & \text{if data \textbf{is not} on other caches} \\ \text{transition to} \textit{ Shared } &\text{if data \textbf{is} on other caches}\end{cases} \) \\
+        \textit{On write}                      & nothing happens   & transition to \textit{Modified} & transition to \textit{Modified} & transition to \textit{Modified}, other copies transition to \textit{Invalidate}                                                                                                                                                   \\
+      \end{tabular}
+    }}
   \caption{State of cache lines with \textit{MESI} Protocol}
   \label{tab:MESI-cache-line}
 \end{table}
@@ -3644,8 +3659,8 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
     \centering
     \begin{tikzpicture}[auto, node distance=4cm, >=Triangle]
       \node [state, initial, initial left, initial text={\texttt{WRITE} miss},  minimum size=1cm](M) {\texttt{M}};
-      \node [state, initial, initial right, initial text={\texttt{READ} miss, not shared}, minimum size=1cm, right=of M](E) {\texttt{E}};
-      \node [state, initial, initial left, initial text={\texttt{READ} miss, shared}, minimum size=1cm, below=of M ](S) {\texttt{S}};
+      \node [state, initial, initial right, initial text={\texttt{READ} miss}, minimum size=1cm, right=of M](E) {\texttt{E}};
+      \node [state, initial, initial left, initial text={\texttt{READ} miss}, minimum size=1cm, below=of M](S) {\texttt{S}};
       \node [state, minimum size=1cm, below=of E](I) {\texttt{I}};
 
       \path[->, thick]
@@ -3681,8 +3696,8 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
 To improve the reading speed (thus reducing the access latency), often processors have two level caches, both on the same chip:
 
 \begin{itemize}
-  \item A \texttt{L2} cache, large
-  \item A \texttt{L1} cache, small
+  \item A \textbf{large} \texttt{L2} cache
+  \item A \textbf{small} \texttt{L1} cache
         \begin{itemize}
           \item entries in \texttt{L1} must be in \texttt{L2}
           \item an invalidation in \texttt{L2} \textbf{implies} an invalidation in \texttt{L1}
@@ -3690,10 +3705,9 @@ To improve the reading speed (thus reducing the access latency), often processor
         \end{itemize}
 \end{itemize}
 
-When a \texttt{READ} miss for a value is detected in a value, a read request for the value is placed on the \texttt{BUS}.
-The cache containing the value needs to supply and change its status to shared.
+When a \texttt{READ} miss for a value is detected in a value, a read request for the value is placed on the \texttt{BUS}:
+the cache containing the value needs to supply and change its status to \textit{Shared}.
 The main memory may respond to the request as well.
-% TODO evaluate if it's necessary to add the image from slide 101
 
 \bigskip
 An illustration of this hardware setup is shown in Figure~\ref{fig:MESI-bus-rd-level-2}
@@ -3711,8 +3725,9 @@ An illustration of this hardware setup is shown in Figure~\ref{fig:MESI-bus-rd-l
 
 A cache line might contain more than one value, and cache coherence is not maintained at the line level or at word level.
 
-Suppose processor \(\texttt{P}_1\) writes \(\texttt{word}_i\) and processor \(\texttt{P}_2\) writes \(\texttt{word}_k\) at the same line address.
-The block may be invalidated many times unnecessarily, since both the addresses share a common block.
+Suppose processor \(\texttt{P}_1\) writes \(\texttt{word}_i\) and processor \(\texttt{P}_2\) writes \(\texttt{word}_k\) at the same line address:
+the block may be invalidated many times unnecessarily, since both the addresses share it.
+
 Such event is called \textbf{false sharing}.
 
 \bigskip
@@ -3855,9 +3870,9 @@ They are:
           \item \textit{SSE} - Streaming \textit{SIMD} Extension
           \item \textit{AVX} - Advanced Vector Extension
         \end{itemize}
-  \item \textbf{Graphics Processor Units} \textit{(GPUs)}
+  \item \textbf{Graphics Processor Units} - \textit{GPU}
         \begin{itemize}
-          \item heterogeneous architectures: require system processor and system memory in addition to \textit{GPU} and graphics memory
+          \item \textbf{Heterogeneous} architectures: require system processor and system memory in addition to \textit{GPU} and graphics memory
         \end{itemize}
 \end{itemize}
 
@@ -3967,6 +3982,8 @@ Vectors applications are not limited to scientific computing, as they are used i
   \item Language run time support
 \end{itemize}
 
+and many more.
+
 The structure of the Vector Unit is represented in Figure~\ref{fig:vector-unit-structure}.
 
 \begin{figure}
@@ -4047,9 +4064,8 @@ It features:
 \textit{VMIPS} functional units consume one vector element per clock cycle, so the execution time of one vector instruction is approximately the vector length.
 
 To simplify the calculations, the \textbf{Convoy notion} has been introduced:
-it considers a set of vector instructions that could potentially execute together \textit{(generating no structural hazards)}.
-
-For a vector of length \(n\) and \(m\) convoys in a program, \(n \cdot m\) clock cycles are needed.
+it considers a set of vector instructions that could potentially execute together \textit{(generating no structural hazards)}:
+for a vector of length \(n\) and \(m\) convoys in a program, \(n \cdot m\) clock cycles are needed.
 
 \paragraph{Vector startup time}
 
@@ -4100,19 +4116,20 @@ It is executed at compile time via heuristic algorithms and it requires extensiv
 \textit{Solution}: \textbf{break loops} into pieces that fit in registers.
 This technique is called \textbf{stripmining}.
 
-\bigskip
-\textit{Code example:}
-\bigskip
-
 \begin{minipage}{\textwidth}
-  \begin{minipage}[t]{0.33\textwidth}
-    \begin{verbatim}
+  \bigskip
+  \textit{Stripmining code example:}
+  \bigskip
+
+  \begin{minipage}{\textwidth}
+    \begin{minipage}[t]{0.33\textwidth}
+      \begin{verbatim}
 for (i = 0; i < N; i++)
   C[i] = A[i] + B[i];
   \end{verbatim}
-  \end{minipage}
-  \begin{minipage}[t]{0.33\textwidth}
-    \begin{verbatim}
+    \end{minipage}
+    \begin{minipage}[t]{0.33\textwidth}
+      \begin{verbatim}
 andi x1, xN, 63 // N mod 64
 setvlr x1 // Do remainder
 loop:
@@ -4129,10 +4146,11 @@ li x1, 64
 setvlr x1 // Reset full length
 bgtz xN, loop // loop again
   \end{verbatim}
-  \end{minipage}
-  \begin{minipage}[t]{0.33\textwidth}
-    \centering
-    \tikzfig[0.7]{image-63.tikz}
+    \end{minipage}
+    \begin{minipage}[t]{0.33\textwidth}
+      \centering
+      \tikzfig[0.7]{image-63.tikz}
+    \end{minipage}
   \end{minipage}
 \end{minipage}
 
@@ -4141,40 +4159,44 @@ bgtz xN, loop // loop again
 
 \textit{Problem}: \textbf{vectorize} loops with conditional code.
 
-\textit{Solution}: add \textbf{vector masks} to registers:
+\textit{Solution}: add \textbf{vector masks} to registers
 
 \begin{itemize}
-  \item vector version of predicate registers, \(1\) bit per element and maskable vector instructions
-  \item vector operations become bubble \textit{(or \texttt{NOP})} at elements where mask bit is clear
+  \item vector version of \textbf{predicate registers}, \(1\) bit per element and maskable vector instructions
+  \item vector operations become \textbf{bubble} \textit{(or \texttt{NOP})} at \textbf{elements where mask bit is clear}
 \end{itemize}
 
 Two different implementation can be used to execute the vector instructions:
 
 \begin{itemize}
-  \item Simple implementation: execute all \(N\) operations, turn off result writeback according to mask
-  \item Density time implementation: scan mask vectors and only execute elements with non zero mask
+  \item \textbf{Simple implementation}: execute all \(N\) operations, turn off result writeback according to mask
+  \item \textbf{Improved implementation}: scan mask vectors and only execute elements with non zero mask
 \end{itemize}
 
-\bigskip
-\textit{Code example:}
-\bigskip
-
 \begin{minipage}{\textwidth}
-  \begin{minipage}[t]{0.3\textwidth}
-    \begin{verbatim}
-for (i = 0; i < N; i++)
-  if (A[i] > 0)
-    A[i] = B{i}
+  \bigskip
+  \textit{Code example:}
+  \bigskip
+
+  \begin{minipage}{\textwidth}
+    \begin{minipage}[t]{0.3\textwidth}
+      \begin{verbatim}
+for (i = 0; i < N; i++) {
+  if (A[i] > 0) {
+    A[i] = B[i];
+  }
+}
     \end{verbatim}
-  \end{minipage}
-  \begin{minipage}[t]{0.695\textwidth}
-    \begin{verbatim}
+    \end{minipage}
+    \begin{minipage}[t]{0.695\textwidth}
+      \begin{verbatim}
 cvm // Turn on all elements
 vld vA, xA // Load entire A vector
 vfsgts.d vA, f0 // Set bits in mask register where A > 0
 vld vA, xB // Load B vector into A under mask
 vsd vA, xA // Store A back to memory under mask
     \end{verbatim}
+    \end{minipage}
   \end{minipage}
 \end{minipage}
 
@@ -4222,9 +4244,9 @@ The advantage of vector chaining is represented in Figure~\ref{fig:vector-chaini
 \paragraph{Vector Memory-Memory vs Vector Register Machines}
 
 \begin{itemize}
-  \item Vector memory-memory architectures \textit{(VMMAs)} require greater main memory bandwidth because all operands must be read in and out of memory
-  \item \textit{VMMAs} make it difficult to overlap execution of multiple vector operations because dependencies on memory addresses must be checked
-  \item \textit{VMMAs} incur in greater startup latencies
+  \item \textbf{Vector memory-memory architectures} \textit{(VMMAs)} require \textbf{greater main memory bandwidth} because all operands must be read in and out of memory
+  \item \textit{VMMAs} make it \textbf{difficult to overlap execution} of multiple vector operations because dependencies on memory addresses must be checked
+  \item \textit{VMMAs} incur in \textbf{greater startup latencies}
   \item All major vector machines since Cray-1 have had vector register architectures
 \end{itemize}
 
@@ -4249,24 +4271,24 @@ The \textbf{multimedia extension}, also called \textit{SIMD} extension. It featu
 
 \paragraph{Multimedia Extensions vs Vector Architectures}
 
-Multimedia Extensions, compared to Vector Architectures, feature:
+\textbf{Multimedia Extensions}, compared to Vector Architectures, feature:
 
 \begin{itemize}
   \item \textbf{A limited instruction set}
-        \begin{itemize}
-          \item no vector length control
-          \item no strided \texttt{LOAD} and \texttt{STORE} or \texttt{SCATTER} and \texttt{GATHER}
-          \item no unit-stride loads must be aligned to \(64/128\) bit boundary
+        \begin{itemize}[label=\xmark]
+          \item no \textbf{vector length} control
+          \item no \textbf{strided} \texttt{LOAD} and \texttt{STORE} or \texttt{SCATTER} and \texttt{GATHER}
+          \item \textbf{unit-stride} loads must be aligned to \(64/128\) bit boundary
         \end{itemize}
   \item \textbf{A limited vector register length}
-        \begin{itemize}
-          \item requires superscalar dispatch to keep multiply/add/load units busy
-          \item loop unrolling to hide latencies increase register pressure
+        \begin{itemize}[label=\xmark]
+          \item requires superscalar dispatch to keep \texttt{MULTIPLY}/\texttt{ADD}/\texttt{LOAD} units busy
+          \item \textbf{loop unrolling} to hide latencies increase register pressure
         \end{itemize}
   \item \textbf{Trend towards fuller vector support in microprocessors}
-        \begin{itemize}
-          \item better support for misaligned memory access
-          \item support of double precision \textit{(64 bits floating point)}
+        \begin{itemize}[label=\cmark]
+          \item \textbf{better support} for misaligned memory access
+          \item support of \textbf{double precision} \textit{(64 bits floating point)}
         \end{itemize}
 \end{itemize}
 
@@ -4310,7 +4332,7 @@ The host \textit{CPU} issues data parallel kernels to \textit{GP-GPU} device for
   \item A \textbf{thread block} is a set of concurrent threads that can cooperate among themselves through barrier synchronization and through shared memory space private to the block
   \item A \textbf{grid} is a set of thread block that may be executed independently and thus may execute in parallel (or any order)
         \begin{itemize}
-          \item Thread creation, scheduling and termination are handled by underlying hardware
+          \item thread \textbf{creation}, \textbf{scheduling} and \textbf{termination} are handled by \textbf{underlying hardware}
           \item \texttt{CUDA} model \textbf{virtualizes} the processor
         \end{itemize}
 \end{itemize}
@@ -4320,26 +4342,26 @@ The host \textit{CPU} issues data parallel kernels to \textit{GP-GPU} device for
 \begin{itemize}
   \item The \textit{GPU} is built from \textbf{multiple parallel cores}, each one containing a multithreaded \textit{SIMD} processor with multiple lanes but without scalar processor
         \begin{itemize}
-          \item each tread block executes on one core.
-          \item some newer models feature a scalar unit
+          \item each tread block executes on \textbf{one core}
+          \item some newer models feature a \textbf{scalar unit}
         \end{itemize}
   \item The \textit{CPU} \textbf{sends the whole grid over to the} \textit{GPU}, which distributes thread blocks among cores
         \begin{itemize}
-          \item the programmer is not aware of the number of cores
+          \item the programmer is \textbf{not aware} of the number of cores
         \end{itemize}
 \end{itemize}
 
 \bigskip
-GPUs use a \textit{SIMT} \textit{(Single Instruction Multiple Thread)} model, where individual \textit{(scalar)} instruction streams for each \texttt{CUDA} thread are grouped together for \textit{SIMD} execution on hardware.
+GPUs use a \textbf{SIMT} \textit{(Single Instruction Multiple Thread)} model, where individual \textit{(scalar)} instruction streams for each \texttt{CUDA} thread are grouped together for \textit{SIMD} execution on hardware.
 \textit{NVIDIA} groups \(32\) threads (\(\mu T\)) into a \textbf{warp}.
 
-Warps are multithreaded on cores, and each of them is managed by the hardware.
-One warp composed by \(32\) threads \textit{\(\mu T\)} represents a single thread in the hardware.
+Warps are multithreaded on cores, and each of them is managed by the hardware:
+one warp composed by \(32\) threads \textit{\(\mu T\)} represents a single thread in the hardware.
 Multiple threads are then interleaved in execution on a single core to reduce latencies to memory and FUs.
 
-A single thread block can contain multiple warps (up to \(512 \mu T\) in \texttt{CUDA}), all mapped into a single core.
-Multiple blocks can also execute on a single core.
-Individual parallel threads of a warp start together but are free to branch and execute in parallel.
+A single thread block can contain multiple warps (up to \(512 \mu T\) in \texttt{CUDA}), all mapped into a single core;
+multiple blocks can also execute on a single core.
+Individual parallel threads of a warp start together but are free to branch and execute in \textbf{parallel}.
 
 \textit{SIMT} model gives the illusion of many independent threads running on a single core, but for efficiency sake the programmer must try and keep each \(\mu T\) as aligned as possible, in \textit{SIMD} fashion.
 
@@ -4348,8 +4370,8 @@ Simple \texttt{if-then-else} instructions are compiled into predicated execution
 more complex control flow code must be compiled into branches.
 
 Hardware tracks which \(\mu T\) take or don't take branches:
-if all go in the same direction, the hardware can execute the block in \textit{SIMD} fashion.
-Otherwise, a mask vector indicating \textit{taken} or \textit{not taken} is created.
+if all go in the same direction, the hardware can execute the block in \textit{SIMD} fashion;
+otherwise, a mask vector indicating \textit{taken} or \textit{not taken} is created.
 
 The \textit{not taken} paths keep running under the mask, while the \textit{taken} paths \texttt{PC} and mask are pushed into a hardware stack in order to be executed later.
 
