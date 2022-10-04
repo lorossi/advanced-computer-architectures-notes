@@ -19,8 +19,6 @@
 		\node [style=none] (13) at (5.5, -6.5) {};
 		\node [style=none] (18) at (7.5, -2) {\footnotesize\texttt{lane 0}};
 		\node [style=none] (23) at (7.5, -3) {\footnotesize\texttt{lane 1}};
-		\node [style=none] (24) at (7.5, -3.75) {};
-		\node [style=none] (25) at (7.5, -4.25) {};
 		\node [style=none] (30) at (7.5, -5) {\footnotesize\texttt{lane 15}};
 		\node [style=none, text=white] (31) at (7.5, -6) {\texttt{core 0}};
 		\node [style=none] (32) at (9.5, -6.5) {};
@@ -37,8 +35,6 @@
 		\node [style=none] (43) at (14, -3.5) {};
 		\node [style=none] (44) at (14, -2.5) {};
 		\node [style=none] (45) at (12.5, -3) {\footnotesize\texttt{lane 1}};
-		\node [style=none] (46) at (12.5, -3.75) {};
-		\node [style=none] (47) at (12.5, -4.25) {};
 		\node [style=none] (48) at (11, -4.5) {};
 		\node [style=none] (49) at (11, -5.5) {};
 		\node [style=none] (50) at (14, -5.5) {};
@@ -75,8 +71,6 @@
 		\node [style=none] (20) at (6, -3.5) {};
 		\node [style=none] (21) at (9, -3.5) {};
 		\node [style=none] (22) at (9, -2.5) {};
-		\node [style=none] (86) at (20, -3.75) {};
-		\node [style=none] (87) at (20, -4.25) {};
 		\node [style=none] (74) at (18.5, -4.5) {};
 		\node [style=none] (75) at (18.5, -5.5) {};
 		\node [style=none] (76) at (21.5, -5.5) {};
@@ -91,6 +85,12 @@
 		\node [style=none] (96) at (14, -7.5) {\small\texttt{cache}};
 		\node [style=none] (99) at (0, -7) {};
 		\node [style=none] (100) at (2, -7) {};
+		\node [style=none] (101) at (7.5, -3.75) {};
+		\node [style=none] (102) at (7.5, -4.25) {};
+		\node [style=none] (103) at (12.5, -3.75) {};
+		\node [style=none] (104) at (12.5, -4.25) {};
+		\node [style=none] (105) at (20, -3.75) {};
+		\node [style=none] (106) at (20, -4.25) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=light fill] (82.center)
@@ -123,7 +123,6 @@
 			 to (1.center)
 			 to (2.center)
 			 to cycle;
-		\draw [style=dashed] (24.center) to (25.center);
 		\draw [style=red fill] (32.center)
 			 to [in=270, out=90] (33.center)
 			 to (12.center)
@@ -144,7 +143,6 @@
 			 to (48.center)
 			 to (49.center)
 			 to cycle;
-		\draw [style=dashed, draw=white] (46.center) to (47.center);
 		\draw [style=dashed] (59.center) to (58.center);
 		\draw [style=dashed] (56.center) to (57.center);
 		\draw [style=light fill] (28.center)
@@ -162,7 +160,6 @@
 			 to (19.center)
 			 to (20.center)
 			 to cycle;
-		\draw [style=dashed, draw=white] (86.center) to (87.center);
 		\draw [style=light fill] (76.center)
 			 to (77.center)
 			 to (74.center)
@@ -175,5 +172,8 @@
 			 to (94.center)
 			 to cycle;
 		\draw [style=light fill] (100.center) to (99.center);
+		\draw [style=dashed, draw=white] (101.center) to (102.center);
+		\draw [style=dashed, draw=white] (103.center) to (104.center);
+		\draw [style=dashed, draw=white] (105.center) to (106.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

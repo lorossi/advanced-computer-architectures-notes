@@ -75,7 +75,7 @@ Created in \(1996\) and upgraded in \(1972\), it provides the first description 
 \end{itemize}
 
 \bigskip
-\textit{MIMD} an \textit{SIMD} architectures will be further explained in sections \ref{sec:mimd} and \ref{sec:simd}.
+\textit{MIMD} an \textit{SIMD} architectures will be further explained in Sections~\ref{sec:mimd}~and~\ref{sec:simd}.
 An illustration of the different architectures is displayed in Figure~\ref{fig:flynn-taxonomy}.
 
 \begin{figure}[htbp]
@@ -122,10 +122,10 @@ There are multiple types \textit{(classes)} of computers, each with different ne
 the performance measurement is not the same for each of them.
 \textit{Price, computing speed, power consumption} can be metrics to measure the performance of a computer.
 
-Programming has become so complicated that it's not possible to balance all the constraints manually.
-While the computational power has grown bigger than ever before, energy consumption is now a sensible constraint.
+Programming has become so complicated that it's not possible to balance all the constraints manually;
+while the computational power has grown bigger than ever before, energy consumption is now a sensible constraint.
 
-The computer engineering methodology is therefore described as such:
+The computer engineering methodology is therefore described as:
 
 \begin{figure}[htbp]
   \bigskip
@@ -139,7 +139,7 @@ The computer engineering methodology is therefore described as such:
       \item \label{enum:methodology-start} \textit{evaluate} system by bottlenecks
       \item \textit{simulate} new designs and organizations
       \item \textit{implement} next generation systems
-      \item \textit{go} to Step~\ref{enum:methodology-start}
+      \item \textit{repeat}
     \end{enumerate}
   \end{minipage}
   \caption{Computer engineering methodology}
@@ -151,22 +151,23 @@ There are more constraints not contained in this models, such as technology tren
 
 \bigskip
 When one computer is faster than another, what quality is being addressed?
-\textbf{It depends on what it's important.}
+The answer is not always the same, and it depends on the application;
+different solutions may consider different metrics, such as
 
-The picked qualities may change according to the use case or the user itself.
-2 metrics are normally used:
+The picked qualities may change according to the use case or the user itself,
+but 2 metrics are normally used:
 
 \begin{enumerate}
-  \item Computer system user
-        \begin{itemize}
-          \item \textbf{minimize elapsed time} for program execution
-          \item \(\texttt{execution time} = \texttt{time end } - \texttt{ time start}\)
-        \end{itemize}
-  \item Computer center manager
-        \begin{itemize}
-          \item \textbf{maximize completion rate}
-          \item \(\texttt{completion rate} = \texttt{number of jobs } \div \texttt{ elapsed time}\)
-        \end{itemize}
+  \item \textbf{Elapsed time}
+  \begin{itemize}
+    \item \(\texttt{execution time} = \texttt{time end} - \texttt{time start}\)
+    \item More relevant for system user
+  \end{itemize}
+  \item \textbf{Completion rate}
+  \begin{itemize}
+    \item \(\texttt{completion rate} = \texttt{number of jobs} \div \texttt{elapsed time}\)
+    \item More relevant for system designer
+  \end{itemize}
 \end{enumerate}
 
 \subsection{Response time vs throughput}
@@ -246,19 +247,19 @@ It serves as a guide to how much an enhancement will improve performance and how
 \textbf{CPU time} is determined by:
 
 \begin{itemize}
-  \item \textbf{Instruction Count}, \textit{IC}:
+  \item \textbf{Instruction Count} - \textit{IC}:
         \begin{itemize}
           \item The number of executed instructions, not the size of static code
           \item Determined by multiple \textit{factors, including algorithm, compiler, ISA}
         \end{itemize}
-  \item \textbf{Cycles per instructions}, \textit{CPI}:
+  \item \textbf{Cycles per instructions} - \textit{CPI}:
         \begin{itemize}
           \item Determined by \textit{ISA} and \textit{CPU} organization
           \item Overlap among instructions reduces this term
           \item The \textit{CPI} relative to a process \texttt{P} is calculated as:
                 \[ CPI(P) = \dfrac{\texttt{\# of clock cycles to execute P}}{\texttt{number of instructions}} \]
         \end{itemize}
-  \item \textbf{Time per cycle}, \textit{TC}:
+  \item \textbf{Time per cycle} - \textit{TC}:
         \begin{itemize}
           \item It's determined by technology, organization and circuit design
         \end{itemize}
@@ -617,8 +618,8 @@ In real life:
 They can also be built starting from standard CPUs.
 
 \bigskip
-Each processor fetches its own instructions and operates on its own data.
-Processors are often off the shelf microprocessors, with the upside of being able to build a scalable architecture and having an high cost performance ratio.
+Each processor fetches its own instructions and operates on its own data;
+processors are often off the shelf microprocessors, with the upside of being able to build a scalable architecture and having an high cost performance ratio.
 
 In order to fully exploit a \textit{MIMD} with \(n\) processors, there must be:
 
@@ -970,8 +971,8 @@ As a consequence, the presence of dependences does not imply the existence of ha
 Two type of name dependences could exist between an instruction \texttt{i} that precedes an instruction \texttt{j}:
 
 \begin{itemize}
-  \item \textbf{Antidependence}: when \texttt{j} writes a register or memory location that instruction \texttt{i} reads. The original instruction ordering must be preserved to ensure that \texttt{i} reads the correct value
-  \item \textbf{Output Dependence}: when \texttt{i} and \texttt{j} write the same register or memory location. The original instructions ordering must be preserved to ensure that the value finally written corresponds to \texttt{j}
+  \item \textbf{Antidependence}: when \texttt{j} writes a register or memory location that instruction \texttt{i} reads; the original instruction ordering must be preserved to ensure that \texttt{i} reads the correct value
+  \item \textbf{Output Dependence}: when \texttt{i} and \texttt{j} write the same register or memory location; the original instructions ordering must be preserved to ensure that the value finally written corresponds to \texttt{j}
 \end{itemize}
 
 Name dependences are not true data dependences, since there is no value \textit{(no data flow)} being transmitted between instructions.
@@ -1076,7 +1077,7 @@ There is a one cycle penalty.
 An alternative scheme is to consider \textbf{every branch as taken}: as soon as the branch is decoded and the branch target address is computed, the branch is assumed to be taken and the fetching and the execution stages can begin at the target.
 
 The predicted-taken scheme makes sense for pipelines where the branch target is known before the actual outcome.
-In \textit{MIPS} pipeline, the branch target address is not known before the branch outcome, so \textbf{there is no advantage in this approach}.
+This is not the case within \textit{MIPS} pipeline \textit{(where the branch target is known only after the operation outcome)}, so \textbf{there is no advantage in this approach}.
 
 \subsubsection{Backward Taken Forward Not Taken}
 \label{sec:backward-taken-forward-not-taken}
@@ -1086,11 +1087,11 @@ The prediction is based on the branch direction:
 \begin{itemize}
   \item \textbf{Backward} going branches are predicted as \textbf{taken}
         \begin{itemize}
-          \item the branches at the end of the loops are likely to be executed most of the time
+          \item the branches at the end of loops are likely to be executed most of the time
         \end{itemize}
   \item \textbf{Forward} going branches are predicted as \textbf{not taken}
         \begin{itemize}
-          \item the if branches are likely not executed most of the time
+          \item the \textbf{if} branches are likely not executed most of the time
         \end{itemize}
 \end{itemize}
 
@@ -1098,23 +1099,24 @@ The prediction is based on the branch direction:
 \label{sec:profile-driven-prediction}
 
 The branch prediction is based on profiling information collected from earlier runs.
+This method can use compiler hints, and it's potentially more effective than the other ones;
+however, it's also the most complicated between the \(5\) as it needs additional hardware.
 
-This method can use compiler hints, and it's potentially more effective than the other ones.
-However, it's also the most complicated between the  \(5\).
+This technique will be explored in Section~\ref{sec:dynamic-branch-prediction}.
 
 \subsubsection{Delayed Branch}
 \label{sec:delayed-branch}
 
 The compiler statically schedules and independent instruction in the branch delay slot, which is then executed whether or not the branch is taken.
 
-If the branch delay consists of one cycle (as in \textit{MIPS}), there's only a one delay slot.
-Almost all processors with delayed branch have a single delay slot, as it's difficult for the compiler to fill more than one slot.
+If the branch delay consists of one cycle (as in \textit{MIPS}), there's only a one delay slot;
+almost all processors with delayed branch have a single delay slot, as it's difficult for the compiler to fill more than one of them.
 
 If the branch:
 
 \begin{itemize}
-  \item \textbf{Is taken}: the execution continues with the instruction after the branch
-  \item \textbf{Is untaken}: the execution continues at the branch target
+  \item \textbf{Is untaken}: the execution continues with the instruction after the branch
+  \item \textbf{Is taken}: the execution continues at the branch target
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -1139,7 +1141,7 @@ These methods will better analyzed in the following paragraphs.
 
 \bigskip
 In general, the compilers are able to fill about \textbf{half} of the delayed branch slots with valid and useful instructions, while the remaining slots are filled with \texttt{nop}.
-In deeply pipelined processors, the delayed branch is longer than one cycle: many slots must be filled for every branch, thus it's more difficult to fill each of the with \textit{useful} instructions.
+In deeply pipelined processors, the delayed branch is longer than one cycle: many slots must be filled for every branch, thus it's more difficult to fill each of them with \textit{useful} instructions.
 
 \bigskip
 The main limitations on delayed branch scheduling arise from:
@@ -1209,12 +1211,13 @@ An illustration of this strategy is represented in Figure~\ref{fig:from-fall-thr
   \bigskip
 \end{figure}
 
-In order to make the optimization legal for the target, it must be ok to execute the moved instruction when the branch goes in the expected direction.
-The instruction in the branch delay slot is executed but its result is wasted \textit{(if the program will still execute correctly)}.
+In order to make the optimization legal for the target, it must be ok to execute the moved instruction when the branch goes in the expected direction;
+the instruction in the branch delay slot is executed but its result is wasted \textit{(if the program will still execute correctly)}.
 
 For example, if the destination register is an unused temporary register when the branch goes in the unexpected direction.
 
 \subsection{Dynamic Branch Prediction}
+\label{sec:dynamic-branch-prediction}
 
 \textit{Basic idea}: use the past branch behaviour to predict the future.
 
@@ -1285,8 +1288,8 @@ The structure of the \textit{BTB} is shown in Figure~\ref{fig:structure-of-BHT}.
 \end{figure}
 
 The prediction is a hint that it is assumed to be correct and fetching begins in the predicted direction.
-If the hint turns out to be wrong, the prediction bit is inverted and stored back.
-Then the pipeline is flushed and the correct sequence is executed.
+If the hint turns out to be wrong, the prediction bit is inverted and stored back;
+the pipeline is then flushed and the correct sequence is executed.
 
 The table has no tags \textit{(every access is a hit)} and the prediction bit could have been put there by another branch with the same LSBs.
 The \(1\)-bit branch history table only considers the last status of the branch \textit{(either taken or not taken)}.
@@ -1320,7 +1323,7 @@ A \textbf{misprediction} occurs when:
   \item The prediction is \textbf{incorrect} for that branch
   \item The same index has been referenced by two different branches, and the \textbf{previous history refers to the other branch}
         \begin{itemize}
-          \item to solve this problem it's enough to increase the number or rows in the \textit{BHT} or to use a hashing function (such as in \textit{GShare}).
+          \item to solve this problem it's enough to increase the number or rows in the \textit{BHT} or to use a hashing function \textit{(such as  GShare)}.
         \end{itemize}
 \end{itemize}
 
@@ -1432,7 +1435,7 @@ It uses the \(2\)-bit global history to choose among the \(4\) \textit{BHTs}.
 
 \begin{itemize}
   \item Each \textit{BHT} is composed of \(16\) entries of \(2\)-bit each
-  \item The \(4\)-bit branch address is used to choose four entries (a row)
+  \item The \(4\)-bit branch address is used to choose four entries \textit{(a row)}
   \item \(2\)-bit global history is used to choose one of four entries in a row \textit{(one of the four \textit{BHTs})}
 \end{itemize}
 
@@ -1444,26 +1447,26 @@ By comparing the performance of a \(2\)-bit simple predictor with \(4000\) entri
 
 \subsection{Two Level Adaptive Branch Predictors}
 
-The first level history is recorded in one (or more) \(k\)-bit shift register called Branch History Register (\textit{BHR}) which records the outcomes of the \(k\) most recent branches.
-The second level history is recorded in ore (or more) tables called Pattern History Table (\textit{PHT}) of two bit saturating counters.
+The first level history is recorded in one \textit{(or more)} \(k\)-bit shift register called \textit{Branch History Register (BHR)} which records the outcomes of the \(k\) most recent branches.
+The second level history is recorded in ore \textit{(or more)} tables called \textit{Pattern History Table (PHT)} of two bit saturating counters.
 
 The BHR is used to index the PHT to select which \(2\)-bit counter to use.
 Once the two bit counter is selected, the prediction is made using the same method as in the two bit counter scheme.
 
 \subsubsection{GA Predictor}
 
-The \textbf{GA Predictor} is composed of a \textit{BHT} (local predictor) and by one (or more) \textit{GAs} (local and global predictor):
+The \textbf{GA Predictor} is composed of a \textit{BHT} \textit{(local predictor)} and by one or more \textit{GAs} \textit{(local and global predictor)}:
 
 \begin{itemize}
-  \item The \textit{BHT} is indexed by the low order bits of the \texttt{PC} (branch address)
-  \item The GAs are a \(2\)-level predictor: \textit{PHT} is indexed by the content of \textit{BHR} (global history)
+  \item The \textit{BHT} is indexed by the low order bits of the \texttt{PC} \textit{(the branch address)}
+  \item The \textit{GAs} are a \(2\)-level predictor: \textit{PHT} is indexed by the content of \textit{BHR} \textit{(from global history)}
 \end{itemize}
 
 The structure of a \textit{GA} predictor is represented in Figure~\ref{fig:GA-predictor}.
 
 \subsubsection{GShare Predictor}
 
-The \textbf{GShare Predictor} is a local \texttt{XOR} global information, indexed by the exclusive \texttt{OR} of the low order bits of \textit{PC} (branch address) and the content of \textit{BHR} (global history).
+The \textbf{GShare Predictor} is a local \texttt{XOR} global information, indexed by the exclusive \texttt{OR} of the low order bits of \textit{PC} \textit{(branch address)} and the content of \textit{BHR} \textit{(global history)}.
 
 The structure of a \textit{GShare} predictor is represented in Figure~\ref{fig:GShare-predictor}.
 
@@ -1714,8 +1717,8 @@ It was invented at IBM \(3\) years after \textit{CDC 6600} scoreboard with the s
 
 The key idea behind this algorithm is to \textbf{distribute} the control login and the buffers within \textit{FUs}, as opposed to the scoreboard \textit{(in which the control logic is centralized)}.
 
-The operand buffers are called \textbf{Reservation Stations} (or \textit{RS}):
-each instruction is also an entry to a \textit{RS} and its operands are replaced by values or pointers (a technique known as \textbf{Implicit Register Renaming}) in order to avoid \textit{WAR} and \textit{RAW} hazards.
+The operand buffers are called \textbf{Reservation Stations} \textit{(RS)}:
+each instruction is also an entry to a \textit{RS} and its operands are replaced by values or pointers \textit{(a technique known as \textbf{Implicit Register Renaming})} in order to avoid \textit{WAR} and \textit{RAW} hazards.
 
 Results are then dispatched to other \textit{FUs} through a \textit{Common Data Bus}, communicating both the data and the source.
 Finally, \texttt{LOAD} and \texttt{STORE} operations are treated as \textit{FUs}, as \textit{RS} are more complex than architectural registers to allow more compiler-level optimizations.
@@ -1744,9 +1747,9 @@ Furthermore, a few more components are needed, such as:
   \item \textbf{Register File} and the \textbf{Store} buffers have a \textit{Value} (\texttt{V}) and a \textit{Pointer} (\texttt{Q}) field
         \begin{itemize}
           \item \texttt{Q} corresponds to the number of the \textit{RS} producing the result (\texttt{V}) to be stored in \textit{Register File} or \textit{Store} buffers
-          \item if \texttt{Q = 0}, no active instructions is producing a result and the \textit{Register File} (or \textit{Store}) buffer contains the wrong value
+          \item if \texttt{Q = 0}, no active instructions is producing a result and the \textit{Register File} \textit{(or \texttt{STORE})} buffer contains the wrong value
         \end{itemize}
-  \item \textbf{Load} and \textbf{Store} buffers have an \textit{Address} (\texttt{A}) field, with the former having also a \textit{Busy} field (\texttt{BUSY})
+  \item \textbf{Load} and \textbf{Store} buffers have an \textit{Address} (\texttt{A}) field, with the former having also a \textit{Busy} field \textit{(\texttt{BUSY})}
         \begin{itemize}
           \item the \texttt{A} field holds information for memory address calculation: initially contains the instruction offset, while after the calculation it stores the effective address
         \end{itemize}
@@ -1795,7 +1798,7 @@ In more detail:
         \begin{itemize}
           \item When the result is available, it is written on the \textit{Common Data Bus}
                 \begin{itemize}
-                  \item it is then propagated into the \textit{Register File} and all the registers \textit{(including store buffers)} waiting for this result
+                  \item it is then propagated into the \textit{Register File} and all the registers \textit{(including \texttt{STORE} buffers)} waiting for this result
                   \item \texttt{STORE} operations write data to memory
                   \item \textit{RSs} are marked as available
                 \end{itemize}
@@ -1804,7 +1807,7 @@ In more detail:
 
 \paragraph{Focus on \texttt{LOAD} and \texttt{STORE} in Tomasulo Algorithm}
 
-\texttt{LOAD} and \texttt{STORE} instructions go through a functional unit for effective computation before proceeding to their respective load and store buffers.
+\texttt{LOAD} and \texttt{STORE} instructions go through a functional unit for effective computation before proceeding to their respective load and \texttt{STORE} buffers.
 \texttt{LOAD} take a second execution step to access memory, then go to \textit{Write} stage to send the value from memory to \textit{Register File} and/or \textit{RS}, while \texttt{STORE} complete their execution in their \textit{Write} stage.
 All write operations occur in the write stage, thus simplifying the algorithm.
 
@@ -1997,7 +2000,7 @@ The compiler outputs dependency-free code.
 \subsection{VLIW architectures}
 
 The \textbf{Very Long Instruction Words} \textit{(VLIW)} is a particular architecture made specifically to fetch more instructions at a time.
-The \textit{CPU} issues multiple sets of operations (single unit of computations, such as \texttt{add}, \texttt{load}, \texttt{branch}, \ldots) called \textbf{instructions}.
+The \textit{CPU} issues multiple sets of operations \textit{(single unit of computations, such as \texttt{ADD}, \texttt{LOAD}, \texttt{branch}, \ldots) }called \textbf{instructions}.
 Those are meant to be intended to be issued at the same time and the compiler has to specify them completely.
 
 \bigskip
@@ -2053,7 +2056,7 @@ An illustration of the inner working instruction-level is represented in Figure~
 
 \subsubsection{Compiler responsibilities}
 
-The \textbf{compiler} has to schedule the instructions (via \textbf{static scheduling}) to maximize the parallel execution:
+The \textbf{compiler} has to schedule the instructions \textit{(via \textbf{static scheduling})} to maximize the parallel execution:
 
 \begin{itemize}
   \item It can exploit \textit{ILP} and \textit{LLP} \textit{(Loop Level Parallelism)}
@@ -2135,7 +2138,7 @@ In addition to the need of compensation codes, there are a few more restrictions
 \bigskip
 
 In order to ensure \ref{enum:data-flow-trace-scheduling}, the \textbf{Data} and \textbf{Control} dependency must be maintained.
-Furthermore, control dependency can be eliminated using \textbf{predicate instructions} (via \textit{Hyperblock scheduling}) and branch removal or by using \textbf{speculative instructions} (via \textit{Speculative Scheduling}) and speculatively moving instructions before branches.
+Furthermore, control dependency can be eliminated using \textbf{predicate instructions} \textit{(via Hyperblock scheduling) }and branch removal or by using \textbf{speculative instructions} \textit{(via Speculative Scheduling)} and speculatively moving instructions before branches.
 
 Finally, Trace Scheduling within loops require lots of registers, due to the duplicated code:
 in order to solve this issue, a new set of register must be allocated for each iteration.
@@ -2216,7 +2219,7 @@ the inner loop gets \textit{unrolled} in order to execute \(4\) iterations at on
   }
 \end{verbatim}
 
-A final clean up is needed to take care of those values of \texttt{N} that are not multiples of the unrolling factor (\(4\) in this example).
+A final clean up is needed to take care of those values of \texttt{N} that are not multiples of the unrolling factor \textit{(\(4\) in this example)}.
 
 This technique has the drawbacks of creating \textbf{longer code} and \textbf{losing performance} due to the costs of starting and closing each iteration.
 Furthermore, trace scheduling cannot proceed beyond a loop.
@@ -2283,7 +2286,7 @@ The total energy consumed may be less depending on the number of instructions in
 
 \subsection{Reorder Buffer}
 
-The \textbf{Reorder Buffer} (or \textit{ROB}) holds instructions in \textit{FIFO} order, exactly as issued:
+The \textbf{Reorder Buffer} \textit{(\textit{ROB})} holds instructions in \textit{FIFO} order, exactly as issued:
 when the instructions complete, their results are placed back in the \textit{ROB}.
 
 Operands are supplied to the other instructions between their completion and their commit, while results are tagged with \textit{ROB} buffer number instead of the reservation station.
@@ -2400,7 +2403,7 @@ Finally, out of order completion, post interrupt and mispredict writebacks chang
 To solve this problems executed instructions are held in \textit{ROB} until they are no longer speculative;
 the instruction commit is then \textit{in order}: exceptions and interrupt are handled by not being addressed until the instruction that caused them is recorded in the \textit{ROB}.
 
-Temporary storage \textit{(in the form of shadow registers and store buffers)} is then needed to hold all results before commit
+Temporary storage \textit{(in the form of shadow registers and \texttt{STORE} buffers)} is then needed to hold all results before commit
 Operands are supplied as well between execution complete and commit.
 
 Once the instruction is committed, its result is placed in the destination register;
@@ -2480,7 +2483,7 @@ Each entry of the \textit{ROB} contains \(4\) fields:
   \item \textbf{Instruction Type} field, indicating if:
         \begin{itemize}
           \item the instruction is a \textit{branch} \textit{(and has no destination result)}
-          \item the instruction is a \textit{store} \textit{(and has a memory address destination)}
+          \item the instruction is a \texttt{STORE} \textit{(and has a memory address destination)}
           \item the instruction is a \texttt{LOAD} or \textit{ALU} operation \textit{(and has a register destination)}
         \end{itemize}
   \item \textbf{Destination} field, supplying:
@@ -2548,7 +2551,7 @@ when the address is actually found, the \texttt{STORE} queue is checked:
 
 \begin{itemize}
   \item If any \texttt{STORE} prior to \texttt{LOAD} is waiting for its address, \textbf{the \texttt{LOAD} is stalled}
-  \item If any \texttt{LOAD} address matches any previous \texttt{STORE} address (found by \textit{associative lookup}):
+  \item If any \texttt{LOAD} address matches any previous \texttt{STORE} address \textit{(found by associative lookup)}:
         \begin{itemize}[label=\(\rightarrow\)]
           \item a \textbf{memory induced} \textit{RAW} hazard is created
           \item if the \texttt{STORE} value is available, then it's returned
@@ -2563,7 +2566,7 @@ All the actual \texttt{STORE} instructions commit in order, so there's no need t
 \textbf{Explicit Register Renaming} is a technique that uses physical register file that is larger than the number of register specified by the \textit{ISA}.
 
 The key \textit{idea} behind this technique is to allocate a new physical destination register for every instruction that writes;
-it's very similar to a compiler transformation called \textbf{Static Single Assignment} (\textit{SSA}) but at hardware level.
+it's very similar to a compiler transformation called \textbf{Static Single Assignment} \textit{(SSA)} but at hardware level.
 It removes all chances of \textit{WAR} or \textit{WAW} hazards while allowing complete \textbf{out of order} completion.
 
 It works by keeping a translation table that maps each \textit{ISA} register to a physical register:
@@ -2681,7 +2684,7 @@ The \(4\) stages now become:
         \end{itemize}
   \item \textbf{Read operands} - wait until no hazard happens and then read operands
         \begin{itemize}
-          \item all real dependences (\textit{RAW} hazards) are resolved in this stage, since the processor waits for instructions to write back data
+          \item all real dependences \textit{(RAW hazards)}  are resolved in this stage, since the processor waits for instructions to write back data
         \end{itemize}
   \item \textbf{Execution} on operands
         \begin{itemize}
@@ -3693,7 +3696,7 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
 
 \subsubsection{Optimized Snoop with Level-2 Caches}
 
-To improve the reading speed (thus reducing the access latency), often processors have two level caches, both on the same chip:
+To improve the reading speed \textit{(thus reducing the access latency)}, often processors have two level caches, both on the same chip:
 
 \begin{itemize}
   \item A \textbf{large} \texttt{L2} cache
@@ -4330,7 +4333,7 @@ The host \textit{CPU} issues data parallel kernels to \textit{GP-GPU} device for
   \item A \textbf{kernel executes} in parallel across a set of parallel \textbf{threads}
   \item The \textbf{programmer organizes} these threads into thread block and grids of \textbf{thread blocks}
   \item A \textbf{thread block} is a set of concurrent threads that can cooperate among themselves through barrier synchronization and through shared memory space private to the block
-  \item A \textbf{grid} is a set of thread block that may be executed independently and thus may execute in parallel (or any order)
+  \item A \textbf{grid} is a set of thread block that may be executed independently and thus may execute in parallel \textit{(or any order)}
         \begin{itemize}
           \item thread \textbf{creation}, \textbf{scheduling} and \textbf{termination} are handled by \textbf{underlying hardware}
           \item \texttt{CUDA} model \textbf{virtualizes} the processor
@@ -4359,7 +4362,7 @@ Warps are multithreaded on cores, and each of them is managed by the hardware:
 one warp composed by \(32\) threads \textit{\(\mu T\)} represents a single thread in the hardware.
 Multiple threads are then interleaved in execution on a single core to reduce latencies to memory and FUs.
 
-A single thread block can contain multiple warps (up to \(512 \mu T\) in \texttt{CUDA}), all mapped into a single core;
+A single thread block can contain multiple warps \textit{(up to \(512 \mu T\) in \texttt{CUDA})}, all mapped into a single core;
 multiple blocks can also execute on a single core.
 Individual parallel threads of a warp start together but are free to branch and execute in \textbf{parallel}.
 
