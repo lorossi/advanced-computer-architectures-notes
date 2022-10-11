@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{notestemplate}[2022/09/04 LaTeX template for my notes]
+\ProvidesPackage{notestemplate}[2022/10/05 LaTeX template for my notes]
 
 % I don't really know how those packages interact or why they do so
 %   but if I change the import order, something always stops working
@@ -17,25 +17,30 @@
 \RequirePackage{amsfonts} % math fonts
 \RequirePackage{amssymb} % math symbols
 \RequirePackage{mathtools} % math operators for asmmath
-\RequirePackage{hyperref} % links colouring
 \RequirePackage{verbatim} % monospaced text blocks
+\RequirePackage{listings} % syntax highlighting
 \RequirePackage{enumitem} % custom enum
 \RequirePackage{graphicx} % images
-\RequirePackage{pifont} % dings
+\RequirePackage{fontawesome} % dings
+\RequirePackage{bbding} % more dings
+\RequirePackage{wasysym} % math symbols
 \RequirePackage{titlesec} % for sections customization
-\RequirePackage{amsmath} % for better math typesetting
 \RequirePackage{xspace} % for spacing after commands
 \RequirePackage{xfrac} % for diagonal fractions
 \RequirePackage{tocloft} % for spacing in TOC
+\RequirePackage{nameref} % for named references
+\RequirePackage{courier} % for bold in listlng
 \RequirePackage{anyfontsize} % for better font sizes
 \RequirePackage{subcaption} % for subfigures and subcaptions
-\RequirePackage{realboxes} % for table and images rotation
+\RequirePackage{adjustbox} % to rotate and adjust floats
+\RequirePackage{hyperref} % links colouring
+\RequirePackage{tabularray} % for better tables
 \RequirePackage[style=iso]{datetime2} % datetime command
 
 \ProcessOptions\relax
 
 % tikz libraries for automata and drawing
-\usetikzlibrary{automata, positioning, backgrounds, arrows, arrows.meta, shapes, shapes.geometric, shapes.misc}
+\usetikzlibrary{automata, positioning, backgrounds, arrows, arrows.meta, shapes}
 % tikz styles
 \input{tikzstyle.tikzstyles}
 % standard layers used in .tikz files
@@ -64,20 +69,23 @@
 % changed bullet for lists
 \newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{\(\bullet\)}}}}}
 \newcommand\striangle[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{\(\blacktriangleright\)}}}}}
-
 \renewcommand{\labelitemi}{\(\sbullet[.9]\)}
 \renewcommand{\labelitemii}{\(\sbullet[.65]\)}
-\renewcommand{\labelitemiii}{\(\sbullet[.4]\)}
-\renewcommand{\labelitemiv}{\(\rightarrow\)}
+\renewcommand{\labelitemiii}{\(\striangle[.5]\)}
+\renewcommand{\labelitemiv}{\(\rightarrrow\)}
 
 % new line after paragraph
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{0.5em}{}
 
 % add commands for checkmark
-\newcommand{\cmark}{\ding{51}\xspace} % check
-\newcommand{\xmark}{\ding{55}\xspace} % cross
+\newcommand{\cmark}{\faCheck\xspace} % check
+\newcommand{\cmarkthin}{\ding{51}\xspace} % check
+\newcommand{\xmark}{\faTimes\xspace}  % cross
+\newcommand{\xmarkthin}{\ding{55}\xspace}  % cross
 \newcommand{\colorcmark}{\textcolor{ForestGreen}{\cmark}\xspace} % green check
+\newcommand{\colorcmarkthin}{\textcolor{ForestGreen}{\cmarkthin}\xspace} % green check
 \newcommand{\colorxmark}{\textcolor{BrickRed}{\xmark}\xspace} % red cross
+\newcommand{\colorxmarkthin}{\textcolor{BrickRed}{\xmarkthin}\xspace} % red cross
 
 % cusom macro creation
 \newcommand{\shortfor}[1]{\textit{#1}\xspace}
@@ -90,7 +98,7 @@
 \numberwithin{equation}{section}
 
 % page margins
-\geometry{left = 2 cm, right = 2 cm, bottom = 2.5 cm, top = 2.5 cm}
+\geometry{left=2cm,right=2cm,bottom=2.5cm,top=2.5cm}
 \setlength{\parindent}{0em}
 
 % hyperlinks colours
@@ -110,6 +118,15 @@
 \advance\cftsubsecindent 0.5em\relax
 \advance\cftsubsecnumwidth 0.5em\relax
 
+% rename List into Listato o Code (according to language)
+\iflanguage{italian} {
+  \renewcommand\lstlistingname{Listato}
+  \renewcommand\lstlistlistingname{Listati}
+}{
+  \renewcommand\lstlistingname{Code}
+  \renewcommand\lstlistlistingname{Codes}
+}
+
 % command to add tikzit image
 \newcommand{\tikzfig}[2][1] {
   \IfFileExists{Images/#2} {
@@ -126,6 +143,39 @@
   }
 }
 
+% define custom colours
+\definecolor{codetext}{rgb}{0.05,0.05,0.05}
+\definecolor{codecomment}{rgb}{0.3,0.3,0.3}
+
+% lstlisting pseudocode style
+\lstdefinelanguage{pseudocode}{
+  morekeywords={NIL,and,ceil,do,downto,each,else,end,error,floor,for,if,in,nand,new,nor,or,repeat,return,swap,then,to,until,while,xnor,xor},
+  morecomment=[l][commentstyle]{//},
+  morecomment=[s][commentstyle]{/*}{*/},
+}
+
+% lstlsting custom style definition
+\lstdefinestyle{custom}{
+  commentstyle=\color{codecomment},
+  keywordstyle=\color{codetext}\bfseries,
+  basicstyle=\color{codetext}\ttfamily,
+  breakatwhitespace=false,
+  captionpos=b,
+  keepspaces=false,
+  xleftmargin=10pt,
+  belowcaptionskip=20pt,
+  numberstyle=\small,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  showlines=false,
+  tabsize=2,
+  mathescape=true,
+}
+
+% lstlisting default style
+\lstset{style=custom}
+
 % command for indented quote block
 \newcommand{\indentquote}[1]{
   \vspace*{1em}
@@ -141,14 +191,6 @@
   \hspace*{-0.75em}
   \textit{\textquote{#1}}
   \hspace*{-0.75em}
-}
-
-% command for my signature
-\newcommand{\signature}{
-  \hspace{5cm}
-  \begin{flushright}
-    \textit{Lorenzo Rossi}
-  \end{flushright}
 }
 
 % command for cover

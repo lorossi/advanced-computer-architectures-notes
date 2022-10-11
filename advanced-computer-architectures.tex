@@ -32,8 +32,6 @@ If you find any errors and you are willing to contribute and fix them, feel free
 
 A big thank you to everyone who helped me!
 
-\signature
-
 \clearpage
 
 \section{Introduction to the Computer Architectures}
@@ -3638,8 +3636,8 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
 \begin{table}[htbp]
   \centering
   \scalebox{0.8}{
-    \Rotatebox{90}{
-      \begin{tabular}{r|c|c|c|c}
+    \rotatebox{90}{
+      \begin{tblr}{r|c|c|c|c}
         \(\Rsh\)                               & \textit{Modified} & \textit{Exclusive}              & \textit{Shared}                 & \textit{Invalid}                                                                                                                                                                                                                  \\
         \hline
         \textit{Line valid?}                   & \colorcmark       & \colorcmark                     & \colorcmark                     & \colorxmark                                                                                                                                                                                                                       \\
@@ -3649,8 +3647,9 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
         \textit{Can be read?}                  & \colorcmark       & \colorcmark                     & \colorcmark                     & \colorxmark                                                                                                                                                                                                                       \\
         \textit{On read}                       & nothing happens   & nothing happens                 & nothing happens                 & \(\begin{cases}\text{transition to} \textit{ Exclusive } & \text{if data \textbf{is not} on other caches} \\ \text{transition to} \textit{ Shared } &\text{if data \textbf{is} on other caches}\end{cases} \) \\
         \textit{On write}                      & nothing happens   & transition to \textit{Modified} & transition to \textit{Modified} & transition to \textit{Modified}, other copies transition to \textit{Invalidate}                                                                                                                                                   \\
-      \end{tabular}
-    }}
+      \end{tblr}
+    }
+  }
   \caption{State of cache lines with \textit{MESI} Protocol}
   \label{tab:MESI-cache-line}
 \end{table}
