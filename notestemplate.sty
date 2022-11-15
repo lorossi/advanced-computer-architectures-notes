@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{notestemplate}[2022/10/05 LaTeX template for my notes]
+\ProvidesPackage{notestemplate}[2022-11-10 LaTeX template for my notes]
 
 % I don't really know how those packages interact or why they do so
 %   but if I change the import order, something always stops working
@@ -35,6 +35,7 @@
 \RequirePackage{adjustbox} % to rotate and adjust floats
 \RequirePackage{hyperref} % links colouring
 \RequirePackage{tabularray} % for better tables
+\RequirePackage{amsthm} % for theorem environments
 \RequirePackage[style=iso]{datetime2} % datetime command
 
 \ProcessOptions\relax
@@ -54,13 +55,11 @@
 % eternalize tikz so that it does not renders all the images each time
 \usetikzlibrary{external}
 \tikzexternalize[prefix=tikztemp/]
-
 % images folder
 \graphicspath{{Images/}}
 
 % taller lines
 \renewcommand{\baselinestretch}{1.05}
-
 % number subparagraphs as well
 \setcounter{secnumdepth}{5}
 % include sub paragraphs in toc
@@ -103,8 +102,8 @@
 
 % hyperlinks colours
 \hypersetup{
-	colorlinks=true,
-	urlcolor={black},
+  colorlinks=true,
+  urlcolor={black},
   linkcolor={black},
   citecolor={black}
 }
@@ -131,9 +130,9 @@
 \newcommand{\tikzfig}[2][1] {
   \IfFileExists{Images/#2} {
     \scalebox{#1}{
-    \tikzstyle{every picture}=[tikzfig]
-    \tikzsetnextfilename{#2}
-    \input{Images/#2}
+      \tikzstyle{every picture}=[tikzfig]
+      \tikzsetnextfilename{#2}
+      \input{Images/#2}
     }
   }{
     % image not found, just write it down
@@ -162,8 +161,10 @@
   breakatwhitespace=false,
   captionpos=b,
   keepspaces=false,
-  xleftmargin=10pt,
-  belowcaptionskip=20pt,
+  xleftmargin=2ex,
+  aboveskip=4ex,
+  belowskip=2ex,
+  abovecaptionskip=3ex,
   numberstyle=\small,
   showspaces=false,
   showstringspaces=false,
@@ -171,6 +172,7 @@
   showlines=false,
   tabsize=2,
   mathescape=true,
+  language=pseudocode,
 }
 
 % lstlisting default style
@@ -185,6 +187,23 @@
   \end{minipage}
   \vspace*{1em}
 }
+
+% theorem, definitions and properties styling
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{definition}
+\newtheorem{property}{Property}[section]
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}[section]
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
 
 % command for inline quote block
 \newcommand{\inlinequote}[1]{
@@ -211,7 +230,7 @@
   \vspace{7.5cm}
 
   \begin{center}
-     \iflanguage{italian} {
+    \iflanguage{italian} {
       \large{\textbf{Ultimo aggiornamento: \today}} \\
       \bigskip
       \large{Questi appunti sono distributi con licenza Creative Commons 4.0 - CC BY-NC \ccbynceu} \\
