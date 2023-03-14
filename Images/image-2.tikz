@@ -2,13 +2,13 @@
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=none] (0) at (0, 3) {};
 		\node [style=none] (11) at (-3, 0) {};
-		\node [style=right align, text={rgb,255: red,191; green,0; blue,64}] (12) at (-2.75, 2.25) {evaluate};
-		\node [style=left align, text={rgb,255: red,0; green,128; blue,128}] (13) at (2.75, 2.25) {simulate};
+		\node [style=left align, text={rgb,255: red,191; green,0; blue,64}] (12) at (-2.75, 2.25) {evaluate};
+		\node [style=right align, text={rgb,255: red,0; green,128; blue,128}] (13) at (2.75, 2.25) {simulate};
 		\node [style=none] (17) at (3, 0) {};
 		\node [style=none] (18) at (0, -3) {};
 		\node [style=none] (19) at (3, 0) {};
-		\node [style=left align, text={rgb,255: red,31; green,117; blue,254}] (20) at (2.75, -2.25) {implement};
-		\node [style=right align, text={rgb,255: red,255; green,117; blue,56}] (21) at (-2.75, -2.25) {repeat};
+		\node [style=right align, text={rgb,255: red,31; green,117; blue,254}] (20) at (2.75, -2.25) {implement};
+		\node [style=left align, text={rgb,255: red,255; green,117; blue,56}] (21) at (-2.75, -2.25) {repeat};
 		\node [style=none] (22) at (-3, 0) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}

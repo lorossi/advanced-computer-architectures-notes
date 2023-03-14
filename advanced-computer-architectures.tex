@@ -1,9 +1,9 @@
 \documentclass[english]{article}
-\usepackage{notestemplate}
+\usepackage[title={Advanced Computer Architectures}, date={2022/2023}]{notestemplate}
 
 \begin{document}
 
-\makecover{Advanced Computer Architectures}{2021/2022}
+\makecover
 
 \section*{Introduction}
 
@@ -151,6 +151,7 @@ There are more constraints not contained in this model, such as technology trend
 When one computer is faster than another, what quality is being addressed?
 The answer is not always the same, and it depends on the application;
 different solutions may consider different metrics, such as
+speed of execution, power consumption, cost, etc.
 
 The picked qualities may change according to the use case or the user themself,
 but 2 metrics are normally used:
@@ -182,7 +183,7 @@ With pipelining, \textbf{execution time} of a single instruction is \textbf{incr
 A few of the factors affecting the performance are:
 
 \begin{itemize}
-  \item Algorithm complexity and data set
+  \item Algorithm complexity and data sets
   \item Compiler
   \item Instructions set
   \item Available operations
@@ -203,7 +204,7 @@ The locution \textbf{\(X\) is \(n\) times faster than \(Y\)} can be expressed as
   Performance(X) = \dfrac{1}{ExTime\ (x)}
 \end{gather*}
 
-So, in order to optimize a system, one must focus on common sense (a \textit{sadly} valuable quality).
+So, in order to optimize a system, it's necessary to focus on common sense (a \textit{sadly} valuable quality).
 While making a design trade-off one must favour the frequent case over the infrequent one.
 
 \textit{For example}:
@@ -214,7 +215,7 @@ While making a design trade-off one must favour the frequent case over the infre
         \end{itemize}
   \item If database server has \(50\) disks processor, storage dependability is more important than system dependability
         \begin{itemize}
-          \item i makes sense to optimize \textbf{storage dependability} first
+          \item it makes sense to optimize \textbf{storage dependability} first
         \end{itemize}
 \end{itemize}
 
@@ -399,7 +400,7 @@ Motivations for the paradigm change:
   \item Moderns processors \textbf{fail to utilize execution resources} well enough
         \begin{itemize}
           \item There's no single culprit:
-                \begin{itemize}[label=\xmark]
+                \begin{itemize}[label=\xmarkthin]
                   \item \textit{memory conflicts}
                   \item \textit{control hazards}
                   \item \textit{branch misprediction}
@@ -408,7 +409,7 @@ Motivations for the paradigm change:
                 \end{itemize}
           \item All those problems are correlated and there's no way of solving one of them without affecting all the others
           \item There's the need for a general latency-tolerance approach that can hide all sources of latency
-                \begin{itemize}[label=\cmark]
+                \begin{itemize}[label=\cmarkthin]
                   \item a solution is found in \textbf{parallel programming}
                 \end{itemize}
         \end{itemize}
@@ -475,14 +476,14 @@ There are \(2\) apparent solutions:
 \bigskip
 
 \textbf{Disadvantages} of multithreading:
-\begin{itemize}[label=\xmark]
+\begin{itemize}[label=\xmarkthin]
   \item For short stalls it \textbf{does not reduce the throughput loss}
   \item The \textit{CPU} starts the execution of instructions that belongs to a \textbf{single thread}
   \item When there is one stall it is necessary to \textbf{empty the pipeline} before starting the new thread
 \end{itemize}
 
 \textbf{Advantages} of multithreading:
-\begin{itemize}[label=\cmark]
+\begin{itemize}[label=\cmarkthin]
   \item In normal conditions \textbf{the single thread is not slowed down}
 \end{itemize}
 
@@ -617,7 +618,7 @@ They can also be built starting from standard CPUs.
 
 \bigskip
 Each processor fetches its own instructions and operates on its own data;
-processors are often off-the-shelf microprocessors, with the upside of being able to build a scalable architecture and having a high cost performance ratio.
+processors are often off-the-shelf microprocessors, with the upside of being able to build a scalable architecture and having a high cost-performance ratio.
 
 In order to fully exploit a \textit{MIMD} with \(n\) processors, there must be:
 
@@ -795,7 +796,7 @@ There are many ways in which data hazards can be solved, such as:
           \item \textbf{Insertion of \texttt{nop}} instructions
           \item \textbf{Instructions scheduling}
                 \begin{itemize}
-                  \item the compiler tries to avoid that correlating instruction are too close
+                  \item the compiler tries to avoid that correlating instructions are too close
                   \item it tries to insert independent instructions among correlated ones
                   \item when it can't, it inserts \texttt{nop} operations
                 \end{itemize}
@@ -827,7 +828,7 @@ While using floating points operations, a few questions might arise:
 In the complex in-order pipeline there isn't a single \textit{ALU} anymore but the execution of floating point operations is split between a number of \textit{Functional Units}.
 The \textit{issue} stage detects conflicts while accessing any of them and it's able to delay the execution \textit{(by using stalls)} of instructions in case of errors.
 
-The pipeline is now constituted by \(6\) stages, normally represented in Figure~\ref{fig:mips-pipeline-stages-issue}.
+The pipeline is now constituted by \(6\) stages, normally represented as in Figure~\ref{fig:mips-pipeline-stages-issue}.
 
 \begin{figure}[htbp]
   \bigskip
@@ -1004,7 +1005,7 @@ The main goal of the \textbf{branch prediction} is to evaluate as early as possi
 Its performance depends on:
 
 \begin{itemize}
-  \item The \textbf{accuracy}, measured in terms of percentage of incorrect predictions given
+  \item The \textbf{accuracy}, measured in terms of the percentage of incorrect predictions given
   \item The \textbf{cost of an incorrect prediction} measured in terms of time lost to execute useless instructions \textit{(misprediction penalty)} given by the processor architecture
         \begin{itemize}
           \item the cost increases for deeply pipelined processors
@@ -1219,7 +1220,7 @@ For example, if the destination register is an unused temporary register when th
 
 \textit{Basic idea}: use the past branch behaviour to predict the future.
 
-Hardware is used to dynamically predict the outcome of a branch: the prediction will depend on the behaviour of the branch at run time and will change if the branch changes its behaviour during execution.
+Hardware is used to dynamically predict the outcome of a branch: the prediction will depend on the behaviour of the branch at \textbf{compile time} and will change if the branch changes its behaviour during \textbf{run time}.
 
 \bigskip
 Dynamic Branch Prediction is based on two interacting mechanisms:
@@ -1291,8 +1292,7 @@ the pipeline is then flushed and the correct sequence is executed.
 
 The table has no tags \textit{(every access is a hit)} and the prediction bit could have been put there by another branch with the same LSBs.
 The \(1\)-bit branch history table only considers the last status of the branch \textit{(either taken or not taken)}.
-It is a simple \textit{FSA} where a misprediction will change the current value.
-Its structure is shown in Figure~\ref{fig:BHT-as-FSA}.
+It is a simple \textit{FSA} where a misprediction will change the current value, whose structure is shown in Figure~\ref{fig:BHT-as-FSA}.
 
 \begin{figure}[htbp]
   \bigskip
@@ -1449,24 +1449,23 @@ The first level history is recorded in one \textit{(or more)} \(k\)-bit shift re
 The second level history is recorded in ore \textit{(or more)} tables called \textit{Pattern History Table (PHT)} of two bits saturating counters.
 
 The BHR is used to index the PHT to select which \(2\)-bit counter to use.
-Once the two bit counter is selected, the prediction is made using the same method as in the two bits counter scheme.
+Once the two-bit counter is selected, the prediction is made using the same method as in the two bits counter scheme.
 
-\subsubsection{GA Predictor}
+\subsubsection{GA and GShare Predictors}
 
-The \textbf{GA Predictor} is composed of a \textit{BHT} \textit{(local predictor)} and by one or more \textit{GAs} \textit{(local and global predictor)}:
+The \textbf{GA Predictor} \textit{(Genetic Algorithm Predictor)} is composed of a \textit{BHT} \textit{(local predictor)} and by one or more \textit{GAs} \textit{(local and global predictor)}:
 
 \begin{itemize}
   \item The \textit{BHT} is indexed by the low order bits of the \texttt{PC} \textit{(the branch address)}
   \item The \textit{GAs} are a \(2\)-level predictor: \textit{PHT} is indexed by the content of \textit{BHR} \textit{(from global history)}
 \end{itemize}
 
-The structure of a \textit{GA} predictor is represented in Figure~\ref{fig:GA-predictor}.
-
-\subsubsection{GShare Predictor}
+\bigskip
 
 The \textbf{GShare Predictor} is a local \texttt{XOR} global information, indexed by the exclusive \texttt{OR} of the low order bits of \textit{PC} \textit{(branch address)} and the content of \textit{BHR} \textit{(global history)}.
 
-The structure of a \textit{GShare} predictor is represented in Figure~\ref{fig:GShare-predictor}.
+\bigskip
+The structure of a \textit{GA} predictor is represented in Figure~\ref{fig:GA-predictor}, while Figure~\ref{fig:GShare-predictor} shows the structure of a \textit{GShare} predictor.
 
 \begin{figure}[htbp]
   \bigskip
@@ -1500,7 +1499,7 @@ Two properties are critical to program correctness \textit{(and normally preserv
 
 \begin{enumerate}
   \item \textbf{Exception behaviour}: preserving exception behaviour means that any changes in the ordering of instructions execution must not change how exceptions are raised in the program
-  \item \textbf{Data flow}: the actual flow of data values among instructions that produce the correct results and consumes them
+  \item \textbf{Data flow}: the actual flow of data values among instructions that produce the correct results and consume them
 \end{enumerate}
 
 \subsection{Strategies to support \textit{ILP}}
@@ -1552,7 +1551,7 @@ The two main techniques used by hardware to minimize stalls are:
         \end{itemize}
   \item \textbf{Stalling}
         \begin{itemize}
-          \item Since not all potential data hazards can be solved by bypassing, so a piece of hardware called \textit{pipeline interlock} is added
+          \item Since not all potential data hazards can be solved by bypassing, a piece of hardware called \textit{pipeline interlock} is added
           \item When it detects a hazard, it \textbf{stalls} the pipeline until that hazard it solved
           \item The stalls are often referred to as \inlinequote{bubbles}
         \end{itemize}
@@ -1666,7 +1665,7 @@ An illustration of the new pipeline is represented in Figure~\ref{fig:pipeline-o
 
 \paragraph{Four stages of Scoreboard Control}
 
-The four stages of the scoreboard control are:
+The four stages of scoreboard control are:
 
 \begin{itemize}
   \item \textbf{Issue}: instructions are decoded and structural hazards \textit{(WAW)} are checked for
@@ -2032,7 +2031,7 @@ Its features include:
 \end{itemize}
 
 There are multiple \textbf{functional units} \textit{(FUs)} that are going to execute instructions in parallel.
-An illustration of the inner working instruction level is represented in Figure~\ref{fig:vliw-instruction-level}, while at pipeline level is represented in Figure~\ref{fig:vliw-pipeline-level}.
+An illustration of the inner working instruction level is represented in Figure~\ref{fig:vliw-instruction-level}, while the pipeline level is represented in Figure~\ref{fig:vliw-pipeline-level}.
 
 \begin{figure}[htbp]
   \bigskip
@@ -2160,7 +2159,7 @@ An illustration of the \textit{RRB} is shown in Figure~\ref{fig:rotating-registe
 \subsubsection{Pros and cons of \textit{VLIW}}
 
 \textit{Pros}:
-\begin{itemize}[label=\cmark]
+\begin{itemize}[label=\cmarkthin]
   \item \textbf{Simple} \textit{HW}
   \item It's \textbf{easy} to increate the number of FU
   \item Good \textbf{compilers} can efficiently \textbf{detect parallelism}
@@ -2168,7 +2167,7 @@ An illustration of the \textit{RRB} is shown in Figure~\ref{fig:rotating-registe
 
 \bigskip
 \textit{Cons}:
-\begin{itemize}[label=\xmark]
+\begin{itemize}[label=\xmarkthin]
   \item \textbf{Huge number of registers }to keep active each FU, each needed to store operands and results
   \item \textbf{Large data transport} capabilities between:
         \begin{itemize}
@@ -2433,7 +2432,7 @@ The \(4\) steps of the Speculative Tomasulo Algorithm are:
         \begin{itemize}
           \item when both operands are ready, the instruction is executed
           \item if they aren't, the \textit{Common Data Bus} is watched for the results
-          \item when both operands are in reservation station, the instruction is executed
+          \item when both operands are in the reservation station, the instruction is executed
           \item \textit{RAW} are checked
         \end{itemize}
   \item \textbf{Write result}
@@ -2826,7 +2825,7 @@ Synchronous events are also called \textbf{Exceptions}.
 
 \subsection{Precise Interrupts}
 
-An interrupt or exception is considered precise if there is a single instruction \textit{(or interrupt point)} for which all instruction before that one have committed their state and no following instructions \textit{(including the interrupting one)} have modified any state.
+An interrupt or exception is considered precise if there is a single instruction \textit{(or interrupt point)} for which all instructions before that one have committed their state and no following instructions \textit{(including the interrupting one)} have modified any state.
 
 This effectively implies that the execution can be restarted at the interrupt point and continue correctly.
 
@@ -2868,7 +2867,7 @@ Exceptions can be divided into classes:
         \end{itemize}
   \item \textbf{User requested} and \textbf{Coerced}:
         \begin{itemize}
-          \item User requested are predictable, they are treated as exceptions because they use the same mechanisms that are used to save and restore the state and are handled after the instruction has completed
+          \item User requested are predictable, they are treated as exceptions because they use the same mechanisms that are used to save and restore the state and are handled after the instruction has been completed
           \item Coerced exceptions are caused by some hardware event, not under the control of the program
         \end{itemize}
   \item \textbf{User Maskable} and \textbf{User Nonmaskable}:
@@ -2905,7 +2904,7 @@ The \textbf{Asynchronous Interrupts} work by:
         \end{enumerate}
 \end{enumerate}
 
-Then the operation is handled by the \textbf{Interrupt Handler}, that will:
+Then the operation is handled by the \textbf{Interrupt Handler}, which will:
 
 \begin{enumerate}[resume*]
   \item \textbf{Save} the \textit{PC} before enabling interrupts to allow nested interrupts
@@ -2937,7 +2936,7 @@ For instance, \textit{arithmetic exceptions} occur in \texttt{EX} stage, while \
 
 The same issue arises while handling interrupts, as the pipeline must be interrupted as little as possible.
 
-This problem can be solved by tagging instructions in pipeline as \inlinequote{cause exceptions or not}, and waiting until the end of \texttt{ME} stage to flag exceptions.
+This problem can be solved by tagging instructions in the pipeline as \inlinequote{cause exceptions or not} and waiting until the end of \texttt{ME} stage to flag exceptions.
 Then:
 
 \begin{itemize}
@@ -3214,29 +3213,29 @@ Main advantages and disadvantages of each method:
   \bigskip
   \begin{itemize}
     \item \textbf{Shared memory}
-          \begin{itemize}[label=\cmark]
+          \begin{itemize}[label=\cmarkthin]
             \item Low latency
             \item Easier to program
-            \item Easier to use hardware controlled caching
+            \item Easier to use hardware-controlled caching
             \item Most common choice among uni processors and small-scale multiprocessors
             \item Implicit communication
             \item Low overhead when cached
             \item Communication happens using \texttt{LOAD} and \texttt{STORE} operations, with low software overhead
           \end{itemize}
-          \begin{itemize}[label=\xmark]
+          \begin{itemize}[label=\xmarkthin]
             \item Complex to build in a way that scales well
             \item Requires synchronizing the processors
             \item Hard to control data placement within the cache
           \end{itemize}
     \item \textbf{Message passing}
-          \begin{itemize}[label=\cmark]
+          \begin{itemize}[label=\cmarkthin]
             \item Less hardware
             \item Easier to design
             \item Focus on local, non-costly, operations
             \item Explicit communication
             \item Easier to control data placement due to lack of automatic caching
           \end{itemize}
-          \begin{itemize}[label=\xmark]
+          \begin{itemize}[label=\xmarkthin]
             \item Message passing overhead can be quite high
             \item More complex to program
             \item Introduces the problem of the reception technique \textit{(polling and interrupts)}
@@ -3307,9 +3306,9 @@ There are \(2\) main categories of shared memory machines:
 \end{enumerate}
 
 Both will work with any data placement, eventually resulting in slow executions, but critical portions of the code can be optimized to be sped up.
-In large-scale systems, the logically distributed shared memory can is implemented as physically distributed memory modules.
+In large-scale systems, the logically distributed shared memory can be implemented as physically distributed memory modules.
 
-The cache, however, needs to introduce a new problem: \textbf{cache coherency}.
+This distribution, however, introduces a new problem called \textbf{cache coherency}.
 Informally, it is described as:
 
 \indentquote{Any write to a cache line must be followed by a read from the same cache line. Furthermore, all writes are seen in proper order}
@@ -3532,7 +3531,7 @@ Then, the two protocols can be compared:
         \end{itemize}
 \end{itemize}
 
-In the same way, most commercial cache based multiprocessors use:
+In the same way, most commercial cache-based multiprocessors use:
 
 \begin{itemize}
   \item \textbf{Write-Back Caches} to reduce \texttt{BUS} traffic, allowing more processors on a single \texttt{BUS}
@@ -4264,18 +4263,18 @@ The \textbf{multimedia extension}, also called \textit{SIMD} extension. It featu
 
 \begin{itemize}
   \item \textbf{A limited instruction set}
-        \begin{itemize}[label=\xmark]
+        \begin{itemize}[label=\xmarkthin]
           \item no \textbf{vector length} control
           \item no \textbf{strided} \texttt{LOAD} and \texttt{STORE} or \texttt{SCATTER} and \texttt{GATHER}
           \item \textbf{unit-stride} loads must be aligned to \(64/128\) bit boundary
         \end{itemize}
   \item \textbf{A limited vector register length}
-        \begin{itemize}[label=\xmark]
+        \begin{itemize}[label=\xmarkthin]
           \item requires superscalar dispatch to keep \texttt{MULTIPLY}/\texttt{ADD}/\texttt{LOAD} units busy
           \item \textbf{loop unrolling} to hide latencies increase register pressure
         \end{itemize}
   \item \textbf{Trend towards fuller vector support in microprocessors}
-        \begin{itemize}[label=\cmark]
+        \begin{itemize}[label=\cmarkthin]
           \item \textbf{better support} for misaligned memory access
           \item support of \textbf{double precision} \textit{(64 bits floating point)}
         \end{itemize}
