@@ -1,29 +1,38 @@
-from pathlib import Path
-from re import M, sub
-from sys import argv
+"""This module is associated to the latex notes template.
 
-TEMP_FOLDER = "tikztemp"
+It is needed to:
+    - clean the tikzit styles file
+    - create the temporary folder for the tikz images
+    - delete the temporary folder
+    - delete the temporary files associated with the tex document
+"""
+from sys import argv
+from re import M, sub
+from pathlib import Path
+
+# constants
+TEMP_FOLDERS = ["tikztemp"]
 TEMP_EXTENSIONS = ["aux", "auxlock", "log", "pdf", "out", "toc"]
-TEMP_FILE_NAME = ".placeholder"
+PLACEHOLDER_EXT = ".placeholder"
 ARROW_STYLE = "{Triangle[scale=0.8]}"
 
 
 def clean_styles() -> None:
-    """cleans the tikzstyles file as it was created by tikzit"""
+    """Clean the tikzstyles file as it was created by tikzit."""
     # load styles files
     with open("tikzit.tikzstyles", "r") as f:
         data = f.read()
 
     # remove tikzit attributes
-    data = sub("tikzit [a-z]+=(([a-zA-Z]+)|(\{.+\}))(, ){0,1}", "", data)
+    data = sub(r"tikzit [a-z]+=(([a-zA-Z]+)|(\{.+\}))(, )?", "", data)
     # remove none fields
-    data = sub("[a-z]*=none(, ){0,1}", "", data)
+    data = sub(r"[a-z]+=none(, )?", "", data)
     # replace arrows
-    data = sub("[<>]", ARROW_STYLE, data)
+    data = sub(r"[<>]", ARROW_STYLE, data)
     # strip comments
-    data = sub("^%.*\n", "", data, flags=M)
+    data = sub(r"^%.*\n", "", data, flags=M)
     # remove empty lines
-    data = sub("^\s*$\n", "", data, flags=M)
+    data = sub(r"^\s*$\n", "", data, flags=M)
 
     # save files
     with open("tikzstyle.tikzstyles", "w") as f:
@@ -31,27 +40,33 @@ def clean_styles() -> None:
 
 
 def make_folder() -> None:
-    Path(TEMP_FOLDER).mkdir(parents=True, exist_ok=True)
-    Path(f"{TEMP_FOLDER}/{TEMP_FILE_NAME}").touch()
+    """Create the temporary folder for the tikz images."""
+    for f in TEMP_FOLDERS:
+        Path(f).mkdir(parents=True, exist_ok=True)
+        Path(f"{f}/{PLACEHOLDER_EXT}").touch()
 
 
 def delete_folder() -> None:
-    for file in Path(TEMP_FOLDER).iterdir():
-        file.unlink()
-    Path(TEMP_FOLDER).rmdir()
+    """Delete the temporary folder, thus deleting all the rendered tikz images."""
+    for folder in TEMP_FOLDERS:
+        for file in Path(folder).iterdir():
+            file.unlink()
+        Path(folder).rmdir()
 
 
 def delete_temp() -> None:
+    """Delete all the temporary files associated with the tex document images."""
     for e in TEMP_EXTENSIONS:
         for file in Path(".").glob(f"*.{e}"):
             file.unlink(missing_ok=True)
 
 
 def main(argv: list[str]) -> None:
-    if "delete" in argv:
+    """Read the arguments and call the appropriate functions."""
+    if "deletetemp" in argv:
         delete_temp()
         delete_folder()
-    if "clean" in argv:
+    if "cleanstyle" in argv:
         clean_styles()
 
     make_folder()

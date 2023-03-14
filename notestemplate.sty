@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{notestemplate}[2022-11-29 LaTeX template for my notes]
+\ProvidesPackage{notestemplate}[2023-01-09 LaTeX template for my notes]
 
 % I don't really know how those packages interact or why they do so
 %   but if I change the import order, something always stops working
@@ -9,7 +9,7 @@
 \RequirePackage{ccicons} % creative common icons
 \RequirePackage[dvipsnames]{xcolor} % text colours
 \RequirePackage[style=english]{csquotes} % for better quotes
-\RequirePackage{babel} % language specific stuff
+\RequirePackage[english]{babel} % language specific stuff
 \RequirePackage[T1]{fontenc} % UTF encoding
 \RequirePackage{lmodern} % allows text at arbitrarily size
 \RequirePackage{tikz} % for drawings
@@ -38,8 +38,24 @@
 \RequirePackage{amsthm} % for theorem environments
 \RequirePackage{tcolorbox} % for theorem environments style customization
 \RequirePackage[style=iso]{datetime2} % datetime command
+\RequirePackage{kvoptions} % for options in package
+\RequirePackage{calculator} % for (mostly useless) calculations in package
 
-\ProcessOptions\relax
+%%% COMMANDS
+
+\newcommand{\nt@year}{\the\year{}}
+\ADD{\year}{1}{\nt@nextyear}
+\newcommand{\nt@currentdate}{\nt@year/\nt@nextyear}
+
+\SetupKeyvalOptions{
+  family=notestemplate,
+  prefix=nt@
+}
+
+\DeclareStringOption[Notes]{title}[Notes]
+\DeclareStringOption[\nt@currentdate]{date}[\nt@currentdate]
+
+\ProcessKeyvalOptions* % process options
 
 %%% TEXT SETTINGS
 
@@ -58,6 +74,8 @@
 \renewcommand{\labelitemiv}{\(\rightarrrow\)}
 % new line after paragraph
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{0.5em}{}
+% subparagraph format
+\titleformat{\subparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubparagraph}{0.5em}{}
 % tighter lists
 \setlist[itemize]{noitemsep}
 \setlist[enumerate]{noitemsep}
@@ -88,7 +106,7 @@
 %%% TIKZ SETTINGS
 
 % tikz libraries for automata and drawing
-\usetikzlibrary{automata, positioning, backgrounds, arrows, arrows.meta, shapes}
+\usetikzlibrary{arrows,arrows.meta,automata,backgrounds,positioning,shapes}
 % tikz styles
 \input{tikzstyle.tikzstyles}
 % standard layers used in .tikz files
@@ -107,14 +125,10 @@
 
 %%% ENVIRONMENTS SETTINGS
 
-% rename List into Listato o Code (according to language)
-\iflanguage{italian} {
-  \renewcommand\lstlistingname{Listato}
-  \renewcommand\lstlistlistingname{Listati}
-}{
-  \renewcommand\lstlistingname{Code}
-  \renewcommand\lstlistlistingname{Codes}
-}
+% rename List into Code (according to language)
+\renewcommand\lstlistingname{Code}
+\renewcommand\lstlistlistingname{Codes}
+
 % define custom colours for code environments
 \definecolor{codetext}{rgb}{0.05,0.05,0.05}
 \definecolor{codecomment}{rgb}{0.3,0.3,0.3}
@@ -130,9 +144,9 @@
 }
 % lstlsting custom style definition
 \lstdefinestyle{custom}{
+  basicstyle=\color{codetext}\ttfamily\small,
   commentstyle=\color{codecomment},
   keywordstyle=\color{codetext}\bfseries,
-  basicstyle=\color{codetext}\ttfamily,
   backgroundcolor=\color{codebg},
   rulecolor=\color{codeborder},
   frame=single,
@@ -156,6 +170,10 @@
   tabsize=2,
   mathescape=true,
   language=pseudocode,
+  breaklines=true,
+  breakatwhitespace=true,
+  breakindent=1em,
+  float=htbp
 }
 % lstlisting default style
 \lstset{style=custom}
@@ -243,42 +261,27 @@
   \hspace*{-0.75em}
 }
 % command for cover
-\newcommand{\makecover}[2] {
+\newcommand{\makecover} {
   \pagenumbering{gobble}
 
-  \title{\Huge{#1}}
-
-  \iflanguage{italian} {
-    \author{\Large Lorenzo Rossi e tutti coloro che mi hanno aiutato!}
-  }{
-    \author{\Large Lorenzo Rossi and everyone who kindly helped!}
-  }
-  \date{#2}
-
+  \title{\Huge{\nt@title}}
+  \author{\Large Lorenzo Rossi and everyone who kindly helped!}
+  \date{\nt@date}
   \maketitle
-
   \vspace{7.5cm}
 
   \begin{center}
-    \iflanguage{italian} {
-      \large{\textbf{Ultimo aggiornamento: \today}} \\
-      \bigskip
-      \large{Questi appunti sono distributi con licenza Creative Commons 4.0 - CC BY-NC \ccbynceu} \\
-    }{
-      \large{\textbf{Last update: \today}} \\
-      \bigskip
-      \large{These notes are distributed under Creative Commons 4.0 license - CC BY-NC \ccbynceu} \\
-    }
+
+    \large{\textbf{Last update: \today}} \\
+    \bigskip
+
+    \large{These notes are distributed under Creative Commons 4.0 license - CC BY-NC \ccbynceu} \\
   \end{center}
 
   \begin{figure}[b]
     \centering
     \includegraphics[width=5cm]{logo.png} \\
-    \iflanguage{italian} {
-      \footnotesize nessun alpaca è stato ferito nella scrittura di questi appunti
-    }{
-      \footnotesize no alpaca has been harmed while writing these notes
-    }
+    \footnotesize no alpaca has been harmed while writing these notes
   \end{figure}
 
   \newpage
@@ -313,5 +316,8 @@
   \end{minipage}
   \vspace*{1em}
 }
+% environment to avoid page breaks
+\newenvironment{onepage}
+{\begin{minipage}{\textwidth}\bigskip}{\end{minipage}}
 
 \endinput

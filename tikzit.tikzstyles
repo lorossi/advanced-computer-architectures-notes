@@ -12,6 +12,7 @@
 \tikzstyle{white}=[fill=white, draw=black, shape=circle, inner sep=2pt, minimum size=15pt]
 \tikzstyle{red}=[fill={rgb,255: red,191; green,0; blue,64}, shape=circle, text=white, inner sep=2pt, minimum size=15pt, draw={rgb,255: red,191; green,0; blue,64}]
 \tikzstyle{small black}=[fill=black, draw=none, shape=circle, inner sep=0pt, minimum width=3pt, tikzit draw=black, tikzit fill={rgb,255: red,191; green,191; blue,191}]
+\tikzstyle{small white}=[fill=white, draw=black, shape=circle, inner sep=0pt, minimum width=3pt, tikzit draw=white, tikzit fill={rgb,255: red,191; green,191; blue,191}]
 \tikzstyle{small red}=[fill={rgb,255: red,191; green,0; blue,64}, draw=none, shape=circle, inner sep=0pt, minimum width=3pt, tikzit draw={rgb,255: red,191; green,0; blue,64}, tikzit fill={rgb,255: red,191; green,191; blue,191}]
 \tikzstyle{textbox}=[fill=white, draw=black, shape=rectangle, inner sep=1ex, outer sep=1ex]
 \tikzstyle{clear textbox}=[fill=none, draw=none, shape=rectangle, tikzit fill={rgb,255: red,220; green,220; blue,220}, tikzit draw=white, inner sep=0ex, outer sep=1ex]
