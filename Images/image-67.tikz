@@ -12,7 +12,7 @@
 		\node [style=none] (1) at (0, -8) {};
 		\node [style=none] (2) at (2, -8) {};
 		\node [style=none] (3) at (2, 0) {};
-		\node [style=none, rotate=-90] (4) at (1, -4) {\Large
+		\node [style=none, rotate=90] (4) at (1, -4) {\Large
 \texttt{CPU}};
 		\node [style=none] (9) at (1, -7.5) {\small \texttt{cache}};
 		\node [style=none] (12) at (5.5, -1) {};
