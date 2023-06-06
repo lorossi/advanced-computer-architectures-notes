@@ -3799,9 +3799,9 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \begin{subfigure}{0.45\textwidth}
+  \begin{subfigure}{0.495\textwidth}
     \centering
-    \scalebox{0.75}{
+    \scalebox{0.7}{
     \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
       \node [state, minimum size=1cm](I) {\texttt{I}};
       \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
@@ -3811,9 +3811,10 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
       \path[->, thick]
       (I) edge node [text width=2.5cm, align=center] {read, shared by others} (S)
       (I) edge node [sloped, below, pos=0.25, text width=2.5cm, align=center] {read, not shared by others} (E)
-      (S) edge [loop above] node {read} ()
+      (I) edge node [sloped, above, pos=0.75] {modify} (M)
+      (S) edge [loop right] node {read} ()
       (S) edge node [sloped, pos=0.25] {write} (M)
-      (E) edge [loop below] node {read} ()
+      (E) edge [loop right] node {read} ()
       (E) edge node {write} (M)
       (M) edge [loop left] node {read or write} ()
       ;
@@ -3823,9 +3824,9 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
     \label{subfig:MESI-snooping-state-transition-diagram}
     \bigskip
   \end{subfigure}
-  \begin{subfigure}{0.45\textwidth}
+  \begin{subfigure}{0.495\textwidth}
     \centering
-    \scalebox{0.75}{
+    \scalebox{0.7}{
     \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
       \node [state, minimum size=1cm](I) {\texttt{I}};
       \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
@@ -3839,10 +3840,6 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
       (M) edge node [above, sloped, pos=0.25] {other read} (S)
       (S) edge [loop right] node {other read} ()
       (E) edge node [sloped] {other read} (S)
-      ;
-      % make an invisible path to align the diagram
-      \path[-, draw=white]
-      (M) edge [loop below] node {} ()
       ;
     \end{tikzpicture}
     }
