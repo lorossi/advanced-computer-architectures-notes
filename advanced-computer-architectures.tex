@@ -3203,6 +3203,149 @@ The main differences among them are shown in Table~\ref{tab:address-spaces-diffe
   \label{tab:address-spaces-differences}
 \end{table}
 
+\subsubsection{Locality Principle}
+
+Locality Principle: a program can access a relatively small portion of the address space at any instant of time.
+
+Properties of the memory references:
+
+\begin{itemize}
+  \item Temporal Locality: if a location is referenced, it is likely to be referenced again in the near future
+  \item Spatial Locality: if a location is referenced, locations with nearby addresses are likely to be referenced soon
+\end{itemize}
+
+\subsubsection{Block Size and Spatial Locality}
+
+The \textbf{Block} is the unit of transfer between the cache and the memory.
+It's the minimum amount of data that can be stored in the cache.
+
+\begin{itemize}
+  \item Size: \(2^b\) bits
+        \begin{itemize}
+          \item \(b\) bits are used for the tag
+          \item \(2^b - b\) bits are used for the data
+        \end{itemize}
+\end{itemize}
+
+\begin{figure}
+  \bigskip
+  \centering
+  \tikzfig{image-68.tikz}
+  \caption{Block size}
+  \label{fig:block-size}
+  \bigskip
+\end{figure}
+
+Larger block size has distinct advantages:
+
+\begin{itemize}
+  \item Less tag overhead
+  \item Exploit fast transfers from \textit{RAM}
+  \item Exploit fast transfers over wide buses
+\end{itemize}
+
+However, larger block size also has disadvantages:
+
+\begin{itemize}
+  \item Larger block size might mean that data is transferred than needed
+  \item Larger block size implies a smaller number of blocks in the cache, generating more conflicts
+\end{itemize}
+
+Large Associativity has also a advantages and disadvantages:
+
+\begin{itemize}
+  \item Advantages:
+        \begin{itemize}
+          \item Less conflict misses
+          \item Less blocks replacement
+          \item Lower miss rate
+        \end{itemize}
+  \item Disadvantages:
+        \begin{itemize}
+          \item Increase hit time due to the complexity of the hardware
+          \item Increases area, power consumption and cost of the hardware
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Finding Blocks}
+
+A block is found thanks to:
+
+\begin{itemize}
+  \item Its index, selecting which set to look it
+  \item Its tag, selecting identifying the actual block
+        \begin{itemize}
+          \item if no block matches, then a cache miss is issued
+          \item thanks to the tag, there's no need to check the index or the block offset
+        \end{itemize}
+\end{itemize}
+
+It's important to notice that increasing associativity reduces the size of the index, while expanding the tag.
+Fully associative caches have no index, but only a tag.
+
+\subsubsection{Cache Misses}
+
+On a cache miss, the cache must be updated with the new block.
+
+\begin{itemize}
+  \item On Direct Mapped caches, the block is placed in the only possible location
+  \item On Set-Associative or Fully Associative caches, multiple policies are available:
+        \begin{itemize}
+          \item \textbf{Random} Replacement: the block is placed in a random location
+          \item \textbf{Least Recently Used} \textit{(LRU)} Replacement: the block is placed in the least recently used location
+                \begin{itemize}
+                  \item the \textit{LRU} cache state must be updated on every access
+                  \item a real implementation is feasible only for small sets, while it's used in highly associative caches
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Cache Writes}
+
+Different scenarios of a cache write:
+
+\begin{itemize}
+  \item Cache \textbf{hit}
+        \begin{itemize}
+          \item write through: both cache and memory are written
+          \item write back: only the cache is written
+        \end{itemize}
+  \item Cache \textbf{miss}
+        \begin{itemize}
+          \item write allocate: the block is loaded in the cache and then written
+          \item no write allocate: the block is written directly in memory
+        \end{itemize}
+\end{itemize}
+
+Table~\ref{tab:cache-write-policies} shows the different effects of the different policies.
+
+\begin{table}[htbp]
+
+  \caption{Cache write policies}
+  \bigskip
+  \centering
+  \begin{tblr}{colspec={r|c|c}, row{1}={font=\itshape}, column{1}={font=\itshape}, hlines}
+           & write through                & write back \\
+    policy & {data written to cache block              \\and lower level memory} & data written only to cache block \\
+    debug  & easy                         & hard       \\
+    {read misses                                       \\produce writes} & no & yes \\
+    {repeated writes                                   \\are propagated to lower levels} & yes & no \\
+  \end{tblr}
+  \bigskip
+  \label{tab:cache-write-policies}
+\end{table}
+
+\subsubsection{Cache Performance calculations}
+
+\begin{itemize}
+  \item Miss-oriented approach to Memory Access:
+        \[ \text{CPU}_\text{time} = IC \cdot \left( \text{CPI}_\text{hit} + \dfrac{\text{\# of misses}}{\# of instructions} \cdot \text{Miss Penalty} \right) \cdot \text{Cycle}_\text{time} \]
+  \item Separating Memory Component:
+        \[ \text{CPU}_\text{time} = IC \cdot \left( \dfrac{\text{\# of ALU ops}}{\text{\# of instructions}} \cdot \text{CPI}_\text{ALU} + \dfrac{\text{\# of memory access}}{\text{\# of instructions}} \cdot \text{AMAT} \right) \cdot \text{Cycle}_\text{time} \]
+  \item Average Memory Access Time \textit{(AMAT)}:
+        \[ \text{AMAT} = \text{Hit Time} + \text{Miss Rate} \cdot \text{Miss Penalty} \]
+\end{itemize}
+
 \subsection{Communication Models}
 
 As mentioned before, the communication between processors can happen either via \textbf{shared memory} \textit{(also called shared variables)} or via \textbf{message passing}.
@@ -3521,13 +3664,13 @@ Then, the two protocols can be compared:
 \begin{itemize}
   \item \textbf{Invalidate}
         \begin{itemize}
-          \item[\cmark] yes: readers will take a miss
-          \item[\xmark] no: multiple writes can be performed without added traffic and old copies will be cleared out
+          \item[\cmarkthin] \textbf{yes}: readers will take a miss
+          \item[\xmarkthin] \textbf{no}: multiple writes can be performed without added traffic and old copies will be cleared out
         \end{itemize}
   \item \textbf{Update}
         \begin{itemize}
-          \item[\cmark] yes: misses on later references will be avoided
-          \item[\xmark] no: multiple useless updates will be broadcast over the \texttt{BUS}
+          \item[\cmarkthin] \textbf{yes}: misses on later references will be avoided
+          \item[\xmarkthin] \textbf{no}: multiple useless updates will be broadcast over the \texttt{BUS}
         \end{itemize}
 \end{itemize}
 
@@ -3656,29 +3799,55 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \begin{subfigure}{\textwidth}
+  \begin{subfigure}{0.45\textwidth}
     \centering
-    \begin{tikzpicture}[auto, node distance=4cm, >=Triangle]
-      \node [state, initial, initial left, initial text={\texttt{WRITE} miss},  minimum size=1cm](M) {\texttt{M}};
-      \node [state, initial, initial right, initial text={\texttt{READ} miss}, minimum size=1cm, right=of M](E) {\texttt{E}};
-      \node [state, initial, initial left, initial text={\texttt{READ} miss}, minimum size=1cm, below=of M](S) {\texttt{S}};
-      \node [state, minimum size=1cm, below=of E](I) {\texttt{I}};
+    \scalebox{0.75}{
+    \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
+      \node [state, minimum size=1cm](I) {\texttt{I}};
+      \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
+      \node [state, minimum size=1cm, below=of I](M) {\texttt{M}};
+      \node [state, right=of M](E) {\texttt{E}};
 
       \path[->, thick]
-      (M) edge [loop above] node {read or write} ()
-      (E) edge [loop above] node {read} ()
-      (S) edge [loop below] node {read} ()
-      (M) edge [bend right, below, sloped] node {\shortstack{other processors read \\ \texttt{P} writes back}} (S)
-      (S) edge [below, sloped] node {intent to write} (M)
-      (S) edge [below, sloped] node {\shortstack{other processors\\intent to write}} (I)
-      (E) edge [above, sloped] node {\shortstack{other processors\\intent to write}} (I)
-      (E) edge [above, sloped] node {write} (M)
-      (M) edge [above, sloped] node {\footnotesize\shortstack[l]{other processors intent to write\\write back}} (I)
-      (E) edge [above, sloped, pos=0.75] node {\footnotesize other processors read} (S);
+      (I) edge node [text width=2.5cm, align=center] {read, shared by others} (S)
+      (I) edge node [sloped, below, pos=0.25, text width=2.5cm, align=center] {read, not shared by others} (E)
+      (S) edge [loop above] node {read} ()
+      (S) edge node [sloped, pos=0.25] {write} (M)
+      (E) edge [loop below] node {read} ()
+      (E) edge node {write} (M)
+      (M) edge [loop left] node {read or write} ()
+      ;
     \end{tikzpicture}
+    }
+    \caption{State Transition Diagram, acting processor}
+    \label{subfig:MESI-snooping-state-transition-diagram}
+    \bigskip
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \scalebox{0.75}{
+    \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
+      \node [state, minimum size=1cm](I) {\texttt{I}};
+      \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
+      \node [state, minimum size=1cm, below=of I](M) {\texttt{M}};
+      \node [state, right=of M](E) {\texttt{E}};
 
-    \caption{State Transition Diagram}
-    \label{subfig:MESI-state-transition-diagram}
+      \path[->, thick]
+      (S) edge node [above] {other write} (I)
+      (E) edge node [above, sloped, pos=0.25] {other write} (I)
+      (M) edge node [above, sloped] {other write} (I)
+      (M) edge node [above, sloped, pos=0.25] {other read} (S)
+      (S) edge [loop right] node {other read} ()
+      (E) edge node [sloped] {other read} (S)
+      ;
+      % make an invisible path to align the diagram
+      \path[-, draw=white]
+      (M) edge [loop below] node {} ()
+      ;
+    \end{tikzpicture}
+    }
+    \caption{State Transition Diagram, snooping processor}
+    \label{subfig:MESI-acting-state-transition-diagram}
     \bigskip
   \end{subfigure}
 
@@ -4294,15 +4463,112 @@ The \textbf{multimedia extension}, also called \textit{SIMD} extension. It featu
 
 \subsection{Graphic Processing Units - \textit{GPUs}}
 
-Originally \textit{(in the mid '90s)}, \textit{GPUs} were dedicated fixed functions for generating 3D graphics, including high-performance \textit{(SP)} floating point units.
-They provided workstation-like graphics for PCs while the user had no real way to program them, but they could merely configure the pipeline.
+The \textbf{Graphics Processing Unit} \textit{(GPU)} is a specialized \textit{SIMD} processor designed for \textbf{real-time} graphics rendering: its main duty is accelerating the graphics elaborations.
 
-Over time, more programmable features were added to the \textit{GPU}, enabling millions of vertices to be rendered in a single frame with very constrained programming models.
+\textit{GPUs} are specifically designed to accelerate 3D rendering \textit{(the process of converting a 3D model into a 2D image)}.
 
-Some users noticed they could do general-purpose computation by mapping input and output data to images and computation to vertex and pixel shading computations.
-It was however a very difficult programming model as the programmer had to exploit the graphics pipeline to perform general computation.
+Properties of \textit{GPUs}:
 
-\subsubsection{General Purpose \textit{GPUs} - \textit{GP-GPUS}}
+\begin{itemize}
+  \item Extensive data parallelism
+  \item Few control instructions
+  \item Many math operations
+  \item Few synchronization instructions
+  \item Some memory operations
+\end{itemize}
+
+\subsubsection{SIMT architecture}
+
+\begin{itemize}
+  \item each fragment \textit{(a vertex, a pixel, \ldots)} has to be processed independently
+  \item the programmed function has to be executed on every fragment
+\end{itemize}
+
+To speed up this process, the following steps were followed:
+
+\begin{itemize}
+  \item The majority of the chip transistors are used to perform operations that help make a single instruction stream run faster
+        \begin{itemize}
+          \item data cache
+          \item out-of-order control logic
+          \item branch prediction
+          \item memory pre-fetcher
+        \end{itemize}
+  \item By removing all those component, a single core executing an instruction stream is obtained
+  \item By replicating the cores, several threads can run in parallel
+        \begin{itemize}
+          \item \(N\) cores can process \(N\) instruction streams in parallel
+        \end{itemize}
+  \item Each unit has its own fetch and decode unit, thus each core can execute a different instruction stream
+  \item \textit{ALUs} are replicated, to speed up even more the execution of much needed mathematical instructions
+\end{itemize}
+
+This is how the \textbf{SIMT} \textit{(Single Instruction Multiple Thread, in NVIDIA terminology)} architecture was born.
+\textbf{SIMT} execution of a scalar program:
+
+\begin{enumerate}
+  \item The compiler generates a binary with scalar instructions
+  \item \(N\) parallel instances of the program are always ran together on the SIMD cores
+  \item The hardware controller is responsible for the simultaneous execution of the same instruction on different data on the \(N\) instances
+\end{enumerate}
+
+\paragraph{Cohererent and Divergent executions}
+
+\textit{GPUs} lack branching capabilities. As such:
+
+\begin{itemize}
+  \item \textbf{Instruction Stream Coherence} (or Coherent Execution) is the property of executing the same instruction on different data
+        \begin{itemize}
+          \item Coherent Execution is \textbf{necessary} for SIMD processing to \textbf{work efficiently}
+          \item Coherent Execution is \textbf{not necessary} for \textbf{efficient parallelization} among different cores
+        \end{itemize}
+  \item \textbf{Divergent Execution}: lack of instruction stream coherence
+        \begin{itemize}
+          \item arises whenever a branching operation is executed in different ways by different threads
+        \end{itemize}
+\end{itemize}
+
+\paragraph{Stalls}
+
+The execution of an instruction with a data dependency on a previous one causes a stall.
+Since caches and pre-fetching logic has been removed from \textit{GPUs}, different solutions are needed.
+
+\begin{itemize}
+  \item Streams processing on a single core are interleaved to hide the latency caused by stalls
+        \begin{itemize}
+          \item whenever a stream is stalled, another stream is executed
+          \item such procedure is possible thanks to scheduling
+        \end{itemize}
+  \item Memory latency is hidden by executing arithmetic instructions of other streams while waiting for data to be fetched
+\end{itemize}
+
+Streams interleaving is managed by an hardware scheduler, while large register files store each execution context.
+
+\bigskip
+The \textit{GPU} is a throughput-oriented processor:
+
+\begin{itemize}
+  \item latency of the single stream is increased
+  \item overall throughput is increased
+  \item as a consequence, the latency of the overall task execution is decreased
+\end{itemize}
+
+\subsubsection{Streaming Multiprocessor}
+
+Refer to Section~\ref{sec:hardware-execution-model} for the terminology of the hardware execution model.
+
+\begin{itemize}
+  \item At each clock cycle, a warp scheduler selects a warp to execute
+        \begin{itemize}
+          \item each warp is independent from the others, so dependency checks are not required
+          \item a scoreboard is used to keep track of the status of each warp
+        \end{itemize}
+  \item Each scheduler may execute an instruction on \(16\) \textit{ALU} cores, \(16\) load/store units or \(4\) special function units
+  \item Concurrent execution of multiple compute kernels is supported
+  \item A single application can use the whole \textit{GPUs}
+\end{itemize}
+
+\subsubsection{\textit{CUDA} programming language}
 
 In \(2006\), \textit{NVIDIA} introduced \textit{GeForce 8800 GPU} supporting a new programming language, called \texttt{CUDA} \textit{("Compute Unified Device Architecture")}.
 Subsequently, the other companies in the industry started pushing for \texttt{OpenCL} \textit{("Open Computing Language")}, a vendor-neutral version of the same language available for multiple platforms.
@@ -4326,6 +4592,7 @@ The host \textit{CPU} issues data-parallel kernels to \textit{GP-GPU} device for
 \end{itemize}
 
 \subsubsection{Hardware execution model}
+\label{sec:hardware-execution-model}
 
 \begin{itemize}
   \item The \textit{GPU} is built from \textbf{multiple parallel cores}, each one containing a multithreaded \textit{SIMD} processor with multiple lanes but without scalar processor

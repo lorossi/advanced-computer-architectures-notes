@@ -1,0 +1,61 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (0, 0) {};
+		\node [style=none] (3) at (0, -1) {};
+		\node [style=none] (4) at (2, -0.5) {\texttt{TAG}};
+		\node [style=none] (5) at (4, 0) {};
+		\node [style=none] (8) at (4, -1) {};
+		\node [style=none] (9) at (7, -0.5) {\texttt{WORD 1}};
+		\node [style=none] (10) at (10, 0) {};
+		\node [style=none] (13) at (10, -1) {};
+		\node [style=none] (14) at (13, -0.5) {\texttt{WORD 2}};
+		\node [style=none] (15) at (16, 0) {};
+		\node [style=none] (18) at (16, -1) {};
+		\node [style=none] (19) at (19, -0.5) {\texttt{WORD 3}};
+		\node [style=none] (20) at (22, 0) {};
+		\node [style=none] (21) at (28, 0) {};
+		\node [style=none] (22) at (28, -1) {};
+		\node [style=none] (23) at (22, -1) {};
+		\node [style=none] (24) at (25, -0.5) {\texttt{WORD 4}};
+		\node [style=none] (25) at (0, -1.25) {};
+		\node [style=none] (26) at (4, -1.25) {};
+		\node [style=none] (27) at (0, -1.5) {};
+		\node [style=none] (28) at (4, -1.5) {};
+		\node [style=none] (29) at (2, -2) {\(b\) bits};
+		\node [style=none] (30) at (28, -1.5) {};
+		\node [style=none] (31) at (16, -2) {\(2^n - b\) bits};
+		\node [style=none] (32) at (28, -1.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=light fill] (5.center)
+			 to (0.center)
+			 to (3.center)
+			 to (8.center)
+			 to cycle;
+		\draw [style=light fill] (8.center)
+			 to (13.center)
+			 to (10.center)
+			 to (5.center)
+			 to cycle;
+		\draw [style=light fill] (10.center)
+			 to (13.center)
+			 to (18.center)
+			 to (15.center)
+			 to cycle;
+		\draw [style=light fill] (20.center)
+			 to (15.center)
+			 to (18.center)
+			 to (23.center)
+			 to cycle;
+		\draw [style=light fill] (20.center)
+			 to (23.center)
+			 to (22.center)
+			 to (21.center)
+			 to cycle;
+		\draw [style=big] (26.center) to (28.center);
+		\draw [style=big] (28.center) to (27.center);
+		\draw [style=big] (27.center) to (25.center);
+		\draw [style=big] (30.center) to (28.center);
+		\draw [style=big] (32.center) to (30.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
