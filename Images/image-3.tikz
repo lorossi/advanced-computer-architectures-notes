@@ -16,7 +16,7 @@
 		\node [style=none] (126) at (7, -2) {};
 		\node [style=none] (127) at (7, -5) {};
 		\node [style=none] (128) at (4, -5) {};
-		\node [style=left align] (218) at (20, -0.5) {threads};
+		\node [style=left align] (218) at (19.75, -0.5) {threads};
 		\node [style=none] (222) at (13, -2) {};
 		\node [style=none] (223) at (16, -2) {};
 		\node [style=none] (224) at (16, -5) {};
@@ -93,7 +93,7 @@
 		\node [style=none] (297) at (0.5, -8.5) {};
 		\node [style=none, rotate=-90] (298) at (0, -3.5) {\(1\)};
 		\node [style=none, rotate=-90] (299) at (0, -8.5) {\(n\)};
-		\node [style=left align, anchor=west, rotate=90] (300) at (0.25, -13) {processes};
+		\node [style=left align, anchor=west, rotate=90] (300) at (0.5, -12.75) {processes};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=dashed] (110.center)

@@ -39,7 +39,7 @@ A big thank you to everyone who helped me!
 \subsection{Flynn Taxonomy}
 \label{sec:flynn-taxonomy}
 
-Created in \(1996\) and upgraded in \(1972\), it provides the first description of a computer.
+Created in \(1966\) and upgraded in \(1972\), it provides the first description of a computer.
 
 \begin{itemize}
   \item \textit{SISD} - \textbf{single} instruction, \textbf{single} data
@@ -53,7 +53,7 @@ Created in \(1996\) and upgraded in \(1972\), it provides the first description 
         \begin{itemize}
           \item Multiple processors working in \textbf{parallel} on the same data
           \item \textbf{Fail safe} due to high redundancy
-          \item The same algorithm is programmed and implemented in different ways, so if one fails the other is still able to compute the result
+          \item The same algorithm is programmed and implemented in different ways, so if one fails the others are still able to compute the result
           \item \textbf{No practical market configuration}
         \end{itemize}
   \item \textit{SIMD} - \textbf{single} instruction, \textbf{multiple} data
@@ -171,11 +171,11 @@ but 2 metrics are normally used:
 
 \subsection{Response time vs throughput}
 
-Is it true that
-\(\texttt{throughput} = {1} \div { \texttt{average response time}}\)?
-The answer can be given only if it's clear if there's an overlap between core operations.
-
-If there is, then \[ \texttt{throughput} > {1} \div {\texttt{average response time}} \]
+Generally, it can be stated that:
+\[ \texttt{throughput} = {1} \div { \texttt{average response time}} \]
+However, if the instructions are overlapping each other, the following expression is true:
+\[ \texttt{throughput} > {1} \div {\texttt{average response time}} \]
+This can be achieved via \textbf{pipelining}.
 With pipelining, \textbf{execution time} of a single instruction is \textbf{increased} while the \textbf{average throughput} is \textbf{decreased}.
 
 \subsection{Factors affecting performance}
@@ -256,7 +256,7 @@ It serves as a guide to how much an enhancement will improve performance and how
           \item Determined by \textit{ISA} and \textit{CPU} organization
           \item Overlap among instructions reduces this term
           \item The \textit{CPI} relative to a process \texttt{P} is calculated as:
-                \[ CPI(P) = \dfrac{\texttt{\# of clock cycles to execute P}}{\texttt{number of instructions}} \]
+                \[ CPI(P) = \dfrac{\texttt{\# of clock cycles to execute P}}{\texttt{\# of instructions}} \]
         \end{itemize}
   \item \textbf{Time per cycle} - \textit{TC}:
         \begin{itemize}
@@ -266,7 +266,7 @@ It serves as a guide to how much an enhancement will improve performance and how
 
 \bigskip
 Then, \textit{CPU} time can be calculated as:
-\[ CPU_{time} = T_{clock} \cdot CPI \cdot N_{inst} = \dfrac{CPI \cdot N_{inst}}{f} \]
+\[ CPU_\text{TIME} = T_\text{CLOCK} \cdot CPI \cdot \left(\texttt{\# of instructions}\right) = \dfrac{CPI \cdot \left(\texttt{\# of instructions}\right)}{f_\text{CLOCK}} \]
 Note that the \textit{CPI} can vary among instructions because each step of the pipeline might take different amounts of time.
 The factors that can influence the \textit{CPU} time are shown in Table~\ref{tab:relation-factor-CPU-time}.
 
@@ -290,14 +290,14 @@ To improve the \textit{CPU} time, an \textbf{instruction cache} can be used.
 Using a more realistic model, while calculating \textit{CPU} time, one must also account for:
 
 \begin{itemize}
-  \item The \textbf{execution} \textit{CPI} - \(\text{CPI}_\text{EXE}\)
-  \item The \textbf{miss penalty} - \(\text{MISS}_P\)
-  \item The \textbf{miss rate} - \(\text{MISS}_R\)
+  \item The \textbf{execution} \(\text{CPI}\) - \(\text{CPI}_\text{EXE}\)
+  \item The \textbf{miss penalty} - \(\text{MISS}_\text{P}\)
+  \item The \textbf{miss rate} - \(\text{MISS}_\text{R}\)
   \item The memory \textbf{references} - \(\text{MEM}\)
 \end{itemize}
 
 Then the \(\text{CPI}_{\text{CACHE}}\) can be calculated as:
-\[ \text{CPI}_{\text{CACHE}} = \text{CPI}_\text{EXE} + \text{MISS}_P \cdot  \text{MISS}_R \cdot \text{MEM} \]
+\[ \text{CPI}_{\text{CACHE}} = \text{CPI}_\text{EXE} + \text{MISS}_\text{P} \cdot  \text{MISS}_\text{R} \cdot \text{MEM} \]
 
 \subsubsection{Other metrics}
 
@@ -305,12 +305,12 @@ There are other metrics to measure the performance of a \textit{CPU}:
 
 \begin{itemize}
   \item \textit{MIPS} - millions of instructions per second
-        \[ MIPS = \dfrac{\texttt{number of instructions}}{\texttt{execution time} \cdot 10^6} = \dfrac{\texttt{clock frequency}}{\texttt{CPI} \cdot 10^6} \]
+        \[ MIPS = \dfrac{\texttt{number of instructions}}{T_\text{EXE} \cdot 10^6} = \dfrac{\texttt{clock frequency}}{\texttt{CPI} \cdot 10^6} \]
         \begin{itemize}
           \item the higher the \textit{MIPS}, the faster the machine
         \end{itemize}
   \item \textit{Execution time}
-        \[ T_{execution} = \dfrac{\texttt{instruction count}}{\texttt{MIPS} \cdot 10^6} \]
+        \[ T_\text{EXE} = \dfrac{\texttt{instruction count}}{\texttt{MIPS} \cdot 10^6} \]
   \item \textit{MFLOPS} - floating point operations in program
         \begin{itemize}
           \item assumes that floating points operations are independent of the compiler and ISA
@@ -728,7 +728,7 @@ The stages are usually represented in Figure~\ref{fig:mips-pipeline-stages}.
 \begin{figure}[htbp]
   \bigskip
   \centering
-  \tikzfig[1.5]{image-7.tikz}
+  \tikzfig[1]{image-7.tikz}
   \caption{Stages in \textit{MIPS} pipelines}
   \label{fig:mips-pipeline-stages}
   \bigskip
@@ -746,19 +746,19 @@ There are \(3\) classes of hazards:
   \item \textbf{Structural} hazards, due to attempting to use the same resource from different instructions at the same time
   \item \textbf{Data} hazards \textit{stalls}, due to attempting to use a result before it is ready
         \begin{itemize}
-          \item \textit{Read after write} - \textit{RAW}
+          \item \textit{Read after write} - \textbf{RAW}
                 \begin{itemize}[label=\(\rightarrow\)]
                   \item the instruction tries to read a source register before it is written by a previous instruction
                   \item it's also called \textit{dependence} by compilers
                   \item caused by an actual need for communication
                 \end{itemize}
-          \item \textit{Write after read} - \textit{WAR}
+          \item \textit{Write after read} - \textbf{WAR}
                 \begin{itemize}[label=\(\rightarrow\)]
                   \item the instruction tries to write a destination register before it is read by a previous instruction
                   \item it's also called \textit{anti dependence} by compilers
                   \item caused by the reuse of the same register for different purposes
                 \end{itemize}
-          \item \textit{Write after write} - \textit{WAW}
+          \item \textit{Write after write} - \textbf{WAW}
                 \begin{itemize}[label=\(\rightarrow\)]
                   \item the instruction tries to write before it is written by a previous instruction
                   \item it's also called \textit{output dependence} by compilers
@@ -771,16 +771,16 @@ There are \(3\) classes of hazards:
 \bigskip
 \textit{Data stalls may occur with instructions such as}:
 \begin{itemize}
-  \item \textit{RAW} stall:
+  \item \textbf{RAW} stall:
         \begin{verbatim}
     r3 := (r1) op (r2)
     r5 := (r3) op (r4)  // r3 has not been written yet\end{verbatim}
 
-  \item \textit{WAR} stall:
+  \item \textbf{WAR} stall:
         \begin{verbatim}
     r3 := (r1) op (r2)
     r1 := (r4) op (r5)  // r1 has not been read yet \end{verbatim}
-  \item \textit{WAW}  \textit{stall}:
+  \item \textbf{WAW} stall:
         \begin{verbatim}
     r3 := (r1) op (r2)
     r3 := (r6) op (r7) // r3 has not been written yet \end{verbatim}
@@ -2200,21 +2200,21 @@ The static scheduling methods used in the \textit{VLIW} are:
 
 Examine this snippet of code:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
   for (int i = 0; i < N; i++)
     B[i] = A[i] + C;
-\end{verbatim}
+\end{lstlisting}
 
 the inner loop gets \textit{unrolled} in order to execute \(4\) iterations at once:
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
   for (int i = 0; i < N; i += 4) {
     B[i] = A[i] + C;
     B[i + 1] = A[i + 1] + C;
     B[i + 2] = A[i + 2] + C;
     B[i + 3] = A[i + 3] + C;
   }
-\end{verbatim}
+\end{lstlisting}
 
 A final clean-up is needed to take care of those values of \texttt{N} that are not multiples of the unrolling factor \textit{(\(4\) in this example)}.
 
@@ -3251,7 +3251,7 @@ However, larger block size also has disadvantages:
   \item Larger block size implies a smaller number of blocks in the cache, generating more conflicts
 \end{itemize}
 
-Large Associativity has also a advantages and disadvantages:
+Large Associativity has also advantages and disadvantages:
 
 \begin{itemize}
   \item Advantages:
@@ -3324,12 +3324,12 @@ Table~\ref{tab:cache-write-policies} shows the different effects of the differen
   \caption{Cache write policies}
   \bigskip
   \centering
-  \begin{tblr}{colspec={r|c|c}, row{1}={font=\itshape}, column{1}={font=\itshape}, hlines}
-           & write through                & write back \\
-    policy & {data written to cache block              \\and lower level memory} & data written only to cache block \\
-    debug  & easy                         & hard       \\
-    {read misses                                       \\produce writes} & no & yes \\
-    {repeated writes                                   \\are propagated to lower levels} & yes & no \\
+  \begin{tblr}{colspec={r|c|c}, row{1}={font=\itshape}, column{1}={font=\itshape}, columns={valign=m}, hline{2}={solid}}
+    \(\Rsh\) & write through                & write back \\
+    policy   & {data written to cache block              \\and lower level memory} & data written only to cache block \\
+    debug    & \cmark                       & \xmark     \\
+    {read misses                                         \\produce writes} & \xmark & \cmark \\
+    {repeated writes                                     \\are propagated to lower levels} & \cmark & \xmark \\
   \end{tblr}
   \bigskip
   \label{tab:cache-write-policies}
@@ -3802,23 +3802,23 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
   \begin{subfigure}{0.495\textwidth}
     \centering
     \scalebox{0.7}{
-    \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
-      \node [state, minimum size=1cm](I) {\texttt{I}};
-      \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
-      \node [state, minimum size=1cm, below=of I](M) {\texttt{M}};
-      \node [state, right=of M](E) {\texttt{E}};
+      \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
+        \node [state, minimum size=1cm](I) {\texttt{I}};
+        \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
+        \node [state, minimum size=1cm, below=of I](M) {\texttt{M}};
+        \node [state, right=of M](E) {\texttt{E}};
 
-      \path[->, thick]
-      (I) edge node [text width=2.5cm, align=center] {read, shared by others} (S)
-      (I) edge node [sloped, below, pos=0.25, text width=2.5cm, align=center] {read, not shared by others} (E)
-      (I) edge node [sloped, above, pos=0.75] {write} (M)
-      (S) edge [loop right] node {read} ()
-      (S) edge node [sloped, pos=0.25] {write} (M)
-      (E) edge [loop right] node {read} ()
-      (E) edge node {write} (M)
-      (M) edge [loop left] node {read or write} ()
-      ;
-    \end{tikzpicture}
+        \path[->, thick]
+        (I) edge node [text width=2.5cm, align=center] {read, shared by others} (S)
+        (I) edge node [sloped, below, pos=0.25, text width=2.5cm, align=center] {read, not shared by others} (E)
+        (I) edge node [sloped, above, pos=0.75] {write} (M)
+        (S) edge [loop right] node {read} ()
+        (S) edge node [sloped, pos=0.25] {write} (M)
+        (E) edge [loop right] node {read} ()
+        (E) edge node {write} (M)
+        (M) edge [loop left] node {read or write} ()
+        ;
+      \end{tikzpicture}
     }
     \caption{State Transition Diagram, acting processor}
     \label{subfig:MESI-snooping-state-transition-diagram}
@@ -3827,21 +3827,21 @@ The transition diagram and relative cache line are represented in Figure~\ref{fi
   \begin{subfigure}{0.495\textwidth}
     \centering
     \scalebox{0.7}{
-    \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
-      \node [state, minimum size=1cm](I) {\texttt{I}};
-      \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
-      \node [state, minimum size=1cm, below=of I](M) {\texttt{M}};
-      \node [state, right=of M](E) {\texttt{E}};
+      \begin{tikzpicture}[auto, node distance=5cm, >=Triangle]
+        \node [state, minimum size=1cm](I) {\texttt{I}};
+        \node [state, minimum size=1cm, right=of I](S) {\texttt{S}};
+        \node [state, minimum size=1cm, below=of I](M) {\texttt{M}};
+        \node [state, right=of M](E) {\texttt{E}};
 
-      \path[->, thick]
-      (S) edge node [above] {other write} (I)
-      (E) edge node [above, sloped, pos=0.25] {other write} (I)
-      (M) edge node [above, sloped] {other write} (I)
-      (M) edge node [above, sloped, pos=0.25] {other read} (S)
-      (S) edge [loop right] node {other read} ()
-      (E) edge node [sloped] {other read} (S)
-      ;
-    \end{tikzpicture}
+        \path[->, thick]
+        (S) edge node [above] {other write} (I)
+        (E) edge node [above, sloped, pos=0.25] {other write} (I)
+        (M) edge node [above, sloped] {other write} (I)
+        (M) edge node [above, sloped, pos=0.25] {other read} (S)
+        (S) edge [loop right] node {other read} ()
+        (E) edge node [sloped] {other read} (S)
+        ;
+      \end{tikzpicture}
     }
     \caption{State Transition Diagram, snooping processor}
     \label{subfig:MESI-acting-state-transition-diagram}
